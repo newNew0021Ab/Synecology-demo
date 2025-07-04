@@ -1,0 +1,14 @@
+# Конфигурация сборки
+[build]
+  # Команда, которую Netlify выполнит для сборки вашего сайта.
+  command = "npm run build"
+
+  # Папка, которую Netlify опубликует.
+  # Vite соберет ваше приложение из папки 'client' в папку 'client/dist'.
+  publish = "dist/public"
+
+# Правило для корректной работы роутинга в React
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
