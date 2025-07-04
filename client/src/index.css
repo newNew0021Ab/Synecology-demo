@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(45, 36%, 98%);
+  --foreground: hsl(182, 25%, 31%);
+  --muted: hsl(45, 20%, 95%);
+  --muted-foreground: hsl(182, 12%, 45%);
+  --popover: hsl(45, 36%, 98%);
+  --popover-foreground: hsl(182, 25%, 31%);
+  --card: hsl(45, 36%, 98%);
+  --card-foreground: hsl(182, 25%, 31%);
+  --border: hsl(45, 15%, 85%);
+  --input: hsl(45, 15%, 85%);
+  --primary: hsl(146, 48%, 35%);
+  --primary-foreground: hsl(45, 36%, 98%);
+  --secondary: hsl(45, 20%, 95%);
+  --secondary-foreground: hsl(182, 25%, 31%);
+  --accent: hsl(146, 48%, 35%);
+  --accent-foreground: hsl(45, 36%, 98%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(45, 36%, 98%);
+  --ring: hsl(146, 48%, 35%);
+  --radius: 0.5rem;
+  
+  /* Custom colors for Synecology */
+  --off-white: hsl(45, 36%, 98%);
+  --dark-slate: hsl(182, 25%, 31%);
+  --sea-green: hsl(146, 48%, 35%);
+  --soft-blue: hsl(180, 23%, 70%);
+  --sandy-beige: hsl(33, 41%, 88%);
+}
+
+.dark {
+  --background: hsl(182, 25%, 8%);
+  --foreground: hsl(45, 36%, 98%);
+  --muted: hsl(182, 20%, 12%);
+  --muted-foreground: hsl(182, 12%, 65%);
+  --popover: hsl(182, 25%, 8%);
+  --popover-foreground: hsl(45, 36%, 98%);
+  --card: hsl(182, 25%, 8%);
+  --card-foreground: hsl(45, 36%, 98%);
+  --border: hsl(182, 20%, 18%);
+  --input: hsl(182, 20%, 18%);
+  --primary: hsl(146, 48%, 35%);
+  --primary-foreground: hsl(45, 36%, 98%);
+  --secondary: hsl(182, 20%, 12%);
+  --secondary-foreground: hsl(45, 36%, 98%);
+  --accent: hsl(182, 20%, 12%);
+  --accent-foreground: hsl(45, 36%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(45, 36%, 98%);
+  --ring: hsl(146, 48%, 35%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-body antialiased bg-off-white text-dark-slate cursor-none;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .glassmorphic {
+    @apply bg-white/25 backdrop-blur-[10px] border border-white/20;
+  }
+
+  .glassmorphic-hover {
+    @apply transition-all duration-300 hover:bg-white/35 hover:-translate-y-1;
+  }
+  
+  .glassmorphic-hover:hover {
+    box-shadow: 0 20px 40px rgba(46, 139, 87, 0.15);
+    border-color: rgba(46, 139, 87, 0.3);
+  }
+
+  .font-heading {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-body {
+    font-family: 'Nunito Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-off-white {
+    background-color: var(--off-white);
+  }
+
+  .text-dark-slate {
+    color: var(--dark-slate);
+  }
+
+  .text-sea-green {
+    color: var(--sea-green);
+  }
+
+  .bg-sea-green {
+    background-color: var(--sea-green);
+  }
+
+  .text-soft-blue {
+    color: var(--soft-blue);
+  }
+
+  .bg-soft-blue {
+    background-color: var(--soft-blue);
+  }
+
+  .text-sandy-beige {
+    color: var(--sandy-beige);
+  }
+
+  .bg-sandy-beige {
+    background-color: var(--sandy-beige);
+  }
+
+  .border-sea-green {
+    border-color: var(--sea-green);
+  }
+
+  .section-divider {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, rgba(253, 251, 246, 0.95) 0%, rgba(168, 218, 220, 0.3) 100%);
+  }
+
+  .custom-cursor {
+    cursor: none;
+  }
+}
+
+.organic-blob {
+  background: linear-gradient(135deg, var(--soft-blue) 0%, var(--sandy-beige) 100%);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: blob-morph 8s ease-in-out infinite;
+}
+
+@keyframes blob-morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--sea-green);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+
+.cursor-outline {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(46, 139, 87, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.15s ease;
+}
+
+.parallax-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
