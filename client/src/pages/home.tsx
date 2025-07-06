@@ -44,14 +44,14 @@ export default function Home() {
       <section className="min-h-screen flex items-center relative overflow-hidden">
         <OrganicBlob className="absolute top-20 right-20 opacity-20" size="lg" />
         <OrganicBlob className="absolute bottom-20 left-20 opacity-15" size="md" delay={3} />
-        
+
         <div
           className="absolute inset-0 parallax-bg opacity-30"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
           }}
         />
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -98,7 +98,7 @@ export default function Home() {
                 </motion.div>
               </motion.div>
             </div>
-            
+
             <motion.div
               className="relative"
               initial={{ opacity: 0, x: 50 }}
@@ -118,7 +118,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 relative section-divider bg-gradient-to-b from-off-white to-soft-blue/20">
+      <section className="py-20 relative section-divider bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
@@ -140,7 +140,7 @@ export default function Home() {
               Комплексные консалтинговые услуги в области экологии, адаптированные под ваши конкретные потребности и нормативные требования.
             </motion.p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <GlassmorphicCard key={service.title} delay={index * 0.1}>
@@ -166,7 +166,7 @@ export default function Home() {
       {/* Quick CTA Section */}
       <section className="py-20 relative">
         <OrganicBlob className="absolute top-10 right-10 opacity-10" size="md" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassmorphicCard className="text-center">
             <motion.h2

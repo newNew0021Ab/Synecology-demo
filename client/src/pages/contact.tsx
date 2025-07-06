@@ -42,16 +42,16 @@ export default function Contact() {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    
+
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       toast({
         title: "Message sent successfully!",
         description: "We'll get back to you within 24 hours.",
       });
-      
+
       form.reset();
     } catch (error) {
       toast({
@@ -103,7 +103,7 @@ export default function Contact() {
       <section className="py-20 relative overflow-hidden">
         <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
         <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
@@ -127,7 +127,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
+      <section className="py-20 bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -171,7 +171,7 @@ export default function Contact() {
                       )}
                     />
                   </div>
-                  
+
                   <FormField
                     control={form.control}
                     name="email"
@@ -190,7 +190,7 @@ export default function Contact() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="company"
@@ -208,7 +208,7 @@ export default function Contact() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="projectType"
@@ -233,7 +233,7 @@ export default function Contact() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="message"
@@ -252,7 +252,7 @@ export default function Contact() {
                       </FormItem>
                     )}
                   />
-                  
+
                   <Button
                     type="submit"
                     disabled={isSubmitting}
@@ -270,7 +270,7 @@ export default function Contact() {
                 </form>
               </Form>
             </GlassmorphicCard>
-            
+
             {/* Contact Information */}
             <div className="space-y-8">
               <GlassmorphicCard>
@@ -295,7 +295,7 @@ export default function Contact() {
                   ))}
                 </div>
               </GlassmorphicCard>
-              
+
               <GlassmorphicCard>
                 <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">Why Choose Synecology?</h3>
                 <div className="space-y-4">
@@ -337,7 +337,7 @@ export default function Contact() {
       {/* FAQ Section */}
       <section className="py-20 relative">
         <OrganicBlob className="absolute top-10 right-10 opacity-10" size="md" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
@@ -350,7 +350,7 @@ export default function Contact() {
               Frequently Asked <span className="text-sea-green">Questions</span>
             </motion.h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
@@ -360,7 +360,7 @@ export default function Contact() {
                 Project timelines vary based on scope and complexity. Small assessments may take 2-4 weeks, while comprehensive sustainability planning can take 6-12 months. We'll provide a detailed timeline during our initial consultation.
               </p>
             </GlassmorphicCard>
-            
+
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
                 What industries do you serve?
@@ -369,7 +369,7 @@ export default function Contact() {
                 We work with clients across manufacturing, energy, agriculture, real estate, education, and municipal sectors. Our expertise adapts to various industry-specific environmental challenges.
               </p>
             </GlassmorphicCard>
-            
+
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
                 Do you provide ongoing support?
@@ -378,7 +378,7 @@ export default function Contact() {
                 Yes! We offer long-term partnerships including monitoring, reporting, compliance management, and system optimization to ensure continued success of your environmental initiatives.
               </p>
             </GlassmorphicCard>
-            
+
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
                 How do you ensure regulatory compliance?
