@@ -23,7 +23,7 @@
   --destructive-foreground: hsl(45, 36%, 98%);
   --ring: hsl(146, 55%, 32%);
   --radius: 0.5rem;
-  
+
   /* Custom colors for Synecology */
   --off-white: hsl(45, 36%, 96%);
   --dark-slate: hsl(182, 35%, 25%);
@@ -62,6 +62,7 @@
   body {
     @apply font-body antialiased bg-off-white text-dark-slate;
     font-family: 'Nunito Sans', sans-serif;
+    padding-top: 5rem;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -78,7 +79,7 @@
   .glassmorphic-hover {
     @apply transition-all duration-300 hover:bg-white/70 hover:-translate-y-2;
   }
-  
+
   .glassmorphic-hover:hover {
     box-shadow: 0 25px 50px rgba(46, 139, 87, 0.25);
     border-color: rgba(46, 139, 87, 0.5);
@@ -152,13 +153,13 @@
     border-color: var(--sea-green);
   }
 
-  
+
 
   .hero-gradient {
     background: linear-gradient(135deg, rgba(253, 251, 246, 0.98) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(168, 218, 220, 0.4) 100%);
   }
 
-  
+
 
   .text-high-contrast {
     color: hsl(182, 45%, 20%);
@@ -178,47 +179,47 @@
       font-size: 2.5rem;
       line-height: 1.2;
     }
-    
+
     .hero-description {
       font-size: 1.1rem;
       line-height: 1.6;
     }
-    
+
     .mobile-padding {
       padding-left: 1rem;
       padding-right: 1rem;
     }
-    
+
     .mobile-text-center {
       text-align: center;
     }
-    
+
     .mobile-flex-col {
       flex-direction: column;
     }
-    
+
     .mobile-full-width {
       width: 100%;
     }
-    
+
     .mobile-mb-4 {
       margin-bottom: 1rem;
     }
-    
+
     .mobile-gap-4 {
       gap: 1rem;
     }
   }
-  
+
   @media (max-width: 480px) {
     .hero-title {
       font-size: 2rem;
     }
-    
+
     .hero-description {
       font-size: 1rem;
     }
-    
+
     .glassmorphic {
       padding: 1rem;
     }
