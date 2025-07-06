@@ -31,7 +31,7 @@ export default function Services() {
         "Разработка программы контроля",
         "Подготовка технических решений",
       ],
-      image: "https://images.unsplash.com/photo-1497436072909-f5e4be425, Gv?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1497436072909-f5e4be425Gv?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
     {
       icon: FileText,
