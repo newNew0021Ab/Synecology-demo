@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award } from "lucide-react";
+import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 
@@ -19,6 +19,7 @@ export default function CaseStudies() {
       image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Солнечная энергия", "Снижение углерода", "Производство"],
       timeline: "18 месяцев",
+      completion: "12.10.2024",
     },
     {
       title: "Восстановление водно-болотных угодий",
@@ -33,6 +34,7 @@ export default function CaseStudies() {
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Восстановление экосистем", "Биоразнообразие", "Охрана природы"],
       timeline: "24 месяца",
+      completion: "03.05.2023",
     },
     {
       title: "Инновации в очистке воды",
@@ -47,6 +49,7 @@ export default function CaseStudies() {
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Очистка воды", "Промышленность", "Сокращение отходов"],
       timeline: "12 месяцев",
+      completion: "18.11.2022",
     },
     {
       title: "Городская зеленая инфраструктура",
@@ -61,6 +64,7 @@ export default function CaseStudies() {
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Зеленая инфраструктура", "Городское планирование", "Климатическая адаптация"],
       timeline: "36 месяцев",
+      completion: "22.06.2024",
     },
     {
       title: "Углеродно-нейтральный кампус",
@@ -75,6 +79,7 @@ export default function CaseStudies() {
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Углеродная нейтральность", "Образование", "Сертификация LEED"],
       timeline: "30 месяцев",
+      completion: "01.02.2023",
     },
     {
       title: "Защита морских местообитаний",
@@ -89,6 +94,7 @@ export default function CaseStudies() {
       image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Охрана морской среды", "Защита берегов", "Биоразнообразие"],
       timeline: "42 месяца",
+      completion: "27.09.2022",
     },
   ];
 
@@ -104,7 +110,7 @@ export default function CaseStudies() {
       <section className="py-20 relative overflow-hidden">
         <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
         <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
@@ -148,67 +154,70 @@ export default function CaseStudies() {
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((study, index) => (
-              <GlassmorphicCard key={study.title} delay={index * 0.1}>
-                <div className="space-y-6">
-                  <div className="relative">
-                    <img
-                      src={study.image}
-                      alt={study.title}
-                      className="w-full h-48 object-cover rounded-xl"
-                    />
-                    <div className="absolute top-4 right-4 bg-sea-green/20 backdrop-blur-sm rounded-full px-3 py-1">
-                      <span className="text-sm font-semibold text-sea-green">
-                        {study.timeline}
-                      </span>
+            {caseStudies.map((caseStudy, index) => (
+              <GlassmorphicCard key={caseStudy.title} delay={index * 0.1}>
+                <div className="flex flex-col h-full">
+                    <div className="relative mb-4">
+                      <img
+                        src={caseStudy.image}
+                        alt={caseStudy.title}
+                        className="w-full h-48 object-cover rounded-xl"
+                      />
                     </div>
-                  </div>
-                  
-                  <div>
-                    <div className="flex items-center gap-2 text-sm text-sea-green mb-2">
-                      <span className="font-semibold">{study.category}</span>
+
+                    <div className="space-y-4 flex-grow">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-2 text-sea-green">
+                          <Calendar className="w-4 h-4" />
+                          <span>{caseStudy.completion}</span>
+                        </div>
+                        <div className="bg-sea-green/10 text-sea-green px-3 py-1 rounded-full font-semibold">
+                          {caseStudy.timeline}
+                        </div>
+                      </div>
+
+                      <h3 className="text-2xl font-heading font-bold text-dark-slate">
+                        {caseStudy.title}
+                      </h3>
+
+                      <p className="text-dark-slate/70">{caseStudy.description}</p>
+
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-dark-slate">Ключевые результаты:</h4>
+                        <ul className="space-y-1">
+                          {caseStudy.results.map((result, index) => (
+                            <li key={index} className="flex items-center gap-2 text-sm text-dark-slate/70">
+                              <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0" />
+                              {result}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {caseStudy.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-heading font-bold text-dark-slate mb-3">
-                      {study.title}
-                    </h3>
-                    <p className="text-dark-slate/70 mb-4">{study.description}</p>
-                  </div>
 
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-dark-slate">Ключевые результаты:</h4>
-                    <ul className="space-y-1">
-                      {study.results.map((result, resultIndex) => (
-                        <li key={resultIndex} className="text-sm text-dark-slate/70 flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-sea-green rounded-full flex-shrink-0" />
-                          {result}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {study.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
+                    <div className="flex items-center justify-between mt-6 pt-6 border-t border-dark-slate/10">
+                      <Link
+                        href="/contact"
+                        className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        Начать похожий проект <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <button className="text-sea-green hover:text-sea-green/80 transition-colors">
+                        <ExternalLink className="w-5 h-5" />
+                      </button>
+                    </div>
                   </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t border-dark-slate/10">
-                    <Link
-                      href="/contact"
-                      className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
-                    >
-                      Начать похожий проект <ArrowRight className="w-4 h-4" />
-                    </Link>
-                    <button className="text-sea-green hover:text-sea-green/80 transition-colors">
-                      <ExternalLink className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
               </GlassmorphicCard>
             ))}
           </div>
@@ -218,7 +227,7 @@ export default function CaseStudies() {
       {/* CTA Section */}
       <section className="py-20 relative">
         <OrganicBlob className="absolute top-10 left-10 opacity-10" size="md" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassmorphicCard className="text-center">
             <motion.h2

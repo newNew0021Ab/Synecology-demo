@@ -10,8 +10,8 @@ export default function Blog() {
       title: "Будущее технологий улавливания углерода",
       excerpt: "Исследование инновационных подходов к улавливанию и хранению углерода, которые могут революционизировать климатические действия.",
       category: "Технологии",
-      date: "15 декабря 2024",
-      readTime: "5 мин чтения",
+      date: "15.12.2024",
+      readTime: "5 мин",
       image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Улавливание углерода", "Климатические технологии", "Инновации"],
       featured: true,
@@ -20,8 +20,8 @@ export default function Blog() {
       title: "Тенденции инвестиций в возобновляемую энергетику",
       excerpt: "Анализ глобальных рынков возобновляемой энергетики и возникающих инвестиционных возможностей в чистых технологиях.",
       category: "Финансы",
-      date: "12 декабря 2024",
-      readTime: "7 мин чтения",
+      date: "12.12.2024",
+      readTime: "7 мин",
       image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Возобновляемая энергия", "Инвестиции", "Рыночный анализ"],
       featured: false,
@@ -30,8 +30,8 @@ export default function Blog() {
       title: "Стратегии сохранения биоразнообразия",
       excerpt: "Эффективные подходы к защите экосистем и исчезающих видов в городской и сельской среде.",
       category: "Охрана природы",
-      date: "10 декабря 2024",
-      readTime: "6 мин чтения",
+      date: "10.12.2024",
+      readTime: "6 мин",
       image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Биоразнообразие", "Охрана природы", "Экосистемы"],
       featured: false,
@@ -40,8 +40,8 @@ export default function Blog() {
       title: "Лучшие практики устойчивого городского планирования",
       excerpt: "Как города внедряют зеленую инфраструктуру и принципы устойчивого дизайна в городское развитие.",
       category: "Городское планирование",
-      date: "8 декабря 2024",
-      readTime: "8 мин чтения",
+      date: "08.12.2024",
+      readTime: "8 мин",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Городское планирование", "Зеленая инфраструктура", "Устойчивость"],
       featured: false,
@@ -50,8 +50,8 @@ export default function Blog() {
       title: "Решения проблемы нехватки воды для промышленных применений",
       excerpt: "Инновационные технологии водосбережения и переработки, помогающие отраслям снизить их воздействие на окружающую среду.",
       category: "Управление водными ресурсами",
-      date: "5 декабря 2024",
-      readTime: "6 мин чтения",
+      date: "05.12.2024",
+      readTime: "6 мин",
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Управление водными ресурсами", "Промышленность", "Сохранение"],
       featured: false,
@@ -60,8 +60,8 @@ export default function Blog() {
       title: "Обновление экологических норм 2024",
       excerpt: "Ключевые изменения в экологическом законодательстве, которые предприятия должны знать для планирования соответствия.",
       category: "Регулирование",
-      date: "3 декабря 2024",
-      readTime: "4 мин чтения",
+      date: "03.12.2024",
+      readTime: "4 мин",
       image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Нормативы", "Соответствие", "Политика"],
       featured: false,
@@ -136,18 +136,18 @@ export default function Blog() {
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-center gap-4 text-sm text-dark-slate/70">
-                  <div className="flex items-center gap-2">
+                <div className="flex items-center gap-6 text-sm">
+                  <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                     <Calendar className="w-4 h-4" />
-                    <span>{blogPosts[0].date}</span>
+                    <span className="font-medium">{blogPosts[0].date}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
                     <Clock className="w-4 h-4" />
-                    <span>{blogPosts[0].readTime}</span>
+                    <span className="font-medium">{blogPosts[0].readTime}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
                     <Tag className="w-4 h-4" />
-                    <span>{blogPosts[0].category}</span>
+                    <span className="font-medium">{blogPosts[0].category}</span>
                   </div>
                 </div>
 
@@ -190,7 +190,7 @@ export default function Blog() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.slice(1).map((post, index) => (
               <GlassmorphicCard key={post.title} delay={index * 0.1}>
-                <article className="space-y-4">
+                <article className="flex flex-col h-full space-y-4">
                   <div className="relative">
                     <img
                       src={post.image}
@@ -199,19 +199,22 @@ export default function Blog() {
                     />
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm text-sea-green">
-                    <Calendar className="w-4 h-4" />
-                    <span>{post.date}</span>
-                    <span className="mx-2">•</span>
-                    <Clock className="w-4 h-4" />
-                    <span>{post.readTime}</span>
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-1 bg-sea-green/10 text-sea-green px-2 py-1 rounded-md">
+                      <Calendar className="w-3 h-3" />
+                      <span className="font-medium">{post.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1 bg-soft-blue/20 text-dark-slate px-2 py-1 rounded-md">
+                      <Clock className="w-3 h-3" />
+                      <span className="font-medium">{post.readTime}</span>
+                    </div>
                   </div>
 
                   <h3 className="text-xl font-heading font-bold text-dark-slate line-clamp-2">
                     {post.title}
                   </h3>
 
-                  <p className="text-dark-slate/70 line-clamp-3">
+                  <p className="text-dark-slate/70 line-clamp-3 flex-grow">
                     {post.excerpt}
                   </p>
 
@@ -226,7 +229,7 @@ export default function Blog() {
                     ))}
                   </div>
 
-                  <button className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all">
+                  <button className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all mt-auto">
                     Читать далее <ArrowRight className="w-4 h-4" />
                   </button>
                 </article>

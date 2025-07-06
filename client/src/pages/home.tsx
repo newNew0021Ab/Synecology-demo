@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { PlayCircle, ArrowRight, Factory, Recycle, FileText, Droplets, Trash2, ClipboardList } from "lucide-react";
@@ -23,7 +22,7 @@ export default function Home() {
       icon: FileText,
       title: "Разработка экологического паспорта предприятия",
       description: "Составление документа, отражающего экологическое состояние и воздействие предприятия.",
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
     {
       icon: Droplets,
@@ -221,3 +220,4 @@ export default function Home() {
     </div>
   );
 }
+`

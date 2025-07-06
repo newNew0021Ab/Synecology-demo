@@ -95,6 +95,17 @@
     flex-direction: column;
   }
 
+  .cards-equal-height {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+
+  .card-equal-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
   .font-heading {
     font-family: 'Playfair Display', serif;
   }
