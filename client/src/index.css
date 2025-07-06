@@ -84,6 +84,17 @@
     border-color: rgba(46, 139, 87, 0.5);
   }
 
+  .card-grid {
+    display: grid;
+    align-items: stretch;
+  }
+
+  .card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   .font-heading {
     font-family: 'Playfair Display', serif;
   }
@@ -136,9 +147,7 @@
     background: linear-gradient(135deg, rgba(253, 251, 246, 0.98) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(168, 218, 220, 0.4) 100%);
   }
 
-  .custom-cursor {
-    cursor: none;
-  }
+  
 
   .text-high-contrast {
     color: hsl(182, 45%, 20%);

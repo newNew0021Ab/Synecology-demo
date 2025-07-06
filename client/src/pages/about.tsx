@@ -66,22 +66,22 @@ export default function About() {
     {
       title: "Инновации",
       description: "Мы применяем передовые технологии и креативные решения для решения сложных экологических задач.",
-      icon: "⚡",
+      icon: <TrendingUp className="w-8 h-8 text-sea-green" />,
     },
     {
       title: "Устойчивость",
       description: "Каждое решение, которое мы разрабатываем, приоритизирует долгосрочное экологическое здоровье и сохранение ресурсов.",
-      icon: "🌿",
+      icon: <Award className="w-8 h-8 text-sea-green" />,
     },
     {
       title: "Сотрудничество",
       description: "Мы верим в тесную работу с нашими клиентами и сообществами для достижения общих экологических целей.",
-      icon: "🔗",
+      icon: <Users className="w-8 h-8 text-sea-green" />,
     },
     {
       title: "Совершенство",
       description: "Мы поддерживаем высочайшие стандарты научной строгости и профессионального сервиса во всей нашей работе.",
-      icon: "🎯",
+      icon: <ArrowRight className="w-8 h-8 text-sea-green" />,
     },
   ];
 
@@ -189,15 +189,15 @@ export default function About() {
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 card-grid">
             {values.map((value, index) => (
               <GlassmorphicCard key={value.title} delay={index * 0.1}>
-                <div className="text-center">
-                  <div className="text-4xl mb-4">{value.icon}</div>
+                <div className="text-center card-content">
+                  <div className="flex justify-center mb-4">{value.icon}</div>
                   <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
                     {value.title}
                   </h3>
-                  <p className="text-dark-slate/70">{value.description}</p>
+                  <p className="text-dark-slate/70 flex-grow">{value.description}</p>
                 </div>
               </GlassmorphicCard>
             ))}
@@ -234,7 +234,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => (
               <GlassmorphicCard key={member.name} delay={index * 0.1}>
-                <div className="flex flex-col sm:flex-row gap-6">
+                <div className="flex flex-col sm:flex-row gap-6 h-full">
                   <div className="flex-shrink-0">
                     <img
                       src={member.image}
