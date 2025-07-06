@@ -12,7 +12,7 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
+
 
 function Router() {
   return (
@@ -33,7 +33,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-off-white text-dark-slate overflow-x-hidden custom-cursor">
-          <CustomCursor />
+          
           <Header />
           <main>
             <Router />

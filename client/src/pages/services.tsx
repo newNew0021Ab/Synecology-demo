@@ -1,86 +1,87 @@
+
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Leaf, Recycle, ShieldCheck, Droplets, Wind, Trees, ArrowRight, CheckCircle } from "lucide-react";
+import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight, CheckCircle } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 
 export default function Services() {
   const services = [
     {
-      icon: Leaf,
-      title: "Экологическая оценка",
-      description: "Комплексные исследования воздействия на окружающую среду и оценка рисков для ваших проектов.",
+      icon: Factory,
+      title: "Разработка акта инвентаризации выбросов загрязняющих веществ в атмосферный воздух",
+      description: "Комплексная инвентаризация источников выбросов для соблюдения экологических нормативов.",
       features: [
-        "Оценка воздействия на окружающую среду (ОВОС)",
-        "Базовые экологические исследования",
-        "Оценка и управление рисками",
-        "Исследования загрязненных участков",
-        "Экологические изыскания и мониторинг",
-      ],
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    },
-    {
-      icon: Recycle,
-      title: "Планирование устойчивости",
-      description: "Стратегические дорожные карты устойчивости и стратегии сокращения углеродного следа.",
-      features: [
-        "Разработка стратегии устойчивости",
-        "Анализ углеродного следа",
-        "Оценка жизненного цикла (ОЖЦ)",
-        "Внедрение циркулярной экономики",
-        "Сертификация зеленых зданий",
-      ],
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    },
-    {
-      icon: ShieldCheck,
-      title: "Соответствие требованиям",
-      description: "Экспертное руководство по экологическим нормам и получению разрешений.",
-      features: [
-        "Заявки на экологические разрешения",
-        "Аудит соответствия",
-        "Анализ регулятивного воздействия",
-        "Поддержка юридической документации",
-        "Услуги связи с государственными органами",
-      ],
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-    },
-    {
-      icon: Droplets,
-      title: "Управление водными ресурсами",
-      description: "Инновационные решения по сохранению и очистке воды для всех отраслей.",
-      features: [
-        "Оценка качества воды",
-        "Проектирование очистки сточных вод",
-        "Управление ливневыми водами",
-        "Мониторинг подземных вод",
-        "Стратегии водосбережения",
+        "Инвентаризация источников выбросов",
+        "Расчет валовых выбросов",
+        "Составление каталога выбросов",
+        "Анализ воздействия на атмосферу",
+        "Рекомендации по снижению выбросов",
       ],
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
     {
-      icon: Wind,
-      title: "Мониторинг качества воздуха",
-      description: "Современная оценка качества воздуха и стратегии контроля выбросов.",
+      icon: Recycle,
+      title: "Разработка проекта нормативов допустимых выбросов загрязняющих веществ в атмосферный воздух",
+      description: "Определение предельно допустимых концентраций выбросов для предприятий.",
       features: [
-        "Программы мониторинга качества воздуха",
-        "Разработка реестра выбросов",
-        "Атмосферное дисперсионное моделирование",
-        "Оценка качества воздуха в помещениях",
-        "Проектирование систем контроля выбросов",
+        "Расчет нормативов ПДВ",
+        "Моделирование рассеивания",
+        "Согласование с экологическими органами",
+        "Разработка программы контроля",
+        "Подготовка технических решений",
       ],
       image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
     {
-      icon: Trees,
-      title: "Восстановление экосистем",
-      description: "Восстановление среды обитания и управление проектами сохранения биоразнообразия.",
+      icon: FileText,
+      title: "Разработка экологического паспорта предприятия",
+      description: "Составление документа, отражающего экологическое состояние и воздействие предприятия.",
       features: [
-        "Планирование восстановления среды обитания",
-        "Сохранение биоразнообразия",
-        "Восстановление водно-болотных угодий",
-        "Реинтродукция местных видов",
-        "Мониторинг экосистем",
+        "Анализ экологического состояния",
+        "Оценка воздействия на окружающую среду",
+        "Разработка мероприятий по охране природы",
+        "Ведение экологической отчетности",
+        "Планирование природоохранных мероприятий",
+      ],
+      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: Droplets,
+      title: "Разработка паспорта газоочистной установки (ГОУ)",
+      description: "Техническая документация для систем очистки промышленных газов.",
+      features: [
+        "Техническое описание установки",
+        "Расчет эффективности очистки",
+        "Режимы работы оборудования",
+        "План технического обслуживания",
+        "Контроль параметров очистки",
+      ],
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: Trash2,
+      title: "Разработка инструкции по обращению с отходами",
+      description: "Правила и процедуры безопасного обращения с промышленными отходами.",
+      features: [
+        "Классификация отходов",
+        "Правила сбора и хранения",
+        "Процедуры транспортировки",
+        "Методы утилизации и переработки",
+        "Контроль за обращением с отходами",
+      ],
+      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: ClipboardList,
+      title: "Заполнение журналов под-1,-2,-3",
+      description: "Ведение обязательной экологической отчетности и документооборота.",
+      features: [
+        "Журнал учета отходов",
+        "Журнал производственного контроля",
+        "Журнал учета водопотребления",
+        "Отчеты о природопользовании",
+        "Статистическая экологическая отчетность",
       ],
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
@@ -152,7 +153,7 @@ export default function Services() {
                       className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                     >
                       <ArrowRight className="w-5 h-5" />
-                      Начать
+                      Получить консультацию
                     </Link>
                   </GlassmorphicCard>
                 </div>
@@ -208,7 +209,7 @@ export default function Services() {
                 className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
               >
                 <ArrowRight className="w-5 h-5" />
-                Записаться на консультацию
+                Получить консультацию
               </Link>
               <Link
                 href="/case-studies"
