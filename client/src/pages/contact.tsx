@@ -67,23 +67,23 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: "Office Location",
-      details: "123 Green Street, Eco City, EC 12345",
+      title: "Адрес",
+      details: "г. Минск, ул. Луговая, 66, корп. 1, кв. 362",
     },
     {
       icon: Phone,
-      title: "Phone",
-      details: "+1 (555) 123-4567",
+      title: "Телефон",
+      details: "+375 (29) 602-42-80",
     },
     {
       icon: Mail,
       title: "Email",
-      details: "hello@synecology.com",
+      details: "synecology@yandex.by",
     },
     {
       icon: Clock,
-      title: "Business Hours",
-      details: "Mon-Fri: 9AM-6PM PST",
+      title: "Часы работы",
+      details: "Пн-Пт: 9:00 - 18:00",
     },
   ];
 

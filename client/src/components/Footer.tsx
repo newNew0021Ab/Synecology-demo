@@ -14,6 +14,11 @@ export default function Footer() {
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
             <p className="text-white/70 mb-4">Экологический консалтинг для устойчивого будущего.</p>
+            <div className="text-white/70 text-sm space-y-1">
+              <p>г. Минск, ул. Луговая, 66, корп. 1, кв. 362</p>
+              <p>Тел.: +375 (29) 602-42-80</p>
+              <p>Email: synecology@yandex.by</p>
+            </div>
             <div className="flex gap-3">
               <a href="#" className="text-white/70 hover:text-sea-green transition-colors">
                 <Linkedin className="w-5 h-5" />

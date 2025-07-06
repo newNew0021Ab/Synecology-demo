@@ -22,7 +22,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 bg-sea-green rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">S</span>
+              <Leaf className="w-4 h-4 text-white" />
             </div>
             <span className="text-lg md:text-xl font-heading font-bold text-dark-slate">
               Synecology
