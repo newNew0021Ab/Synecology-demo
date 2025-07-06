@@ -347,44 +347,44 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Часто задаваемые <span className="text-sea-green">вопросы</span>
+              Frequently Asked <span className="text-sea-green">Questions</span>
             </motion.h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
-                Сколько времени занимает типичный проект?
+                How long does a typical project take?
               </h3>
               <p className="text-dark-slate/70">
-                Сроки проектов варьируются в зависимости от масштаба и сложности. Небольшие оценки могут занять 2-4 недели, в то время как комплексное планирование устойчивости может занять 6-12 месяцев. Мы предоставим подробный график во время первичной консультации.
+                Project timelines vary based on scope and complexity. Small assessments may take 2-4 weeks, while comprehensive sustainability planning can take 6-12 months. We'll provide a detailed timeline during our initial consultation.
               </p>
             </GlassmorphicCard>
 
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
-                Какие отрасли вы обслуживаете?
+                What industries do you serve?
               </h3>
               <p className="text-dark-slate/70">
-                Мы работаем с клиентами в сферах производства, энергетики, сельского хозяйства, недвижимости, образования и муниципальных секторах. Наша экспертиза адаптируется к различным отраслевым экологическим вызовам.
+                We work with clients across manufacturing, energy, agriculture, real estate, education, and municipal sectors. Our expertise adapts to various industry-specific environmental challenges.
               </p>
             </GlassmorphicCard>
 
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
-                Предоставляете ли вы постоянную поддержку?
+                Do you provide ongoing support?
               </h3>
               <p className="text-dark-slate/70">
-                Да! Мы предлагаем долгосрочные партнерства, включая мониторинг, отчетность, управление соответствием и оптимизацию систем для обеспечения непрерывного успеха ваших экологических инициатив.
+                Yes! We offer long-term partnerships including monitoring, reporting, compliance management, and system optimization to ensure continued success of your environmental initiatives.
               </p>
             </GlassmorphicCard>
 
             <GlassmorphicCard>
               <h3 className="text-xl font-heading font-bold text-dark-slate mb-4">
-                Как вы обеспечиваете соблюдение нормативных требований?
+                How do you ensure regulatory compliance?
               </h3>
               <p className="text-dark-slate/70">
-                Наша команда следит за всеми экологическими нормами и поддерживает отношения с регулирующими органами. Мы встраиваем соблюдение требований в каждое решение с самого начала.
+                Our team stays current with all environmental regulations and maintains relationships with regulatory agencies. We build compliance into every solution from the ground up.
               </p>
             </GlassmorphicCard>
           </div>
@@ -428,7 +428,7 @@ export default function Contact() {
                 className="bg-sea-green hover:bg-sea-green/90 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300"
               >
                 <ArrowRight className="w-5 h-5 mr-2" />
-                Получить консультацию
+                Get Free Consultation
               </Button>
               <Button
                 variant="outline"

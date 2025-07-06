@@ -1,47 +1,40 @@
-
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { PlayCircle, ArrowRight, Factory, Recycle, FileText, Droplets, Trash2, ClipboardList } from "lucide-react";
+import { PlayCircle, ArrowRight, Leaf, Recycle, ShieldCheck, Droplets, Wind, Trees } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 
 export default function Home() {
   const services = [
     {
-      icon: Factory,
-      title: "Разработка акта инвентаризации выбросов загрязняющих веществ в атмосферный воздух",
-      description: "Комплексная инвентаризация источников выбросов для соблюдения экологических нормативов.",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      icon: Leaf,
+      title: "Экологическая оценка",
+      description: "Комплексные исследования воздействия на окружающую среду и оценка рисков для ваших проектов.",
     },
     {
       icon: Recycle,
-      title: "Разработка проекта нормативов допустимых выбросов загрязняющих веществ в атмосферный воздух",
-      description: "Определение предельно допустимых концентраций выбросов для предприятий.",
-      image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      title: "Планирование устойчивости",
+      description: "Стратегические дорожные карты устойчивости и стратегии сокращения углеродного следа.",
     },
     {
-      icon: FileText,
-      title: "Разработка экологического паспорта предприятия",
-      description: "Составление документа, отражающего экологическое состояние и воздействие предприятия.",
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      icon: ShieldCheck,
+      title: "Соответствие требованиям",
+      description: "Экспертное руководство по экологическим нормам и получению разрешений.",
     },
     {
       icon: Droplets,
-      title: "Разработка паспорта газоочистной установки (ГОУ)",
-      description: "Техническая документация для систем очистки промышленных газов.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      title: "Управление водными ресурсами",
+      description: "Инновационные решения по сохранению и очистке воды для всех отраслей.",
     },
     {
-      icon: Trash2,
-      title: "Разработка инструкции по обращению с отходами",
-      description: "Правила и процедуры безопасного обращения с промышленными отходами.",
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      icon: Wind,
+      title: "Мониторинг качества воздуха",
+      description: "Современная оценка качества воздуха и стратегии контроля выбросов.",
     },
     {
-      icon: ClipboardList,
-      title: "Заполнение журналов под-1,-2,-3",
-      description: "Ведение обязательной экологической отчетности и документооборота.",
-      image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      icon: Trees,
+      title: "Восстановление экосистем",
+      description: "Восстановление среды обитания и управление проектами сохранения биоразнообразия.",
     },
   ];
 
@@ -100,7 +93,7 @@ export default function Home() {
                     className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                   >
                     <ArrowRight className="w-5 h-5" />
-                    Получить консультацию
+                    Начать проект
                   </Link>
                 </motion.div>
               </motion.div>
@@ -125,7 +118,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 relative bg-subtle-gradient">
+      <section className="py-20 relative section-divider bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
@@ -206,7 +199,7 @@ export default function Home() {
                 className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
               >
                 <ArrowRight className="w-5 h-5" />
-                Получить консультацию
+                Начать сегодня
               </Link>
               <Link
                 href="/case-studies"
