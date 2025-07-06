@@ -58,17 +58,17 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-white/40 backdrop-blur-sm rounded-3xl p-8 shadow-lg"
+                className="bg-white/40 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-lg"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
                 <motion.h1
-                  className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate leading-tight mb-6"
+                  className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
@@ -77,7 +77,7 @@ export default function Home() {
                   <span className="text-sea-green">устойчивого будущего</span>
                 </motion.h1>
                 <motion.p
-                  className="text-xl text-dark-slate/80 mb-8 leading-relaxed"
+                  className="hero-description text-lg md:text-xl text-dark-slate/80 mb-6 md:mb-8 leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
@@ -85,20 +85,20 @@ export default function Home() {
                   Мы объединяем передовые технологии с глубокой экологической экспертизой для предоставления инновационных консалтинговых услуг, которые защищают нашу планету и способствуют успеху бизнеса.
                 </motion.p>
                 <motion.div
-                  className="flex flex-col sm:flex-row gap-4"
+                  className="flex flex-col sm:flex-row gap-3 md:gap-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
                 >
-                  <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2">
-                    <PlayCircle className="w-5 h-5" />
+                  <button className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base">
+                    <PlayCircle className="w-4 h-4 md:w-5 md:h-5" />
                     Наша история
                   </button>
                   <Link
                     href="/contact"
-                    className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+                    className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base"
                   >
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                     Получить консультацию
                   </Link>
                 </motion.div>
@@ -106,16 +106,16 @@ export default function Home() {
             </div>
 
             <motion.div
-              className="relative"
+              className="relative mt-8 lg:mt-0"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <div className="glassmorphic rounded-3xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
                   alt="Modern sustainable building"
-                  className="rounded-xl shadow-lg w-full h-auto"
+                  className="rounded-xl shadow-lg w-full h-auto max-h-96 md:max-h-none object-cover"
                 />
               </div>
             </motion.div>
@@ -147,21 +147,21 @@ export default function Home() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <GlassmorphicCard key={service.title} delay={index * 0.1}>
-                <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-sea-green/30 transition-colors">
-                  <service.icon className="w-8 h-8 text-sea-green" />
+                <div className="w-12 h-12 md:w-16 md:h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-sea-green/30 transition-colors">
+                  <service.icon className="w-6 h-6 md:w-8 md:h-8 text-sea-green" />
                 </div>
-                <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate mb-3 md:mb-4 leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-dark-slate/70 mb-6">{service.description}</p>
+                <p className="text-dark-slate/70 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">{service.description}</p>
                 <Link
                   href="/services"
-                  className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
+                  className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-sm md:text-base"
                 >
-                  Подробнее <ArrowRight className="w-4 h-4" />
+                  Подробнее <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                 </Link>
               </GlassmorphicCard>
             ))}
@@ -176,7 +176,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassmorphicCard className="text-center">
             <motion.h2
-              className="text-4xl font-heading font-bold text-dark-slate mb-6"
+              className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-dark-slate mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -185,7 +185,7 @@ export default function Home() {
               Готовы создать <span className="text-sea-green">экологическое воздействие</span>?
             </motion.h2>
             <motion.p
-              className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-dark-slate/70 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -194,7 +194,7 @@ export default function Home() {
               Присоединяйтесь к сотням организаций, которые изменили свой экологический след с помощью наших экспертных консалтинговых услуг.
             </motion.p>
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
@@ -202,14 +202,14 @@ export default function Home() {
             >
               <Link
                 href="/contact"
-                className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+                className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base"
               >
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                 Получить консультацию
               </Link>
               <Link
                 href="/case-studies"
-                className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2"
+                className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base"
               >
                 Посмотреть кейсы
               </Link>

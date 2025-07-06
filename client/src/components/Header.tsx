@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [location] = useLocation();
@@ -16,77 +17,143 @@ export default function Header() {
   ];
 
   return (
-    <header className="glassmorphic fixed top-4 left-4 right-4 z-50 rounded-2xl px-6 py-4 mx-auto max-w-7xl">
-      <nav className="flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="w-10 h-10 rounded-full bg-sea-green flex items-center justify-center">
-            <Leaf className="w-6 h-6 text-white" />
+    <header className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-sea-green rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">S</span>
+            </div>
+            <span className="text-lg md:text-xl font-heading font-bold text-dark-slate">
+              Synecology
+            </span>
+          </Link>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            <Link 
+              href="/" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              Главная
+            </Link>
+            <Link 
+              href="/services" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/services' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              Услуги
+            </Link>
+            <Link 
+              href="/case-studies" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/case-studies' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              Кейсы
+            </Link>
+            <Link 
+              href="/blog" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/blog' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              Блог
+            </Link>
+            <Link 
+              href="/about" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/about' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              О нас
+            </Link>
+            <Link 
+              href="/contact" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/contact' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              Контакты
+            </Link>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <Link
+              href="/contact"
+              className="hidden lg:inline-flex bg-sea-green text-white px-4 lg:px-6 py-2 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 text-sm lg:text-base"
+            >
+              Связаться с нами
+            </Link>
+
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              {isMenuOpen ? (
+                <X className="w-5 h-5 text-dark-slate" />
+              ) : (
+                <Menu className="w-5 h-5 text-dark-slate" />
+              )}
+            </button>
           </div>
-          <span className="text-2xl font-heading font-bold text-sea-green">Synecology</span>
-        </Link>
+        </div>
+      </div>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={`hover:text-sea-green transition-colors ${
-                  location === item.href ? "text-sea-green" : ""
-                }`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden glassmorphic p-2 rounded-lg"
-        >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-
-        {/* Get Started Button */}
-        <Link
-          href="/contact"
-          className="hidden md:block glassmorphic glassmorphic-hover px-6 py-2 rounded-full text-sea-green font-semibold"
-        >
-          Начать проект
-        </Link>
-      </nav>
-
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="md:hidden mt-4 pt-4 border-t border-white/20">
-          <ul className="space-y-2">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`block py-2 hover:text-sea-green transition-colors ${
-                    location === item.href ? "text-sea-green" : ""
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link
-                href="/contact"
-                className="block py-2 text-sea-green font-semibold"
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden glassmorphic border-t border-white/20"
+          >
+            <div className="px-4 py-6 space-y-4">
+              <Link 
+                href="/" 
+                className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Начать проект
+                Главная
               </Link>
-            </li>
-          </ul>
-        </div>
-      )}
+              <Link 
+                href="/services" 
+                className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/services' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Услуги
+              </Link>
+              <Link 
+                href="/case-studies" 
+                className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/case-studies' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Кейсы
+              </Link>
+              <Link 
+                href="/blog" 
+                className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/blog' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Блог
+              </Link>
+              <Link 
+                href="/about" 
+                className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/about' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                О нас
+              </Link>
+              <Link 
+                href="/contact" 
+                className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/contact' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Контакты
+              </Link>
+              <Link
+                href="/contact"
+                className="block w-full bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 text-center mt-6"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Связаться с нами
+              </Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

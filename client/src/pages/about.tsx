@@ -91,7 +91,7 @@ export default function About() {
       <section className="py-20 relative overflow-hidden">
         <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
         <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -140,7 +140,7 @@ export default function About() {
                 </Link>
               </motion.div>
             </div>
-            
+
             <motion.div
               className="relative"
               initial={{ opacity: 0, x: 50 }}
@@ -188,7 +188,7 @@ export default function About() {
               Мы стремимся создать устойчивое будущее через инновационные экологические решения, которые защищают нашу планету, обеспечивая при этом экономический рост.
             </motion.p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 card-grid">
             {values.map((value, index) => (
               <GlassmorphicCard key={value.title} delay={index * 0.1}>
@@ -208,7 +208,7 @@ export default function About() {
       {/* Team Section */}
       <section className="py-20 relative">
         <OrganicBlob className="absolute top-10 right-10 opacity-10" size="md" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
@@ -230,7 +230,7 @@ export default function About() {
               Наша разнообразная команда экспертов объединяет десятилетия опыта в области экологических наук, инженерии и политики для предоставления инновационных решений.
             </motion.p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => (
               <GlassmorphicCard key={member.name} delay={index * 0.1}>
