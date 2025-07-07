@@ -14,8 +14,10 @@ export default function Footer() {
               </div>
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
-            <p className="text-white/70 mb-4">Экологический консалтинг для устойчивого будущего.</p>
-            <div className="flex gap-3">
+            <p className="text-white/70 mb-2">Экологический консалтинг для устойчивого будущего.</p>
+            
+            
+            <div className="flex gap-3 mb-4">
               <a href="#" className="text-white/70 hover:text-sea-green transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
@@ -26,7 +28,13 @@ export default function Footer() {
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
+            <div className="text-white/70 text-sm">
+              <p>ИП Волошко А.Г.</p>
+              <p>УНП 193443921</p>
+              <p></p>
+            </div>
           </div>
+          
           
           <div>
             <h4 className="font-semibold mb-4">Услуги</h4>
@@ -82,16 +90,16 @@ export default function Footer() {
           
           <div>
             <h4 className="font-semibold mb-4">Контакты</h4>
-            <div className="text-white/70 text-sm space-y-2">
-              <p>г. Минск, ул. Луговая, 66, корп. 1, кв. 362</p>
-              <p>Тел.: +375 (29) 602-42-80</p>
-              <p>Email: synecology@yandex.by</p>
+            <div className="text-white/70 space-y-2">
+              <p>г. Минск, ул. Якубова 66, корп.1, кв. 362.</p>
+              <p>+375 (29) 602-42-80</p>
+              <p>synecology@yandex.by</p>
             </div>
           </div>
         </div>
         
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70 text-sm">
-          <p>&copy; 2024 Synecology. Все права защищены.</p>
+          <p>&copy; 2025 Synecology. Все права защищены.</p>
         </div>
       </div>
     </footer>
