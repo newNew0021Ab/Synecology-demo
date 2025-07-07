@@ -58,26 +58,26 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-8 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
-            <div className="space-y-4 md:space-y-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-white/40 backdrop-blur-sm rounded-2xl md:rounded-3xl p-3 sm:p-6 md:p-8 shadow-lg"
+                className="bg-white/40 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-lg"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
                 <motion.h1
-                  className="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-3 md:mb-6"
+                  className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
                 >
                   Экологические решения для{" "}
-                  <span className="text-sea-green block sm:inline">устойчивого будущего</span>
+                  <span className="text-sea-green">устойчивого будущего</span>
                 </motion.h1>
                 <motion.p
-                  className="hero-description text-sm sm:text-base md:text-lg lg:text-xl text-dark-slate/80 mb-4 md:mb-8 leading-relaxed"
+                  className="hero-description text-lg md:text-xl text-dark-slate/80 mb-6 md:mb-8 leading-relaxed"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
@@ -85,18 +85,18 @@ export default function Home() {
                   Мы объединяем передовые технологии с глубокой экологической экспертизой для предоставления инновационных консалтинговых услуг, которые защищают нашу планету и способствуют успеху бизнеса.
                 </motion.p>
                 <motion.div
-                  className="flex flex-col gap-3 md:gap-4"
+                  className="flex flex-col sm:flex-row gap-3 md:gap-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
                 >
-                  <button className="glassmorphic glassmorphic-hover px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base w-full sm:w-auto">
+                  <button className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base">
                     <PlayCircle className="w-4 h-4 md:w-5 md:h-5" />
                     Наша история
                   </button>
                   <Link
                     href="/contact"
-                    className="bg-sea-green text-white px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base w-full sm:w-auto"
+                    className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base"
                   >
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                     Получить консультацию
@@ -106,16 +106,16 @@ export default function Home() {
             </div>
 
             <motion.div
-              className="relative mt-6 lg:mt-0 px-2 sm:px-0"
+              className="relative mt-8 lg:mt-0"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <div className="glassmorphic rounded-2xl md:rounded-3xl p-2 sm:p-4 md:p-8 transform hover:rotate-0 transition-transform duration-500">
+              <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
                   alt="Modern sustainable building"
-                  className="rounded-lg md:rounded-xl shadow-lg w-full h-auto max-h-64 sm:max-h-80 md:max-h-none object-cover"
+                  className="rounded-xl shadow-lg w-full h-auto max-h-96 md:max-h-none object-cover"
                 />
               </div>
             </motion.div>
