@@ -16,11 +16,18 @@ export default function Header() {
     { href: "/contact", label: "Контакты" },
   ];
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    if (location === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2" onClick={handleLogoClick}>
             <div className="w-8 h-8 bg-sea-green rounded-lg flex items-center justify-center">
               <Leaf className="w-4 h-4 text-white" />
             </div>
