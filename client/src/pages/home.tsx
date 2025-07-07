@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center relative overflow-hidden">
+      <section className="min-h-screen flex items-center relative overflow-hidden pt-20 md:pt-0">
         <OrganicBlob className="absolute top-20 right-20 opacity-20" size="lg" />
         <OrganicBlob className="absolute bottom-20 left-20 opacity-15" size="md" delay={3} />
 
