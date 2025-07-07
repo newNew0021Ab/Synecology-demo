@@ -1,3 +1,4 @@
+
 import { Link } from "wouter";
 import { Leaf, Linkedin, Twitter, Instagram } from "lucide-react";
 
@@ -14,11 +15,6 @@ export default function Footer() {
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
             <p className="text-white/70 mb-4">Экологический консалтинг для устойчивого будущего.</p>
-            <div className="text-white/70 text-sm space-y-1">
-              <p>г. Минск, ул. Луговая, 66, корп. 1, кв. 362</p>
-              <p>Тел.: +375 (29) 602-42-80</p>
-              <p>Email: synecology@yandex.by</p>
-            </div>
             <div className="flex gap-3">
               <a href="#" className="text-white/70 hover:text-sea-green transition-colors">
                 <Linkedin className="w-5 h-5" />
@@ -31,31 +27,33 @@ export default function Footer() {
               </a>
             </div>
           </div>
+          
           <div>
             <h4 className="font-semibold mb-4">Услуги</h4>
             <ul className="space-y-2 text-white/70">
               <li>
                 <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Экологическая оценка
+                  Экологический аудит
                 </Link>
               </li>
               <li>
                 <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Планирование устойчивости
+                  Инвентаризация выбросов
                 </Link>
               </li>
               <li>
                 <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Соответствие требованиям
+                  Сертификация ESG
                 </Link>
               </li>
               <li>
                 <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Управление водными ресурсами
+                  Экологический мониторинг
                 </Link>
               </li>
             </ul>
           </div>
+          
           <div>
             <h4 className="font-semibold mb-4">Компания</h4>
             <ul className="space-y-2 text-white/70">
@@ -75,23 +73,24 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-sea-green transition-colors">
-                  Карьера
-                </a>
+                <Link href="/contact" className="hover:text-sea-green transition-colors">
+                  Контакты
+                </Link>
               </li>
             </ul>
           </div>
+          
           <div>
             <h4 className="font-semibold mb-4">Контакты</h4>
-            <ul className="space-y-2 text-white/70">
-              <li>ул. Зеленая, д. 123</li>
-              <li>Эко Сити, 12345</li>
-              <li>+7 (555) 123-4567</li>
-              <li>hello@synecology.com</li>
-            </ul>
+            <div className="text-white/70 text-sm space-y-2">
+              <p>г. Минск, ул. Луговая, 66, корп. 1, кв. 362</p>
+              <p>Тел.: +375 (29) 602-42-80</p>
+              <p>Email: synecology@yandex.by</p>
+            </div>
           </div>
         </div>
-        <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70">
+        
+        <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70 text-sm">
           <p>&copy; 2024 Synecology. Все права защищены.</p>
         </div>
       </div>
