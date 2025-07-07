@@ -18,13 +18,13 @@ export default function Footer() {
             
             
             <div className="flex gap-3 mb-4">
-              <a href="#" className="text-white/70 hover:text-sea-green transition-colors">
+              <a href="https://linkedin.com/company/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white/70 hover:text-sea-green transition-colors">
+              <a href="https://twitter.com/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-white/70 hover:text-sea-green transition-colors">
+              <a href="https://instagram.com/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -40,23 +40,23 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Услуги</h4>
             <ul className="space-y-2 text-white/70">
               <li>
-                <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Экологический аудит
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-sea-green transition-colors">
+                <Link href="/services/emissions-inventory" className="hover:text-sea-green transition-colors">
                   Инвентаризация выбросов
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Сертификация ESG
+                <Link href="/services/pdv-standards" className="hover:text-sea-green transition-colors">
+                  Нормативы ПДВ
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-sea-green transition-colors">
-                  Экологический мониторинг
+                <Link href="/services/ecological-passport" className="hover:text-sea-green transition-colors">
+                  Экологический паспорт
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/gas-treatment-passport" className="hover:text-sea-green transition-colors">
+                  Паспорт газоочистной установки
                 </Link>
               </li>
             </ul>
@@ -92,8 +92,12 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="text-white/70 space-y-2">
               <p>г. Минск, ул. Якубова 66, корп.1, кв. 362.</p>
-              <p>+375 (29) 602-42-80</p>
-              <p>synecology@yandex.by</p>
+              <a href="tel:+375296024280" className="block hover:text-sea-green transition-colors">
+                +375 (29) 602-42-80
+              </a>
+              <a href="mailto:synecology@yandex.by" className="block hover:text-sea-green transition-colors">
+                synecology@yandex.by
+              </a>
             </div>
           </div>
         </div>
