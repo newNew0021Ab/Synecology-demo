@@ -7,8 +7,11 @@ import { useScrollToTop } from "@/hooks/useScrollToTop";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Services from "@/pages/services";
+import ServiceDetail from "@/pages/service-detail";
 import CaseStudies from "@/pages/case-studies";
+import CaseStudyDetail from "@/pages/case-study-detail";
 import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import Header from "@/components/Header";
@@ -20,8 +23,11 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/services" component={Services} />
+      <Route path="/services/:slug" component={ServiceDetail} />
       <Route path="/case-studies" component={CaseStudies} />
+      <Route path="/case-studies/:slug" component={CaseStudyDetail} />
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />

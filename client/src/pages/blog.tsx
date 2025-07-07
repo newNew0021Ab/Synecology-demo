@@ -170,10 +170,13 @@ export default function Blog() {
                   ))}
                 </div>
 
-                <button className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2">
-                  <ArrowRight className="w-5 h-5" />
-                  Читать полную статью
-                </button>
+                <Link
+                    href="/blog/carbon-capture-future"
+                    className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                    Читать полную статью
+                  </Link>
               </div>
             </div>
           </GlassmorphicCard>
@@ -229,9 +232,12 @@ export default function Blog() {
                     ))}
                   </div>
 
-                  <button className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all mt-auto">
+                  <Link
+                    href="/blog/carbon-capture-future"
+                    className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all mt-auto"
+                  >
                     Читать далее <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </Link>
                 </article>
               </GlassmorphicCard>
             ))}

@@ -208,14 +208,17 @@ export default function CaseStudies() {
 
                     <div className="flex items-center justify-between mt-6 pt-6 border-t border-dark-slate/10">
                       <Link
-                        href="/contact"
+                        href={`/case-studies/${index === 0 ? 'solar-energy-transition' : index === 1 ? 'wetlands-restoration' : index === 2 ? 'water-treatment-innovation' : index === 3 ? 'urban-green-infrastructure' : index === 4 ? 'carbon-neutral-campus' : 'marine-habitat-protection'}`}
                         className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
                       >
-                        Начать похожий проект <ArrowRight className="w-4 h-4" />
+                        Подробнее <ArrowRight className="w-4 h-4" />
                       </Link>
-                      <button className="text-sea-green hover:text-sea-green/80 transition-colors">
-                        <ExternalLink className="w-5 h-5" />
-                      </button>
+                      <Link
+                        href="/contact"
+                        className="text-sea-green hover:text-sea-green/80 transition-colors text-sm"
+                      >
+                        Начать проект
+                      </Link>
                     </div>
                   </div>
               </GlassmorphicCard>
