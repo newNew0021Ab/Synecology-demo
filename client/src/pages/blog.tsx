@@ -85,7 +85,7 @@ export default function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Latest <span className="text-sea-green">Insights</span>
+              Последние <span className="text-sea-green">статьи</span>
             </motion.h1>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -93,7 +93,7 @@ export default function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Stay updated with the latest environmental trends, regulations, and sustainable practices through our expert insights and industry analysis.
+              Будьте в курсе последних экологических тенденций, нормативов и устойчивых практик благодаря нашим экспертным аналитическим материалам и отраслевым исследованиям.
             </motion.p>
           </div>
         </div>
@@ -262,7 +262,7 @@ export default function Blog() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Stay <span className="text-sea-green">Informed</span>
+              Будьте <span className="text-sea-green">в курсе</span>
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
