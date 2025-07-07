@@ -31,7 +31,7 @@ export default function Services() {
         "Разработка программы контроля",
         "Подготовка технических решений",
       ],
-      image: "Photo by <a href=https://unsplash.com/photos/a-no-smoking-sign-in-a-grassy-field-z9gyph_MiI8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
     {
       icon: FileText,

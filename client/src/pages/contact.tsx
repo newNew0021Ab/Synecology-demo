@@ -68,7 +68,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: "Адрес",
-      details: "г. Минск, ул. Луговая, 66, корп. 1, кв. 362",
+      details: "г. Минск, ул. Якубова 66, корп.1, кв. 362",
     },
     {
       icon: Phone,
@@ -88,13 +88,13 @@ export default function Contact() {
   ];
 
   const projectTypes = [
-    "Environmental Assessment",
-    "Sustainability Planning",
-    "Regulatory Compliance",
-    "Water Management",
-    "Air Quality Monitoring",
-    "Ecosystem Restoration",
-    "Other",
+    "Экологическая оценка",
+    "Планирование устойчивости",
+    "Соблюдение нормативов",
+    "Управление водными ресурсами",
+    "Мониторинг качества воздуха",
+    "Восстановление экосистем",
+    "Другое",
   ];
 
   return (
@@ -259,11 +259,11 @@ export default function Contact() {
                     className="w-full bg-sea-green hover:bg-sea-green/90 text-white font-semibold py-4 rounded-full transition-all duration-300"
                   >
                     {isSubmitting ? (
-                      "Sending..."
+                      "Отправка..."
                     ) : (
                       <>
                         <Send className="w-5 h-5 mr-2" />
-                        Send Message
+                        Отправить сообщение
                       </>
                     )}
                   </Button>
@@ -274,7 +274,7 @@ export default function Contact() {
             {/* Contact Information */}
             <div className="space-y-8">
               <GlassmorphicCard>
-                <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">Contact Information</h3>
+                <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">Контактная информация</h3>
                 <div className="space-y-6">
                   {contactInfo.map((info, index) => (
                     <motion.div
@@ -297,34 +297,34 @@ export default function Contact() {
               </GlassmorphicCard>
 
               <GlassmorphicCard>
-                <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">Why Choose Synecology?</h3>
+                <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">Почему выбрать Synecology?</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
-                      <div className="font-semibold text-dark-slate">Expert Team</div>
-                      <div className="text-dark-slate/70 text-sm">25+ environmental professionals with decades of experience</div>
+                      <div className="font-semibold text-dark-slate">Экспертная команда</div>
+                      <div className="text-dark-slate/70 text-sm">Более 25 экологических специалистов с многолетним опытом</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
-                      <div className="font-semibold text-dark-slate">Proven Results</div>
-                      <div className="text-dark-slate/70 text-sm">150+ successful projects with measurable environmental impact</div>
+                      <div className="font-semibold text-dark-slate">Проверенные результаты</div>
+                      <div className="text-dark-slate/70 text-sm">Более 150 успешных проектов с измеримым экологическим воздействием</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
-                      <div className="font-semibold text-dark-slate">Innovative Solutions</div>
-                      <div className="text-dark-slate/70 text-sm">Cutting-edge technology combined with scientific expertise</div>
+                      <div className="font-semibold text-dark-slate">Инновационные решения</div>
+                      <div className="text-dark-slate/70 text-sm">Передовые технологии в сочетании с научной экспертизой</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
-                      <div className="font-semibold text-dark-slate">Full Support</div>
-                      <div className="text-dark-slate/70 text-sm">End-to-end project management and ongoing consultation</div>
+                      <div className="font-semibold text-dark-slate">Полная поддержка</div>
+                      <div className="text-dark-slate/70 text-sm">Комплексное управление проектами и постоянные консультации</div>
                     </div>
                   </div>
                 </div>
@@ -402,7 +402,7 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Ready to Make an <span className="text-sea-green">Impact</span>?
+              Готовы сделать <span className="text-sea-green">экологический шаг</span>?
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
@@ -411,7 +411,7 @@ export default function Contact() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Don't wait to start your environmental journey. Contact us today for a free consultation and discover how we can help achieve your sustainability goals.
+              Не откладывайте начало вашего экологического пути. Свяжитесь с нами сегодня для бесплатной консультации и узнайте, как мы можем помочь достичь ваших целей устойчивости.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -435,7 +435,7 @@ export default function Contact() {
                 className="glassmorphic glassmorphic-hover border-sea-green text-sea-green font-semibold py-4 px-8 rounded-full"
               >
                 <Phone className="w-5 h-5 mr-2" />
-                Call Now
+                Позвонить сейчас
               </Button>
             </motion.div>
           </GlassmorphicCard>
