@@ -166,6 +166,22 @@ export default function Home() {
               </GlassmorphicCard>
             ))}
           </div>
+
+          <motion.div
+            className="text-center mt-12 md:mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <Link
+              href="/services"
+              className="bg-sea-green text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-3 text-base md:text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Все наши услуги
+              <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
