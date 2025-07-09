@@ -62,7 +62,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-white/40 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-lg"
+                className="bg-white/40 backdrop-blur-sm  rounded-3xl p-4 md:p-8 shadow-lg "
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
@@ -200,7 +200,7 @@ export default function Home() {
           >
             <Link
               href="/services"
-              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
+              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
             >
               Все наши услуги
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
