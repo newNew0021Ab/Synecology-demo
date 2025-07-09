@@ -74,7 +74,7 @@ export default function Services() {
     },
     {
       icon: ClipboardList,
-      title: "Заполнение журналов ПОД-1,-2,-3",
+      title: "Ведение книг и журналов учета в области экологии",
       description: "Ведение обязательной экологической отчетности и документооборота.",
       features: [
         "Журнал учета отходов",
@@ -82,8 +82,61 @@ export default function Services() {
         "Журнал учета водопотребления",
         "Отчеты о природопользовании",
         "Статистическая экологическая отчетность",
+        "Восстановление данных за предыдущие периоды",
       ],
       image: "https://images.unsplash.com/photo-1568992688065-536aad8a12f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: FileText,
+      title: "Экологическое сопровождение предприятий",
+      description: "Комплексная поддержка предприятий по всем вопросам экологии и охраны окружающей среды.",
+      features: [
+        "Аутсорсинг экологических функций",
+        "Консультации по всем направлениям экологии",
+        "Представительство в контролирующих органах",
+        "Разработка экологических программ",
+        "Мониторинг изменений в законодательстве",
+      ],
+      image: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: Factory,
+      title: "Анализ действующей системы охраны окружающей среды",
+      description: "Комплексный анализ соответствия деятельности предприятия экологическим требованиям.",
+      features: [
+        "Экологический аудит предприятия",
+        "Оценка соответствия законодательству",
+        "Анализ экологических рисков",
+        "Разработка корректирующих мероприятий",
+        "Подготовка отчетов и рекомендаций",
+      ],
+      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: FileText,
+      title: "Разработка документации по инструктажам",
+      description: "Создание всей необходимой документации для проведения экологических инструктажей.",
+      features: [
+        "Положение об организации проведения инструктажей",
+        "Программа инструктажа по экологии",
+        "Программа повторного инструктажа",
+        "Приказы на утверждение и введение документации",
+        "Приказы на проведение инструктажей и журналы",
+      ],
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+    },
+    {
+      icon: ClipboardList,
+      title: "Разработка инструкций по проведению ПН (ПЭК)",
+      description: "Разработка документов, регламентирующих проведение производственных наблюдений.",
+      features: [
+        "Инструкция по осуществлению производственных наблюдений",
+        "Планы мероприятий и планы-графики ПН (ПЭК)",
+        "Приказы на утверждение документации",
+        "Отчеты о проведении ПН (ПЭК)",
+        "Учет специфики деятельности заказчика",
+      ],
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
     },
   ];
 
@@ -151,7 +204,7 @@ export default function Services() {
                       </div>
                       <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                         <Link
-                          href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : 'environmental-journals'}`}
+                          href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
                           className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
                         >
                           Подробнее
