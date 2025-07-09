@@ -149,23 +149,45 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
-              <GlassmorphicCard key={service.title} delay={index * 0.1} className="group hover:scale-105 hover:shadow-2xl transition-all duration-300 border border-sea-green/10 hover:border-sea-green/30">
-                <div className="mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-sea-green/40 to-sea-green/60 rounded-xl flex items-center justify-center group-hover:from-sea-green/60 group-hover:to-sea-green/80 transition-all duration-300 float-right ml-4 mb-2 shadow-lg">
-                    <service.icon className="w-5 h-5 md:w-6 md:h-6 text-sea-green group-hover:text-sea-green/90" />
-                  </div>
-                  <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate leading-tight group-hover:text-sea-green transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                </div>
-                <p className="text-dark-slate/70 mb-4 md:mb-6 text-sm md:text-base leading-relaxed group-hover:text-dark-slate/80">{service.description}</p>
-                <Link
-                  href="/services"
-                  className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-sm md:text-base group-hover:text-sea-green/80"
+              <motion.div 
+                key={service.title} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                className="group hover:scale-[1.02] transition-all duration-500 cursor-pointer"
+              >
+                <div 
+                  className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
+                  }}
                 >
-                  Подробнее <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-                </Link>
-              </GlassmorphicCard>
+                  {/* Декоративный элемент */}
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
+                  
+                  <div className="relative z-10">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-dark-slate/80 mb-6 md:mb-8 text-base md:text-lg leading-relaxed group-hover:text-dark-slate/90 transition-colors duration-300">
+                      {service.description}
+                    </p>
+                    
+                    <Link
+                      href="/services"
+                      className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80"
+                    >
+                      Подробнее 
+                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+                  
+                  {/* Hover эффект */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-sea-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                </div>
+              </motion.div>
             ))}
           </div>
 
