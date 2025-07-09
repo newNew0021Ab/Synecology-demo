@@ -200,10 +200,10 @@ export default function Home() {
           >
             <Link
               href="/services"
-              className="bg-sea-green text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-3 text-base md:text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
             >
               Все наши услуги
-              <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
             </Link>
           </motion.div>
         </div>
