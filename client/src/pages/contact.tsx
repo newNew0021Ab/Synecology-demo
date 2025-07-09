@@ -107,12 +107,12 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
-              className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
+              className="section-title-enhanced text-5xl lg:text-6xl font-heading font-black text-dark-slate mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Начните свой <span className="text-sea-green">проект</span>
+              Начните свой <span className="highlight-text text-sea-green">проект</span>
             </motion.h1>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -256,7 +256,7 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-sea-green hover:bg-sea-green/90 text-white font-semibold py-4 rounded-full transition-all duration-300"
+                    className="w-full cta-button-primary py-5 rounded-full font-bold transition-all duration-300"
                   >
                     {isSubmitting ? (
                       "Отправка..."

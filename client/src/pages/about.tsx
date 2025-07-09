@@ -96,12 +96,12 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <motion.h1
-                className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
+                className="section-title-enhanced text-5xl lg:text-6xl font-heading font-black text-dark-slate mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                О <span className="text-sea-green">Synecology</span>
+                О <span className="highlight-text text-sea-green">Synecology</span>
               </motion.h1>
               <motion.p
                 className="text-xl text-dark-slate/70 mb-8 leading-relaxed"

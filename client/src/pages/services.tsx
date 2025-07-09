@@ -150,12 +150,12 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
-              className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
+              className="section-title-enhanced text-5xl lg:text-6xl font-heading font-black text-dark-slate mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Наши <span className="text-sea-green">услуги</span>
+              Наши <span className="highlight-text text-sea-green">услуги</span>
             </motion.h1>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -187,8 +187,8 @@ export default function Services() {
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <GlassmorphicCard>
                     <div className="flex flex-col h-full">
-                      <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-6">
-                        <service.icon className="w-8 h-8 text-sea-green" />
+                      <div className="service-icon-enhanced w-18 h-18 rounded-2xl flex items-center justify-center mb-6">
+                        <service.icon className="w-9 h-9 text-sea-green" />
                       </div>
                       <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
                         {service.title}
@@ -205,7 +205,7 @@ export default function Services() {
                       <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                         <Link
                           href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
-                          className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
+                          className="cta-button-primary px-8 py-4 rounded-full font-bold transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
                         >
                           Подробнее
                         </Link>
