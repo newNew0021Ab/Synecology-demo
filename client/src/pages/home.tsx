@@ -151,7 +151,7 @@ export default function Home() {
             {services.map((service, index) => (
               <GlassmorphicCard key={service.title} delay={index * 0.1} className="group hover:scale-105 hover:shadow-2xl transition-all duration-300 border border-sea-green/10 hover:border-sea-green/30">
                 <div className="mb-4 md:mb-6">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-sea-green/20 to-sea-green/30 rounded-xl flex items-center justify-center group-hover:from-sea-green/30 group-hover:to-sea-green/40 transition-all duration-300 float-right ml-4 mb-2 shadow-lg">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-sea-green/40 to-sea-green/60 rounded-xl flex items-center justify-center group-hover:from-sea-green/60 group-hover:to-sea-green/80 transition-all duration-300 float-right ml-4 mb-2 shadow-lg"></div>
                     <service.icon className="w-5 h-5 md:w-6 md:h-6 text-sea-green group-hover:text-sea-green/90" />
                   </div>
                   <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate leading-tight group-hover:text-sea-green transition-colors duration-300">
