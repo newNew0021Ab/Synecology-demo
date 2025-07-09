@@ -62,27 +62,36 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="rounded-3xl p-4 md:p-8 shadow-lg"
+                className="rounded-3xl p-6 md:p-10 shadow-xl"
                 style={{
-                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(46, 139, 87, 0.1) 50%, rgba(255, 255, 255, 0.6) 100%)",
-                  backdropFilter: "blur(15px)",
-                  border: "1px solid rgba(46, 139, 87, 0.2)",
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.05) 50%, rgba(255, 255, 255, 0.9) 100%)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(46, 139, 87, 0.15)",
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(46, 139, 87, 0.15)",
                 }}
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
                 <motion.h1
-                  className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6"
+                  className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold leading-tight mb-4 md:mb-6"
+                  style={{ 
+                    color: "hsl(182, 45%, 20%)",
+                    textShadow: "0 2px 4px rgba(255, 255, 255, 0.8)"
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.8 }}
                 >
                   Превращаем эконормы в {" "}
-                  <span className="text-sea-green">вашу прибыль</span>
+                  <span className="text-sea-green" style={{ textShadow: "0 2px 4px rgba(255, 255, 255, 0.6)" }}>вашу прибыль</span>
                 </motion.h1>
                 <motion.p
-                  className="hero-description text-lg md:text-xl text-dark-slate/80 mb-6 md:mb-8 leading-relaxed"
+                  className="hero-description text-lg md:text-xl mb-6 md:mb-8 leading-relaxed font-medium"
+                  style={{ 
+                    color: "hsl(182, 40%, 25%)",
+                    textShadow: "0 1px 2px rgba(255, 255, 255, 0.8)"
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
