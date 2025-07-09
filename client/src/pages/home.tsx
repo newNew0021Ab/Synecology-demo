@@ -150,12 +150,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <GlassmorphicCard key={service.title} delay={index * 0.1}>
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:bg-sea-green/30 transition-colors">
-                  <service.icon className="w-6 h-6 md:w-8 md:h-8 text-sea-green" />
+                <div className="mb-4 md:mb-6">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center group-hover:bg-sea-green/30 transition-colors float-left mr-4 mb-2">
+                    <service.icon className="w-6 h-6 md:w-8 md:h-8 text-sea-green" />
+                  </div>
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate leading-tight">
+                    {service.title}
+                  </h3>
                 </div>
-                <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate mb-3 md:mb-4 leading-tight">
-                  {service.title}
-                </h3>
                 <p className="text-dark-slate/70 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">{service.description}</p>
                 <Link
                   href="/services"
