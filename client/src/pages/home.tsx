@@ -149,19 +149,19 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
-              <GlassmorphicCard key={service.title} delay={index * 0.1}>
+              <GlassmorphicCard key={service.title} delay={index * 0.1} className="group hover:scale-105 hover:shadow-2xl transition-all duration-300 border border-sea-green/10 hover:border-sea-green/30">
                 <div className="mb-4 md:mb-6">
-                  <div className="w-12 h-12 md:w-16 md:h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center group-hover:bg-sea-green/30 transition-colors float-right ml-4 mb-2">
-                    <service.icon className="w-6 h-6 md:w-8 md:h-8 text-sea-green" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-sea-green/20 to-sea-green/30 rounded-xl flex items-center justify-center group-hover:from-sea-green/30 group-hover:to-sea-green/40 transition-all duration-300 float-right ml-4 mb-2 shadow-lg">
+                    <service.icon className="w-5 h-5 md:w-6 md:h-6 text-sea-green group-hover:text-sea-green/90" />
                   </div>
-                  <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate leading-tight">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-heading font-bold text-dark-slate leading-tight group-hover:text-sea-green transition-colors duration-300">
                     {service.title}
                   </h3>
                 </div>
-                <p className="text-dark-slate/70 mb-4 md:mb-6 text-sm md:text-base leading-relaxed">{service.description}</p>
+                <p className="text-dark-slate/70 mb-4 md:mb-6 text-sm md:text-base leading-relaxed group-hover:text-dark-slate/80">{service.description}</p>
                 <Link
                   href="/services"
-                  className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-sm md:text-base"
+                  className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-sm md:text-base group-hover:text-sea-green/80"
                 >
                   Подробнее <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                 </Link>
