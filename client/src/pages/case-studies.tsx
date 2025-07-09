@@ -114,12 +114,12 @@ export default function CaseStudies() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
-              className="section-title-enhanced text-5xl lg:text-6xl font-heading font-black text-dark-slate mb-8"
+              className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Истории <span className="highlight-text text-sea-green">успеха</span>
+              Истории <span className="text-sea-green">успеха</span>
             </motion.h1>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -136,13 +136,13 @@ export default function CaseStudies() {
             {stats.map((stat, index) => (
               <GlassmorphicCard key={stat.label} delay={index * 0.1}>
                 <div className="text-center">
-                  <div className={`w-18 h-18 ${stat.color} mx-auto mb-6 service-icon-enhanced`}>
+                  <div className={`w-16 h-16 ${stat.color} mx-auto mb-4`}>
                     <stat.icon className="w-full h-full" />
                   </div>
-                  <div className="text-5xl font-heading font-black text-dark-slate mb-3 stats-highlight">
+                  <div className="text-4xl font-heading font-bold text-dark-slate mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-dark-slate font-semibold">{stat.label}</div>
+                  <div className="text-dark-slate/70">{stat.label}</div>
                 </div>
               </GlassmorphicCard>
             ))}
