@@ -14,7 +14,7 @@ export default function Footer() {
               </div>
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
-            <p className="text-white/70 mb-2">Экологический консалтинг в Минске. Помогаем разобраться в законодательстве РБ, разрабатываем документацию и защищаем ваш бизнес от штрафов.</p>
+            <p className="text-white/70 mb-2">Экологический консалтинг. Помогаем разобраться в законодательстве РБ.</p>
             
             
             <div className="flex gap-3 mb-4">
@@ -27,11 +27,6 @@ export default function Footer() {
               <a href="https://instagram.com/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-            </div>
-            <div className="text-white/70 text-sm">
-              <p>ИП Волошко А.Г.</p>
-              <p>УНП 193443921</p>
-              <p></p>
             </div>
           </div>
           
