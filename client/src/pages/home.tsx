@@ -125,7 +125,15 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div 
+                className="rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500 shadow-xl"
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.05) 50%, rgba(255, 255, 255, 0.9) 100%)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(46, 139, 87, 0.15)",
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(46, 139, 87, 0.15)",
+                }}
+              >
                 <img
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
                   alt="Modern sustainable building"
