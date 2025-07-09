@@ -62,7 +62,12 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-white/40 backdrop-blur-sm  rounded-3xl p-4 md:p-8 shadow-lg "
+                className="rounded-3xl p-4 md:p-8 shadow-lg"
+                style={{
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(46, 139, 87, 0.1) 50%, rgba(255, 255, 255, 0.6) 100%)",
+                  backdropFilter: "blur(15px)",
+                  border: "1px solid rgba(46, 139, 87, 0.2)",
+                }}
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
