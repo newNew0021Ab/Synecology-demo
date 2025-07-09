@@ -165,16 +165,16 @@ export default function Home() {
                 >
                   {/* Декоративный элемент */}
                   <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
-                  
+
                   <div className="relative z-10">
                     <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
                       {service.title}
                     </h3>
-                    
+
                     <p className="text-dark-slate/80 mb-6 md:mb-8 text-base md:text-lg leading-relaxed group-hover:text-dark-slate/90 transition-colors duration-300">
                       {service.description}
                     </p>
-                    
+
                     <Link
                       href="/services"
                       className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80"
@@ -183,7 +183,7 @@ export default function Home() {
                       <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
                     </Link>
                   </div>
-                  
+
                   {/* Hover эффект */}
                   <div className="absolute inset-0 bg-gradient-to-r from-sea-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
                 </div>
