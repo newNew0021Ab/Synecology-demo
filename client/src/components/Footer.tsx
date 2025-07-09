@@ -14,7 +14,7 @@ export default function Footer() {
               </div>
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
-            <p className="text-white/70 mb-2">Экологический консалтинг для устойчивого будущего.</p>
+            <p className="text-white/70 mb-2">Экологический консалтинг в Минске. Помогаем разобраться в законодательстве РБ, разрабатываем документацию и защищаем ваш бизнес от штрафов.</p>
             
             
             <div className="flex gap-3 mb-4">
