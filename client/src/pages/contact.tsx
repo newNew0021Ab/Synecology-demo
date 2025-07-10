@@ -387,22 +387,12 @@ export default function Contact() {
               Не откладывайте начало вашего экологического пути. Свяжитесь с нами сегодня для бесплатной консультации и узнайте, как мы можем помочь достичь ваших целей устойчивости.
             </motion.p>
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
+              className="flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Button
-                onClick={() => {
-                  const formSection = document.querySelector('form');
-                  formSection?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="bg-sea-green hover:bg-sea-green/90 text-white font-semibold py-4 px-8 rounded-full transition-all duration-300"
-              >
-                <ArrowRight className="w-5 h-5 mr-2" />
-                Получить консультацию
-              </Button>
               <Button
                 variant="outline"
                 className="glassmorphic glassmorphic-hover border-sea-green text-sea-green font-semibold py-4 px-8 rounded-full"
