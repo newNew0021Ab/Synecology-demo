@@ -1,7 +1,6 @@
-
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Clock } from "lucide-react";
+import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 
@@ -52,6 +51,66 @@ export default function CaseStudies() {
       tags: ["Восстановление экосистем", "Биоразнообразие", "Охрана природы"],
       timeline: "24 месяца",
       completion: "03.05.2023",
+    },
+    {
+      title: "Инновации в очистке воды",
+      category: "Промышленная вода",
+      description: "Внедрили передовые системы очистки воды, сократив отходы на 85% для крупного промышленного клиента.",
+      results: [
+        "85% сокращение водных отходов",
+        "99,5% эффективность очистки",
+        "1,8 млн долларов годовой экономии",
+        "Соответствие нормам нулевого сброса",
+      ],
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Очистка воды", "Промышленность", "Сокращение отходов"],
+      timeline: "12 месяцев",
+      completion: "18.11.2022",
+    },
+    {
+      title: "Городская зеленая инфраструктура",
+      category: "Городское планирование",
+      description: "Создали системы зеленых крыш в 12 городских зданиях, снизив эффект городского теплового острова на 30%.",
+      results: [
+        "30% снижение эффекта городского теплового острова",
+        "12 зданий с зеленой инфраструктурой",
+        "40% улучшение качества воздуха",
+        "25% сокращение ливневого стока",
+      ],
+      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Зеленая инфраструктура", "Городское планирование", "Климатическая адаптация"],
+      timeline: "36 месяцев",
+      completion: "22.06.2024",
+    },
+    {
+      title: "Углеродно-нейтральный кампус",
+      category: "Образовательный сектор",
+      description: "Превратили университетский кампус в углеродно-нейтральное учреждение с помощью комплексных мер устойчивости.",
+      results: [
+        "100% углеродная нейтральность достигнута",
+        "60% снижение энергопотребления",
+        "1,2 млн долларов годовой экономии",
+        "Сертификация LEED Platinum",
+      ],
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Углеродная нейтральность", "Образование", "Сертификация LEED"],
+      timeline: "30 месяцев",
+      completion: "01.02.2023",
+    },
+    {
+      title: "Защита морских местообитаний",
+      category: "Прибрежная охрана",
+      description: "Разработали и внедрили комплексный план защиты морских ресурсов для 50-мильной береговой линии.",
+      results: [
+        "50 миль береговой линии защищено",
+        "75% увеличение морских видов",
+        "90% сокращение инцидентов загрязнения",
+        "Запущена программа вовлечения сообщества",
+      ],
+      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Охрана морской среды", "Защита берегов", "Биоразнообразие"],
+      timeline: "42 месяца",
+      completion: "27.09.2022",
     },
   ];
 
@@ -110,102 +169,80 @@ export default function CaseStudies() {
       {/* Case Studies Grid */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {caseStudies.map((caseStudy, index) => (
-              <motion.div
-                key={caseStudy.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
-                viewport={{ once: true }}
-                className="h-full"
-              >
-                <GlassmorphicCard className="h-full">
-                  <div className="flex flex-col h-full">
-                    {/* Title */}
-                    <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4 line-clamp-2">
-                      {caseStudy.title}
-                    </h3>
-
-                    {/* Image */}
-                    <div className="relative mb-4 rounded-xl overflow-hidden">
+              <GlassmorphicCard key={caseStudy.title} delay={index * 0.1}>
+                <div className="flex flex-col h-full">
+                    <div className="relative mb-4">
                       <img
                         src={caseStudy.image}
                         alt={caseStudy.title}
-                        className="w-full h-48 object-cover"
+                        className="w-full h-48 object-cover rounded-xl"
                       />
                       {caseStudy.featured && (
-                        <div className="absolute top-4 right-4 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <div className="absolute top-2 right-2 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
                           Рекомендуемый
                         </div>
                       )}
                     </div>
 
-                    {/* Header with date and timeline */}
-                    <div className="flex items-center justify-between text-sm mb-4">
-                      <div className="flex items-center gap-2 text-sea-green">
-                        <Calendar className="w-4 h-4" />
-                        <span>{caseStudy.completion}</span>
+                    <div className="space-y-4 flex-grow">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-2 text-sea-green">
+                          <Calendar className="w-4 h-4" />
+                          <span>{caseStudy.completion}</span>
+                        </div>
+                        <div className="bg-sea-green/10 text-sea-green px-3 py-1 rounded-full font-semibold">
+                          {caseStudy.timeline}
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full font-semibold">
-                        <Clock className="w-4 h-4" />
-                        <span>{caseStudy.timeline}</span>
+
+                      <h3 className="text-2xl font-heading font-bold text-dark-slate">
+                        {caseStudy.title}
+                      </h3>
+
+                      <p className="text-dark-slate/70">{caseStudy.description}</p>
+
+                      <div className="space-y-2">
+                        <h4 className="font-semibold text-dark-slate">Ключевые результаты:</h4>
+                        <ul className="space-y-1">
+                          {caseStudy.results.map((result, index) => (
+                            <li key={index} className="flex items-center gap-2 text-sm text-dark-slate/70">
+                              <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0" />
+                              {result}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    </div>
 
-                    {/* Category */}
-                    <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold inline-block self-start mb-4">
-                      {caseStudy.category}
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-dark-slate/70 leading-relaxed mb-6 line-clamp-3 flex-grow">
-                      {caseStudy.description}
-                    </p>
-
-                    {/* Key Results */}
-                    <div className="space-y-3 mb-6">
-                      <h4 className="text-lg font-semibold text-dark-slate">Ключевые результаты:</h4>
-                      <ul className="space-y-2">
-                        {caseStudy.results.map((result, resultIndex) => (
-                          <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate/70">
-                            <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
-                            <span>{result}</span>
-                          </li>
+                      <div className="flex flex-wrap gap-2">
+                        {caseStudy.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
+                          >
+                            {tag}
+                          </span>
                         ))}
-                      </ul>
+                      </div>
                     </div>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {caseStudy.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex flex-col gap-3 mt-auto">
+                    <div className="flex items-center justify-between mt-6 pt-6 border-t border-dark-slate/10">
                       <Link
-                        href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : 'wetlands-restoration'}`}
-                        className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
+                        href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : index === 2 ? 'wetlands-restoration' : index === 3 ? 'water-treatment-innovation' : index === 4 ? 'urban-green-infrastructure' : index === 5 ? 'carbon-neutral-campus' : 'marine-habitat-protection'}`}
+                        className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
                       >
                         Подробнее <ArrowRight className="w-4 h-4" />
                       </Link>
                       <Link
                         href="/contact"
-                        className="glassmorphic glassmorphic-hover px-6 py-3 rounded-full text-sea-green font-semibold inline-flex items-center gap-2 text-center justify-center"
+                        className="text-sea-green hover:text-sea-green/80 transition-colors text-sm"
                       >
                         Начать проект
                       </Link>
                     </div>
                   </div>
-                </GlassmorphicCard>
-              </motion.div>
+              </GlassmorphicCard>
             ))}
           </div>
         </div>
