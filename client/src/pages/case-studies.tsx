@@ -1,6 +1,7 @@
+
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle } from "lucide-react";
+import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Clock } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 
@@ -109,90 +110,112 @@ export default function CaseStudies() {
       {/* Case Studies Grid */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {caseStudies.map((caseStudy, index) => (
-              <GlassmorphicCard key={caseStudy.title} delay={index * 0.1}>
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${
-                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-                }`}>
-                  <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
-                    <div className="relative">
+              <motion.div
+                key={caseStudy.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.8 }}
+                viewport={{ once: true }}
+                className="h-full"
+              >
+                <GlassmorphicCard className="h-full">
+                  <div className="flex flex-col h-full">
+                    {/* Header with date and timeline */}
+                    <div className="flex items-center justify-between text-sm mb-4">
+                      <div className="flex items-center gap-2 text-sea-green">
+                        <Calendar className="w-4 h-4" />
+                        <span>{caseStudy.completion}</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full font-semibold">
+                        <Clock className="w-4 h-4" />
+                        <span>{caseStudy.timeline}</span>
+                      </div>
+                    </div>
+
+                    {/* Category */}
+                    <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold inline-block self-start mb-4">
+                      {caseStudy.category}
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4 line-clamp-2">
+                      {caseStudy.title}
+                    </h3>
+
+                    {/* Image */}
+                    <div className="relative mb-6 rounded-xl overflow-hidden">
                       <img
                         src={caseStudy.image}
                         alt={caseStudy.title}
-                        className="w-full h-64 lg:h-80 object-cover rounded-xl"
+                        className="w-full h-48 object-cover"
                       />
                       {caseStudy.featured && (
-                        <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        <div className="absolute top-4 right-4 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
                           Рекомендуемый
                         </div>
                       )}
                     </div>
-                  </div>
 
-                  <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-2 text-sea-green">
-                          <Calendar className="w-4 h-4" />
-                          <span>{caseStudy.completion}</span>
-                        </div>
-                        <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold">
-                          {caseStudy.timeline}
-                        </div>
-                      </div>
+                    {/* Description */}
+                    <p className="text-dark-slate/70 leading-relaxed mb-6 line-clamp-3 flex-grow">
+                      {caseStudy.description}
+                    </p>
 
-                      <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold inline-block">
-                        {caseStudy.category}
-                      </div>
-
-                      <h3 className="text-3xl lg:text-4xl font-heading font-bold text-dark-slate">
-                        {caseStudy.title}
-                      </h3>
-
-                      <p className="text-lg text-dark-slate/70 leading-relaxed">{caseStudy.description}</p>
-
-                      <div className="space-y-3">
-                        <h4 className="text-xl font-semibold text-dark-slate">Ключевые результаты:</h4>
-                        <ul className="space-y-2">
-                          {caseStudy.results.map((result, resultIndex) => (
-                            <li key={resultIndex} className="flex items-start gap-3 text-dark-slate/70">
-                              <CheckCircle className="w-5 h-5 text-sea-green flex-shrink-0 mt-0.5" />
-                              <span>{result}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {caseStudy.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
-                          >
-                            {tag}
-                          </span>
+                    {/* Key Results */}
+                    <div className="space-y-3 mb-6">
+                      <h4 className="text-lg font-semibold text-dark-slate">Ключевые результаты:</h4>
+                      <ul className="space-y-2">
+                        {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
+                          <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate/70">
+                            <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
+                            <span className="line-clamp-2">{result}</span>
+                          </li>
                         ))}
-                      </div>
+                        {caseStudy.results.length > 3 && (
+                          <li className="text-sm text-sea-green font-semibold">
+                            +{caseStudy.results.length - 3} еще результатов
+                          </li>
+                        )}
+                      </ul>
+                    </div>
 
-                      <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                        <Link
-                          href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : 'wetlands-restoration'}`}
-                          className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {caseStudy.tags.slice(0, 2).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
                         >
-                          Подробнее <ArrowRight className="w-4 h-4" />
-                        </Link>
-                        <Link
-                          href="/contact"
-                          className="glassmorphic glassmorphic-hover px-6 py-3 rounded-full text-sea-green font-semibold inline-flex items-center gap-2 text-center justify-center"
-                        >
-                          Начать проект
-                        </Link>
-                      </div>
+                          {tag}
+                        </span>
+                      ))}
+                      {caseStudy.tags.length > 2 && (
+                        <span className="px-3 py-1 bg-dark-slate/10 text-dark-slate/70 text-sm rounded-full">
+                          +{caseStudy.tags.length - 2}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex flex-col gap-3 mt-auto">
+                      <Link
+                        href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : 'wetlands-restoration'}`}
+                        className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
+                      >
+                        Подробнее <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <Link
+                        href="/contact"
+                        className="glassmorphic glassmorphic-hover px-6 py-3 rounded-full text-sea-green font-semibold inline-flex items-center gap-2 text-center justify-center"
+                      >
+                        Начать проект
+                      </Link>
                     </div>
                   </div>
-                </div>
-              </GlassmorphicCard>
+                </GlassmorphicCard>
+              </motion.div>
             ))}
           </div>
         </div>
