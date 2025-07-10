@@ -14,12 +14,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 
 const contactFormSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
+  firstName: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+  lastName: z.string().min(2, "Фамилия должна содержать минимум 2 символа"),
+  email: z.string().email("Введите корректный email адрес"),
   company: z.string().optional(),
-  projectType: z.string().min(1, "Please select a project type"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  projectType: z.string().min(1, "Выберите тип проекта"),
+  message: z.string().min(10, "Сообщение должно содержать минимум 10 символов"),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -48,15 +48,15 @@ export default function Contact() {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       toast({
-        title: "Message sent successfully!",
-        description: "We'll get back to you within 24 hours.",
+        title: "Сообщение успешно отправлено!",
+        description: "Мы свяжемся с вами в течение 24 часов.",
       });
 
       form.reset();
     } catch (error) {
       toast({
-        title: "Error sending message",
-        description: "Please try again later.",
+        title: "Ошибка отправки сообщения",
+        description: "Попробуйте еще раз позже.",
         variant: "destructive",
       });
     } finally {
