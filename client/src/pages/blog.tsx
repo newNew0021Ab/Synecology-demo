@@ -7,33 +7,33 @@ import GlassmorphicCard from "@/components/GlassmorphicCard";
 export default function Blog() {
   const blogPosts = [
     {
-      title: "Будущее технологий улавливания углерода",
-      excerpt: "Исследование инновационных подходов к улавливанию и хранению углерода, которые могут революционизировать климатические действия.",
-      category: "Технологии",
-      date: "15.12.2024",
-      readTime: "5 мин",
-      image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Улавливание углерода", "Климатические технологии", "Инновации"],
+      title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
+      excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе.",
+      category: "Сертификация",
+      date: "20.12.2024",
+      readTime: "8 мин",
+      image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
       featured: true,
     },
     {
-      title: "Тенденции инвестиций в возобновляемую энергетику",
-      excerpt: "Анализ глобальных рынков возобновляемой энергетики и возникающих инвестиционных возможностей в чистых технологиях.",
-      category: "Финансы",
-      date: "12.12.2024",
-      readTime: "7 мин",
-      image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Возобновляемая энергия", "Инвестиции", "Рыночный анализ"],
+      title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
+      excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса.",
+      category: "Отходы",
+      date: "18.12.2024",
+      readTime: "10 мин",
+      image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
       featured: false,
     },
     {
-      title: "Стратегии сохранения биоразнообразия",
-      excerpt: "Эффективные подходы к защите экосистем и исчезающих видов в городской и сельской среде.",
-      category: "Охрана природы",
-      date: "10.12.2024",
-      readTime: "6 мин",
-      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Биоразнообразие", "Охрана природы", "Экосистемы"],
+      title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
+      excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов.",
+      category: "Выбросы",
+      date: "16.12.2024",
+      readTime: "9 мин",
+      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
       featured: false,
     },
     {
@@ -68,7 +68,7 @@ export default function Blog() {
     },
   ];
 
-  const categories = ["Все", "Технологии", "Финансы", "Охрана природы", "Городское планирование", "Управление водными ресурсами", "Регулирование"];
+  const categories = ["Все", "Сертификация", "Отходы", "Выбросы", "Городское планирование", "Управление водными ресурсами", "Регулирование"];
 
   return (
     <div className="pt-24">
@@ -171,7 +171,7 @@ export default function Blog() {
                 </div>
 
                 <Link
-                    href="/blog/carbon-capture-future"
+                    href="/blog/eco-certification-belarus"
                     className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                   >
                     <ArrowRight className="w-5 h-5" />
@@ -233,7 +233,7 @@ export default function Blog() {
                   </div>
 
                   <Link
-                    href="/blog/carbon-capture-future"
+                    href={index === 0 ? "/blog/waste-management-belarus" : index === 1 ? "/blog/air-emissions-belarus" : "/blog/carbon-capture-future"}
                     className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all mt-auto"
                   >
                     Читать далее <ArrowRight className="w-4 h-4" />
