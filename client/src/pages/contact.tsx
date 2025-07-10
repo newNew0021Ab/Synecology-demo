@@ -375,7 +375,8 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Один звонок до решения вашей задачи <span className="text-sea-green">экологический шаг</span>?
+              <span className="text-sea-green">Один звонок </span>
+                до решения вашей задачи 
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
@@ -384,7 +385,7 @@ export default function Contact() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Не откладывайте начало вашего экологического пути. Свяжитесь с нами сегодня для бесплатной консультации и узнайте, как мы можем помочь достичь ваших целей устойчивости.
+              Не откладывайте. Свяжитесь с нами любым удобным способом, и мы начнем работать над вашей задачей уже сегодня. Консультация ни к чему вас не обязывает.
             </motion.p>
             <motion.div
               className="flex justify-center"
@@ -407,4 +408,3 @@ export default function Contact() {
     </div>
   );
 }
-```
