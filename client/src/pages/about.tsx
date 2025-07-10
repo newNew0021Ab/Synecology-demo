@@ -259,7 +259,7 @@ export default function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Наша <span className="text-sea-green">миссия и ценности</span>
+              Наша миссия: <span className="text-sea-green">Делать экологию выгодной</span>
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -268,7 +268,7 @@ export default function About() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Мы стремимся создать устойчивое будущее через инновационные экологические решения, которые защищают нашу планету, обеспечивая при этом экономический рост.
+              Мы верим, что ответственный подход к экологии — это не расходы, а умные инвестиции в репутацию, рост и будущее вашего бизнеса.
             </motion.p>
           </div>
 
