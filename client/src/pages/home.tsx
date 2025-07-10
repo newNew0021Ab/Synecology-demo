@@ -62,7 +62,7 @@ export default function Home() {
         <OrganicBlob className="absolute bottom-20 left-20 opacity-15" size="md" delay={3} />
 
         <div
-          className="absolute inset-0 parallax-bg opacity-30"
+          className="absolute inset-0 parallax-bg opacity-60"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
           }}
@@ -72,7 +72,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-white/40 backdrop-blur-sm rounded-3xl p-4 md:p-8 shadow-lg"
+                className="bg-white/85 backdrop-blur-md rounded-3xl p-4 md:p-8 shadow-2xl border border-white/50"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
