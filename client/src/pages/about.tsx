@@ -165,46 +165,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission & Values */}
-      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              className="text-4xl lg:text-5xl font-heading font-bold text-dark-slate mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Наша <span className="text-sea-green">миссия и ценности</span>
-            </motion.h2>
-            <motion.p
-              className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Мы стремимся создать устойчивое будущее через инновационные экологические решения, которые защищают нашу планету, обеспечивая при этом экономический рост.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 card-grid">
-            {values.map((value, index) => (
-              <GlassmorphicCard key={value.title} delay={index * 0.1}>
-                <div className="text-center card-content">
-                  <div className="flex justify-center mb-4">{value.icon}</div>
-                  <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
-                    {value.title}
-                  </h3>
-                  <p className="text-dark-slate/70 flex-grow">{value.description}</p>
-                </div>
-              </GlassmorphicCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Team Section */}
       <section className="py-20 relative">
         <OrganicBlob className="absolute top-10 right-10 opacity-10" size="md" />
@@ -281,6 +241,46 @@ export default function About() {
                       </a>
                     </div>
                   </div>
+                </div>
+              </GlassmorphicCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Values */}
+      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2
+              className="text-4xl lg:text-5xl font-heading font-bold text-dark-slate mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              Наша <span className="text-sea-green">миссия и ценности</span>
+            </motion.h2>
+            <motion.p
+              className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              Мы стремимся создать устойчивое будущее через инновационные экологические решения, которые защищают нашу планету, обеспечивая при этом экономический рост.
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 card-grid">
+            {values.map((value, index) => (
+              <GlassmorphicCard key={value.title} delay={index * 0.1}>
+                <div className="text-center card-content">
+                  <div className="flex justify-center mb-4">{value.icon}</div>
+                  <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
+                    {value.title}
+                  </h3>
+                  <p className="text-dark-slate/70 flex-grow">{value.description}</p>
                 </div>
               </GlassmorphicCard>
             ))}
