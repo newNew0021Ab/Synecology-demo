@@ -226,20 +226,22 @@ export default function Contact() {
                     )}
                   />
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-sea-green hover:bg-sea-green/90 text-white font-semibold py-4 rounded-full transition-all duration-300"
-                  >
-                    {isSubmitting ? (
-                      "Отправка..."
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-2" />
-                        Отправить сообщение
-                      </>
-                    )}
-                  </Button>
+                  <div className="pt-4">
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-sea-green hover:bg-sea-green/90 text-white font-semibold py-4 rounded-full transition-all duration-300"
+                    >
+                      {isSubmitting ? (
+                        "Отправка..."
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Отправить сообщение
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </form>
               </Form>
             </GlassmorphicCard>
