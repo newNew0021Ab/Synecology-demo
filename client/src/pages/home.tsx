@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const isMobile = useIsMobile();
-
+  
   const handleCardClick = (e: React.MouseEvent) => {
     if (isMobile) {
       e.preventDefault();
@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 relative bg-services-gradient">
+      <section className="py-20 relative bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
@@ -201,14 +201,13 @@ export default function Home() {
                 ) : (
                   <Link href="/services" className="block cursor-pointer">
                     <div 
-                      className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/60 shadow-2xl hover:shadow-[0_30px_60px_rgba(46,139,87,0.25)] transition-all duration-500 overflow-hidden"
+                      className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden"
                       style={{
-                        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(46, 139, 87, 0.05) 30%, rgba(255, 255, 255, 0.95) 100%)",
-                        boxShadow: "0 15px 35px rgba(46, 139, 87, 0.15), 0 5px 15px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
+                        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
                       }}
                     >
                       {/* Декоративный элемент */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/30 to-sea-green/10 rounded-bl-[3rem] opacity-80"></div>
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
 
                       <div className="relative z-10">
                         <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
