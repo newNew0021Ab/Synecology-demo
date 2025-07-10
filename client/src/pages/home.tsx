@@ -72,7 +72,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-white/80 backdrop-blur-xl rounded-3xl p-4 md:p-8 shadow-2xl border border-white/50"
+                className="bg-white/85 backdrop-blur-md rounded-3xl p-4 md:p-8 shadow-2xl border border-white/50"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 relative bg-gradient-to-br from-slate-100 via-slate-50 to-sea-green/10">
+      <section className="py-20 relative bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
