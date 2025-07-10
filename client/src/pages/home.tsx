@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const isMobile = useIsMobile();
-
+  
   const handleCardClick = (e: React.MouseEvent) => {
     if (isMobile) {
       e.preventDefault();
@@ -138,16 +138,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
-              className="text-4xl lg:text-5xl font-heading font-bold text-white mb-6 drop-shadow-lg"
+              className="text-4xl lg:text-5xl font-heading font-bold text-dark-slate mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Наши <span className="text-sandy-beige">услуги</span>
+              Наши <span className="text-sea-green">услуги</span>
             </motion.h2>
             <motion.p
-              className="text-xl text-white/90 max-w-3xl mx-auto drop-shadow-md"
+              className="text-xl text-dark-slate/70 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -201,20 +201,20 @@ export default function Home() {
                 ) : (
                   <Link href="/services" className="block cursor-pointer">
                     <div 
-                      className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/40 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden"
+                      className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden"
                       style={{
-                        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.92) 100%)",
+                        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
                       }}
                     >
                       {/* Декоративный элемент */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/25 to-sea-green/8 rounded-bl-[3rem] opacity-70"></div>
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
 
                       <div className="relative z-10">
                         <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
                           {service.title}
                         </h3>
 
-                        <p className="text-dark-slate/85 mb-6 md:mb-8 text-base md:text-lg leading-relaxed group-hover:text-dark-slate/95 transition-colors duration-300 font-medium">
+                        <p className="text-dark-slate/80 mb-6 md:mb-8 text-base md:text-lg leading-relaxed group-hover:text-dark-slate/90 transition-colors duration-300">
                           {service.description}
                         </p>
 
@@ -242,7 +242,7 @@ export default function Home() {
           >
             <Link
               href="/services"
-              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-white hover:bg-sea-green hover:text-white hover:border-sea-green transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-lg hover:shadow-xl"
+              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
             >
               Все наши услуги
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
@@ -264,7 +264,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Готовы создать <span className="text-sea-green">экологическое воздействие</span>?
+              Сделайте экологию  <span className="text-sea-green">вашим преимуществом.</span>
             </motion.h2>
             <motion.p
               className="text-lg md:text-xl text-dark-slate/70 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed"
@@ -273,7 +273,7 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Присоединяйтесь к сотням организаций, которые изменили свой экологический след с помощью наших экспертных консалтинговых услуг.
+              Правильный подход к экологии — это не затраты, а инвестиция в будущее. Давайте начнем сегодня.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"

@@ -85,7 +85,7 @@ export default function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Последние <span className="text-sea-green">статьи</span>
+              Экология <span className="text-sea-green">простыми словами</span>
             </motion.h1>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -93,7 +93,7 @@ export default function Blog() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Будьте в курсе последних экологических тенденций, нормативов и устойчивых практик благодаря нашим экспертным аналитическим материалам и отраслевым исследованиям.
+              Превращаем запутанные инструкции и законы в четкие и понятные статьи. Наша цель — помочь вам быстро найти нужное решение и сэкономить ваше самое ценное время.
             </motion.p>
           </div>
         </div>
@@ -271,7 +271,7 @@ export default function Blog() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Подпишитесь на нашу рассылку, чтобы получать последние экологические инсайты, отраслевые тренды и устойчивые решения прямо на вашу почту.
+              Подпишитесь, чтобы получать закрытые аналитические материалы, чек-листы для самопроверки и шаблоны документов, которые мы отправляем только нашим подписчикам.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"

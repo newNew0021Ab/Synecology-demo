@@ -119,7 +119,7 @@ export default function CaseStudies() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Истории <span className="text-sea-green">успеха</span>
+              Наш опыт —  <span className="text-sea-green">ваша уверенность</span>
             </motion.h1>
             <motion.p
               className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
@@ -127,7 +127,7 @@ export default function CaseStudies() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Узнайте, как мы помогли организациям в различных отраслях достичь экологических целей с помощью инновационных решений и экспертного руководства.
+              Мы гордимся каждым проектом. Посмотрите, как мы уже помогли другим компаниям. Возможно, в одном из этих кейсов вы узнаете свою ситуацию?
             </motion.p>
           </div>
 
@@ -240,7 +240,7 @@ export default function CaseStudies() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Готовы создать свою <span className="text-sea-green">историю успеха</span>?
+              Хотите такие же  <span className="text-sea-green">результаты?</span>
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
@@ -249,7 +249,7 @@ export default function CaseStudies() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Давайте работать вместе, чтобы разработать инновационные экологические решения, которые обеспечат измеримые результаты для вашей организации.
+              Каждый из этих успешных кейсов начинался с одного простого шага — консультации. Сделайте этот шаг, чтобы превратить ваши экологические задачи в вашу личную историю успеха.
             </motion.p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
