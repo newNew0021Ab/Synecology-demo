@@ -58,22 +58,21 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="min-h-screen flex items-center relative overflow-hidden pt-20 md:pt-0">
-        <OrganicBlob className="absolute top-20 right-20 opacity-35" size="lg" />
-        <OrganicBlob className="absolute bottom-20 left-20 opacity-25" size="md" delay={3} />
+        <OrganicBlob className="absolute top-20 right-20 opacity-20" size="lg" />
+        <OrganicBlob className="absolute bottom-20 left-20 opacity-15" size="md" delay={3} />
 
         <div
-          className="absolute inset-0 parallax-bg opacity-50"
+          className="absolute inset-0 parallax-bg opacity-60"
           style={{
             backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-sea-green/20 via-transparent to-sea-green/30 opacity-70" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-6 md:space-y-8">
               <motion.div
-                className="bg-gradient-to-br from-white/85 via-sea-green/5 to-white/75 backdrop-blur-xl rounded-3xl p-4 md:p-8 shadow-2xl border border-sea-green/20"
+                className="bg-white/80 backdrop-blur-xl rounded-3xl p-4 md:p-8 shadow-2xl border border-white/50"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
@@ -122,7 +121,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <div className="bg-gradient-to-br from-white/90 via-sea-green/8 to-white/80 backdrop-blur-xl border border-sea-green/25 rounded-3xl p-4 md:p-8 shadow-2xl transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
                   alt="Modern sustainable building"
