@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const isMobile = useIsMobile();
-  
+
   const handleCardClick = (e: React.MouseEvent) => {
     if (isMobile) {
       e.preventDefault();
@@ -201,13 +201,13 @@ export default function Home() {
                 ) : (
                   <Link href="/services" className="block cursor-pointer">
                     <div 
-                      className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden"
-                      style={{
-                        background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
-                      }}
+                      className="relative rounded-3xl p-6 md:p-8 h-full border-2 border-dark-slate/20 bg-white shadow-2xl hover:shadow-[0_30px_60px_rgba(46,139,87,0.25)] hover:border-sea-green/50 hover:scale-[1.02] transition-all duration-500 overflow-hidden"
                     >
+                      {/* Декоративная полоска сверху */}
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sea-green to-soft-blue rounded-t-3xl"></div>
+
                       {/* Декоративный элемент */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
+                      <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-sea-green/15 to-sea-green/5 rounded-2xl"></div>
 
                       <div className="relative z-10">
                         <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
