@@ -134,7 +134,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 relative bg-gradient-to-br from-sea-green/15 via-sea-green/8 to-sea-green/20">
+      <section className="py-20 relative bg-gradient-to-br from-sea-green/30 via-sea-green/20 to-sea-green/35">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h2
