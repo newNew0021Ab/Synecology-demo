@@ -109,7 +109,7 @@ export default function Home() {
                     className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base"
                   >
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                    Начать с аудита
+                    Начать с консультации
                   </Link>
                 </motion.div>
               </motion.div>
