@@ -256,5 +256,5 @@
 }
 
 .bg-services-gradient {
-    background: linear-gradient(135deg, rgba(253, 251, 246, 0.95) 0%, rgba(46, 139, 87, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(70, 130, 134, 0.4) 0%, rgba(46, 139, 87, 0.5) 50%, rgba(168, 218, 220, 0.6) 100%);
   }
