@@ -99,33 +99,6 @@ export default function Contact() {
 
   return (
     <div className="pt-24">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
-        <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h1
-              className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Начните свой <span className="text-sea-green">проект</span>
-            </motion.h1>
-            <motion.p
-              className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              Готовы оказать положительное воздействие на окружающую среду? Давайте обсудим, как мы можем помочь вам достичь целей устойчивости с помощью инновационных решений.
-            </motion.p>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Form & Info */}
       <section className="py-20 bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
