@@ -276,28 +276,28 @@ export default function Contact() {
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <div className="font-semibold text-dark-slate">Экспертная команда</div>
-                      <div className="text-dark-slate/70 text-sm">Более 25 экологических специалистов с многолетним опытом</div>
+                      <div className="text-dark-slate/70 text-sm">Вашей задачей займутся не просто теоретики, а практикующие экологи с реальным опытом решения самых сложных кейсов в Беларуси.</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
-                      <div className="font-semibold text-dark-slate">Проверенные результаты</div>
-                      <div className="text-dark-slate/70 text-sm">Более 150 успешных проектов с измеримым экологическим воздействием</div>
+                      <div className="font-semibold text-dark-slate">Измеримый успех</div>
+                      <div className="text-dark-slate/70 text-sm">Каждый наш проект нацелен на конкретный результат: снижение затрат, защита от штрафов, укрепление репутации.</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
-                      <div className="font-semibold text-dark-slate">Инновационные решения</div>
-                      <div className="text-dark-slate/70 text-sm">Передовые технологии в сочетании с научной экспертизой</div>
+                      <div className="font-semibold text-dark-slate">Прозрачные решения</div>
+                      <div className="text-dark-slate/70 text-sm">Вы всегда будете в курсе каждого этапа. Мы работаем открыто, предоставляя понятные отчеты и четкие планы действий.</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-sea-green rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <div className="font-semibold text-dark-slate">Полная поддержка</div>
-                      <div className="text-dark-slate/70 text-sm">Комплексное управление проектами и постоянные консультации</div>
+                      <div className="text-dark-slate/70 text-sm">Мы остаемся на связи даже после завершения проекта, помогая вам с любыми возникающими вопросами.</div>
                     </div>
                   </div>
                 </div>
