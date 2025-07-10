@@ -8,17 +8,17 @@ export default function Blog() {
   const blogPosts = [
     {
       title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
-      excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе.",
+      excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
       category: "Сертификация",
       date: "20.12.2024",
       readTime: "8 мин",
-      image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
       featured: true,
     },
     {
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
-      excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса.",
+      excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
       category: "Отходы",
       date: "18.12.2024",
       readTime: "10 мин",
@@ -28,42 +28,42 @@ export default function Blog() {
     },
     {
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
-      excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов.",
+      excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов. Объясняем пошагово, как получить разрешение и избежать проблем с контролирующими органами.",
       category: "Выбросы",
       date: "16.12.2024",
       readTime: "9 мин",
-      image: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
       featured: false,
     },
     {
-      title: "Лучшие практики устойчивого городского планирования",
-      excerpt: "Как города внедряют зеленую инфраструктуру и принципы устойчивого дизайна в городское развитие.",
-      category: "Городское планирование",
+      title: "Экологическое сопровождение: как защитить бизнес от штрафов и претензий",
+      excerpt: "Комплексное экологическое сопровождение предприятий — это не роскошь, а необходимость для современного бизнеса. Рассказываем, как выбрать подходящий формат сопровождения и что включает полный аутсорсинг экологических функций.",
+      category: "Сопровождение",
       date: "08.12.2024",
       readTime: "8 мин",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Городское планирование", "Зеленая инфраструктура", "Устойчивость"],
+      image: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Сопровождение", "Аутсорсинг", "Экология", "Консалтинг"],
       featured: false,
     },
     {
-      title: "Решения проблемы нехватки воды для промышленных применений",
-      excerpt: "Инновационные технологии водосбережения и переработки, помогающие отраслям снизить их воздействие на окружающую среду.",
-      category: "Управление водными ресурсами",
+      title: "Экологический паспорт предприятия: обязательный документ или формальность?",
+      excerpt: "Экологический паспорт — это документ, который отражает реальное воздействие предприятия на окружающую среду. Разбираемся, кому он нужен, как его правильно составить и какие выгоды он может принести бизнесу.",
+      category: "Документооборот",
       date: "05.12.2024",
       readTime: "6 мин",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Управление водными ресурсами", "Промышленность", "Сохранение"],
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Экологический паспорт", "Документооборот", "Отчетность"],
       featured: false,
     },
     {
-      title: "Обновление экологических норм 2024",
-      excerpt: "Ключевые изменения в экологическом законодательстве, которые предприятия должны знать для планирования соответствия.",
-      category: "Регулирование",
+      title: "Производственный экологический контроль: как не попасть на штрафы",
+      excerpt: "Производственный экологический контроль — это не просто формальность, а реальный инструмент управления экологическими рисками. Рассказываем, как правильно организовать ПЭК и избежать нарушений при проверках.",
+      category: "Контроль",
       date: "03.12.2024",
-      readTime: "4 мин",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Нормативы", "Соответствие", "Политика"],
+      readTime: "7 мин",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["ПЭК", "Контроль", "Мониторинг", "Проверки"],
       featured: false,
     },
   ];
@@ -130,7 +130,7 @@ export default function Blog() {
                   alt={blogPosts[0].title}
                   className="w-full h-64 lg:h-full object-cover rounded-xl"
                 />
-                <div className="absolute top-4 left-4 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 left-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold">
                   Рекомендуемая
                 </div>
               </div>
@@ -190,42 +190,46 @@ export default function Blog() {
             <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">Недавние статьи</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {blogPosts.slice(1).map((post, index) => (
               <GlassmorphicCard key={post.title} delay={index * 0.1}>
-                <article className="flex flex-col h-full space-y-4">
+                <article className="flex flex-col h-full space-y-6">
                   <div className="relative">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-48 object-cover rounded-xl"
+                      className="w-full h-64 object-cover rounded-xl"
                     />
                   </div>
 
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1 bg-sea-green/10 text-sea-green px-2 py-1 rounded-md">
-                      <Calendar className="w-3 h-3" />
+                  <div className="flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
+                      <Calendar className="w-4 h-4" />
                       <span className="font-medium">{post.date}</span>
                     </div>
-                    <div className="flex items-center gap-1 bg-soft-blue/20 text-dark-slate px-2 py-1 rounded-md">
-                      <Clock className="w-3 h-3" />
+                    <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
+                      <Clock className="w-4 h-4" />
                       <span className="font-medium">{post.readTime}</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
+                      <Tag className="w-4 h-4" />
+                      <span className="font-medium">{post.category}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-heading font-bold text-dark-slate line-clamp-2">
+                  <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3">
                     {post.title}
                   </h3>
 
-                  <p className="text-dark-slate/70 line-clamp-3 flex-grow">
+                  <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
                     {post.excerpt}
                   </p>
 
                   <div className="flex flex-wrap gap-2">
-                    {post.tags.slice(0, 2).map((tag) => (
+                    {post.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+                        className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
                       >
                         {tag}
                       </span>
@@ -233,10 +237,11 @@ export default function Blog() {
                   </div>
 
                   <Link
-                    href={index === 0 ? "/blog/waste-management-belarus" : index === 1 ? "/blog/air-emissions-belarus" : "/blog/carbon-capture-future"}
-                    className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all mt-auto"
+                    href={index === 0 ? "/blog/waste-management-belarus" : index === 1 ? "/blog/air-emissions-belarus" : index === 2 ? "/blog/ecological-support" : index === 3 ? "/blog/ecological-passport" : "/blog/production-environmental-control"}
+                    className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 mt-auto"
                   >
-                    Читать далее <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
+                    Читать полную статью
                   </Link>
                 </article>
               </GlassmorphicCard>
