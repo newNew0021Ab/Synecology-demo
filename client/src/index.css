@@ -169,7 +169,7 @@
   }
 
   .bg-services-gradient {
-    background: linear-gradient(135deg, rgba(70, 130, 134, 0.08) 0%, rgba(46, 139, 87, 0.12) 50%, rgba(168, 218, 220, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(70, 130, 134, 0.25) 0%, rgba(46, 139, 87, 0.30) 50%, rgba(168, 218, 220, 0.35) 100%);
   }
 
   .enhanced-shadow {
