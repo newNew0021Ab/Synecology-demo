@@ -375,7 +375,7 @@ export default function Contact() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Готовы сделать <span className="text-sea-green">экологический шаг</span>?
+              Один звонок до решения вашей задачи <span className="text-sea-green">экологический шаг</span>?
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
@@ -407,3 +407,4 @@ export default function Contact() {
     </div>
   );
 }
+```
