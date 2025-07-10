@@ -122,6 +122,25 @@ export default function CaseStudies() {
               >
                 <GlassmorphicCard className="h-full">
                   <div className="flex flex-col h-full">
+                    {/* Title */}
+                    <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4 line-clamp-2">
+                      {caseStudy.title}
+                    </h3>
+
+                    {/* Image */}
+                    <div className="relative mb-4 rounded-xl overflow-hidden">
+                      <img
+                        src={caseStudy.image}
+                        alt={caseStudy.title}
+                        className="w-full h-48 object-cover"
+                      />
+                      {caseStudy.featured && (
+                        <div className="absolute top-4 right-4 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          Рекомендуемый
+                        </div>
+                      )}
+                    </div>
+
                     {/* Header with date and timeline */}
                     <div className="flex items-center justify-between text-sm mb-4">
                       <div className="flex items-center gap-2 text-sea-green">
@@ -139,25 +158,6 @@ export default function CaseStudies() {
                       {caseStudy.category}
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4 line-clamp-2">
-                      {caseStudy.title}
-                    </h3>
-
-                    {/* Image */}
-                    <div className="relative mb-6 rounded-xl overflow-hidden">
-                      <img
-                        src={caseStudy.image}
-                        alt={caseStudy.title}
-                        className="w-full h-48 object-cover"
-                      />
-                      {caseStudy.featured && (
-                        <div className="absolute top-4 right-4 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          Рекомендуемый
-                        </div>
-                      )}
-                    </div>
-
                     {/* Description */}
                     <p className="text-dark-slate/70 leading-relaxed mb-6 line-clamp-3 flex-grow">
                       {caseStudy.description}
@@ -167,23 +167,18 @@ export default function CaseStudies() {
                     <div className="space-y-3 mb-6">
                       <h4 className="text-lg font-semibold text-dark-slate">Ключевые результаты:</h4>
                       <ul className="space-y-2">
-                        {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
+                        {caseStudy.results.map((result, resultIndex) => (
                           <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate/70">
                             <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
-                            <span className="line-clamp-2">{result}</span>
+                            <span>{result}</span>
                           </li>
                         ))}
-                        {caseStudy.results.length > 3 && (
-                          <li className="text-sm text-sea-green font-semibold">
-                            +{caseStudy.results.length - 3} еще результатов
-                          </li>
-                        )}
                       </ul>
                     </div>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {caseStudy.tags.slice(0, 2).map((tag) => (
+                      {caseStudy.tags.map((tag) => (
                         <span
                           key={tag}
                           className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
@@ -191,11 +186,6 @@ export default function CaseStudies() {
                           {tag}
                         </span>
                       ))}
-                      {caseStudy.tags.length > 2 && (
-                        <span className="px-3 py-1 bg-dark-slate/10 text-dark-slate/70 text-sm rounded-full">
-                          +{caseStudy.tags.length - 2}
-                        </span>
-                      )}
                     </div>
 
                     {/* Action Buttons */}
