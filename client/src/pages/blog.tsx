@@ -171,7 +171,7 @@ export default function Blog() {
                 </div>
 
                 <Link
-                    href="/blog/eco-certification-belarus"
+                    href="/blog/eco-certification-business-belarus"
                     className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                   >
                     <ArrowRight className="w-5 h-5" />
@@ -237,7 +237,14 @@ export default function Blog() {
                   </div>
 
                   <Link
-                    href={index === 0 ? "/blog/waste-management-belarus" : index === 1 ? "/blog/air-emissions-belarus" : index === 2 ? "/blog/ecological-support" : index === 3 ? "/blog/ecological-passport" : "/blog/production-environmental-control"}
+                    href={`/blog/${
+                          post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
+                          post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
+                          post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
+                          post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
+                          post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
+                          "production-environmental-control"
+                        }`}
                     className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 mt-auto"
                   >
                     <ArrowRight className="w-5 h-5" />
