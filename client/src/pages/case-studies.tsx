@@ -7,6 +7,22 @@ import GlassmorphicCard from "@/components/GlassmorphicCard";
 export default function CaseStudies() {
   const caseStudies = [
     {
+      title: "Комплексная экологическая документация для кофейного производства",
+      category: "Пищевая промышленность",
+      description: "Создали полную экологическую систему «с нуля» для ведущего обжарщика спешелти кофе, обеспечив 100% соответствие законодательству.",
+      results: [
+        "100% соответствие природоохранному законодательству",
+        "Полностью исключены риски штрафов и приостановки деятельности",
+        "Получены все необходимые разрешения и согласования",
+        "Организована переработка отходов с получением дополнительного дохода",
+      ],
+      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству"],
+      timeline: "6 месяцев",
+      completion: "15.12.2024",
+      featured: true,
+    },
+    {
       title: "Переход на солнечную энергию",
       category: "Производственная отрасль",
       description: "Помогли производственной компании снизить выбросы углерода на 70% за счет стратегического внедрения солнечной энергии.",
@@ -163,6 +179,11 @@ export default function CaseStudies() {
                         alt={caseStudy.title}
                         className="w-full h-48 object-cover rounded-xl"
                       />
+                      {caseStudy.featured && (
+                        <div className="absolute top-2 right-2 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          Рекомендуемый
+                        </div>
+                      )}
                     </div>
 
                     <div className="space-y-4 flex-grow">
@@ -208,7 +229,7 @@ export default function CaseStudies() {
 
                     <div className="flex items-center justify-between mt-6 pt-6 border-t border-dark-slate/10">
                       <Link
-                        href={`/case-studies/${index === 0 ? 'solar-energy-transition' : index === 1 ? 'wetlands-restoration' : index === 2 ? 'water-treatment-innovation' : index === 3 ? 'urban-green-infrastructure' : index === 4 ? 'carbon-neutral-campus' : 'marine-habitat-protection'}`}
+                        href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : index === 2 ? 'wetlands-restoration' : index === 3 ? 'water-treatment-innovation' : index === 4 ? 'urban-green-infrastructure' : index === 5 ? 'carbon-neutral-campus' : 'marine-habitat-protection'}`}
                         className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
                       >
                         Подробнее <ArrowRight className="w-4 h-4" />
