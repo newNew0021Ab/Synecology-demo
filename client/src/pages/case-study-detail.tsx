@@ -4,8 +4,6 @@ import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, Users, Share2 } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import OptimizedImage from "@/components/OptimizedImage";
-import { IMAGES } from "@/data/images";
 import { useEffect, useState } from "react";
 
 export default function CaseStudyDetail() {
@@ -283,11 +281,10 @@ export default function CaseStudyDetail() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <OptimizedImage
+              <img
                 src={caseStudy.image}
                 alt={caseStudy.title}
                 className="rounded-2xl shadow-2xl w-full h-auto"
-                imageOptions={{ width: 800, height: 600, quality: 85 }}
               />
             </motion.div>
           </div>
@@ -388,11 +385,10 @@ export default function CaseStudyDetail() {
                   transition={{ delay: index * 0.1, duration: 0.8 }}
                   viewport={{ once: true }}
                 >
-                  <OptimizedImage
+                  <img
                     src={image}
                     alt={`${caseStudy.title} - изображение ${index + 1}`}
                     className="rounded-xl w-full h-48 object-cover"
-                    imageOptions={{ width: 600, height: 400, quality: 80 }}
                   />
                 </motion.div>
               ))}
