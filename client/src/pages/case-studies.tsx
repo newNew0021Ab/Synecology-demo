@@ -184,8 +184,8 @@ export default function CaseStudies() {
                         Начать проект
                       </Link>
                     </div>
-                  </div>
               </GlassmorphicCard>
+      
             ))}
           </div>
 
