@@ -17,7 +17,7 @@ export default function Services() {
         "Анализ воздействия на атмосферу",
         "Рекомендации по снижению выбросов",
       ],
-      image: "https://unsplash.com/photos/a-black-and-white-photo-of-smoke-coming-out-of-a-factory-HWaZyJ4SyrU",
+      image: "https://images.unsplash.com/photo-1688763699666-88cef43ac4e4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       icon: Recycle,
@@ -30,7 +30,7 @@ export default function Services() {
         "Разработка программы контроля",
         "Подготовка технических решений",
       ],
-      image: "https://unsplash.com/photos/a-piece-of-paper-that-says-eco-friendly-next-to-a-typewriter-u6TOk7UwD6Q",
+      image: "https://images.unsplash.com/photo-1695391533533-fcad0ac7b8ae?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       icon: FileText,
@@ -43,7 +43,7 @@ export default function Services() {
         "Ведение экологической отчетности",
         "Планирование природоохранных мероприятий",
       ],
-      image: "https://unsplash.com/photos/a-woman-holding-two-papers-in-front-of-her-face-9lvJKjRgit0",
+      image: "https://images.unsplash.com/photo-1693328397193-b858f1b38c60?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       icon: Droplets,
