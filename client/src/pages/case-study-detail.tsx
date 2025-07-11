@@ -32,11 +32,11 @@ export default function CaseStudyDetail() {
         { icon: Users, value: "100 000 BYN+", label: "Доход от отходов в год", color: "text-sandy-beige" },
         { icon: Leaf, value: "0", label: "Прекращений работы", color: "text-sea-green" }
       ],
-      image: "https://i.ibb.co/8L56rbRx/Gemini-Generated-Image-q9hqoeq9hqoeq9hq.png",
+      image: "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=800",
       images: [
-        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+        "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
       ],
       tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству", "Производственный контроль", "Переработка отходов"],
       timeline: "6 месяцев",
@@ -419,27 +419,7 @@ export default function CaseStudyDetail() {
               </GlassmorphicCard>
             </div>
 
-            <GlassmorphicCard delay={0.5}>
-              <div className="bg-gradient-to-r from-sea-green/10 to-soft-blue/10 rounded-xl p-6">
-                <h3 className="text-xl font-semibold text-dark-slate mb-4 text-center">
-                  Гарантии качества
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-2xl font-bold text-sea-green mb-2">100%</div>
-                    <p className="text-sm text-dark-slate/70">Соответствие законодательству</p>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-sea-green mb-2">24/7</div>
-                    <p className="text-sm text-dark-slate/70">Поддержка после сдачи</p>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-sea-green mb-2">∞</div>
-                    <p className="text-sm text-dark-slate/70">Гарантия на документацию</p>
-                  </div>
-                </div>
-              </div>
-            </GlassmorphicCard>
+            
           </div>
         </div>
       </section>
