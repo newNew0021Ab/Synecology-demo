@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, Users, Share2 } from "lucide-react";
@@ -373,77 +372,74 @@ export default function CaseStudyDetail() {
               Этапы реализации проекта
             </h2>
             <p className="text-xl text-dark-slate/70 max-w-3xl mx-auto">
-              Пошаговый план работ, который мы применили для достижения результата
+              Пошаговый процесс работы над проектом — от первичного анализа до финального результата
             </p>
           </div>
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-sea-green via-soft-blue to-sandy-beige"></div>
-            
-            <div className="space-y-12">
-              {[
-                {
-                  phase: "Этап 1",
-                  title: "Диагностика и анализ",
-                  description: "Комплексное обследование производственных процессов, выявление всех источников воздействия на окружающую среду",
-                  duration: "2-3 недели",
-                  side: "left"
-                },
-                {
-                  phase: "Этап 2", 
-                  title: "Разработка документации",
-                  description: "Создание полного пакета экологической документации в соответствии с требованиями законодательства",
-                  duration: "4-6 недель",
-                  side: "right"
-                },
-                {
-                  phase: "Этап 3",
-                  title: "Согласование с органами",
-                  description: "Подача документов в Минприроды, сопровождение процесса согласования и получение всех необходимых разрешений",
-                  duration: "3-4 недели",
-                  side: "left"
-                },
-                {
-                  phase: "Этап 4",
-                  title: "Внедрение системы контроля",
-                  description: "Организация производственного экологического контроля и обучение персонала",
-                  duration: "1-2 недели",
-                  side: "right"
-                }
-              ].map((step, index) => (
-                <motion.div
-                  key={index}
-                  className={`flex items-center ${step.side === 'left' ? 'justify-start' : 'justify-end'}`}
-                  initial={{ opacity: 0, x: step.side === 'left' ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2, duration: 0.8 }}
-                  viewport={{ once: true }}
-                >
-                  <div className={`w-5/12 ${step.side === 'left' ? 'text-right pr-8' : 'text-left pl-8'}`}>
-                    <GlassmorphicCard>
-                      <div className="p-6">
-                        <div className="flex items-center gap-3 mb-3">
-                          <span className="bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            {step.phase}
-                          </span>
-                          <span className="text-sm text-dark-slate/70">{step.duration}</span>
-                        </div>
-                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-3">
-                          {step.title}
-                        </h3>
-                        <p className="text-dark-slate/70">
-                          {step.description}
-                        </p>
-                      </div>
-                    </GlassmorphicCard>
+          <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <GlassmorphicCard delay={0.1}>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-sea-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-sea-green text-2xl font-bold">1</span>
                   </div>
-                  
-                  {/* Timeline dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-sea-green rounded-full border-4 border-white shadow-lg"></div>
-                </motion.div>
-              ))}
+                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Анализ и аудит</h3>
+                  <p className="text-sm text-dark-slate/70">Комплексная оценка текущего состояния предприятия</p>
+                </div>
+              </GlassmorphicCard>
+
+              <GlassmorphicCard delay={0.2}>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-soft-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-soft-blue text-2xl font-bold">2</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Планирование</h3>
+                  <p className="text-sm text-dark-slate/70">Разработка стратегии и дорожной карты решений</p>
+                </div>
+              </GlassmorphicCard>
+
+              <GlassmorphicCard delay={0.3}>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-sandy-beige/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-sandy-beige text-2xl font-bold">3</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Реализация</h3>
+                  <p className="text-sm text-dark-slate/70">Внедрение решений и создание документации</p>
+                </div>
+              </GlassmorphicCard>
+
+              <GlassmorphicCard delay={0.4}>
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-sea-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-sea-green text-2xl font-bold">4</span>
+                  </div>
+                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Сопровождение</h3>
+                  <p className="text-sm text-dark-slate/70">Поддержка и мониторинг после внедрения</p>
+                </div>
+              </GlassmorphicCard>
             </div>
+
+            <GlassmorphicCard delay={0.5}>
+              <div className="bg-gradient-to-r from-sea-green/10 to-soft-blue/10 rounded-xl p-6">
+                <h3 className="text-xl font-semibold text-dark-slate mb-4 text-center">
+                  Гарантии качества
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-sea-green mb-2">100%</div>
+                    <p className="text-sm text-dark-slate/70">Соответствие законодательству</p>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-sea-green mb-2">24/7</div>
+                    <p className="text-sm text-dark-slate/70">Поддержка после сдачи</p>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-sea-green mb-2">∞</div>
+                    <p className="text-sm text-dark-slate/70">Гарантия на документацию</p>
+                  </div>
+                </div>
+              </div>
+            </GlassmorphicCard>
           </div>
         </div>
       </section>
