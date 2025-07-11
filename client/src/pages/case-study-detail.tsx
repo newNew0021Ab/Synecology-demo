@@ -32,7 +32,7 @@ export default function CaseStudyDetail() {
         { icon: Users, value: "100 000 BYN+", label: "Доход от отходов в год", color: "text-sandy-beige" },
         { icon: Leaf, value: "0", label: "Прекращений работы", color: "text-sea-green" }
       ],
-      image: "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=800",
+      image: "https://unsplash.com/photos/brown-coffee-beans-in-white-ceramic-bowl-fHZYP7QR8NI&auto=format&fit=crop&w=1200&h=800",
       images: [
         "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
