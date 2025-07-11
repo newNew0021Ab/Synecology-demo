@@ -12,7 +12,7 @@ export default function Blog() {
       category: "Сертификация",
       date: "20.12.2024",
       readTime: "8 мин",
-      image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
       featured: true,
     },
@@ -22,7 +22,7 @@ export default function Blog() {
       category: "Отходы",
       date: "18.12.2024",
       readTime: "10 мин",
-      image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
       featured: false,
     },
@@ -32,38 +32,8 @@ export default function Blog() {
       category: "Выбросы",
       date: "16.12.2024",
       readTime: "9 мин",
-      image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
-      featured: false,
-    },
-    {
-      title: "Экологическое сопровождение: как защитить бизнес от штрафов и претензий",
-      excerpt: "Комплексное экологическое сопровождение предприятий — это не роскошь, а необходимость для современного бизнеса. Рассказываем, как выбрать подходящий формат сопровождения и что включает полный аутсорсинг экологических функций.",
-      category: "Сопровождение",
-      date: "08.12.2024",
-      readTime: "8 мин",
-      image: "https://images.unsplash.com/photo-1560472355-536de3962603?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Сопровождение", "Аутсорсинг", "Экология", "Консалтинг"],
-      featured: false,
-    },
-    {
-      title: "Экологический паспорт предприятия: обязательный документ или формальность?",
-      excerpt: "Экологический паспорт — это документ, который отражает реальное воздействие предприятия на окружающую среду. Разбираемся, кому он нужен, как его правильно составить и какие выгоды он может принести бизнесу.",
-      category: "Документооборот",
-      date: "05.12.2024",
-      readTime: "6 мин",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Экологический паспорт", "Документооборот", "Отчетность"],
-      featured: false,
-    },
-    {
-      title: "Производственный экологический контроль: как не попасть на штрафы",
-      excerpt: "Производственный экологический контроль — это не просто формальность, а реальный инструмент управления экологическими рисками. Рассказываем, как правильно организовать ПЭК и избежать нарушений при проверках.",
-      category: "Контроль",
-      date: "03.12.2024",
-      readTime: "7 мин",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["ПЭК", "Контроль", "Мониторинг", "Проверки"],
       featured: false,
     },
   ];
@@ -256,9 +226,14 @@ export default function Blog() {
           </div>
 
           <div className="text-center mt-12">
-            <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold">
-              Загрузить больше статей
-            </button>
+            <GlassmorphicCard className="max-w-md mx-auto">
+              <p className="text-dark-slate/70 mb-4">
+                Мы готовим для вас ещё больше полезных статей
+              </p>
+              <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
+                Статьи в процессе написания
+              </button>
+            </GlassmorphicCard>
           </div>
         </div>
       </section>
