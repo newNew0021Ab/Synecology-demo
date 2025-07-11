@@ -116,7 +116,7 @@ export default function CaseStudies() {
             {mainCaseStudies.map((caseStudy, index) => (
               <GlassmorphicCard key={caseStudy.title} delay={index * 0.1}>
                 <div className="flex flex-col h-full min-h-[700px]">
-                    <div className="relative mb-6"></div>
+                    <div className="relative mb-6">
                       <img
                         src={caseStudy.image}
                         alt={caseStudy.title}
