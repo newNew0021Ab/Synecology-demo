@@ -29,9 +29,9 @@ export default function CaseStudyDetail() {
       ],
       metrics: [
         { icon: CheckCircle, value: "100%", label: "Соответствие закону", color: "text-sea-green" },
-        { icon: TrendingUp, value: "50М₽", label: "Избежали штрафов", color: "text-soft-blue" },
-        { icon: Users, value: "1,2М₽", label: "Доход от отходов в год", color: "text-sandy-beige" },
-        { icon: Leaf, value: "85%", label: "Сокращение расходов", color: "text-sea-green" }
+        { icon: TrendingUp, value: "50 000 BYN+", label: "Экономии на штрафах", color: "text-soft-blue" },
+        { icon: Users, value: "100 000 BYN+", label: "Доход от отходов в год", color: "text-sandy-beige" },
+        { icon: Leaf, value: "0", label: "Прекращений работы", color: "text-sea-green" }
       ],
       image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=800",
       images: [
