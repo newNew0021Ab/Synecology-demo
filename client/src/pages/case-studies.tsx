@@ -1,116 +1,59 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle } from "lucide-react";
+import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import { useState } from "react";
 
 export default function CaseStudies() {
-  const caseStudies = [
+  const [showAdditionalCases, setShowAdditionalCases] = useState(false);
+  
+  const mainCaseStudies = [
     {
-      title: "Комплексная экологическая документация для кофейного производства",
+      title: "Комплексная экологическая система для кофейного производства",
       category: "Пищевая промышленность",
-      description: "Создали полную экологическую систему «с нуля» для ведущего обжарщика спешелти кофе, обеспечив 100% соответствие законодательству.",
+      description: "Создали полную экологическую систему «с нуля» для ведущего обжарщика спешелти кофе, обеспечив 100% соответствие законодательству и экономию 2,5 млн рублей в год.",
       results: [
         "100% соответствие природоохранному законодательству",
-        "Полностью исключены риски штрафов и приостановки деятельности",
-        "Получены все необходимые разрешения и согласования",
-        "Организована переработка отходов с получением дополнительного дохода",
+        "Экономия 2,5 млн рублей в год на штрафах и платежах",
+        "Получены все необходимые разрешения за 3 месяца",
+        "Организована переработка отходов с доходом 850 тыс. руб/год",
       ],
       image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству"],
-      timeline: "6 месяцев",
+      timeline: "3 месяца",
       completion: "15.12.2024",
       featured: true,
     },
     {
-      title: "Переход на солнечную энергию",
+      title: "Переход на возобновляемую энергию",
       category: "Производственная отрасль",
-      description: "Помогли производственной компании снизить выбросы углерода на 70% за счет стратегического внедрения солнечной энергии.",
+      description: "Помогли производственной компании снизить выбросы на 85% и сократить затраты на электроэнергию на 4,2 млн рублей ежегодно.",
       results: [
-        "70% снижение выбросов углерода",
-        "2,3 млн долларов годовой экономии энергозатрат",
-        "15 000 МВтч чистой энергии в год",
-        "Окупаемость за 3,2 года",
+        "85% снижение выбросов углекислого газа",
+        "4,2 млн рублей экономии на электроэнергии в год",
+        "Окупаемость инвестиций за 2,1 года",
+        "Получение статуса «Зеленое предприятие»",
       ],
       image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Солнечная энергия", "Снижение углерода", "Производство"],
-      timeline: "18 месяцев",
+      tags: ["Возобновляемая энергия", "Снижение выбросов", "Производство"],
+      timeline: "8 месяцев",
       completion: "12.10.2024",
     },
     {
-      title: "Восстановление водно-болотных угодий",
+      title: "Восстановление природной экосистемы",
       category: "Природоохранный проект",
-      description: "Успешно восстановили 500 акров экосистемы водно-болотных угодий, увеличив местное биоразнообразие на 200%.",
+      description: "Успешно восстановили 300 гектаров природной экосистемы, увеличив биоразнообразие на 320% и получив федеральное финансирование в размере 15 млн рублей.",
       results: [
-        "500 акров водно-болотных угодий восстановлено",
-        "200% увеличение биоразнообразия",
-        "85% улучшение качества воды",
-        "30 исчезающих видов реинтродуцировано",
+        "300 гектаров экосистемы восстановлено",
+        "320% увеличение биоразнообразия",
+        "15 млн рублей федерального финансирования",
+        "42 редких вида флоры и фауны сохранено",
       ],
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
       tags: ["Восстановление экосистем", "Биоразнообразие", "Охрана природы"],
-      timeline: "24 месяца",
+      timeline: "14 месяцев",
       completion: "03.05.2023",
-    },
-    {
-      title: "Инновации в очистке воды",
-      category: "Промышленная вода",
-      description: "Внедрили передовые системы очистки воды, сократив отходы на 85% для крупного промышленного клиента.",
-      results: [
-        "85% сокращение водных отходов",
-        "99,5% эффективность очистки",
-        "1,8 млн долларов годовой экономии",
-        "Соответствие нормам нулевого сброса",
-      ],
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Очистка воды", "Промышленность", "Сокращение отходов"],
-      timeline: "12 месяцев",
-      completion: "18.11.2022",
-    },
-    {
-      title: "Городская зеленая инфраструктура",
-      category: "Городское планирование",
-      description: "Создали системы зеленых крыш в 12 городских зданиях, снизив эффект городского теплового острова на 30%.",
-      results: [
-        "30% снижение эффекта городского теплового острова",
-        "12 зданий с зеленой инфраструктурой",
-        "40% улучшение качества воздуха",
-        "25% сокращение ливневого стока",
-      ],
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Зеленая инфраструктура", "Городское планирование", "Климатическая адаптация"],
-      timeline: "36 месяцев",
-      completion: "22.06.2024",
-    },
-    {
-      title: "Углеродно-нейтральный кампус",
-      category: "Образовательный сектор",
-      description: "Превратили университетский кампус в углеродно-нейтральное учреждение с помощью комплексных мер устойчивости.",
-      results: [
-        "100% углеродная нейтральность достигнута",
-        "60% снижение энергопотребления",
-        "1,2 млн долларов годовой экономии",
-        "Сертификация LEED Platinum",
-      ],
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Углеродная нейтральность", "Образование", "Сертификация LEED"],
-      timeline: "30 месяцев",
-      completion: "01.02.2023",
-    },
-    {
-      title: "Защита морских местообитаний",
-      category: "Прибрежная охрана",
-      description: "Разработали и внедрили комплексный план защиты морских ресурсов для 50-мильной береговой линии.",
-      results: [
-        "50 миль береговой линии защищено",
-        "75% увеличение морских видов",
-        "90% сокращение инцидентов загрязнения",
-        "Запущена программа вовлечения сообщества",
-      ],
-      image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Охрана морской среды", "Защита берегов", "Биоразнообразие"],
-      timeline: "42 месяца",
-      completion: "27.09.2022",
     },
   ];
 
@@ -169,18 +112,18 @@ export default function CaseStudies() {
       {/* Case Studies Grid */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {caseStudies.map((caseStudy, index) => (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            {mainCaseStudies.map((caseStudy, index) => (
               <GlassmorphicCard key={caseStudy.title} delay={index * 0.1}>
                 <div className="flex flex-col h-full">
                     <div className="relative mb-4">
                       <img
                         src={caseStudy.image}
                         alt={caseStudy.title}
-                        className="w-full h-48 object-cover rounded-xl"
+                        className="w-full h-56 object-cover rounded-xl"
                       />
                       {caseStudy.featured && (
-                        <div className="absolute top-2 right-2 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <div className="absolute top-3 right-3 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
                           Рекомендуемый
                         </div>
                       )}
@@ -197,29 +140,29 @@ export default function CaseStudies() {
                         </div>
                       </div>
 
-                      <h3 className="text-2xl font-heading font-bold text-dark-slate">
+                      <h3 className="text-xl font-heading font-bold text-dark-slate line-clamp-2">
                         {caseStudy.title}
                       </h3>
 
-                      <p className="text-dark-slate/70">{caseStudy.description}</p>
+                      <p className="text-dark-slate/70 text-sm line-clamp-3">{caseStudy.description}</p>
 
                       <div className="space-y-2">
-                        <h4 className="font-semibold text-dark-slate">Ключевые результаты:</h4>
+                        <h4 className="font-semibold text-dark-slate text-sm">Ключевые результаты:</h4>
                         <ul className="space-y-1">
-                          {caseStudy.results.map((result, index) => (
-                            <li key={index} className="flex items-center gap-2 text-sm text-dark-slate/70">
-                              <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0" />
+                          {caseStudy.results.slice(0, 3).map((result, index) => (
+                            <li key={index} className="flex items-start gap-2 text-xs text-dark-slate/70">
+                              <CheckCircle className="w-3 h-3 text-sea-green flex-shrink-0 mt-0.5" />
                               {result}
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="flex flex-wrap gap-2">
-                        {caseStudy.tags.map((tag) => (
+                      <div className="flex flex-wrap gap-1">
+                        {caseStudy.tags.slice(0, 2).map((tag) => (
                           <span
                             key={tag}
-                            className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
+                            className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
                           >
                             {tag}
                           </span>
@@ -227,16 +170,16 @@ export default function CaseStudies() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-6 pt-6 border-t border-dark-slate/10">
+                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-dark-slate/10">
                       <Link
-                        href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : index === 2 ? 'wetlands-restoration' : index === 3 ? 'water-treatment-innovation' : index === 4 ? 'urban-green-infrastructure' : index === 5 ? 'carbon-neutral-campus' : 'marine-habitat-protection'}`}
-                        className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all"
+                        href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : 'wetlands-restoration'}`}
+                        className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-sm"
                       >
                         Подробнее <ArrowRight className="w-4 h-4" />
                       </Link>
                       <Link
                         href="/contact"
-                        className="text-sea-green hover:text-sea-green/80 transition-colors text-sm"
+                        className="text-sea-green hover:text-sea-green/80 transition-colors text-xs"
                       >
                         Начать проект
                       </Link>
@@ -244,6 +187,45 @@ export default function CaseStudies() {
                   </div>
               </GlassmorphicCard>
             ))}
+          </div>
+
+          {/* More Cases Button */}
+          <div className="text-center">
+            <GlassmorphicCard delay={0.3}>
+              <div className="text-center py-8">
+                <button
+                  onClick={() => setShowAdditionalCases(!showAdditionalCases)}
+                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 mb-4"
+                >
+                  <Plus className="w-5 h-5" />
+                  Ещё кейсы
+                </button>
+                
+                {showAdditionalCases && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.5 }}
+                    className="text-dark-slate/70 max-w-md mx-auto"
+                  >
+                    <div className="bg-soft-blue/20 rounded-xl p-6">
+                      <h4 className="font-semibold text-dark-slate mb-2">Готовится к публикации</h4>
+                      <p className="text-sm">
+                        Мы работаем над оформлением дополнительных кейсов. Скоро здесь появятся новые истории успеха наших клиентов.
+                      </p>
+                      <div className="mt-4">
+                        <Link
+                          href="/contact"
+                          className="text-sea-green font-semibold hover:text-sea-green/80 transition-colors text-sm"
+                        >
+                          Узнать о своем кейсе →
+                        </Link>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </GlassmorphicCard>
           </div>
         </div>
       </section>
