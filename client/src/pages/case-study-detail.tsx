@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, Users, Share2 } from "lucide-react";
@@ -32,11 +33,11 @@ export default function CaseStudyDetail() {
         { icon: Users, value: "100 000 BYN+", label: "Доход от отходов в год", color: "text-sandy-beige" },
         { icon: Leaf, value: "0", label: "Прекращений работы", color: "text-sea-green" }
       ],
-      image: "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=800",
+      image: "https://i.ibb.co/8L56rbRx/Gemini-Generated-Image-q9hqoeq9hqoeq9hq.png",
       images: [
-        "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
       ],
       tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству", "Производственный контроль", "Переработка отходов"],
       timeline: "6 месяцев",
@@ -372,54 +373,77 @@ export default function CaseStudyDetail() {
               Этапы реализации проекта
             </h2>
             <p className="text-xl text-dark-slate/70 max-w-3xl mx-auto">
-              Пошаговый процесс работы над проектом — от первичного анализа до финального результата
+              Пошаговый план работ, который мы применили для достижения результата
             </p>
           </div>
 
-          <div className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <GlassmorphicCard delay={0.1}>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-sea-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-sea-green text-2xl font-bold">1</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Анализ и аудит</h3>
-                  <p className="text-sm text-dark-slate/70">Комплексная оценка текущего состояния предприятия</p>
-                </div>
-              </GlassmorphicCard>
-
-              <GlassmorphicCard delay={0.2}>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-soft-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-soft-blue text-2xl font-bold">2</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Планирование</h3>
-                  <p className="text-sm text-dark-slate/70">Разработка стратегии и дорожной карты решений</p>
-                </div>
-              </GlassmorphicCard>
-
-              <GlassmorphicCard delay={0.3}>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-sandy-beige/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-sandy-beige text-2xl font-bold">3</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Реализация</h3>
-                  <p className="text-sm text-dark-slate/70">Внедрение решений и создание документации</p>
-                </div>
-              </GlassmorphicCard>
-
-              <GlassmorphicCard delay={0.4}>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-sea-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-sea-green text-2xl font-bold">4</span>
-                  </div>
-                  <h3 className="text-lg font-semibold text-dark-slate mb-2">Сопровождение</h3>
-                  <p className="text-sm text-dark-slate/70">Поддержка и мониторинг после внедрения</p>
-                </div>
-              </GlassmorphicCard>
-            </div>
-
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-sea-green via-soft-blue to-sandy-beige"></div>
             
+            <div className="space-y-12">
+              {[
+                {
+                  phase: "Этап 1",
+                  title: "Диагностика и анализ",
+                  description: "Комплексное обследование производственных процессов, выявление всех источников воздействия на окружающую среду",
+                  duration: "2-3 недели",
+                  side: "left"
+                },
+                {
+                  phase: "Этап 2", 
+                  title: "Разработка документации",
+                  description: "Создание полного пакета экологической документации в соответствии с требованиями законодательства",
+                  duration: "4-6 недель",
+                  side: "right"
+                },
+                {
+                  phase: "Этап 3",
+                  title: "Согласование с органами",
+                  description: "Подача документов в Минприроды, сопровождение процесса согласования и получение всех необходимых разрешений",
+                  duration: "3-4 недели",
+                  side: "left"
+                },
+                {
+                  phase: "Этап 4",
+                  title: "Внедрение системы контроля",
+                  description: "Организация производственного экологического контроля и обучение персонала",
+                  duration: "1-2 недели",
+                  side: "right"
+                }
+              ].map((step, index) => (
+                <motion.div
+                  key={index}
+                  className={`flex items-center ${step.side === 'left' ? 'justify-start' : 'justify-end'}`}
+                  initial={{ opacity: 0, x: step.side === 'left' ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.2, duration: 0.8 }}
+                  viewport={{ once: true }}
+                >
+                  <div className={`w-5/12 ${step.side === 'left' ? 'text-right pr-8' : 'text-left pl-8'}`}>
+                    <GlassmorphicCard>
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            {step.phase}
+                          </span>
+                          <span className="text-sm text-dark-slate/70">{step.duration}</span>
+                        </div>
+                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-3">
+                          {step.title}
+                        </h3>
+                        <p className="text-dark-slate/70">
+                          {step.description}
+                        </p>
+                      </div>
+                    </GlassmorphicCard>
+                  </div>
+                  
+                  {/* Timeline dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-sea-green rounded-full border-4 border-white shadow-lg"></div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
