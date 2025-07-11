@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight, CheckCircle } from "lucide-react";
@@ -18,7 +17,7 @@ export default function Services() {
         "Анализ воздействия на атмосферу",
         "Рекомендации по снижению выбросов",
       ],
-      image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://unsplash.com/photos/a-black-and-white-photo-of-smoke-coming-out-of-a-factory-HWaZyJ4SyrU",
     },
     {
       icon: Recycle,
@@ -31,7 +30,7 @@ export default function Services() {
         "Разработка программы контроля",
         "Подготовка технических решений",
       ],
-      image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://unsplash.com/photos/a-piece-of-paper-that-says-eco-friendly-next-to-a-typewriter-u6TOk7UwD6Q",
     },
     {
       icon: FileText,
@@ -44,7 +43,7 @@ export default function Services() {
         "Ведение экологической отчетности",
         "Планирование природоохранных мероприятий",
       ],
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://unsplash.com/photos/a-woman-holding-two-papers-in-front-of-her-face-9lvJKjRgit0",
     },
     {
       icon: Droplets,
@@ -146,7 +145,7 @@ export default function Services() {
       <section className="py-20 relative overflow-hidden">
         <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
         <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <motion.h1
@@ -220,7 +219,7 @@ export default function Services() {
                     </div>
                   </GlassmorphicCard>
                 </div>
-                
+
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
                   <div className="glassmorphic rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500">
                     <img
@@ -239,7 +238,7 @@ export default function Services() {
       {/* CTA Section */}
       <section className="py-20 relative">
         <OrganicBlob className="absolute top-10 left-10 opacity-10" size="md" />
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassmorphicCard className="text-center">
             <motion.h2

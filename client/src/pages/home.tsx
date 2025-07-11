@@ -7,7 +7,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
   const isMobile = useIsMobile();
-  
+
   const handleCardClick = (e: React.MouseEvent) => {
     if (isMobile) {
       e.preventDefault();
@@ -123,10 +123,10 @@ export default function Home() {
             >
               <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-                  alt="Modern sustainable building"
-                  className="rounded-xl shadow-lg w-full h-auto max-h-96 md:max-h-none object-cover"
-                />
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+                    alt="Green building with plants"
+                    className="rounded-xl shadow-lg w-full h-auto max-h-96 md:max-h-none object-cover"
+                  />
               </div>
             </motion.div>
           </div>
