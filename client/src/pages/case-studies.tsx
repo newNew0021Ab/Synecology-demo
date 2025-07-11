@@ -112,57 +112,57 @@ export default function CaseStudies() {
       {/* Case Studies Grid */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
             {mainCaseStudies.map((caseStudy, index) => (
               <GlassmorphicCard key={caseStudy.title} delay={index * 0.1}>
-                <div className="flex flex-col h-full">
-                    <div className="relative mb-4">
+                <div className="flex flex-col h-full min-h-[600px]">
+                    <div className="relative mb-6">
                       <img
                         src={caseStudy.image}
                         alt={caseStudy.title}
-                        className="w-full h-56 object-cover rounded-xl"
+                        className="w-full h-64 object-cover rounded-xl"
                       />
                       {caseStudy.featured && (
-                        <div className="absolute top-3 right-3 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                           Рекомендуемый
                         </div>
                       )}
                     </div>
 
-                    <div className="space-y-4 flex-grow">
-                      <div className="flex items-center justify-between text-sm">
+                    <div className="space-y-5 flex-grow">
+                      <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-sea-green">
                           <Calendar className="w-4 h-4" />
-                          <span>{caseStudy.completion}</span>
+                          <span className="text-sm font-medium">{caseStudy.completion}</span>
                         </div>
-                        <div className="bg-sea-green/10 text-sea-green px-3 py-1 rounded-full font-semibold">
+                        <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
                           {caseStudy.timeline}
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-heading font-bold text-dark-slate line-clamp-2">
+                      <h3 className="text-2xl font-heading font-bold text-dark-slate leading-tight">
                         {caseStudy.title}
                       </h3>
 
-                      <p className="text-dark-slate/70 text-sm line-clamp-3">{caseStudy.description}</p>
+                      <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description}</p>
 
-                      <div className="space-y-2">
-                        <h4 className="font-semibold text-dark-slate text-sm">Ключевые результаты:</h4>
-                        <ul className="space-y-1">
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
+                        <ul className="space-y-2">
                           {caseStudy.results.slice(0, 3).map((result, index) => (
-                            <li key={index} className="flex items-start gap-2 text-xs text-dark-slate/70">
-                              <CheckCircle className="w-3 h-3 text-sea-green flex-shrink-0 mt-0.5" />
-                              {result}
+                            <li key={index} className="flex items-start gap-3 text-sm text-dark-slate/70">
+                              <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
+                              <span>{result}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="flex flex-wrap gap-1">
+                      <div className="flex flex-wrap gap-2">
                         {caseStudy.tags.slice(0, 2).map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+                            className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
                           >
                             {tag}
                           </span>
@@ -170,16 +170,16 @@ export default function CaseStudies() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-dark-slate/10">
+                    <div className="flex items-center justify-between mt-8 pt-6 border-t border-dark-slate/10">
                       <Link
                         href={`/case-studies/${index === 0 ? 'coffee-environmental-documentation' : index === 1 ? 'solar-energy-transition' : 'wetlands-restoration'}`}
-                        className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-sm"
+                        className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base"
                       >
-                        Подробнее <ArrowRight className="w-4 h-4" />
+                        Подробнее <ArrowRight className="w-5 h-5" />
                       </Link>
                       <Link
                         href="/contact"
-                        className="text-sea-green hover:text-sea-green/80 transition-colors text-xs"
+                        className="text-sea-green hover:text-sea-green/80 transition-colors text-sm font-medium"
                       >
                         Начать проект
                       </Link>
