@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Calendar, ArrowRight, Clock, Tag } from "lucide-react";
+import { Calendar, ArrowRight, Clock, Tag, Search } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import { useState, useMemo } from "react";
 
 export default function Blog() {
+  const [selectedCategory, setSelectedCategory] = useState("Все");
+  const [selectedTag, setSelectedTag] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
   const blogPosts = [
     {
       title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
@@ -38,7 +43,36 @@ export default function Blog() {
     },
   ];
 
-  const categories = ["Все", "Сертификация", "Отходы", "Выбросы", "Городское планирование", "Управление водными ресурсами", "Регулирование"];
+  const categories = ["Все", "Сертификация", "Отходы", "Выбросы", "Сопровождение", "Документооборот", "Контроль"];
+
+  // Собираем все уникальные теги
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    blogPosts.forEach(post => {
+      post.tags.forEach(tag => tags.add(tag));
+    });
+    return Array.from(tags).sort();
+  }, [blogPosts]);
+
+  // Фильтруем посты по категории, тегу и поисковому запросу
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter(post => {
+      const matchesCategory = selectedCategory === "Все" || post.category === selectedCategory;
+      const matchesTag = !selectedTag || post.tags.includes(selectedTag);
+      const matchesSearch = !searchTerm || 
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      return matchesCategory && matchesTag && matchesSearch;
+    });
+  }, [blogPosts, selectedCategory, selectedTag, searchTerm]);
+
+  const clearFilters = () => {
+    setSelectedCategory("Все");
+    setSelectedTag("");
+    setSearchTerm("");
+  };
 
   return (
     <div className="pt-24">
@@ -69,99 +103,208 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Category Filter */}
+      {/* Search and Filter Section */}
       <section className="py-8 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-4 justify-center mb-8">
+          {/* Search Bar */}
+          <div className="mb-8 max-w-2xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-dark-slate/50 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Поиск по статьям и тегам..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-full border border-dark-slate/20 bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sea-green focus:border-transparent text-dark-slate"
+              />
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="flex flex-wrap gap-4 justify-center mb-6">
             {categories.map((category) => (
               <button
                 key={category}
-                className="glassmorphic glassmorphic-hover px-6 py-2 rounded-full text-sea-green font-semibold text-sm"
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-sea-green text-white'
+                    : 'glassmorphic glassmorphic-hover text-sea-green'
+                }`}
               >
                 {category}
               </button>
             ))}
           </div>
+
+          {/* Tag Filter */}
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {allTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => setSelectedTag(selectedTag === tag ? "" : tag)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    selectedTag === tag
+                      ? 'bg-sea-green/20 text-sea-green border-2 border-sea-green'
+                      : 'bg-white/60 text-dark-slate/70 hover:bg-sea-green/10 hover:text-sea-green border border-dark-slate/20'
+                  }`}
+                >
+                  <Tag className="w-3 h-3 inline mr-1" />
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Active Filters and Clear Button */}
+          {(selectedCategory !== "Все" || selectedTag || searchTerm) && (
+            <div className="flex justify-center items-center gap-4 mb-4">
+              <div className="flex items-center gap-2 text-sm text-dark-slate/70">
+                <span>Активные фильтры:</span>
+                {selectedCategory !== "Все" && (
+                  <span className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
+                    {selectedCategory}
+                  </span>
+                )}
+                {selectedTag && (
+                  <span className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
+                    {selectedTag}
+                  </span>
+                )}
+                {searchTerm && (
+                  <span className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
+                    "{searchTerm}"
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={clearFilters}
+                className="text-sm text-dark-slate/70 hover:text-sea-green transition-colors"
+              >
+                Очистить все
+              </button>
+            </div>
+          )}
+
+          {/* Results count */}
+          <div className="text-center text-sm text-dark-slate/70">
+            {filteredPosts.length === 0 ? (
+              <span>Статьи не найдены</span>
+            ) : (
+              <span>Найдено {filteredPosts.length} {filteredPosts.length === 1 ? 'статья' : filteredPosts.length < 5 ? 'статьи' : 'статей'}</span>
+            )}
+          </div>
         </div>
       </section>
 
       {/* Featured Post */}
-      <section className="py-12 bg-gradient-to-b from-soft-blue/20 to-off-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">Рекомендуемая статья</h2>
-          </div>
-
-          <GlassmorphicCard className="overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="relative">
-                <img
-                  src={blogPosts[0].image}
-                  alt={blogPosts[0].title}
-                  className="w-full h-64 lg:h-full object-cover rounded-xl"
-                />
-                <div className="absolute top-4 left-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold">
-                  Рекомендуемая
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="flex items-center gap-6 text-sm">
-                  <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                    <Calendar className="w-4 h-4" />
-                    <span className="font-medium">{blogPosts[0].date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                    <Clock className="w-4 h-4" />
-                    <span className="font-medium">{blogPosts[0].readTime}</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                    <Tag className="w-4 h-4" />
-                    <span className="font-medium">{blogPosts[0].category}</span>
-                  </div>
-                </div>
-
-                <h3 className="text-3xl font-heading font-bold text-dark-slate">
-                  {blogPosts[0].title}
-                </h3>
-
-                <p className="text-lg text-dark-slate/70 leading-relaxed">
-                  {blogPosts[0].excerpt}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {blogPosts[0].tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <Link
-                    href="/blog/eco-certification-business-belarus"
-                    className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                    Читать полную статью
-                  </Link>
-              </div>
+      {filteredPosts.length > 0 && filteredPosts.some(post => post.featured) && (
+        <section className="py-12 bg-gradient-to-b from-soft-blue/20 to-off-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mb-8">
+              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">Рекомендуемая статья</h2>
             </div>
-          </GlassmorphicCard>
-        </div>
-      </section>
+
+            {filteredPosts.filter(post => post.featured).map((post) => (
+              <GlassmorphicCard key={post.title} className="overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <div className="relative">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-64 lg:h-full object-cover rounded-xl"
+                    />
+                    <div className="absolute top-4 left-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold">
+                      Рекомендуемая
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-6 text-sm">
+                      <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
+                        <Calendar className="w-4 h-4" />
+                        <span className="font-medium">{post.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
+                        <Clock className="w-4 h-4" />
+                        <span className="font-medium">{post.readTime}</span>
+                      </div>
+                      <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
+                        <Tag className="w-4 h-4" />
+                        <span className="font-medium">{post.category}</span>
+                      </div>
+                    </div>
+
+                    <h3 className="text-3xl font-heading font-bold text-dark-slate">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-lg text-dark-slate/70 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <button
+                          key={tag}
+                          onClick={() => setSelectedTag(selectedTag === tag ? "" : tag)}
+                          className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full hover:bg-sea-green/20 transition-colors cursor-pointer"
+                        >
+                          {tag}
+                        </button>
+                      ))}
+                    </div>
+
+                    <Link
+                        href="/blog/eco-certification-business-belarus"
+                        className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+                      >
+                        <ArrowRight className="w-5 h-5" />
+                        Читать полную статью
+                      </Link>
+                  </div>
+                </div>
+              </GlassmorphicCard>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Blog Posts Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">Недавние статьи</h2>
-          </div>
+          {filteredPosts.length > 0 && (
+            <div className="mb-12">
+              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
+                {filteredPosts.some(post => post.featured) ? "Другие статьи" : "Статьи"}
+              </h2>
+            </div>
+          )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {blogPosts.slice(1).map((post, index) => (
+          {filteredPosts.length === 0 ? (
+            <GlassmorphicCard className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 bg-sea-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-8 h-8 text-sea-green/50" />
+                </div>
+                <h3 className="text-xl font-heading font-semibold text-dark-slate mb-2">
+                  Статьи не найдены
+                </h3>
+                <p className="text-dark-slate/70 mb-4">
+                  Попробуйте изменить критерии поиска или очистить фильтры
+                </p>
+                <button
+                  onClick={clearFilters}
+                  className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300"
+                >
+                  Очистить фильтры
+                </button>
+              </div>
+            </GlassmorphicCard>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {filteredPosts.filter(post => !post.featured).map((post, index) => (
               <GlassmorphicCard key={post.title} delay={index * 0.1}>
                 <article className="flex flex-col h-full space-y-6">
                   <div className="relative">
@@ -197,12 +340,17 @@ export default function Blog() {
 
                   <div className="flex flex-wrap gap-2">
                     {post.tags.slice(0, 3).map((tag) => (
-                      <span
+                      <button
                         key={tag}
-                        className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
+                        onClick={() => setSelectedTag(selectedTag === tag ? "" : tag)}
+                        className={`px-3 py-1 text-sm rounded-full transition-all duration-300 ${
+                          selectedTag === tag
+                            ? 'bg-sea-green text-white'
+                            : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
+                        }`}
                       >
                         {tag}
-                      </span>
+                      </button>
                     ))}
                   </div>
 
@@ -223,18 +371,21 @@ export default function Blog() {
                 </article>
               </GlassmorphicCard>
             ))}
-          </div>
+            </div>
+          )}
 
-          <div className="text-center mt-12">
+          {filteredPosts.length > 0 && (
+            <div className="text-center mt-12">
             <GlassmorphicCard className="max-w-md mx-auto">
-              <p className="text-dark-slate/70 mb-4">
-                Мы готовим для вас ещё больше полезных статей
-              </p>
-              <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
-                Статьи в процессе написания
-              </button>
-            </GlassmorphicCard>
-          </div>
+                <p className="text-dark-slate/70 mb-4">
+                  Мы готовим для вас ещё больше полезных статей
+                </p>
+                <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
+                  Статьи в процессе написания
+                </button>
+              </GlassmorphicCard>
+            </div>
+          )}
         </div>
       </section>
 
