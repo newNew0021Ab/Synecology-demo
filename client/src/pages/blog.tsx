@@ -6,8 +6,7 @@ import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useState, useMemo } from "react";
 
 export default function Blog() {
-  const [selectedCategory, setSelectedCategory] = useState("Все");
-  const [selectedTag, setSelectedTag] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const blogPosts = [
@@ -43,8 +42,6 @@ export default function Blog() {
     },
   ];
 
-  const categories = ["Все", "Сертификация", "Отходы", "Выбросы", "Сопровождение", "Документооборот", "Контроль"];
-
   // Собираем все уникальные теги
   const allTags = useMemo(() => {
     const tags = new Set<string>();
@@ -54,24 +51,30 @@ export default function Blog() {
     return Array.from(tags).sort();
   }, [blogPosts]);
 
-  // Фильтруем посты по категории, тегу и поисковому запросу
+  // Фильтруем посты по тегам и поисковому запросу
   const filteredPosts = useMemo(() => {
     return blogPosts.filter(post => {
-      const matchesCategory = selectedCategory === "Все" || post.category === selectedCategory;
-      const matchesTag = !selectedTag || post.tags.includes(selectedTag);
+      const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => post.tags.includes(tag));
       const matchesSearch = !searchTerm || 
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
       
-      return matchesCategory && matchesTag && matchesSearch;
+      return matchesTags && matchesSearch;
     });
-  }, [blogPosts, selectedCategory, selectedTag, searchTerm]);
+  }, [blogPosts, selectedTags, searchTerm]);
 
   const clearFilters = () => {
-    setSelectedCategory("Все");
-    setSelectedTag("");
+    setSelectedTags([]);
     setSearchTerm("");
+  };
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag)
+        : [...prev, tag]
+    );
   };
 
   return (
@@ -120,32 +123,15 @@ export default function Blog() {
             </div>
           </div>
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap gap-4 justify-center mb-6">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full font-semibold text-sm transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'bg-sea-green text-white'
-                    : 'glassmorphic glassmorphic-hover text-sea-green'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
           {/* Tag Filter */}
           <div className="mb-4">
             <div className="flex flex-wrap gap-2 justify-center">
               {allTags.map((tag) => (
                 <button
                   key={tag}
-                  onClick={() => setSelectedTag(selectedTag === tag ? "" : tag)}
+                  onClick={() => toggleTag(tag)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    selectedTag === tag
+                    selectedTags.includes(tag)
                       ? 'bg-sea-green/20 text-sea-green border-2 border-sea-green'
                       : 'bg-white/60 text-dark-slate/70 hover:bg-sea-green/10 hover:text-sea-green border border-dark-slate/20'
                   }`}
@@ -158,20 +144,15 @@ export default function Blog() {
           </div>
 
           {/* Active Filters and Clear Button */}
-          {(selectedCategory !== "Все" || selectedTag || searchTerm) && (
+          {(selectedTags.length > 0 || searchTerm) && (
             <div className="flex justify-center items-center gap-4 mb-4">
               <div className="flex items-center gap-2 text-sm text-dark-slate/70">
                 <span>Активные фильтры:</span>
-                {selectedCategory !== "Все" && (
-                  <span className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
-                    {selectedCategory}
+                {selectedTags.map(tag => (
+                  <span key={tag} className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
+                    {tag}
                   </span>
-                )}
-                {selectedTag && (
-                  <span className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
-                    {selectedTag}
-                  </span>
-                )}
+                ))}
                 {searchTerm && (
                   <span className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
                     "{searchTerm}"
@@ -248,8 +229,12 @@ export default function Blog() {
                       {post.tags.map((tag) => (
                         <button
                           key={tag}
-                          onClick={() => setSelectedTag(selectedTag === tag ? "" : tag)}
-                          className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full hover:bg-sea-green/20 transition-colors cursor-pointer"
+                          onClick={() => toggleTag(tag)}
+                          className={`px-3 py-1 text-sm rounded-full transition-colors cursor-pointer ${
+                            selectedTags.includes(tag)
+                              ? 'bg-sea-green text-white'
+                              : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
+                          }`}
                         >
                           {tag}
                         </button>
@@ -342,9 +327,9 @@ export default function Blog() {
                     {post.tags.slice(0, 3).map((tag) => (
                       <button
                         key={tag}
-                        onClick={() => setSelectedTag(selectedTag === tag ? "" : tag)}
+                        onClick={() => toggleTag(tag)}
                         className={`px-3 py-1 text-sm rounded-full transition-all duration-300 ${
-                          selectedTag === tag
+                          selectedTags.includes(tag)
                             ? 'bg-sea-green text-white'
                             : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
                         }`}
