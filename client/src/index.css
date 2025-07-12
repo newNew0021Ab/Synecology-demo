@@ -207,6 +207,22 @@
     border-color: rgba(46, 139, 87, 0.3);
   }
 
+  .bg-sea-green\/10 {
+    background-color: rgba(46, 139, 87, 0.1);
+  }
+
+  .bg-sea-green\/20 {
+    background-color: rgba(46, 139, 87, 0.2);
+  }
+
+  .bg-soft-blue\/20 {
+    background-color: rgba(168, 218, 220, 0.2);
+  }
+
+  .bg-sandy-beige\/50 {
+    background-color: rgba(228, 206, 176, 0.5);
+  }
+
   
 
   .hero-gradient {
