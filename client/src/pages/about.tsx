@@ -154,12 +154,7 @@ export default function About() {
                   className="rounded-xl shadow-lg w-full h-auto"
                 />
               </div>
-              <div className="glassmorphic absolute -bottom-6 -right-6 px-6 py-4 rounded-2xl">
-                <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5 text-sea-green" />
-                  <span className="text-sm font-semibold text-dark-slate">Награжденная команда</span>
-                </div>
-              </div>
+              
             </motion.div>
           </div>
         </div>
