@@ -1,7 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
-import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote } from "lucide-react";
+import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function TeamMember() {
   const { slug } = useParams();
   const [member, setMember] = useState<any>(null);
+  const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
 
   const teamMembers = {
     "sara-chen": {
@@ -396,12 +397,21 @@ export default function TeamMember() {
             </h2>
             
             {member.certificates && member.certificates.length > 3 ? (
-              <Carousel className="w-full max-w-7xl mx-auto">
+              <Carousel 
+                className="w-full max-w-7xl mx-auto"
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+              >
                 <CarouselContent className="-ml-4">
                   {member.certificates.map((certificate: any, index: number) => (
                     <CarouselItem key={certificate.title} className="pl-4 md:basis-1/2 lg:basis-1/3">
                       <GlassmorphicCard delay={index * 0.1}>
-                        <div className="aspect-[4/3] mb-4 overflow-hidden rounded-xl">
+                        <div 
+                          className="aspect-[4/3] mb-4 overflow-hidden rounded-xl cursor-pointer"
+                          onClick={() => setSelectedCertificate(certificate)}
+                        >
                           <img
                             src={certificate.image}
                             alt={certificate.title}
@@ -428,7 +438,10 @@ export default function TeamMember() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {member.certificates?.map((certificate: any, index: number) => (
                   <GlassmorphicCard key={certificate.title} delay={index * 0.1}>
-                    <div className="aspect-[4/3] mb-4 overflow-hidden rounded-xl">
+                    <div 
+                      className="aspect-[4/3] mb-4 overflow-hidden rounded-xl cursor-pointer"
+                      onClick={() => setSelectedCertificate(certificate)}
+                    >
                       <img
                         src={certificate.image}
                         alt={certificate.title}
@@ -572,6 +585,48 @@ export default function TeamMember() {
           </GlassmorphicCard>
         </div>
       </section>
+
+      {/* Certificate Modal */}
+      {selectedCertificate && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div className="relative max-w-4xl w-full">
+            <button
+              onClick={() => setSelectedCertificate(null)}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <div className="glassmorphic p-6 rounded-2xl">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                <div className="aspect-[4/3] overflow-hidden rounded-xl">
+                  <img
+                    src={selectedCertificate.image}
+                    alt={selectedCertificate.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
+                    {selectedCertificate.title}
+                  </h3>
+                  <p className="text-xl text-sea-green font-semibold mb-4">
+                    {selectedCertificate.issuer}
+                  </p>
+                  <p className="text-lg text-dark-slate/70 mb-6">
+                    Год получения: {selectedCertificate.year}
+                  </p>
+                  <button
+                    onClick={() => setSelectedCertificate(null)}
+                    className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-colors"
+                  >
+                    Закрыть
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
