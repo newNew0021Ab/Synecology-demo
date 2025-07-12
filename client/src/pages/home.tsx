@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import { PlayCircle, ArrowRight, Factory, Recycle, FileText, Droplets, Trash2, ClipboardList } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { LazyImage } from "@/components/LazyImage";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function Home() {
@@ -123,7 +122,7 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.8 }}
             >
               <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
-                <LazyImage
+                <img
                     src="https://images.unsplash.com/photo-1683402964714-a161848996d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Environmental documentation"
                     className="rounded-xl shadow-lg w-full h-auto max-h-96 md:max-h-none object-cover"

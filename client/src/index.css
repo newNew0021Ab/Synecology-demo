@@ -23,7 +23,7 @@
   --destructive-foreground: hsl(45, 36%, 98%);
   --ring: hsl(146, 55%, 32%);
   --radius: 0.5rem;
-
+  
   /* Custom colors for Synecology */
   --off-white: hsl(45, 36%, 96%);
   --dark-slate: hsl(182, 35%, 25%);
@@ -78,7 +78,7 @@
   .glassmorphic-hover {
     @apply transition-all duration-300 ease-out;
   }
-
+  
   .glassmorphic-hover:hover {
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 15px 35px rgba(46, 139, 87, 0.2);
@@ -223,13 +223,13 @@
     background-color: rgba(228, 206, 176, 0.5);
   }
 
-
+  
 
   .hero-gradient {
     background: linear-gradient(135deg, rgba(253, 251, 246, 0.98) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(168, 218, 220, 0.4) 100%);
   }
 
-
+  
 
   .text-high-contrast {
     color: hsl(182, 45%, 20%);
@@ -259,47 +259,47 @@
       font-size: 2.5rem;
       line-height: 1.2;
     }
-
+    
     .hero-description {
       font-size: 1.1rem;
       line-height: 1.6;
     }
-
+    
     .mobile-padding {
       padding-left: 1rem;
       padding-right: 1rem;
     }
-
+    
     .mobile-text-center {
       text-align: center;
     }
-
+    
     .mobile-flex-col {
       flex-direction: column;
     }
-
+    
     .mobile-full-width {
       width: 100%;
     }
-
+    
     .mobile-mb-4 {
       margin-bottom: 1rem;
     }
-
+    
     .mobile-gap-4 {
       gap: 1rem;
     }
   }
-
+  
   @media (max-width: 480px) {
     .hero-title {
       font-size: 2rem;
     }
-
+    
     .hero-description {
       font-size: 1rem;
     }
-
+    
     .glassmorphic {
       padding: 1rem;
     }
@@ -325,50 +325,3 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-  /* Анимации для загрузчика */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-    }
-    to {
-      opacity: 0;
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: -468px 0;
-    }
-    100% {
-      background-position: 468px 0;
-    }
-  }
-
-  .loading-shimmer {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 400% 100%;
-    animation: shimmer 1.2s ease-in-out infinite;
-  }
-
-  /* Плавные переходы для изображений */
-  img {
-    transition: opacity 0.3s ease-in-out;
-  }
-
-  img[loading] {
-    opacity: 0.5;
-  }
-
-  img:not([loading]) {
-    opacity: 1;
-  }
