@@ -1,7 +1,3 @@
-
-// In-memory storage implementation
-// This will be replaced with a proper database later
-
 interface User {
   id: string;
   username: string;
@@ -33,7 +29,7 @@ class InMemoryStorage {
   async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
     const userIndex = this.users.findIndex(user => user.id === id);
     if (userIndex === -1) return null;
-    
+
     this.users[userIndex] = { ...this.users[userIndex], ...updates };
     return this.users[userIndex];
   }
@@ -41,7 +37,7 @@ class InMemoryStorage {
   async deleteUser(id: string): Promise<boolean> {
     const userIndex = this.users.findIndex(user => user.id === id);
     if (userIndex === -1) return false;
-    
+
     this.users.splice(userIndex, 1);
     return true;
   }
