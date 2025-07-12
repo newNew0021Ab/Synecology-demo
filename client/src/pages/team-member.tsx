@@ -54,7 +54,27 @@ export default function TeamMember() {
         phone: "+375 29 123-45-67"
       },
       experience: "15+ лет",
-      education: "PhD в области экологии, Белорусский государственный университет"
+      education: "PhD в области экологии, Белорусский государственный университет",
+      certificates: [
+        {
+          title: "ISO 14001 Lead Auditor",
+          issuer: "International Register of Certificated Auditors",
+          year: "2019",
+          image: "https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        },
+        {
+          title: "Сертификат эколога-эксперта",
+          issuer: "Министерство природных ресурсов РБ",
+          year: "2018",
+          image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        },
+        {
+          title: "Green Building Certification",
+          issuer: "LEED Green Associate",
+          year: "2020",
+          image: "https://images.unsplash.com/photo-1616077168079-7e6f17846f44?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        }
+      ]
     },
     "michael-rodriguez": {
       name: "Михаил Родригес", 
@@ -96,7 +116,21 @@ export default function TeamMember() {
         phone: "+375 29 234-56-78"
       },
       experience: "12+ лет",
-      education: "Магистр инженерных наук, БНТУ"
+      education: "Магистр инженерных наук, БНТУ",
+      certificates: [
+        {
+          title: "Инженер-эколог",
+          issuer: "Белорусская инженерная ассоциация",
+          year: "2017",
+          image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        },
+        {
+          title: "Эксперт по ПДВ",
+          issuer: "Минприроды РБ",
+          year: "2019",
+          image: "https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        }
+      ]
     },
     "emily-johnson": {
       name: "Эмили Джонсон",
@@ -138,7 +172,21 @@ export default function TeamMember() {
         phone: "+375 29 345-67-89"
       },
       experience: "10+ лет",
-      education: "PhD в области морской биологии, МГУ"
+      education: "PhD в области морской биологии, МГУ",
+      certificates: [
+        {
+          title: "Marine Biology Expert",
+          issuer: "International Marine Biology Association",
+          year: "2018",
+          image: "https://images.unsplash.com/photo-1616077168079-7e6f17846f44?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        },
+        {
+          title: "ОВОС Специалист",
+          issuer: "Минприроды РБ",
+          year: "2020",
+          image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        }
+      ]
     },
     "david-park": {
       name: "Дэвид Парк",
@@ -180,7 +228,21 @@ export default function TeamMember() {
         phone: "+375 29 456-78-90"
       },
       experience: "14+ лет",
-      education: "Магистр гидрогеологии, БГУ"
+      education: "Магистр гидрогеологии, БГУ",
+      certificates: [
+        {
+          title: "Гидрогеолог-эксперт",
+          issuer: "Белорусское геологическое общество",
+          year: "2016",
+          image: "https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        },
+        {
+          title: "Water Treatment Specialist",
+          issuer: "European Water Association",
+          year: "2021",
+          image: "https://images.unsplash.com/photo-1616077168079-7e6f17846f44?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        }
+      ]
     }
   };
 
@@ -235,9 +297,9 @@ export default function TeamMember() {
                   alt={member.name}
                   className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
                 />
-                <div className="glassmorphic absolute -bottom-6 -right-6 px-6 py-4 rounded-2xl">
+                <div className="glassmorphic absolute top-4 right-4 px-4 py-2 rounded-full">
                   <div className="flex items-center gap-2">
-                    <Award className="w-5 h-5 text-sea-green" />
+                    <Award className="w-4 h-4 text-sea-green" />
                     <span className="text-sm font-semibold text-dark-slate">{member.experience}</span>
                   </div>
                 </div>
@@ -318,7 +380,7 @@ export default function TeamMember() {
         </div>
       </section>
 
-      {/* Approach Section */}
+      {/* Certificates Gallery Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -328,14 +390,35 @@ export default function TeamMember() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
-              Мой подход <span className="text-sea-green">к работе</span>
+              Мои <span className="text-sea-green">сертификаты</span>
             </h2>
             
-            <GlassmorphicCard>
-              <p className="text-lg text-dark-slate/80 leading-relaxed">
-                {member.approach}
-              </p>
-            </GlassmorphicCard>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {member.certificates?.map((certificate: any, index: number) => (
+                <GlassmorphicCard key={certificate.title} delay={index * 0.1}>
+                  <div className="aspect-[4/3] mb-4 overflow-hidden rounded-xl">
+                    <img
+                      src={certificate.image}
+                      alt={certificate.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-dark-slate mb-2">
+                    {certificate.title}
+                  </h3>
+                  <p className="text-sea-green font-medium mb-2">
+                    {certificate.issuer}
+                  </p>
+                  <p className="text-sm text-dark-slate/70">
+                    {certificate.year}
+                  </p>
+                </GlassmorphicCard>
+              )) || (
+                <div className="col-span-full text-center text-dark-slate/70">
+                  <p>Галерея сертификатов скоро будет дополнена</p>
+                </div>
+              )}
+            </div>
           </motion.div>
         </div>
       </section>
