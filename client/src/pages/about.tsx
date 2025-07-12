@@ -299,35 +299,6 @@ export default function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Готовы начать сотрудничество?
-            </motion.h2>
-            <motion.p
-              className="text-lg text-dark-slate/70 mb-8 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Свяжитесь с нами для обсуждения вашего проекта
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Link href="/contact" className="btn-primary">
-                Связаться с нами
-              </Link>
-              <Link href="/services" className="btn-secondary">
-                Наши услуги
-              </Link>
-            </motion.div>nitial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
               Готовы работать <span className="text-sea-green">вместе</span>?
             </motion.h2>
             <motion.p
@@ -346,17 +317,11 @@ export default function About() {
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Link
-                href="/contact"
-                className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
-              >
+              <Link href="/contact" className="btn-primary">
                 <ArrowRight className="w-5 h-5" />
                 Получить консультацию
               </Link>
-              <Link
-                href="/case-studies"
-                className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2"
-              >
+              <Link href="/case-studies" className="btn-secondary">
                 Посмотреть наши работы
               </Link>
             </motion.div>
