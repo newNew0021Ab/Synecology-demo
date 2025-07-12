@@ -305,7 +305,14 @@ export default function TeamMember() {
                   alt={member.name}
                   className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
                 />
-                
+                <div className="glassmorphic absolute -top-4 -right-4 px-4 py-2 rounded-full">
+                  <div className="flex items-center gap-2">
+                    <Award className="w-4 h-4 text-sea-green" />
+                    <span className="text-sm font-semibold text-dark-slate">
+                      {member.experience}
+                    </span>
+                  </div>
+                </div>
               </div>
             </motion.div>
 

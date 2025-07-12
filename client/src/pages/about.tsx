@@ -209,17 +209,6 @@ export default function About() {
                           className="w-24 h-24 rounded-full object-cover hover:scale-105 transition-transform cursor-pointer"
                         />
                       </Link>
-                      <div className="glassmorphic absolute -top-2 -right-2 px-3 py-1 rounded-full">
-                        <div className="flex items-center gap-1">
-                          <Award className="w-3 h-3 text-sea-green" />
-                          <span className="text-xs font-semibold text-dark-slate">
-                            {member.name === "Др. Сара Чен" ? "15+ лет" :
-                             member.name === "Михаил Родригес" ? "12+ лет" :
-                             member.name === "Др. Эмили Джонсон" ? "10+ лет" :
-                             "14+ лет"}
-                          </span>
-                        </div>
-                      </div>
                     </div>
                     <div className="flex-1">
                       <Link href={`/team/${memberSlug}`}>
