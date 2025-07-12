@@ -74,6 +74,12 @@ export default function TeamMember() {
           issuer: "LEED Green Associate",
           year: "2020",
           image: "https://images.unsplash.com/photo-1616077168079-7e6f17846f44?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
+        },
+        {
+          title: "Сертификат специалиста по управлению качеством окружающей среды",
+          issuer: "Европейская ассоциация экологов",
+          year: "2021",
+          image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400"
         }
       ]
     },
