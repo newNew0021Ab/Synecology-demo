@@ -19,7 +19,7 @@ export default function CaseStudies() {
         "Гарантированное прохождение всех проверок с первого раза",
         "100% соответствие природоохранному законодательству",
       ],
-      image: "https://images.unsplash.com/photo-1554475901-4538ddfbccc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      image: "https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
       tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству"],
       timeline: "3 месяца",
       completion: "15.12.2024",

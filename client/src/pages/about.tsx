@@ -149,7 +149,7 @@ export default function About() {
             >
               <div className="glassmorphic rounded-3xl p-8 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
+                  src="https://images.unsplash.com/photo-1623303647440-967d26b95b47?q=80&w=1155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600"
                   alt="Environmental consulting team"
                   className="rounded-xl shadow-lg w-full h-auto"
                 />
