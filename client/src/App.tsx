@@ -17,6 +17,7 @@ import Contact from "@/pages/contact";
 import FAQ from "@/pages/faq";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TeamMember from "@/pages/team-member";
 
 
 function Router() {
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/faq" component={FAQ} />
+      <Route path="/team/:slug" component={TeamMember} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -39,12 +41,12 @@ function Router() {
 
 function App() {
   useScrollToTop();
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-off-white text-dark-slate overflow-x-hidden custom-cursor">
-          
+
           <Header />
           <main>
             <Router />

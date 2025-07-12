@@ -192,58 +192,82 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {teamMembers.map((member, index) => (
-              <GlassmorphicCard key={member.name} delay={index * 0.1}>
-                <div className="flex flex-col sm:flex-row gap-6 h-full">
-                  <div className="flex-shrink-0">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-24 h-24 rounded-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-heading font-bold text-dark-slate mb-2">
-                      {member.name}
-                    </h3>
-                    <p className="text-sea-green font-semibold mb-3">{member.role}</p>
-                    <p className="text-dark-slate/70 mb-4 text-sm leading-relaxed">
-                      {member.bio}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {member.expertise.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+            {teamMembers.map((member, index) => {
+              const memberSlug = member.name === "Др. Сара Чен" ? "sara-chen" :
+                                member.name === "Михаил Родригес" ? "michael-rodriguez" :
+                                member.name === "Др. Эмили Джонсон" ? "emily-johnson" :
+                                "david-park";
+              
+              return (
+                <GlassmorphicCard key={member.name} delay={index * 0.1}>
+                  <div className="flex flex-col sm:flex-row gap-6 h-full">
+                    <div className="flex-shrink-0">
+                      <Link href={`/team/${memberSlug}`}>
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-24 h-24 rounded-full object-cover hover:scale-105 transition-transform cursor-pointer"
+                        />
+                      </Link>
+                    </div>
+                    <div className="flex-1">
+                      <Link href={`/team/${memberSlug}`}>
+                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-2 hover:text-sea-green transition-colors cursor-pointer">
+                          {member.name}
+                        </h3>
+                      </Link>
+                      <p className="text-sea-green font-semibold mb-3">{member.role}</p>
+                      <p className="text-dark-slate/70 mb-4 text-sm leading-relaxed">
+                        {member.bio}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {member.expertise.slice(0, 3).map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {member.expertise.length > 3 && (
+                          <span className="px-2 py-1 bg-dark-slate/10 text-dark-slate/60 text-xs rounded-full">
+                            +{member.expertise.length - 3} еще
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <div className="flex gap-3">
+                          <a
+                            href={member.social.linkedin}
+                            className="text-dark-slate/60 hover:text-sea-green transition-colors"
+                          >
+                            <Linkedin className="w-4 h-4" />
+                          </a>
+                          <a
+                            href={member.social.twitter}
+                            className="text-dark-slate/60 hover:text-sea-green transition-colors"
+                          >
+                            <Twitter className="w-4 h-4" />
+                          </a>
+                          <a
+                            href={`mailto:${member.social.email}`}
+                            className="text-dark-slate/60 hover:text-sea-green transition-colors"
+                          >
+                            <Mail className="w-4 h-4" />
+                          </a>
+                        </div>
+                        <Link
+                          href={`/team/${memberSlug}`}
+                          className="text-sea-green font-medium text-sm hover:text-sea-green/80 transition-colors inline-flex items-center gap-1"
                         >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-3">
-                      <a
-                        href={member.social.linkedin}
-                        className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                      >
-                        <Linkedin className="w-4 h-4" />
-                      </a>
-                      <a
-                        href={member.social.twitter}
-                        className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                      >
-                        <Twitter className="w-4 h-4" />
-                      </a>
-                      <a
-                        href={`mailto:${member.social.email}`}
-                        className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                      >
-                        <Mail className="w-4 h-4" />
-                      </a>
+                          Подробнее <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </GlassmorphicCard>
-            ))}
+                </GlassmorphicCard>
+              );
+            })}
           </div>
         </div>
       </section>
