@@ -4,6 +4,7 @@ import { Link, useParams } from "wouter";
 import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 
 export default function TeamMember() {
@@ -393,32 +394,63 @@ export default function TeamMember() {
               Мои <span className="text-sea-green">сертификаты</span>
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {member.certificates?.map((certificate: any, index: number) => (
-                <GlassmorphicCard key={certificate.title} delay={index * 0.1}>
-                  <div className="aspect-[4/3] mb-4 overflow-hidden rounded-xl">
-                    <img
-                      src={certificate.image}
-                      alt={certificate.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+            {member.certificates && member.certificates.length > 3 ? (
+              <Carousel className="w-full max-w-7xl mx-auto">
+                <CarouselContent className="-ml-4">
+                  {member.certificates.map((certificate: any, index: number) => (
+                    <CarouselItem key={certificate.title} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                      <GlassmorphicCard delay={index * 0.1}>
+                        <div className="aspect-[4/3] mb-4 overflow-hidden rounded-xl">
+                          <img
+                            src={certificate.image}
+                            alt={certificate.title}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <h3 className="text-lg font-semibold text-dark-slate mb-2">
+                          {certificate.title}
+                        </h3>
+                        <p className="text-sea-green font-medium mb-2">
+                          {certificate.issuer}
+                        </p>
+                        <p className="text-sm text-dark-slate/70">
+                          {certificate.year}
+                        </p>
+                      </GlassmorphicCard>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="left-0" />
+                <CarouselNext className="right-0" />
+              </Carousel>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {member.certificates?.map((certificate: any, index: number) => (
+                  <GlassmorphicCard key={certificate.title} delay={index * 0.1}>
+                    <div className="aspect-[4/3] mb-4 overflow-hidden rounded-xl">
+                      <img
+                        src={certificate.image}
+                        alt={certificate.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <h3 className="text-lg font-semibold text-dark-slate mb-2">
+                      {certificate.title}
+                    </h3>
+                    <p className="text-sea-green font-medium mb-2">
+                      {certificate.issuer}
+                    </p>
+                    <p className="text-sm text-dark-slate/70">
+                      {certificate.year}
+                    </p>
+                  </GlassmorphicCard>
+                )) || (
+                  <div className="col-span-full text-center text-dark-slate/70">
+                    <p>Галерея сертификатов скоро будет дополнена</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-dark-slate mb-2">
-                    {certificate.title}
-                  </h3>
-                  <p className="text-sea-green font-medium mb-2">
-                    {certificate.issuer}
-                  </p>
-                  <p className="text-sm text-dark-slate/70">
-                    {certificate.year}
-                  </p>
-                </GlassmorphicCard>
-              )) || (
-                <div className="col-span-full text-center text-dark-slate/70">
-                  <p>Галерея сертификатов скоро будет дополнена</p>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
