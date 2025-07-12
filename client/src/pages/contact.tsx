@@ -19,7 +19,7 @@ const contactFormSchema = z.object({
   email: z.string().email("Введите корректный email адрес"),
   company: z.string().optional(),
   projectType: z.string().min(1, "Выберите тип проекта"),
-  message: z.string().min(10, "Сообщение должно содержать минимум 10 символов"),
+  message: z.string().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -213,7 +213,7 @@ export default function Contact() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-dark-slate font-medium">Сообщение</FormLabel>
+                        <FormLabel className="text-dark-slate font-medium">Сообщение (опционально)</FormLabel>
                         <FormControl>
                           <Textarea
                             {...field}
