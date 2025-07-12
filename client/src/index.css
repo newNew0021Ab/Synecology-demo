@@ -76,12 +76,46 @@
   }
 
   .glassmorphic-hover {
-    @apply transition-all duration-300 hover:bg-white/70 hover:-translate-y-2;
+    @apply transition-all duration-500 ease-out;
   }
   
   .glassmorphic-hover:hover {
-    box-shadow: 0 25px 50px rgba(46, 139, 87, 0.25);
-    border-color: rgba(46, 139, 87, 0.5);
+    @apply bg-white/80;
+    box-shadow: 0 15px 35px rgba(46, 139, 87, 0.2);
+    border-color: rgba(46, 139, 87, 0.3);
+    transform: scale(1.02);
+  }
+
+  /* Unified Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-white bg-sea-green transition-all duration-500 ease-out;
+    box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+  }
+
+  .btn-primary:hover {
+    @apply bg-sea-green/90;
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.4);
+    transform: scale(1.05);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sea-green bg-white/80 backdrop-blur-sm border border-sea-green/30 transition-all duration-500 ease-out;
+    box-shadow: 0 4px 15px rgba(46, 139, 87, 0.1);
+  }
+
+  .btn-secondary:hover {
+    @apply bg-sea-green text-white border-sea-green;
+    box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
+    transform: scale(1.05);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-sea-green transition-all duration-500 ease-out;
+  }
+
+  .btn-ghost:hover {
+    @apply bg-sea-green/10;
+    transform: scale(1.05);
   }
 
   .card-grid {
@@ -173,13 +207,13 @@
   }
 
   .service-card-enhanced {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-500 ease-out;
     will-change: transform, box-shadow;
   }
 
   .service-card-enhanced:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(46, 139, 87, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(46, 139, 87, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
   /* Mobile optimizations */

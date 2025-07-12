@@ -204,13 +204,13 @@ export default function Services() {
                       <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                         <Link
                           href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
-                          className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 text-center justify-center"
+                          className="btn-secondary"
                         >
                           Подробнее
                         </Link>
                         <Link
                           href="/contact"
-                          className="glassmorphic glassmorphic-hover px-6 py-3 rounded-full text-sea-green font-semibold inline-flex items-center gap-2 text-center justify-center"
+                          className="btn-primary"
                         >
                           <ArrowRight className="w-4 h-4" />
                           Заказать

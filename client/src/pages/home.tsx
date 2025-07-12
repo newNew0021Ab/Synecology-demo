@@ -188,10 +188,10 @@ export default function Home() {
 
                       <Link
                         href="/services"
-                        className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80"
+                        className="btn-ghost"
                       >
                         Подробнее 
-                        <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRight className="w-5 h-5" />
                       </Link>
                     </div>
 

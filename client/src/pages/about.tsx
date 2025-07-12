@@ -299,6 +299,35 @@ export default function About() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
+              Готовы начать сотрудничество?
+            </motion.h2>
+            <motion.p
+              className="text-lg text-dark-slate/70 mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              Свяжитесь с нами для обсуждения вашего проекта
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <Link href="/contact" className="btn-primary">
+                Связаться с нами
+              </Link>
+              <Link href="/services" className="btn-secondary">
+                Наши услуги
+              </Link>
+            </motion.div>nitial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
               Готовы работать <span className="text-sea-green">вместе</span>?
             </motion.h2>
             <motion.p
