@@ -4,6 +4,10 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
+import { useGlobalLoading } from "@/hooks/useGlobalLoading";
+import { useImageLoading } from "@/hooks/useImageLoading";
+import { useRouteLoading } from "@/hooks/useRouteLoading";
+import { LoadingOverlay } from "@/components/LoadingOverlay";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Services from "@/pages/services";
@@ -39,12 +43,15 @@ function Router() {
 
 function App() {
   useScrollToTop();
+  useRouteLoading();
+  useImageLoading();
+  const { isLoading } = useGlobalLoading();
   
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-off-white text-dark-slate overflow-x-hidden custom-cursor">
-          
+          <LoadingOverlay isVisible={isLoading} />
           <Header />
           <main>
             <Router />
