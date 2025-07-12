@@ -14,6 +14,7 @@ import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
+import FAQ from "@/pages/faq";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
+      <Route path="/faq" component={FAQ} />
       <Route component={NotFound} />
     </Switch>
   );

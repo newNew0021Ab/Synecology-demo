@@ -1,39 +1,50 @@
-import { users, type User, type InsertUser } from "@shared/schema";
 
-// modify the interface with any CRUD methods
-// you might need
+// In-memory storage implementation
+// This will be replaced with a proper database later
 
-export interface IStorage {
-  getUser(id: number): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+interface User {
+  id: string;
+  username: string;
+  password: string;
+  createdAt: Date;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  currentId: number;
+class InMemoryStorage {
+  private users: User[] = [];
 
-  constructor() {
-    this.users = new Map();
-    this.currentId = 1;
+  async insertUser(user: Omit<User, 'id' | 'createdAt'>): Promise<User> {
+    const newUser: User = {
+      ...user,
+      id: Math.random().toString(36).substr(2, 9),
+      createdAt: new Date(),
+    };
+    this.users.push(newUser);
+    return newUser;
   }
 
-  async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+  async getUserByUsername(username: string): Promise<User | null> {
+    return this.users.find(user => user.username === username) || null;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async getUserById(id: string): Promise<User | null> {
+    return this.users.find(user => user.id === id) || null;
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
+    const userIndex = this.users.findIndex(user => user.id === id);
+    if (userIndex === -1) return null;
+    
+    this.users[userIndex] = { ...this.users[userIndex], ...updates };
+    return this.users[userIndex];
+  }
+
+  async deleteUser(id: string): Promise<boolean> {
+    const userIndex = this.users.findIndex(user => user.id === id);
+    if (userIndex === -1) return false;
+    
+    this.users.splice(userIndex, 1);
+    return true;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new InMemoryStorage();
