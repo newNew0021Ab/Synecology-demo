@@ -64,7 +64,17 @@ export default {
         // Synecology custom colors
         "off-white": "var(--off-white)",
         "dark-slate": "var(--dark-slate)",
-        "sea-green": "var(--sea-green)",
+        "sea-green": {
+          DEFAULT: "var(--sea-green)",
+          50: "rgba(46, 139, 87, 0.05)",
+          100: "rgba(46, 139, 87, 0.1)",
+          200: "rgba(46, 139, 87, 0.2)",
+          300: "rgba(46, 139, 87, 0.3)",
+          400: "rgba(46, 139, 87, 0.4)",
+          500: "var(--sea-green)",
+          600: "rgba(46, 139, 87, 0.8)",
+          700: "rgba(46, 139, 87, 0.9)",
+        },
         "soft-blue": "var(--soft-blue)",
         "sandy-beige": "var(--sandy-beige)",
       },
