@@ -130,6 +130,10 @@ export default function CaseStudies() {
                     </div>
 
                     <div className="space-y-5 flex-grow">
+                      <h3 className="text-2xl font-heading font-bold text-dark-slate leading-tight">
+                        {caseStudy.title}
+                      </h3>
+
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2 text-sea-green">
                           <Calendar className="w-4 h-4" />
@@ -139,10 +143,6 @@ export default function CaseStudies() {
                           {caseStudy.timeline}
                         </div>
                       </div>
-
-                      <h3 className="text-2xl font-heading font-bold text-dark-slate leading-tight">
-                        {caseStudy.title}
-                      </h3>
 
                       <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description}</p>
 
