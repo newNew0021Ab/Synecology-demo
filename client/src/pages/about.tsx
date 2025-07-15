@@ -109,7 +109,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
-                Основанная в 2015 году, Synecology представляет собой глубокую экспертизу и руку помощи. Для нас каждый проект — это в первую очередь результат для клиента. За это время мы научились не просто помогать получить документы, а выстроить надежную систему, которая экономит деньги и защищает от рисков.
+                Synecology — это команда экспертов с многолетним опытом в области экологического консалтинга. Мы специализируемся на комплексном подходе к природоохранной деятельности предприятий. Для нас каждый проект — это в первую очередь конкретный результат для клиента. За годы работы мы научились не просто помогать получить документы, а выстраивать надежные системы, которые экономят деньги и защищают от рисков.
               </motion.p>
               <motion.div
                 className="grid grid-cols-3 gap-8 mb-8"
@@ -154,7 +154,7 @@ export default function About() {
                   className="rounded-xl shadow-lg w-full h-auto"
                 />
               </div>
-              
+
             </motion.div>
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function About() {
                                 member.name === "Михаил Родригес" ? "michael-rodriguez" :
                                 member.name === "Др. Эмили Джонсон" ? "emily-johnson" :
                                 "david-park";
-              
+
               return (
                 <GlassmorphicCard key={member.name} delay={index * 0.1}>
                   <div className="flex flex-col sm:flex-row gap-6 h-full">
