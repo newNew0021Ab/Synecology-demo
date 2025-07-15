@@ -80,7 +80,6 @@ export default function ServiceDetail() {
         "Расчеты рассеивания с помощью специализированного ПО",
         "Разработка плана мероприятий при НМУ",
         "Оформление проекта НДВ согласно требованиям законодательства",
-        "Сопровождение санитарно-гигиенической экспертизы в ЦГиЭ",
         "Получение Разрешения на выбросы в территориальном органе Минприроды"
       ],
       process: [
@@ -727,7 +726,7 @@ export default function ServiceDetail() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-6" style={{gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))`}}>
             {service.features.map((feature: string, index: number) => (
               <GlassmorphicCard key={feature} delay={index * 0.1}>
                 <div className="flex items-center gap-3">
