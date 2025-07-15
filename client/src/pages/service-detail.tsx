@@ -726,7 +726,7 @@ export default function ServiceDetail() {
             </h2>
           </div>
 
-          <div className="grid gap-6" style={{gridTemplateColumns: `repeat(auto-fit, minmax(280px, 1fr))`}}>
+          <div className="grid gap-6" style={{gridTemplateColumns: `repeat(auto-fit, minmax(300px, 1fr))`}}>
             {service.features.map((feature: string, index: number) => (
               <GlassmorphicCard key={feature} delay={index * 0.1}>
                 <div className="flex items-center gap-3">
