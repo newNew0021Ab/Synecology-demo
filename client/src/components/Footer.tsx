@@ -88,7 +88,7 @@ export default function Footer() {
             <div className="text-white/70 space-y-2">
               <p>ООО «Синэкология»</p>
               <p>УНП 193885234</p>
-              <p>220117 г. Минск, пр-т. Газеты звезда д.16, пом. 53, офис 5В</p>
+              <p>г. Минск, пр-т. Газеты звезда д.16, пом. 53, офис 5В, 220117 </p>
               <a href="tel:+375296024280" className="block hover:text-sea-green transition-colors">
                 +375 (29) 602-42-80
               </a>
