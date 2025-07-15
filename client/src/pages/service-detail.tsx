@@ -204,11 +204,6 @@ export default function ServiceDetail() {
           step: 3,
           title: "Разработка и оформление",
           description: "Заполнение и оформление паспорта ГОУ"
-        },
-        {
-          step: 4,
-          title: "Регистрация и передача",
-          description: "Регистрация в инспекции Минприроды и передача готового документа"
         }
       ],
       benefits: [
@@ -516,6 +511,7 @@ export default function ServiceDetail() {
       image: "https://images.unsplash.com/photo-1737502483541-92e91801cfaf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=600",
       icon: "FileText",
       tags: ["Инструктажи", "ПЭК", "Документация", "Обучение", "ООС"],
+```python
       seoTitle: "Разработка документации по экологическим инструктажам - Беларусь",
       seoDescription: "Профессиональная разработка документации для проведения экологических инструктажей на предприятии в Беларуси.",
       seoKeywords: ["экологические инструктажи", "ПЭК", "документация ООС", "Беларусь", "Минприроды"]
