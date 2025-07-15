@@ -141,7 +141,7 @@ export default function ServiceDetail() {
         {
           step: 2,
           title: "Разработка проекта паспорта",
-          description: "Проведение расчетов и заполнение всех разделов паспорта"
+          description: "Заполнение всех разделов паспорта"
         },
         {
           step: 3,
