@@ -86,7 +86,9 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="text-white/70 space-y-2">
-              <p>г. Минск, ул. Якубова 66, корп.1, кв. 362.</p>
+              <p>ООО «Синэкология»</p>
+              <p>УНП 193885234</p>
+              <p>220117 г. Минск, пр-т. Газеты звезда д.16, пом. 53, офис 5В</p>
               <a href="tel:+375296024280" className="block hover:text-sea-green transition-colors">
                 +375 (29) 602-42-80
               </a>

@@ -73,8 +73,15 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "description": "Экологическое консультирование и природоохранные решения",
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+7-495-XXX-XXXX",
+            "telephone": "+375 (29) 602-42-80",
             "contactType": "Клиентская поддержка"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "пр-т. Газеты звезда д.16, пом. 53, офис 5В",
+            "addressLocality": "Минск",
+            "postalCode": "220117",
+            "addressCountry": "BY"
           },
           "sameAs": [
             "https://vk.com/synecology",

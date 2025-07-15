@@ -68,7 +68,7 @@ export default function Contact() {
     {
       icon: MapPin,
       title: "Адрес",
-      details: "г. Минск, ул. Якубова 66, корп.1, кв. 362",
+      details: "220117 г. Минск, пр-т. Газеты звезда д.16, пом. 53, офис 5В",
     },
     {
       icon: Phone,
