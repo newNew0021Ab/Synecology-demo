@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, CheckCircle, Clock, DollarSign, FileText, Share2, ArrowRight } from "lucide-react";
@@ -85,18 +84,18 @@ export default function ServiceDetail() {
       process: [
         {
           step: 1,
-          title: "Сбор исходных данных",
-          description: "Анализ акта инвентаризации, получение справок о фоновых концентрациях"
+          title: "Разработка проекта НДВ",
+          description: "Формирование проекта нормативов на основе готового акта инвентаризации"
         },
         {
           step: 2,
-          title: "Разработка и расчеты",
-          description: "Расчеты рассеивания, формирование плана-графика контроля и мероприятий при НМУ"
+          title: "Расчеты рассеивания",
+          description: "Моделирование распространения выбросов и разработка плана мероприятий при НМУ"
         },
         {
           step: 3,
           title: "Экспертиза и согласование",
-          description: "Сопровождение прохождения санитарно-гигиенической экспертизы в ЦГиЭ"
+          description: "Сопровождение санитарно-гигиенической экспертизы проекта в ЦГиЭ"
         },
         {
           step: 4,
