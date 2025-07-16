@@ -183,14 +183,14 @@ export default function Services() {
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <Link
                     href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
-                    className="service-card-clickable block group"
+                    className="service-card-clickable block"
                   >
-                    <GlassmorphicCard className="group-hover:scale-[1.02] transition-all duration-300 group-hover:shadow-lg">
+                    <GlassmorphicCard>
                       <div className="flex flex-col h-full">
                         <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-6">
                           <service.icon className="w-8 h-8 text-sea-green" />
                         </div>
-                        <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4 group-hover:text-sea-green transition-colors duration-300">
+                        <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
                           {service.title}
                         </h2>
                         <p className="text-lg text-dark-slate/70 mb-6">{service.description}</p>
@@ -223,13 +223,13 @@ export default function Services() {
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
                   <Link
                     href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
-                    className="service-image-clickable block group"
+                    className="service-image-clickable block"
                   >
-                    <div className="glassmorphic rounded-3xl p-8 transform group-hover:scale-105 transition-transform duration-500">
+                    <div className="glassmorphic rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500">
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="rounded-xl shadow-lg w-full h-auto group-hover:scale-105 transition-transform duration-300"
+                        className="rounded-xl shadow-lg w-full h-auto"
                       />
                     </div>
                   </Link>

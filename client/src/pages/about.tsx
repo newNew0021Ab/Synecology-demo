@@ -109,7 +109,7 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
-                Мы превращаем экологические требования из головной боли в конкурентное преимущество. Пока другие боятся проверок и штрафов, наши клиенты используют грамотно выстроенную экологическую политику как инструмент для экономии и роста. Не просто помогаем получить справки — строим защитные системы, которые работают на опережение и приносят реальную пользу вашему бизнесу.
+                Synecology — это команда экспертов с многолетним опытом в области экологического консалтинга. Мы специализируемся на комплексном подходе к природоохранной деятельности предприятий. Для нас каждый проект — это в первую очередь конкретный результат для клиента. За годы работы мы научились не просто помогать получить документы, а выстраивать надежные системы, которые экономят деньги и защищают от рисков.
               </motion.p>
               <motion.div
                 className="grid grid-cols-3 gap-8 mb-8"
@@ -194,20 +194,23 @@ export default function About() {
                                 "david-park";
 
               return (
-                <Link href={`/team/${memberSlug}`} key={member.name} className="group">
-                  <GlassmorphicCard delay={index * 0.1} className="cursor-pointer group-hover:scale-105 transition-all duration-300 group-hover:shadow-lg">
-                    <div className="flex flex-col sm:flex-row gap-6 h-full">
-                      <div className="flex-shrink-0 relative">
+                <GlassmorphicCard key={member.name} delay={index * 0.1}>
+                  <div className="flex flex-col sm:flex-row gap-6 h-full">
+                    <div className="flex-shrink-0 relative">
+                      <Link href={`/team/${memberSlug}`}>
                         <img
                           src={member.image}
                           alt={member.name}
-                          className="w-24 h-24 rounded-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          className="w-24 h-24 rounded-full object-cover hover:scale-105 transition-transform cursor-pointer"
                         />
-                      </div>
+                      </Link>
+                    </div>
                     <div className="flex-1">
-                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-2 group-hover:text-sea-green transition-colors duration-300">
+                      <Link href={`/team/${memberSlug}`}>
+                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-2 hover:text-sea-green transition-colors cursor-pointer">
                           {member.name}
                         </h3>
+                      </Link>
                       <p className="text-sea-green font-semibold mb-3">{member.role}</p>
                       <p className="text-dark-slate/70 mb-4 text-sm leading-relaxed">
                         {member.bio}
@@ -216,13 +219,13 @@ export default function About() {
                         {member.expertise.slice(0, 3).map((skill) => (
                           <span
                             key={skill}
-                            className="px-3 py-1 bg-sea-green/15 text-sea-green text-xs rounded-full font-medium"
+                            className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
                           >
                             {skill}
                           </span>
                         ))}
                         {member.expertise.length > 3 && (
-                          <span className="px-3 py-1 bg-dark-slate/15 text-dark-slate text-xs rounded-full font-medium">
+                          <span className="px-2 py-1 bg-dark-slate/10 text-dark-slate/60 text-xs rounded-full">
                             +{member.expertise.length - 3} еще
                           </span>
                         )}
@@ -232,33 +235,32 @@ export default function About() {
                           <a
                             href={member.social.linkedin}
                             className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                            onClick={(e) => e.stopPropagation()}
                           >
                             <Linkedin className="w-4 h-4" />
                           </a>
                           <a
                             href={member.social.twitter}
                             className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                            onClick={(e) => e.stopPropagation()}
                           >
                             <Twitter className="w-4 h-4" />
                           </a>
                           <a
                             href={`mailto:${member.social.email}`}
                             className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                            onClick={(e) => e.stopPropagation()}
                           >
                             <Mail className="w-4 h-4" />
                           </a>
                         </div>
-                        <div className="text-sea-green font-medium text-sm group-hover:text-sea-green/80 transition-colors inline-flex items-center gap-1">
+                        <Link
+                          href={`/team/${memberSlug}`}
+                          className="text-sea-green font-medium text-sm hover:text-sea-green/80 transition-colors inline-flex items-center gap-1"
+                        >
                           Подробнее <ArrowRight className="w-3 h-3" />
-                        </div>
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  </GlassmorphicCard>
-                </Link>
+                </GlassmorphicCard>
               );
             })}
           </div>

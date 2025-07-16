@@ -15,9 +15,10 @@ import BlogPost from "@/pages/blog-post";
 import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import FAQ from "@/pages/faq";
-import TeamMember from "@/pages/team-member";
+import Team from "@/pages/team";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TeamMember from "@/pages/team-member";
 
 
 function Router() {
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/faq" component={FAQ} />
+      <Route path="/team" component={Team} />
       <Route path="/team/:slug" component={TeamMember} />
       <Route component={NotFound} />
     </Switch>
