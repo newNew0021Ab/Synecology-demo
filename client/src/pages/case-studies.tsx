@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function CaseStudies() {
   const [showAdditionalCases, setShowAdditionalCases] = useState(false);
-  
+
   const mainCaseStudies = [
     {
       title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
@@ -111,11 +111,11 @@ export default function CaseStudies() {
                           </h3>
 
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 text-sea-green">
+                            <div className="flex items-center gap-2 bg-soft-blue/30 text-dark-slate px-3 py-2 rounded-full">
                               <Calendar className="w-4 h-4" />
-                              <span className="text-sm font-medium">{caseStudy.completion}</span>
+                              <span className="text-sm font-semibold">{caseStudy.completion}</span>
                             </div>
-                            <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
+                            <div className="bg-sea-green text-white px-4 py-2 rounded-full font-semibold text-sm shadow-md">
                               {caseStudy.timeline}
                             </div>
                           </div>
@@ -154,7 +154,7 @@ export default function CaseStudies() {
                     </div>
                   </GlassmorphicCard>
                 </Link>
-                
+
                 {/* Mobile version - not clickable */}
                 <div className="md:hidden">
                   <GlassmorphicCard delay={index * 0.1}>
@@ -178,11 +178,11 @@ export default function CaseStudies() {
                           </h3>
 
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2 text-sea-green">
+                            <div className="flex items-center gap-2 bg-soft-blue/30 text-dark-slate px-3 py-2 rounded-full">
                               <Calendar className="w-4 h-4" />
-                              <span className="text-sm font-medium">{caseStudy.completion}</span>
+                              <span className="text-sm font-semibold">{caseStudy.completion}</span>
                             </div>
-                            <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
+                            <div className="bg-sea-green text-white px-4 py-2 rounded-full font-semibold text-sm shadow-md">
                               {caseStudy.timeline}
                             </div>
                           </div>
@@ -239,7 +239,7 @@ export default function CaseStudies() {
                   <Plus className="w-5 h-5" />
                   Ещё кейсы
                 </button>
-                
+
                 {showAdditionalCases && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}

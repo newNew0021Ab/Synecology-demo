@@ -456,7 +456,7 @@ export default function Blog() {
               Будьте <span className="text-sea-green">в курсе</span>
             </motion.h2>
             <motion.p
-              className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
+              className="text-xl text-dark-slate/70 mb-6 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -464,6 +464,36 @@ export default function Blog() {
             >
               Подпишитесь, чтобы получать закрытые аналитические материалы, чек-листы для самопроверки и шаблоны документов, которые мы отправляем только нашим подписчикам.
             </motion.p>
+            
+            <motion.div
+              className="flex justify-center items-center gap-4 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-dark-slate/70">Авторы статей:</span>
+              <div className="flex gap-3">
+                <Link 
+                  href="/team/elena-kozlova"
+                  className="w-10 h-10 bg-sea-green/10 rounded-full flex items-center justify-center hover:bg-sea-green/20 transition-colors"
+                >
+                  <Users className="w-5 h-5 text-sea-green" />
+                </Link>
+                <Link 
+                  href="/team/dmitry-petrov"
+                  className="w-10 h-10 bg-soft-blue/20 rounded-full flex items-center justify-center hover:bg-soft-blue/30 transition-colors"
+                >
+                  <Users className="w-5 h-5 text-soft-blue" />
+                </Link>
+                <Link 
+                  href="/team/anna-sidorova"
+                  className="w-10 h-10 bg-sandy-beige/30 rounded-full flex items-center justify-center hover:bg-sandy-beige/40 transition-colors"
+                >
+                  <Users className="w-5 h-5 text-dark-slate" />
+                </Link>
+              </div>
+            </motion.div>
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
               initial={{ opacity: 0, y: 20 }}
