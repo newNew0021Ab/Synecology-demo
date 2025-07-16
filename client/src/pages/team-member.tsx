@@ -38,6 +38,12 @@ export default function TeamMember() {
           role: "Ведущий консультант",
           description: "Разработка и внедрение системы обращения с отходами для сети предприятий",
           link: "/case-studies/waste-management"
+        },
+        {
+          title: "Экологическое сопровождение производства спешлти кофе",
+          role: "Главный эколог проекта",
+          description: "Разработка полного комплекса экологической документации для производства премиального кофе с получением международных сертификатов качества",
+          link: "/case-studies/specialty-coffee"
         }
       ],
       articles: [
@@ -98,20 +104,7 @@ export default function TeamMember() {
         "Стратегическое планирование"
       ],
       approach: "Мой принцип — детальность и системность. Каждый технологический процесс клиента я изучаю досконально, чтобы найти не только соответствие нормативам, но и возможности для оптимизации. Часто удается значительно снизить экологические платежи, просто грамотно пересчитав выбросы или предложив техническое решение.",
-      keyProjects: [
-        {
-          title: "Проект ПДВ для металлургического завода",
-          role: "Ведущий инженер проекта",
-          description: "Комплексная разработка нормативов с внедрением системы мониторинга выбросов",
-          link: "/case-studies/metallurgical-plant"
-        },
-        {
-          title: "Система управления выбросами для химического производства",
-          role: "Технический руководитель",
-          description: "Оптимизация системы газоочистки и снижение экологических платежей на 40%",
-          link: "/case-studies/chemical-plant"
-        }
-      ],
+      keyProjects: [],
       articles: [
         {
           title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
@@ -472,43 +465,45 @@ export default function TeamMember() {
         </div>
       </section>
 
-      {/* Key Projects Section */}
-      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
-              Проекты, которыми <span className="text-sea-green">я горжусь</span>
-            </h2>
+      {/* Key Projects Section - только если есть проекты */}
+      {member.keyProjects && member.keyProjects.length > 0 && (
+        <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
+                Проекты, которыми <span className="text-sea-green">я горжусь</span>
+              </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {member.keyProjects.map((project: any, index: number) => (
-                <GlassmorphicCard key={project.title} delay={index * 0.1}>
-                  <h3 className="text-xl font-heading font-bold text-dark-slate mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-sea-green font-semibold mb-3">
-                    {project.role}
-                  </p>
-                  <p className="text-dark-slate/70 mb-6 leading-relaxed">
-                    {project.description}
-                  </p>
-                  <Link
-                    href={project.link}
-                    className="inline-flex items-center gap-2 text-sea-green font-semibold hover:text-sea-green/80 transition-colors"
-                  >
-                    Узнать подробнее <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </GlassmorphicCard>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {member.keyProjects.map((project: any, index: number) => (
+                  <GlassmorphicCard key={project.title} delay={index * 0.1}>
+                    <h3 className="text-xl font-heading font-bold text-dark-slate mb-3">
+                      {project.title}
+                    </h3>
+                    <p className="text-sea-green font-semibold mb-3">
+                      {project.role}
+                    </p>
+                    <p className="text-dark-slate/70 mb-6 leading-relaxed">
+                      {project.description}
+                    </p>
+                    <Link
+                      href={project.link}
+                      className="inline-flex items-center gap-2 text-sea-green font-semibold hover:text-sea-green/80 transition-colors"
+                    >
+                      Узнать подробнее <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </GlassmorphicCard>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Articles Section */}
       <section className="py-20">
