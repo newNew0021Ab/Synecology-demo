@@ -146,17 +146,10 @@ export default function CaseStudies() {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between mt-8 pt-6 border-t border-dark-slate/10">
+                        <div className="flex items-center justify-center mt-8 pt-6 border-t border-dark-slate/10">
                           <div className="text-sea-green font-semibold inline-flex items-center gap-2 text-base">
                             Подробнее <ArrowRight className="w-5 h-5" />
                           </div>
-                          <Link
-                            href="/contact"
-                            className="text-sea-green hover:text-sea-green/80 transition-colors text-sm font-medium"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            Начать проект
-                          </Link>
                         </div>
                     </div>
                   </GlassmorphicCard>
@@ -220,18 +213,12 @@ export default function CaseStudies() {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between mt-8 pt-6 border-t border-dark-slate/10">
+                        <div className="flex items-center justify-center mt-8 pt-6 border-t border-dark-slate/10">
                           <Link
                             href="/case-studies/coffee-environmental-documentation"
                             className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base"
                           >
                             Подробнее <ArrowRight className="w-5 h-5" />
-                          </Link>
-                          <Link
-                            href="/contact"
-                            className="text-sea-green hover:text-sea-green/80 transition-colors text-sm font-medium"
-                          >
-                            Начать проект
                           </Link>
                         </div>
                     </div>
