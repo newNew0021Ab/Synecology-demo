@@ -788,26 +788,7 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      {/* Tags */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h3 className="text-xl font-heading font-bold text-dark-slate mb-6">
-              Ключевые направления
-            </h3>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {service.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 bg-sea-green/10 text-sea-green rounded-full font-semibold"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
