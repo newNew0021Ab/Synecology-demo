@@ -13,51 +13,27 @@ export default function About() {
 
   const teamMembers = [
     {
-      name: "Др. Сара Чен",
-      role: "Основатель и генеральный директор",
-      bio: "Эколог с более чем 15-летним опытом консультирования по устойчивости и разработки политики.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
-      expertise: ["Экологическая политика", "Климатология", "Стратегическое планирование"],
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sarah@synecology.com",
-      },
-    },
-    {
-      name: "Михаил Родригес",
-      role: "Директор по операциям",
-      bio: "Инженерный лидер, специализирующийся на системах возобновляемой энергии и развитии устойчивой инфраструктуры.",
+      name: "Корякин Егор Дмитриевич",
+      role: "Директор",
+      bio: "Опытный специалист с более чем 5-летним стажем в сфере экологии и природопользования. Имеет практический опыт работы в системе Минприроды, где участвовал в разработке и реализации различных проектов.",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
-      expertise: ["Возобновляемая энергия", "Управление проектами", "Системная инженерия"],
+      expertise: ["Экологическое законодательство", "Проекты Минприроды", "Стратегическое планирование"],
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "michael@synecology.com",
+        email: "egor@synecology.com",
       },
     },
     {
-      name: "Др. Эмили Джонсон",
-      role: "Старший эколог",
-      bio: "Морской биолог и специалист по охране природы с экспертизой в восстановлении экосистем и оценке биоразнообразия.",
+      name: "Волошко Инна Владимировна",
+      role: "Коммерческий директор",
+      bio: "Опытный управленец с более чем 10-летним стажем в коммерческой деятельности и руководящих должностях. Отвечает за развитие бизнеса и работу с клиентами.",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
-      expertise: ["Морская биология", "Восстановление экосистем", "Оценка биоразнообразия"],
+      expertise: ["Коммерческая деятельность", "Управление проектами", "Развитие бизнеса"],
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "emily@synecology.com",
-      },
-    },
-    {
-      name: "Дэвид Парк",
-      role: "Менеджер водных ресурсов",
-      bio: "Гидрогеолог с обширным опытом в системах очистки воды и решениях устойчивого управления водными ресурсами.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
-      expertise: ["Водные ресурсы", "Гидрогеология", "Системы очистки"],
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "david@synecology.com",
+        email: "inna@synecology.com",
       },
     },
   ];
@@ -188,10 +164,9 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => {
-              const memberSlug = member.name === "Др. Сара Чен" ? "sara-chen" :
-                                member.name === "Михаил Родригес" ? "michael-rodriguez" :
-                                member.name === "Др. Эмили Джонсон" ? "emily-johnson" :
-                                "david-park";
+              const memberSlug = member.name === "Корякин Егор Дмитриевич" ? "egor-koryakin" :
+                                member.name === "Волошко Инна Владимировна" ? "inna-voloshko" :
+                                "team-member";
 
               return (
                 <GlassmorphicCard key={member.name} delay={index * 0.1}>
