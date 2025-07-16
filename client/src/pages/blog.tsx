@@ -188,8 +188,9 @@ export default function Blog() {
             </div>
 
             {filteredPosts.filter(post => post.featured).map((post) => (
-              <GlassmorphicCard key={post.title} className="overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Link key={post.title} href="/blog/eco-certification-business-belarus" className="group">
+                <GlassmorphicCard className="overflow-hidden group-hover:scale-[1.02] transition-all duration-300 group-hover:shadow-lg cursor-pointer">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div className="relative">
                     <img
                       src={post.image}
@@ -217,7 +218,7 @@ export default function Blog() {
                       </div>
                     </div>
 
-                    <h3 className="text-3xl font-heading font-bold text-dark-slate">
+                    <h3 className="text-3xl font-heading font-bold text-dark-slate group-hover:text-sea-green transition-colors duration-300">
                       {post.title}
                     </h3>
 
@@ -241,16 +242,14 @@ export default function Blog() {
                       ))}
                     </div>
 
-                    <Link
-                        href="/blog/eco-certification-business-belarus"
-                        className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
-                      >
+                    <div className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold group-hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2">
                         <ArrowRight className="w-5 h-5" />
                         Читать полную статью
-                      </Link>
+                      </div>
                   </div>
                 </div>
-              </GlassmorphicCard>
+                </GlassmorphicCard>
+              </Link>
             ))}
           </div>
         </section>
