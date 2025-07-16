@@ -59,7 +59,7 @@ export default function Blog() {
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-      
+
       return matchesTags && matchesSearch;
     });
   }, [blogPosts, selectedTags, searchTerm]);
@@ -353,7 +353,7 @@ export default function Blog() {
                     </article>
                   </GlassmorphicCard>
                 </Link>
-                
+
                 {/* Mobile version - not clickable */}
                 <div className="md:hidden">
                   <GlassmorphicCard delay={index * 0.1}>

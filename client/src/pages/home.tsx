@@ -186,13 +186,18 @@ export default function Home() {
                         {service.description}
                       </p>
 
-                      <Link
-                        href="/services"
-                        className="btn-ghost"
-                      >
-                        Подробнее 
-                        <ArrowRight className="w-5 h-5" />
-                      </Link>
+                      <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                        <span className="btn-secondary pointer-events-none">
+                          Подробнее
+                        </span>
+                        <Link
+                          href="/contact"
+                          className="btn-primary"
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                          Заказать
+                        </Link>
+                      </div>
                     </div>
 
                     {/* Hover эффект */}

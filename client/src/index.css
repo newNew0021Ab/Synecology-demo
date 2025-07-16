@@ -140,6 +140,21 @@
     align-items: stretch;
   }
 
+  /* Service Card Hover Effects */
+  .service-card-clickable:hover .glassmorphic {
+    transform: scale(1.02);
+    box-shadow: 0 20px 40px rgba(46, 139, 87, 0.15);
+  }
+
+  .service-image-clickable:hover .glassmorphic {
+    transform: scale(1.05);
+  }
+
+  /* Enhanced button pointer events */
+  .pointer-events-none {
+    pointer-events: none;
+  }
+
   .card-content {
     height: 100%;
     display: flex;
