@@ -169,73 +169,131 @@ export default function About() {
                                 "team-member";
 
               return (
-                <GlassmorphicCard key={member.name} delay={index * 0.1}>
-                  <div className="flex flex-col sm:flex-row gap-6 h-full">
-                    <div className="flex-shrink-0 relative">
-                      <Link href={`/team/${memberSlug}`}>
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-24 h-24 rounded-full object-cover hover:scale-105 transition-transform cursor-pointer"
-                        />
-                      </Link>
-                    </div>
-                    <div className="flex-1">
-                      <Link href={`/team/${memberSlug}`}>
-                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-2 hover:text-sea-green transition-colors cursor-pointer">
-                          {member.name}
-                        </h3>
-                      </Link>
-                      <p className="text-sea-green font-semibold mb-3">{member.role}</p>
-                      <p className="text-dark-slate/70 mb-4 text-sm leading-relaxed">
-                        {member.bio}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {member.expertise.slice(0, 3).map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        {member.expertise.length > 3 && (
-                          <span className="px-2 py-1 bg-dark-slate/10 text-dark-slate/60 text-xs rounded-full">
-                            +{member.expertise.length - 3} еще
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <div className="flex gap-3">
-                          <a
-                            href={member.social.linkedin}
-                            className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                          <a
-                            href={member.social.twitter}
-                            className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                          >
-                            <Twitter className="w-4 h-4" />
-                          </a>
+                <div key={member.name} className="group">
+                  {/* Desktop/Tablet - clickable card */}
+                  <Link href={`/team/${memberSlug}`} className="hidden sm:block">
+                    <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
+                      <div className="flex flex-col h-full p-6">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-8 h-8 text-sea-green" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-heading font-bold text-dark-slate mb-1 group-hover:text-sea-green transition-colors">
+                              {member.name}
+                            </h3>
+                            <p className="text-sea-green font-semibold text-sm">
+                              {member.role}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <p className="text-dark-slate/70 text-sm leading-relaxed mb-4 flex-grow">
+                          {member.bio}
+                        </p>
+                        
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
+                            <span className="text-sm font-medium text-dark-slate">
+                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <h4 className="text-sm font-semibold text-dark-slate">Экспертиза:</h4>
+                            <div className="flex flex-wrap gap-1">
+                              {member.expertise.slice(0, 4).map((skill) => (
+                                <span
+                                  key={skill}
+                                  className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-between items-center mt-6 pt-4 border-t border-dark-slate/10">
+                          <div className="text-sea-green font-medium text-sm inline-flex items-center gap-1">
+                            Подробнее <ArrowRight className="w-3 h-3" />
+                          </div>
                           <a
                             href={`mailto:${member.social.email}`}
                             className="text-dark-slate/60 hover:text-sea-green transition-colors"
+                            onClick={(e) => e.stopPropagation()}
                           >
                             <Mail className="w-4 h-4" />
                           </a>
                         </div>
-                        <Link
-                          href={`/team/${memberSlug}`}
-                          className="text-sea-green font-medium text-sm hover:text-sea-green/80 transition-colors inline-flex items-center gap-1"
-                        >
-                          Подробнее <ArrowRight className="w-3 h-3" />
-                        </Link>
                       </div>
-                    </div>
+                    </GlassmorphicCard>
+                  </Link>
+
+                  {/* Mobile - non-clickable card with buttons */}
+                  <div className="sm:hidden">
+                    <GlassmorphicCard delay={index * 0.1} className="h-full">
+                      <div className="flex flex-col h-full p-6">
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-8 h-8 text-sea-green" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-xl font-heading font-bold text-dark-slate mb-1">
+                              {member.name}
+                            </h3>
+                            <p className="text-sea-green font-semibold text-sm">
+                              {member.role}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        <p className="text-dark-slate/70 text-sm leading-relaxed mb-4 flex-grow">
+                          {member.bio}
+                        </p>
+                        
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
+                            <span className="text-sm font-medium text-dark-slate">
+                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <h4 className="text-sm font-semibold text-dark-slate">Экспертиза:</h4>
+                            <div className="flex flex-wrap gap-1">
+                              {member.expertise.slice(0, 4).map((skill) => (
+                                <span
+                                  key={skill}
+                                  className="px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="flex gap-3 mt-6 pt-4 border-t border-dark-slate/10">
+                          <Link
+                            href={`/team/${memberSlug}`}
+                            className="flex-1 bg-sea-green text-white px-4 py-2 rounded-full font-medium text-sm text-center hover:bg-sea-green/90 transition-colors"
+                          >
+                            Подробнее
+                          </Link>
+                          <a
+                            href={`mailto:${member.social.email}`}
+                            className="px-4 py-2 glassmorphic glassmorphic-hover rounded-full text-sea-green font-medium text-sm hover:text-sea-green/80 transition-colors inline-flex items-center gap-2"
+                          >
+                            <Mail className="w-4 h-4" />
+                          </a>
+                        </div>
+                      </div>
+                    </GlassmorphicCard>
                   </div>
-                </GlassmorphicCard>
+                </div>
               );
             })}
           </div>

@@ -28,9 +28,9 @@ export default function CaseStudies() {
   ];
 
   const stats = [
-    { icon: TrendingUp, value: "150+", label: "Кейсов без штрафов", color: "text-sea-green" },
-    { icon: Users, value: "500+", label: "Довольных директоров", color: "text-soft-blue" },
-    { icon: Award, value: "95%", label: "Проходят с первого раза", color: "text-sandy-beige" },
+    { icon: TrendingUp, value: "100%", label: "Проектов завершено в срок", color: "text-sea-green" },
+    { icon: Users, value: "50+", label: "Предприятий обслужено", color: "text-soft-blue" },
+    { icon: Award, value: "98%", label: "Документов принято с первого раза", color: "text-sandy-beige" },
   ];
 
   return (
