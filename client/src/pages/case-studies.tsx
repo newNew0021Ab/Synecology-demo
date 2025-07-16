@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function CaseStudies() {
   const [showAdditionalCases, setShowAdditionalCases] = useState(false);
-  
+
   const mainCaseStudies = [
     {
       title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
@@ -126,9 +126,9 @@ export default function CaseStudies() {
                             <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
                             <ul className="space-y-2">
                               {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
-                                <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate/70">
+                                <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
                                   <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
-                                  <span>{result}</span>
+                                  <span className="font-medium">{result}</span>
                                 </li>
                               ))}
                             </ul>
@@ -154,7 +154,7 @@ export default function CaseStudies() {
                     </div>
                   </GlassmorphicCard>
                 </Link>
-                
+
                 {/* Mobile version - not clickable */}
                 <div className="md:hidden">
                   <GlassmorphicCard delay={index * 0.1}>
@@ -193,9 +193,9 @@ export default function CaseStudies() {
                             <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
                             <ul className="space-y-2">
                               {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
-                                <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate/70">
+                                <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
                                   <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
-                                  <span>{result}</span>
+                                  <span className="font-medium">{result}</span>
                                 </li>
                               ))}
                             </ul>
@@ -239,7 +239,7 @@ export default function CaseStudies() {
                   <Plus className="w-5 h-5" />
                   Ещё кейсы
                 </button>
-                
+
                 {showAdditionalCases && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}

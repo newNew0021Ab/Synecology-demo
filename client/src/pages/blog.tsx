@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Calendar, ArrowRight, Clock, Tag, Search } from "lucide-react";
+import { Calendar, ArrowRight, Clock, Tag, Search, User } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useState, useMemo } from "react";
@@ -19,6 +19,7 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
       featured: true,
+      author: "Иванов Иван",
     },
     {
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
@@ -29,6 +30,7 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
       featured: false,
+      author: "Петров Петр",
     },
     {
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
@@ -39,6 +41,7 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
       featured: false,
+      author: "Сидоров Василий",
     },
   ];
 
@@ -202,20 +205,33 @@ export default function Blog() {
                   </div>
 
                   <div className="space-y-6">
-                    <div className="flex items-center gap-6 text-sm">
-                      <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                        <Calendar className="w-4 h-4" />
-                        <span className="font-medium">{post.date}</span>
+                    
+                    <div className="flex items-center gap-4 text-sm flex-wrap">
+                        <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
+                          <Calendar className="w-4 h-4" />
+                          <span className="font-medium">{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-medium">{post.readTime}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
+                          <Tag className="w-4 h-4" />
+                          <span className="font-medium">{post.category}</span>
+                        </div>
+                        <Link
+                          href={`/team/${post.author?.toLowerCase().replace(/\s+/g, '-').replace(/[аеёиоуыэюя]/g, (match) => {
+                            const map: {[key: string]: string} = {
+                              'а': 'a', 'е': 'e', 'ё': 'e', 'и': 'i', 'о': 'o', 'у': 'u', 'ы': 'y', 'э': 'e', 'ю': 'yu', 'я': 'ya'
+                            };
+                            return map[match] || match;
+                          })}`}
+                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full pointer-events-none opacity-50"
+                        >
+                          <User className="w-4 h-4" />
+                          <span className="font-medium">{post.author}</span>
+                        </Link>
                       </div>
-                      <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                        <Clock className="w-4 h-4" />
-                        <span className="font-medium">{post.readTime}</span>
-                      </div>
-                      <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                        <Tag className="w-4 h-4" />
-                        <span className="font-medium">{post.category}</span>
-                      </div>
-                    </div>
 
                     <h3 className="text-3xl font-heading font-bold text-dark-slate">
                       {post.title}
@@ -312,7 +328,8 @@ export default function Blog() {
                         />
                       </div>
 
-                      <div className="flex items-center gap-4 text-sm">
+                      
+                      <div className="flex items-center gap-4 text-sm flex-wrap">
                         <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                           <Calendar className="w-4 h-4" />
                           <span className="font-medium">{post.date}</span>
@@ -325,6 +342,18 @@ export default function Blog() {
                           <Tag className="w-4 h-4" />
                           <span className="font-medium">{post.category}</span>
                         </div>
+                        <Link
+                          href={`/team/${post.author?.toLowerCase().replace(/\s+/g, '-').replace(/[аеёиоуыэюя]/g, (match) => {
+                            const map: {[key: string]: string} = {
+                              'а': 'a', 'е': 'e', 'ё': 'e', 'и': 'i', 'о': 'o', 'у': 'u', 'ы': 'y', 'э': 'e', 'ю': 'yu', 'я': 'ya'
+                            };
+                            return map[match] || match;
+                          })}`}
+                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full pointer-events-none opacity-50"
+                        >
+                          <User className="w-4 h-4" />
+                          <span className="font-medium">{post.author}</span>
+                        </Link>
                       </div>
 
                       <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
@@ -366,7 +395,8 @@ export default function Blog() {
                         />
                       </div>
 
-                      <div className="flex items-center gap-4 text-sm">
+                      
+                      <div className="flex items-center gap-4 text-sm flex-wrap">
                         <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                           <Calendar className="w-4 h-4" />
                           <span className="font-medium">{post.date}</span>
@@ -379,6 +409,13 @@ export default function Blog() {
                           <Tag className="w-4 h-4" />
                           <span className="font-medium">{post.category}</span>
                         </div>
+                        <Link
+                          href={`/team/${post.authorSlug}`}
+                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
+                        >
+                          <User className="w-4 h-4" />
+                          <span className="font-medium">{post.author}</span>
+                        </Link>
                       </div>
 
                       <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3">

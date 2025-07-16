@@ -14,8 +14,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 
 const contactFormSchema = z.object({
-  firstName: z.string().min(2, "Имя должно содержать минимум 2 символа"),
-  lastName: z.string().min(2, "Фамилия должна содержать минимум 2 символа"),
+  firstName: z.string().min(2, "Поле должно содержать минимум 2 символа"),
   email: z.string().email("Введите корректный email адрес"),
   company: z.string().optional(),
   projectType: z.string().min(1, "Выберите тип проекта"),
@@ -32,7 +31,6 @@ export default function Contact() {
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       firstName: "",
-      lastName: "",
       email: "",
       company: "",
       projectType: "",
@@ -109,42 +107,23 @@ export default function Contact() {
               <h2 className="text-3xl font-heading font-bold text-dark-slate mb-6">Свяжитесь с нами</h2>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="firstName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-dark-slate font-medium">Имя</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              className="glassmorphic border-dark-slate/20 bg-white/50 focus:ring-sea-green focus:border-sea-green"
-                              placeholder="Иван"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="lastName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-dark-slate font-medium">Фамилия</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              className="glassmorphic border-dark-slate/20 bg-white/50 focus:ring-sea-green focus:border-sea-green"
-                              placeholder="Петров"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-dark-slate font-medium">Как к вам обращаться</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            className="glassmorphic border-dark-slate/20 bg-white/50 focus:ring-sea-green focus:border-sea-green"
+                            placeholder="Иван Петрович"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   <FormField
                     control={form.control}
