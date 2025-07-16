@@ -253,6 +253,21 @@
     box-shadow: 0 15px 30px rgba(46, 139, 87, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
+  /* Service card clickable behavior - only on devices with hover capability */
+  .service-card-clickable,
+  .service-image-clickable {
+    @media (hover: none) {
+      pointer-events: none;
+    }
+  }
+
+  /* Make sure buttons inside clickable cards work on hover devices */
+  @media (hover: hover) {
+    .service-card-clickable .btn-primary {
+      pointer-events: auto;
+    }
+  }
+
   /* Mobile optimizations */
   @media (max-width: 768px) {
     .hero-title {

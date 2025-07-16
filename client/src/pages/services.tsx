@@ -181,50 +181,58 @@ export default function Services() {
                 viewport={{ once: true }}
               >
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
-                  <GlassmorphicCard>
-                    <div className="flex flex-col h-full">
-                      <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-6">
-                        <service.icon className="w-8 h-8 text-sea-green" />
+                  <Link
+                    href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
+                    className="service-card-clickable block"
+                  >
+                    <GlassmorphicCard>
+                      <div className="flex flex-col h-full">
+                        <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center mb-6">
+                          <service.icon className="w-8 h-8 text-sea-green" />
+                        </div>
+                        <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
+                          {service.title}
+                        </h2>
+                        <p className="text-lg text-dark-slate/70 mb-6">{service.description}</p>
+                        <div className="space-y-3 mb-8 flex-grow">
+                          {service.features.map((feature) => (
+                            <div key={feature} className="flex items-center gap-3">
+                              <CheckCircle className="w-5 h-5 text-sea-green flex-shrink-0" />
+                              <span className="text-dark-slate/80">{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                          <span className="btn-secondary pointer-events-none">
+                            Подробнее
+                          </span>
+                          <Link
+                            href="/contact"
+                            className="btn-primary"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ArrowRight className="w-4 h-4" />
+                            Заказать
+                          </Link>
+                        </div>
                       </div>
-                      <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
-                        {service.title}
-                      </h2>
-                      <p className="text-lg text-dark-slate/70 mb-6">{service.description}</p>
-                      <div className="space-y-3 mb-8 flex-grow">
-                        {service.features.map((feature) => (
-                          <div key={feature} className="flex items-center gap-3">
-                            <CheckCircle className="w-5 h-5 text-sea-green flex-shrink-0" />
-                            <span className="text-dark-slate/80">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                        <Link
-                          href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
-                          className="btn-secondary"
-                        >
-                          Подробнее
-                        </Link>
-                        <Link
-                          href="/contact"
-                          className="btn-primary"
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                          Заказать
-                        </Link>
-                      </div>
-                    </div>
-                  </GlassmorphicCard>
+                    </GlassmorphicCard>
+                  </Link>
                 </div>
 
                 <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                  <div className="glassmorphic rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="rounded-xl shadow-lg w-full h-auto"
-                    />
-                  </div>
+                  <Link
+                    href={`/services/${index === 0 ? 'emissions-inventory' : index === 1 ? 'pdv-standards' : index === 2 ? 'ecological-passport' : index === 3 ? 'gas-treatment-passport' : index === 4 ? 'waste-management-instructions' : index === 5 ? 'environmental-journals' : index === 6 ? 'ecological-support' : index === 7 ? 'environmental-analysis' : index === 8 ? 'instruction-documentation' : 'production-monitoring'}`}
+                    className="service-image-clickable block"
+                  >
+                    <div className="glassmorphic rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="rounded-xl shadow-lg w-full h-auto"
+                      />
+                    </div>
+                  </Link>
                 </div>
               </motion.div>
             ))}
