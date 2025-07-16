@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
@@ -305,7 +304,7 @@ export default function TeamMember() {
                   alt={member.name}
                   className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
                 />
-                
+
               </div>
             </motion.div>
 
@@ -320,7 +319,7 @@ export default function TeamMember() {
               <p className="text-2xl text-sea-green font-semibold mb-6">
                 {member.role}
               </p>
-              
+
               <div className="glassmorphic p-6 rounded-2xl mb-8">
                 <Quote className="w-8 h-8 text-sea-green/50 mb-4" />
                 <p className="text-lg text-dark-slate italic leading-relaxed">
@@ -361,12 +360,12 @@ export default function TeamMember() {
             <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
               Моя <span className="text-sea-green">специализация</span>
             </h2>
-            
+
             <GlassmorphicCard className="mb-8">
               <p className="text-lg text-dark-slate/80 leading-relaxed mb-6">
                 {member.bio}
               </p>
-              
+
               <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
                 Ключевые компетенции:
               </h3>
@@ -395,7 +394,7 @@ export default function TeamMember() {
             <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
               Мои <span className="text-sea-green">сертификаты</span>
             </h2>
-            
+
             {member.certificates && member.certificates.length > 3 ? (
               <Carousel 
                 className="w-full max-w-7xl mx-auto"
@@ -485,7 +484,7 @@ export default function TeamMember() {
             <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
               Проекты, которыми <span className="text-sea-green">я горжусь</span>
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {member.keyProjects.map((project: any, index: number) => (
                 <GlassmorphicCard key={project.title} delay={index * 0.1}>
@@ -523,7 +522,7 @@ export default function TeamMember() {
             <h2 className="text-4xl font-heading font-bold text-dark-slate mb-8 text-center">
               Делюсь <span className="text-sea-green">опытом</span>
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {member.articles.map((article: any, index: number) => (
                 <GlassmorphicCard key={article.title} delay={index * 0.1}>
