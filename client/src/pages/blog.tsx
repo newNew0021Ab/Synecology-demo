@@ -290,71 +290,139 @@ export default function Blog() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredPosts.filter(post => !post.featured).map((post, index) => (
-              <GlassmorphicCard key={post.title} delay={index * 0.1}>
-                <article className="flex flex-col h-full space-y-6">
-                  <div className="relative">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-64 object-cover rounded-xl"
-                    />
-                  </div>
+              <div key={post.title} className="group">
+                <Link
+                  href={`/blog/${
+                        post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
+                        post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
+                        post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
+                        post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
+                        post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
+                        "production-environmental-control"
+                      }`}
+                  className="hidden md:block"
+                >
+                  <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
+                    <article className="flex flex-col h-full space-y-6">
+                      <div className="relative">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                        />
+                      </div>
 
-                  <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                      <Calendar className="w-4 h-4" />
-                      <span className="font-medium">{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                      <Clock className="w-4 h-4" />
-                      <span className="font-medium">{post.readTime}</span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                      <Tag className="w-4 h-4" />
-                      <span className="font-medium">{post.category}</span>
-                    </div>
-                  </div>
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
+                          <Calendar className="w-4 h-4" />
+                          <span className="font-medium">{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-medium">{post.readTime}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
+                          <Tag className="w-4 h-4" />
+                          <span className="font-medium">{post.category}</span>
+                        </div>
+                      </div>
 
-                  <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3">
-                    {post.title}
-                  </h3>
+                      <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
+                        {post.title}
+                      </h3>
 
-                  <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
-                    {post.excerpt}
-                  </p>
+                      <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
+                        {post.excerpt}
+                      </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <button
-                        key={tag}
-                        onClick={() => toggleTag(tag)}
-                        className={`px-3 py-1 text-sm rounded-full transition-all duration-300 ${
-                          selectedTags.includes(tag)
-                            ? 'bg-sea-green text-white'
-                            : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
-                        }`}
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 text-sm rounded-full bg-sea-green/10 text-sea-green pointer-events-none"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 mt-auto justify-center group-hover:bg-sea-green/90">
+                        <ArrowRight className="w-5 h-5" />
+                        Читать полную статью
+                      </div>
+                    </article>
+                  </GlassmorphicCard>
+                </Link>
+                
+                {/* Mobile version - not clickable */}
+                <div className="md:hidden">
+                  <GlassmorphicCard delay={index * 0.1}>
+                    <article className="flex flex-col h-full space-y-6">
+                      <div className="relative">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-64 object-cover rounded-xl"
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
+                          <Calendar className="w-4 h-4" />
+                          <span className="font-medium">{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-medium">{post.readTime}</span>
+                        </div>
+                        <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
+                          <Tag className="w-4 h-4" />
+                          <span className="font-medium">{post.category}</span>
+                        </div>
+                      </div>
+
+                      <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
+                        {post.excerpt}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <button
+                            key={tag}
+                            onClick={() => toggleTag(tag)}
+                            className={`px-3 py-1 text-sm rounded-full transition-all duration-300 ${
+                              selectedTags.includes(tag)
+                                ? 'bg-sea-green text-white'
+                                : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
+                            }`}
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
+
+                      <Link
+                        href={`/blog/${
+                              post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
+                              post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
+                              post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
+                              post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
+                              post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
+                              "production-environmental-control"
+                            }`}
+                        className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 mt-auto"
                       >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-
-                  <Link
-                    href={`/blog/${
-                          post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
-                          post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
-                          post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
-                          post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
-                          post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
-                          "production-environmental-control"
-                        }`}
-                    className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 mt-auto"
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                    Читать полную статью
-                  </Link>
-                </article>
-              </GlassmorphicCard>
+                        <ArrowRight className="w-5 h-5" />
+                        Читать полную статью
+                      </Link>
+                    </article>
+                  </GlassmorphicCard>
+                </div>
+              </div>
             ))}
             </div>
           )}

@@ -62,6 +62,12 @@ export default function Header() {
               Блог
             </Link>
             <Link 
+              href="/team" 
+              className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/team' ? 'text-sea-green font-semibold' : ''}`}
+            >
+              Команда
+            </Link>
+            <Link 
               href="/about" 
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/about' ? 'text-sea-green font-semibold' : ''}`}
             >
