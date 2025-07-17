@@ -1,4 +1,3 @@
-
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
 import { visionTool } from '@sanity/vision'
@@ -9,7 +8,7 @@ export default defineConfig({
   name: 'default',
   title: 'Synecology CMS',
 
-  projectId: 'ysoxzj37',
+  projectId: 'sg6ov4g1',
   dataset: 'production',
 
   plugins: [

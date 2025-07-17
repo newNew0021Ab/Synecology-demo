@@ -8,7 +8,7 @@ export default defineConfig({
   name: 'default',
   title: 'Synecology CMS',
 
-  projectId: 'ysoxzj37', // Замените на ваш project ID
+  projectId: 'sg6ov4g1',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
