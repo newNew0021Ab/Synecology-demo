@@ -790,6 +790,101 @@ export default function ServiceDetail() {
 
       
 
+      {/* Tags Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GlassmorphicCard>
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
+                Ключевые темы
+              </h3>
+              <div className="flex flex-wrap justify-center gap-3">
+                {service.tags.map((tag: string) => (
+                  <Link
+                    key={tag}
+                    href={`/services?tag=${encodeURIComponent(tag)}`}
+                    className="inline-flex items-center px-4 py-2 bg-sea-green/10 text-sea-green rounded-full text-sm font-medium hover:bg-sea-green/20 transition-all duration-300 border border-sea-green/20"
+                  >
+                    <span>{tag}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </GlassmorphicCard>
+        </div>
+      </section>
+
+      {/* Related Services */}
+      <section className="py-20 bg-gradient-to-b from-soft-blue/20 to-off-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-heading font-bold text-dark-slate mb-4">
+              Вас может заинтересовать
+            </h3>
+            <p className="text-lg text-dark-slate/70">
+              Похожие услуги по тематике
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(() => {
+              // Логика поиска похожих услуг по тегам
+              const currentTags = service.tags;
+              const relatedServices = Object.entries(services)
+                .filter(([key]) => key !== slug) // Исключаем текущую услугу
+                .map(([key, relatedService]) => ({
+                  key,
+                  service: relatedService,
+                  matchScore: relatedService.tags.filter((tag: string) => currentTags.includes(tag)).length
+                }))
+                .filter(item => item.matchScore > 0) // Только услуги с общими тегами
+                .sort((a, b) => b.matchScore - a.matchScore) // Сортируем по количеству совпадений
+                .slice(0, 3); // Берем только первые 3
+
+              return relatedServices.map(({ key, service: relatedService }) => (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <Link href={`/services/${key}`}>
+                    <GlassmorphicCard className="h-full hover:scale-105 transition-transform duration-300">
+                      <div className="flex flex-col h-full">
+                        <div className="w-12 h-12 bg-sea-green/20 rounded-xl flex items-center justify-center mb-4">
+                          <FileText className="w-6 h-6 text-sea-green" />
+                        </div>
+                        <h4 className="text-lg font-heading font-semibold text-dark-slate mb-3 line-clamp-2">
+                          {relatedService.shortTitle}
+                        </h4>
+                        <p className="text-dark-slate/70 text-sm mb-4 flex-grow line-clamp-3">
+                          {relatedService.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {relatedService.tags.slice(0, 2).map((tag: string) => (
+                            <span
+                              key={tag}
+                              className="inline-block px-2 py-1 bg-sea-green/10 text-sea-green text-xs rounded-full"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between text-sm text-dark-slate/60">
+                          <span>{relatedService.timeline}</span>
+                          <span>{relatedService.pricing}</span>
+                        </div>
+                      </div>
+                    </GlassmorphicCard>
+                  </Link>
+                </motion.div>
+              ));
+            })()}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
