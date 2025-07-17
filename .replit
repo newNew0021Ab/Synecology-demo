@@ -37,4 +37,4 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd studio && npx sanity dev --port 3333 --host 0.0.0.0"
+args = "npx sanity dev --port 3333 --host 0.0.0.0"
