@@ -19,7 +19,7 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
       featured: true,
-      author: "Иванов Иван",
+      author: "Корякин Егор Дмитриевич",
     },
     {
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
@@ -30,7 +30,7 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
       featured: false,
-      author: "Петров Петр",
+      author: "Волошко Инна Владимировна",
     },
     {
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
@@ -41,7 +41,7 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
       featured: false,
-      author: "Сидоров Василий",
+      author: "Корякин Егор Дмитриевич",
     },
   ];
 
@@ -206,7 +206,7 @@ export default function Blog() {
                   </div>
 
                   <div className="space-y-6">
-                    
+
                     <div className="flex items-center gap-4 text-sm flex-wrap">
                         <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                           <Calendar className="w-4 h-4" />
@@ -221,13 +221,8 @@ export default function Blog() {
                           <span className="font-medium">{post.category}</span>
                         </div>
                         <Link
-                          href={`/team/${post.author?.toLowerCase().replace(/\s+/g, '-').replace(/[аеёиоуыэюя]/g, (match) => {
-                            const map: {[key: string]: string} = {
-                              'а': 'a', 'е': 'e', 'ё': 'e', 'и': 'i', 'о': 'o', 'у': 'u', 'ы': 'y', 'э': 'e', 'ю': 'yu', 'я': 'ya'
-                            };
-                            return map[match] || match;
-                          })}`}
-                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full pointer-events-none opacity-50"
+                          href={`/team/${post.author === "Корякин Егор Дмитриевич" ? "egor-koryakin" : "inna-voloshko"}`}
+                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
                           <span className="font-medium">{post.author}</span>
@@ -329,7 +324,7 @@ export default function Blog() {
                         />
                       </div>
 
-                      
+
                       <div className="flex items-center gap-4 text-sm flex-wrap">
                         <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                           <Calendar className="w-4 h-4" />
@@ -344,13 +339,8 @@ export default function Blog() {
                           <span className="font-medium">{post.category}</span>
                         </div>
                         <Link
-                          href={`/team/${post.author?.toLowerCase().replace(/\s+/g, '-').replace(/[аеёиоуыэюя]/g, (match) => {
-                            const map: {[key: string]: string} = {
-                              'а': 'a', 'е': 'e', 'ё': 'e', 'и': 'i', 'о': 'o', 'у': 'u', 'ы': 'y', 'э': 'e', 'ю': 'yu', 'я': 'ya'
-                            };
-                            return map[match] || match;
-                          })}`}
-                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full pointer-events-none opacity-50"
+                          href={`/team/${post.author === "Корякин Егор Дмитриевич" ? "egor-koryakin" : "inna-voloshko"}`}
+                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
                           <span className="font-medium">{post.author}</span>
@@ -396,7 +386,7 @@ export default function Blog() {
                         />
                       </div>
 
-                      
+
                       <div className="flex items-center gap-4 text-sm flex-wrap">
                         <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                           <Calendar className="w-4 h-4" />
@@ -411,7 +401,7 @@ export default function Blog() {
                           <span className="font-medium">{post.category}</span>
                         </div>
                         <Link
-                          href={`/team/${post.authorSlug}`}
+                          href={`/team/${post.author === "Корякин Егор Дмитриевич" ? "egor-koryakin" : "inna-voloshko"}`}
                           className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
