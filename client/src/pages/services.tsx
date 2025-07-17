@@ -54,7 +54,7 @@ export default function Services() {
         "Консультации по обновлению паспорта",
       ],
       image: "https://images.unsplash.com/photo-1693328397193-b858f1b38c60?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Экологический паспорт", "ТКП", "Природопользование", "Документация", "Беларусь"],
+      tags: ["Экологический паспорт", "ТКП", "Природопользование", "Документация", "Экологическое право"],
       slug: "ecological-passport"
     },
     {
@@ -169,7 +169,7 @@ export default function Services() {
   const allTags = Array.from(new Set(services.flatMap(service => service.tags)));
   
   // Самые популярные теги (встречающиеся чаще всего)
-  const popularTags = ["Минприроды", "Документация", "Отчетность", "ПЭК", "Нормативы", "Беларусь"];
+  const popularTags = ["Минприроды", "Документация", "Отчетность", "ПЭК", "Нормативы", "Экологическое право"];
 
   // Фильтруем услуги по выбранному тегу
   const filteredServices = selectedTag 

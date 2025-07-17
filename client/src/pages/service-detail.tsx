@@ -172,10 +172,10 @@ export default function ServiceDetail() {
       pricing: "от 1000 бел. руб.",
       image: "https://images.unsplash.com/photo-1693328397193-b858f1b38c60?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       icon: "FileText",
-      tags: ["Экологический паспорт", "ТКП", "Природопользование", "Документация", "Беларусь"],
-      seoTitle: "Экологический паспорт предприятия - разработка по ТКП Беларусь",
-      seoDescription: "Разработка экологического паспорта предприятия в соответствии с ТКП 17.02-08-2012. Анализ воздействия на окружающую среду, планирование мероприятий.",
-      seoKeywords: ["экологический паспорт", "ТКП 17.02-08-2012", "природопользование", "Беларусь", "Минприроды"]
+      tags: ["Экологический паспорт", "ТКП", "Природопользование", "Документация", "Экологическое право"],
+      seoTitle: "Экологический паспорт предприятия - разработка по ТКП 17.02-08-2012",
+      seoDescription: "Разработка экологического паспорта предприятия по ТКП 17.02-08-2012. Анализ воздействия на окружающую среду, экологическое планирование.",
+      seoKeywords: ["экологический паспорт", "ТКП 17.02-08-2012", "предприятие", "экологическое право", "экология"]
     },
     "gas-treatment-passport": {
       title: "Паспорт газоочистной установки (ГОУ)",
@@ -222,7 +222,7 @@ export default function ServiceDetail() {
       ],
       timeline: "от 10 рабочих дней",
       pricing: "от 500 бел. руб.",
-      image: "https://images.unsplash.com/photo-1745921180154-084875e95722?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=600",
+      image: "https://images.unsplash.com/photo-1745921180154-084875e95722?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=600",
       icon: "Droplets",
       tags: ["ГОУ", "Газоочистка", "Паспорт", "Регистрация", "Оборудование"],
       seoTitle: "Паспорт газоочистной установки (ГОУ) - регистрация в Беларуси",
