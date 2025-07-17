@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
-import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
+import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X, User, UserCheck, Briefcase, GraduationCap } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -17,7 +17,7 @@ export default function TeamMember() {
       role: "Директор",
       quote: "Экология — это не препятствие для бизнеса, а инструмент для его защиты и развития. Моя задача — показать это каждому клиенту.",
       bio: "В Synecology я отвечаю за стратегическое развитие компании и контроль качества всех экологических проектов. Мой практический опыт работы в системе Минприроды позволяет мне понимать требования с обеих сторон — как регулятора, так и бизнеса.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+      icon: UserCheck,
       expertise: [
         "Экологическое законодательство",
         "Проекты системы Минприроды", 
@@ -94,7 +94,7 @@ export default function TeamMember() {
       role: "Коммерческий директор",
       quote: "Успешный бизнес начинается с правильно выстроенных процессов. Моя задача — сделать сотрудничество с нами максимально комфортным и эффективным.",
       bio: "В Synecology я отвечаю за коммерческое развитие и обеспечение высокого качества обслуживания клиентов. Мой многолетний опыт в управлении позволяет выстраивать долгосрочные партнерские отношения с предприятиями различных отраслей.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+      icon: Briefcase,
       expertise: [
         "Коммерческая деятельность",
         "Управление проектами", 
@@ -137,7 +137,7 @@ export default function TeamMember() {
       role: "Старший эколог",
       quote: "Природа не прощает ошибок, поэтому в экологии важна абсолютная точность — от расчетов до документооборота.",
       bio: "В Synecology я специализируюсь на оценке воздействия на окружающую среду и восстановлении экосистем. Мой опыт в морской биологии помогает комплексно подходить к решению экологических задач предприятий, особенно связанных с водными ресурсами.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+      icon: GraduationCap,
       expertise: [
         "Оценка воздействия на окружающую среду (ОВОС)",
         "Восстановление экосистем и биоразнообразия",
@@ -193,7 +193,7 @@ export default function TeamMember() {
       role: "Менеджер водных ресурсов", 
       quote: "Чистая вода — основа жизни. Моя задача — обеспечить, чтобы деятельность предприятий не нарушала этот баланс.",
       bio: "В Synecology я отвечаю за все проекты, связанные с водными ресурсами — от разработки нормативов водопользования до проектирования систем очистки сточных вод. Мой гидрогеологический опыт позволяет находить оптимальные решения даже для самых сложных задач.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+      icon: User,
       expertise: [
         "Разработка нормативов водопользования",
         "Проектирование систем очистки сточных вод",
@@ -292,12 +292,9 @@ export default function TeamMember() {
               transition={{ duration: 0.8 }}
             >
               <div className="relative">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
-                />
-
+                <div className="w-80 h-80 bg-gradient-to-br from-sea-green/20 to-sea-green/40 rounded-3xl shadow-2xl mx-auto lg:mx-0 flex items-center justify-center glassmorphic">
+                  <member.icon className="w-32 h-32 text-sea-green" />
+                </div>
               </div>
             </motion.div>
 
@@ -552,11 +549,9 @@ export default function TeamMember() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-24 h-24 object-cover rounded-full mx-auto mb-6"
-              />
+              <div className="w-24 h-24 bg-gradient-to-br from-sea-green/20 to-sea-green/40 rounded-full mx-auto mb-6 flex items-center justify-center glassmorphic">
+                <member.icon className="w-12 h-12 text-sea-green" />
+              </div>
               <h2 className="text-4xl font-heading font-bold text-dark-slate mb-6">
                 Готовы обсудить <span className="text-sea-green">ваш проект?</span>
               </h2>
