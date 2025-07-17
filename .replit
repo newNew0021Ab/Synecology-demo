@@ -41,4 +41,4 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npx sanity dev --port 3333 --host 0.0.0.0"
+args = "cd studio && npm run dev -- --port 3333 --host 0.0.0.0"
