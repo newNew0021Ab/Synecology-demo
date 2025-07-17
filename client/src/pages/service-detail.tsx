@@ -788,7 +788,27 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      
+      {/* Tags Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <GlassmorphicCard className="text-center">
+            <h2 className="text-3xl font-heading font-bold text-dark-slate mb-8">
+              Возможно вас заинтересует
+            </h2>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {service.tags.map((tag: string) => (
+                <Link
+                  key={tag}
+                  href={`/services?tag=${encodeURIComponent(tag)}`}
+                  className="glassmorphic glassmorphic-hover px-6 py-3 rounded-full text-sea-green font-medium hover:scale-105 transition-all duration-300 border border-sea-green/20"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          </GlassmorphicCard>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
