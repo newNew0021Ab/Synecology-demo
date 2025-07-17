@@ -161,20 +161,20 @@ export default function Services() {
   const filteredServices = useMemo(() => {
     if (!selectedTag) return services;
     return services.filter(service => 
-      service.tags && service.tags.includes(selectedTag)
+      service.tags && Array.isArray(service.tags) && service.tags.includes(selectedTag)
     );
-  }, [selectedTag]);
+  }, [selectedTag, services]);
 
   // Получаем все уникальные теги
   const allTags = useMemo(() => {
     const tags = new Set<string>();
     services.forEach(service => {
-      if (service.tags) {
+      if (service.tags && Array.isArray(service.tags)) {
         service.tags.forEach(tag => tags.add(tag));
       }
     });
     return Array.from(tags).sort();
-  }, []);
+  }, [services]);
 
   const clearFilter = () => {
     setSelectedTag(null);

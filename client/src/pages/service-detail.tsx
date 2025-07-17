@@ -822,24 +822,47 @@ export default function ServiceDetail() {
               Вас может заинтересовать
             </h3>
             <p className="text-lg text-dark-slate/70">
-              Похожие услуги по тематике
+              Другие популярные услуги
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {(() => {
               // Логика поиска похожих услуг по тегам
-              const currentTags = service.tags;
-              const relatedServices = Object.entries(services)
-                .filter(([key]) => key !== slug) // Исключаем текущую услугу
-                .map(([key, relatedService]) => ({
-                  key,
-                  service: relatedService,
-                  matchScore: relatedService.tags.filter((tag: string) => currentTags.includes(tag)).length
-                }))
-                .filter(item => item.matchScore > 0) // Только услуги с общими тегами
-                .sort((a, b) => b.matchScore - a.matchScore) // Сортируем по количеству совпадений
-                .slice(0, 3); // Берем только первые 3
+              const currentTags = service.tags || [];
+              const allServicesList = Object.entries(services)
+                .filter(([key]) => key !== slug); // Исключаем текущую услугу
+              
+              let relatedServices = [];
+              
+              if (currentTags.length > 0) {
+                // Сначала ищем услуги с общими тегами
+                relatedServices = allServicesList
+                  .map(([key, relatedService]) => ({
+                    key,
+                    service: relatedService,
+                    matchScore: (relatedService.tags || []).filter((tag: string) => currentTags.includes(tag)).length
+                  }))
+                  .filter(item => item.matchScore > 0) // Только услуги с общими тегами
+                  .sort((a, b) => b.matchScore - a.matchScore); // Сортируем по количеству совпадений
+              }
+              
+              // Если недостаточно услуг с общими тегами, добавляем остальные
+              if (relatedServices.length < 3) {
+                const usedKeys = new Set(relatedServices.map(item => item.key));
+                const remainingServices = allServicesList
+                  .filter(([key]) => !usedKeys.has(key))
+                  .map(([key, relatedService]) => ({
+                    key,
+                    service: relatedService,
+                    matchScore: 0
+                  }));
+                
+                relatedServices = [...relatedServices, ...remainingServices];
+              }
+              
+              // Берем только первые 3
+              relatedServices = relatedServices.slice(0, 3);
 
               return relatedServices.map(({ key, service: relatedService }) => (
                 <motion.div
