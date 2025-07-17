@@ -266,17 +266,15 @@ export default function Services() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
               >
-                <h3 className="text-lg font-heading font-semibold text-dark-slate mb-2">Популярные категории:</h3>
-                <p className="text-sm text-dark-slate/60 mb-4">Выберите одну или несколько категорий для фильтрации услуг</p>
+                <h3 className="text-lg font-heading font-semibold text-dark-slate mb-4">Популярные категории:</h3>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {popularTags.map((tag) => (
                     <button
                       key={tag}
                       onClick={() => handleTagClick(tag)}
-                      className="glassmorphic glassmorphic-hover px-4 py-2 rounded-full text-sea-green font-medium hover:scale-105 transition-all duration-300 border border-sea-green/20 cursor-pointer relative"
+                      className="glassmorphic glassmorphic-hover px-4 py-2 rounded-full text-sea-green font-medium hover:scale-105 transition-all duration-300 border border-sea-green/20 cursor-pointer"
                     >
                       {tag}
-                      <span className="ml-2 text-xs text-sea-green/60">+</span>
                     </button>
                   ))}
                 </div>
@@ -291,59 +289,26 @@ export default function Services() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <h3 className="text-lg font-heading font-semibold text-dark-slate mb-2 text-center">Активные фильтры:</h3>
                 <div className="flex flex-wrap gap-3 justify-center mb-4">
                   {activeFilters.map((filter) => (
-                    <div key={filter} className="inline-flex items-center gap-2 bg-sea-green/15 border border-sea-green/40 rounded-full px-4 py-2 shadow-sm">
-                      <CheckCircle className="w-3 h-3 text-sea-green" />
+                    <div key={filter} className="inline-flex items-center gap-2 bg-sea-green/10 border border-sea-green/30 rounded-full px-4 py-2">
                       <span className="text-sea-green font-medium text-sm">{filter}</span>
                       <button
                         onClick={() => handleTagClick(filter)}
                         className="text-sea-green hover:text-sea-green/70 transition-colors"
-                        title="Убрать фильтр"
                       >
                         <X className="w-3 h-3" />
                       </button>
                     </div>
                   ))}
+                  <button
+                    onClick={clearFilters}
+                    className="text-sea-green hover:text-sea-green/70 transition-colors text-sm font-medium px-3 py-2 rounded-full border border-sea-green/30"
+                  >
+                    Очистить все
+                  </button>
                 </div>
-                <div className="flex flex-col items-center gap-4">
-                  <p className="text-dark-slate/60 text-center">Найдено услуг: <span className="font-semibold text-sea-green">{filteredServices.length}</span></p>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={clearFilters}
-                      className="text-sea-green hover:text-sea-green/70 transition-colors text-sm font-medium px-4 py-2 rounded-full border border-sea-green/30 glassmorphic glassmorphic-hover"
-                    >
-                      Очистить все фильтры
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* All Available Tags for Multi-Selection */}
-            {activeFilters.length > 0 && (
-              <motion.div
-                className="mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
-                <h4 className="text-base font-heading font-semibold text-dark-slate mb-3 text-center">Добавить еще категории:</h4>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {allTags
-                    .filter(tag => !activeFilters.includes(tag))
-                    .map((tag) => (
-                    <button
-                      key={tag}
-                      onClick={() => handleTagClick(tag)}
-                      className="glassmorphic glassmorphic-hover px-3 py-1.5 rounded-full text-dark-slate/70 font-medium hover:scale-105 transition-all duration-300 border border-dark-slate/20 cursor-pointer text-sm hover:text-sea-green hover:border-sea-green/30"
-                    >
-                      {tag}
-                      <span className="ml-1 text-xs text-sea-green/60">+</span>
-                    </button>
-                  ))}
-                </div>
+                <p className="text-dark-slate/60 text-center">Найдено услуг: {filteredServices.length}</p>
               </motion.div>
             )}
           </div>
