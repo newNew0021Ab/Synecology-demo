@@ -4,14 +4,12 @@ import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quo
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { useState } from "react";
-import { useTeamMember } from "@/hooks/useSanity";
-import { urlFor } from "@/lib/sanity";
+import { useEffect, useState } from "react";
 
 export default function TeamMember() {
   const { slug } = useParams();
+  const [member, setMember] = useState<any>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<any>(null);
-  const { data: member, isLoading, error } = useTeamMember(slug || '');
 
   const teamMembers = {
     "egor-koryakin": {
@@ -236,20 +234,13 @@ export default function TeamMember() {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="pt-24 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/2 mx-auto mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/4 mx-auto"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (slug) {
+      setMember(teamMembers[slug as keyof typeof teamMembers] || null);
+    }
+  }, [slug]);
 
-  if (error || !member) {
+  if (!member) {
     return (
       <div className="pt-24 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -290,7 +281,7 @@ export default function TeamMember() {
             >
               <div className="relative">
                 <img
-                  src={member.image ? urlFor(member.image).width(400).height(400).url() : '/placeholder-avatar.jpg'}
+                  src={member.image}
                   alt={member.name}
                   className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
                 />
@@ -434,7 +425,7 @@ export default function TeamMember() {
                       onClick={() => setSelectedCertificate(certificate)}
                     >
                       <img
-                        src={certificate.image ? urlFor(certificate.image).width(400).height(300).url() : '/placeholder-certificate.jpg'}
+                        src={certificate.image}
                         alt={certificate.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
