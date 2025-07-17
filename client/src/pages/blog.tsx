@@ -20,6 +20,7 @@ export default function Blog() {
       tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
       featured: true,
       author: "Корякин Егор Дмитриевич",
+      authorSlug: "egor-koryakin",
     },
     {
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
@@ -31,6 +32,7 @@ export default function Blog() {
       tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
       featured: false,
       author: "Волошко Инна Владимировна",
+      authorSlug: "inna-voloshko",
     },
     {
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
@@ -42,6 +44,7 @@ export default function Blog() {
       tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
       featured: false,
       author: "Корякин Егор Дмитриевич",
+      authorSlug: "egor-koryakin",
     },
   ];
 
@@ -221,7 +224,7 @@ export default function Blog() {
                           <span className="font-medium">{post.category}</span>
                         </div>
                         <Link
-                          href={`/team/${post.author === "Корякин Егор Дмитриевич" ? "egor-koryakin" : "inna-voloshko"}`}
+                          href={`/team/${post.authorSlug}`}
                           className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
@@ -339,7 +342,7 @@ export default function Blog() {
                           <span className="font-medium">{post.category}</span>
                         </div>
                         <Link
-                          href={`/team/${post.author === "Корякин Егор Дмитриевич" ? "egor-koryakin" : "inna-voloshko"}`}
+                          href={`/team/${post.authorSlug}`}
                           className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
@@ -401,7 +404,7 @@ export default function Blog() {
                           <span className="font-medium">{post.category}</span>
                         </div>
                         <Link
-                          href={`/team/${post.author === "Корякин Егор Дмитриевич" ? "egor-koryakin" : "inna-voloshko"}`}
+                          href={`/team/${post.authorSlug}`}
                           className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
