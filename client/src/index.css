@@ -276,19 +276,16 @@
     box-shadow: 0 15px 30px rgba(46, 139, 87, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
   }
 
-  /* Service card clickable behavior - only on devices with hover capability */
+  /* Service card clickable behavior - enable on all devices */
   .service-card-clickable,
   .service-image-clickable {
-    @media (hover: none) {
-      pointer-events: none;
-    }
+    cursor: pointer;
   }
 
-  /* Make sure buttons inside clickable cards work on hover devices */
-  @media (hover: hover) {
-    .service-card-clickable .btn-primary {
-      pointer-events: auto;
-    }
+  /* Make sure buttons inside clickable cards work on all devices */
+  .service-card-clickable .btn-primary,
+  .service-card-clickable .btn-secondary {
+    pointer-events: auto;
   }
 
   /* Mobile optimizations */
