@@ -8,6 +8,10 @@ channel = "stable-24_05"
 run = ["sh", "-c", "npm run dev"]
 
 [[ports]]
+localPort = 3333
+externalPort = 3001
+
+[[ports]]
 localPort = 4321
 externalPort = 3000
 
