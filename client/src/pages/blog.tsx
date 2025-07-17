@@ -315,7 +315,7 @@ export default function Blog() {
                         post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
                         "production-environmental-control"
                       }`
-                    }`}>
+                </div>})
                   <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                     <article className="flex flex-col h-full space-y-6">
                       <div className="relative">
