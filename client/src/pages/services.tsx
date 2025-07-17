@@ -301,12 +301,7 @@ export default function Services() {
                       </button>
                     </div>
                   ))}
-                  <button
-                    onClick={clearFilters}
-                    className="text-sea-green hover:text-sea-green/70 transition-colors text-sm font-medium px-3 py-2 rounded-full border border-sea-green/30"
-                  >
-                    Очистить все
-                  </button>
+                  
                 </div>
                 <p className="text-dark-slate/60 text-center">Найдено услуг: {filteredServices.length}</p>
               </motion.div>
