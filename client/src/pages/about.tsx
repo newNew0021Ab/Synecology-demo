@@ -16,7 +16,7 @@ export default function About() {
       name: "Корякин Егор Дмитриевич",
       role: "Директор",
       bio: "Опытный специалист с более чем 5-летним стажем в сфере экологии и природопользования. Имеет практический опыт работы в системе Минприроды, где участвовал в разработке и реализации различных проектов.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
       expertise: ["Экологическое законодательство", "Проекты Минприроды", "Стратегическое планирование"],
       social: {
         linkedin: "#",
@@ -28,7 +28,7 @@ export default function About() {
       name: "Волошко Инна Владимировна",
       role: "Коммерческий директор",
       bio: "Опытный управленец с более чем 10-летним стажем в коммерческой деятельности и руководящих должностях. Отвечает за развитие бизнеса и работу с клиентами.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
+      image: "https://images.unsplash.com/photo-1494790108755-2616c56f84f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
       expertise: ["Коммерческая деятельность", "Управление проектами", "Развитие бизнеса"],
       social: {
         linkedin: "#",

@@ -82,7 +82,7 @@ export default function TeamMember() {
       role: "Коммерческий директор",
       quote: "Успешный бизнес начинается с правильно выстроенных процессов. Моя задача — сделать сотрудничество с нами максимально комфортным и эффективным.",
       bio: "В Synecology я отвечаю за коммерческое развитие и обеспечение высокого качества обслуживания клиентов. Мой многолетний опыт в управлении позволяет выстраивать долгосрочные партнерские отношения с предприятиями различных отраслей.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+      image: "https://images.unsplash.com/photo-1494790108755-2616c56f84f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
       expertise: [
         "Коммерческая деятельность",
         "Управление проектами", 
@@ -181,7 +181,7 @@ export default function TeamMember() {
       role: "Менеджер водных ресурсов", 
       quote: "Чистая вода — основа жизни. Моя задача — обеспечить, чтобы деятельность предприятий не нарушала этот баланс.",
       bio: "В Synecology я отвечаю за все проекты, связанные с водными ресурсами — от разработки нормативов водопользования до проектирования систем очистки сточных вод. Мой гидрогеологический опыт позволяет находить оптимальные решения даже для самых сложных задач.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800",
       expertise: [
         "Разработка нормативов водопользования",
         "Проектирование систем очистки сточных вод",
