@@ -1,21 +1,10 @@
 import { motion } from "framer-motion";
-import { Link, useLocation } from "wouter";
-import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight, CheckCircle, X } from "lucide-react";
+import { Link } from "wouter";
+import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight, CheckCircle } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { useEffect, useState, useMemo } from "react";
 
 export default function Services() {
-  const [location] = useLocation();
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
-
-  // Получаем тег из URL параметров
-  useEffect(() => {
-    const urlParams = new URLSearchParams(location.split('?')[1] || '');
-    const tagFromUrl = urlParams.get('tag');
-    setSelectedTag(tagFromUrl);
-  }, [location]);
-
   const services = [
     {
       icon: Factory,
@@ -28,7 +17,6 @@ export default function Services() {
         "Рекомендации по снижению выбросов",
       ],
       image: "https://images.unsplash.com/photo-1688763699666-88cef43ac4e4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Инвентаризация", "Выбросы", "ЭкоНиП", "Минприроды", "Атмосферный воздух"],
     },
     {
       icon: Recycle,
@@ -40,7 +28,6 @@ export default function Services() {
         "Подготовка технических решений",
       ],
       image: "https://images.unsplash.com/photo-1695391533533-fcad0ac7b8ae?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["НДВ", "Нормативы", "Разрешения", "ЦГиЭ", "Минприроды"],
     },
     {
       icon: FileText,
@@ -54,7 +41,6 @@ export default function Services() {
         "Консультации по обновлению паспорта",
       ],
       image: "https://images.unsplash.com/photo-1693328397193-b858f1b38c60?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Экологический паспорт", "ТКП", "Природопользование", "Документация", "Беларусь"],
     },
     {
       icon: Droplets,
@@ -68,7 +54,6 @@ export default function Services() {
         "Контроль параметров очистки",
       ],
       image: "https://images.unsplash.com/photo-1745921180154-084875e95722?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
-      tags: ["ГОУ", "Газоочистка", "Паспорт", "Регистрация", "Оборудование"],
     },
     {
       icon: Trash2,
@@ -82,7 +67,6 @@ export default function Services() {
         "Контроль за обращением с отходами",
       ],
       image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Отходы", "Инструкция", "Нормативы", "Согласование", "ПОД"],
     },
     {
       icon: ClipboardList,
@@ -97,7 +81,6 @@ export default function Services() {
         "Восстановление данных за предыдущие периоды",
       ],
       image: "https://plus.unsplash.com/premium_photo-1682379784551-f36d725abf3f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D &auto=format&fit=crop&w=800&h=600",
-      tags: ["Отчетность", "Журналы", "ПОД", "Учет", "Налог"],
     },
     {
       icon: FileText,
@@ -111,7 +94,6 @@ export default function Services() {
         "Мониторинг изменений в законодательстве",
       ],
       image: "https://images.unsplash.com/photo-1752159400890-d906038f1b35?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
-      tags: ["Аутсорсинг", "Сопровождение", "Эколог", "Консультации", "Отчетность"],
     },
     {
       icon: Factory,
@@ -125,7 +107,6 @@ export default function Services() {
         "Подготовка отчетов и рекомендаций",
       ],
       image: "https://images.unsplash.com/photo-1625384827802-1118262acfa6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Аудит", "Анализ", "Проверка", "Нарушения", "Минприроды"],
     },
     {
       icon: FileText,
@@ -139,7 +120,6 @@ export default function Services() {
         "Приказы на проведение инструктажей и журналы",
       ],
       image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      tags: ["Инструктажи", "ПЭК", "Документация", "Обучение", "ООС"],
     },
     {
       icon: ClipboardList,
@@ -153,33 +133,8 @@ export default function Services() {
         "Учет специфики деятельности заказчика",
       ],
       image: "https://images.unsplash.com/photo-1737502483541-92e91801cfaf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
-      tags: ["ПЭК", "Контроль", "Мониторинг", "ЭкоНиП", "Наблюдения"],
     },
   ];
-
-  // Фильтрация услуг по выбранному тегу
-  const filteredServices = useMemo(() => {
-    if (!selectedTag) return services;
-    return services.filter(service => 
-      service.tags && Array.isArray(service.tags) && service.tags.includes(selectedTag)
-    );
-  }, [selectedTag, services]);
-
-  // Получаем все уникальные теги
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    services.forEach(service => {
-      if (service.tags && Array.isArray(service.tags)) {
-        service.tags.forEach(tag => tags.add(tag));
-      }
-    });
-    return Array.from(tags).sort();
-  }, [services]);
-
-  const clearFilter = () => {
-    setSelectedTag(null);
-    window.history.pushState({}, '', '/services');
-  };
 
   return (
     <div className="pt-24">
@@ -210,34 +165,11 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Filter Section */}
-      {selectedTag && (
-        <section className="py-12 bg-gradient-to-b from-soft-blue/10 to-transparent">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <span className="text-dark-slate/70">Фильтр по тегу:</span>
-              <div className="flex items-center gap-2 px-4 py-2 bg-sea-green/10 text-sea-green rounded-full border border-sea-green/20">
-                <span className="font-medium">{selectedTag}</span>
-                <button
-                  onClick={clearFilter}
-                  className="w-5 h-5 flex items-center justify-center hover:bg-sea-green/20 rounded-full transition-colors"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </div>
-              <span className="text-dark-slate/70">
-                ({filteredServices.length} {filteredServices.length === 1 ? 'услуга' : filteredServices.length < 5 ? 'услуги' : 'услуг'})
-              </span>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Services Grid */}
       <section className="py-20 bg-subtle-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-20">
-            {filteredServices.map((service, index) => (
+            {services.map((service, index) => (
               <motion.div
                 key={service.title}
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
@@ -262,7 +194,7 @@ export default function Services() {
                           {service.title}
                         </h2>
                         <p className="text-lg text-dark-slate/70 mb-6">{service.description}</p>
-                        <div className="space-y-3 mb-6 flex-grow">
+                        <div className="space-y-3 mb-8 flex-grow">
                           {service.features.map((feature) => (
                             <div key={feature} className="flex items-center gap-3">
                               <CheckCircle className="w-5 h-5 text-sea-green flex-shrink-0" />
@@ -270,18 +202,6 @@ export default function Services() {
                             </div>
                           ))}
                         </div>
-                        {service.tags && (
-                          <div className="flex flex-wrap gap-2 mb-6">
-                            {service.tags.slice(0, 3).map((tag) => (
-                              <span
-                                key={tag}
-                                className="inline-block px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
                         <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                           <span className="btn-secondary pointer-events-none">
                             Подробнее
