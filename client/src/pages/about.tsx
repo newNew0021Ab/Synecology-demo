@@ -7,7 +7,7 @@ import GlassmorphicCard from "@/components/GlassmorphicCard";
 export default function About() {
   const stats = [
     { value: "150+", label: "Проектов завершено", icon: TrendingUp },
-    { value: "25+", label: "Экспертов в команде", icon: Users },
+    { value: "98%", label: "Довольных клиентов", icon: Users },
     { value: "9", label: "Лет опыта", icon: Award },
   ];
 
