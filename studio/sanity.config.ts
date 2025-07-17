@@ -11,6 +11,9 @@ export default defineConfig({
 
   projectId: 'ysoxzj37',
   dataset: 'production',
+  
+  // Настройки для Replit
+  basePath: '/studio',
 
   plugins: [
     deskTool({
