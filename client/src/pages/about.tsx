@@ -171,8 +171,8 @@ export default function About() {
               return (
                 <div key={member.name} className="group">
                   {/* Desktop/Tablet - clickable card */}
-                  <Link href={`/team/${memberSlug}`} className="hidden sm:block">
-                    <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
+                  <div className="hidden sm:block">
+                    <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer" onClick={() => window.location.href = `/team/${memberSlug}`}>
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
                           <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -229,7 +229,7 @@ export default function About() {
                         </div>
                       </div>
                     </GlassmorphicCard>
-                  </Link>
+                  </div>
 
                   {/* Mobile - non-clickable card with buttons */}
                   <div className="sm:hidden">
