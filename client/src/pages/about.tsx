@@ -169,10 +169,18 @@ export default function About() {
                                 "team-member";
 
               return (
-                <div key={member.name} className="group">
+                <motion.div
+                  key={member.name}
+                  className="group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.8 }}
+                  viewport={{ once: true }}
+                  onClick={() => window.location.href = `/team/${memberSlug}`}
+                >
                   {/* Desktop/Tablet - clickable card */}
                   <div className="hidden sm:block">
-                    <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer" onClick={() => window.location.href = `/team/${memberSlug}`}>
+                    <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
                           <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -219,13 +227,15 @@ export default function About() {
                           <div className="text-sea-green font-medium text-sm inline-flex items-center gap-1">
                             Подробнее <ArrowRight className="w-3 h-3" />
                           </div>
-                          <a
-                            href={`mailto:${member.social.email}`}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.location.href = `mailto:${member.social.email}`;
+                            }}
                             className="text-dark-slate/60 hover:text-sea-green transition-colors"
-                            onClick={(e) => e.stopPropagation()}
                           >
                             <Mail className="w-4 h-4" />
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </GlassmorphicCard>
@@ -233,7 +243,7 @@ export default function About() {
 
                   {/* Mobile - non-clickable card with buttons */}
                   <div className="sm:hidden">
-                    <GlassmorphicCard delay={index * 0.1} className="h-full">
+                    <GlassmorphicCard className="h-full">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
                           <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -277,23 +287,29 @@ export default function About() {
                         </div>
                         
                         <div className="flex gap-3 mt-6 pt-4 border-t border-dark-slate/10">
-                          <Link
-                            href={`/team/${memberSlug}`}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.location.href = `/team/${memberSlug}`;
+                            }}
                             className="flex-1 bg-sea-green text-white px-4 py-2 rounded-full font-medium text-sm text-center hover:bg-sea-green/90 transition-colors"
                           >
                             Подробнее
-                          </Link>
-                          <a
-                            href={`mailto:${member.social.email}`}
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.location.href = `mailto:${member.social.email}`;
+                            }}
                             className="px-4 py-2 glassmorphic glassmorphic-hover rounded-full text-sea-green font-medium text-sm hover:text-sea-green/80 transition-colors inline-flex items-center gap-2"
                           >
                             <Mail className="w-4 h-4" />
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </GlassmorphicCard>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

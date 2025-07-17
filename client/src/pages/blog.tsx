@@ -306,18 +306,17 @@ export default function Blog() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredPosts.filter(post => !post.featured).map((post, index) => (
               <div key={post.title} className="group">
-                <Link
-                  href={`/blog/${
+                {/* Replacing the Link with a div and onClick for navigation */}
+                <div className="group block h-full cursor-pointer" onClick={() => window.location.href = `/blog/${
                         post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
                         post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
                         post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
                         post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
                         post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
                         "production-environmental-control"
-                      }`}
-                  className="hidden md:block"
-                >
-                  <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
+                      }`
+                    }`}>
+                  <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                     <article className="flex flex-col h-full space-y-6">
                       <div className="relative">
                         <img
@@ -341,13 +340,17 @@ export default function Blog() {
                           <Tag className="w-4 h-4" />
                           <span className="font-medium">{post.category}</span>
                         </div>
-                        <Link
-                          href={`/team/${post.authorSlug}`}
+                        {/* Changed Link to button to avoid nested links, using onClick to navigate */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent navigation on the card itself
+                            window.location.href = `/team/${post.authorSlug}`;
+                          }}
                           className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
                           <span className="font-medium">{post.author}</span>
-                        </Link>
+                        </button>
                       </div>
 
                       <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
@@ -369,17 +372,17 @@ export default function Blog() {
                         ))}
                       </div>
 
+                      {/* The navigation is already handled at the card level, so this Link is not needed anymore, but keeping the styling */}
                       <div className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 mt-auto justify-center group-hover:bg-sea-green/90">
                         <ArrowRight className="w-5 h-5" />
                         Читать полную статью
                       </div>
                     </article>
                   </GlassmorphicCard>
-                </Link>
+                </div>
 
-                {/* Mobile version - not clickable */}
-                <div className="md:hidden">
-                  <GlassmorphicCard delay={index * 0.1}>
+                {/* Mobile version - clickable (removed Link) */}
+                <GlassmorphicCard delay={index * 0.1}>
                     <article className="flex flex-col h-full space-y-6">
                       <div className="relative">
                         <img
@@ -403,13 +406,17 @@ export default function Blog() {
                           <Tag className="w-4 h-4" />
                           <span className="font-medium">{post.category}</span>
                         </div>
-                        <Link
-                          href={`/team/${post.authorSlug}`}
+                         {/* Changed Link to button to avoid nested links, using onClick to navigate */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent navigation on the card itself
+                            window.location.href = `/team/${post.authorSlug}`;
+                          }}
                           className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                         >
                           <User className="w-4 h-4" />
                           <span className="font-medium">{post.author}</span>
-                        </Link>
+                        </button>
                       </div>
 
                       <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3">
@@ -452,7 +459,7 @@ export default function Blog() {
                       </Link>
                     </article>
                   </GlassmorphicCard>
-                </div>
+              </div>
               </div>
             ))}
             </div>
