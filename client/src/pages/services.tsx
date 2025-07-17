@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export default function Services() {
   const [location] = useLocation();
-  const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [filteredServices, setFilteredServices] = useState<typeof services>([]);
 
   const services = [
@@ -168,51 +168,68 @@ export default function Services() {
   // Самые популярные теги
   const popularTags = ["Минприроды", "Документация", "Отчетность", "ПЭК", "Нормативы", "Экологическое право"];
 
-  // Функция для применения фильтра
-  const applyFilter = (tag: string | null) => {
-    if (!tag) {
+  // Функция для применения фильтров
+  const applyFilters = (filters: string[]) => {
+    if (filters.length === 0) {
       setFilteredServices(services);
-      setActiveFilter(null);
+      setActiveFilters([]);
     } else {
       const filtered = services.filter(service => 
-        service.tags.some(serviceTag => serviceTag.toLowerCase() === tag.toLowerCase())
+        filters.every(filter => 
+          service.tags.some(serviceTag => serviceTag.toLowerCase() === filter.toLowerCase())
+        )
       );
       setFilteredServices(filtered);
-      setActiveFilter(tag);
+      setActiveFilters(filters);
     }
   };
 
-  // Инициализация фильтра при загрузке страницы
+  // Инициализация фильтров при загрузке страницы
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const tagParam = urlParams.get('tag');
+    const tagParams = urlParams.getAll('tag');
     
-    if (tagParam) {
-      applyFilter(tagParam);
+    if (tagParams.length > 0) {
+      applyFilters(tagParams);
     } else {
-      applyFilter(null);
+      applyFilters([]);
     }
   }, []);
 
   // Следим за изменениями в URL
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const tagParam = urlParams.get('tag');
+    const tagParams = urlParams.getAll('tag');
     
-    if (tagParam !== activeFilter) {
-      applyFilter(tagParam);
+    const filtersChanged = tagParams.length !== activeFilters.length || 
+      !tagParams.every(tag => activeFilters.includes(tag));
+    
+    if (filtersChanged) {
+      applyFilters(tagParams);
     }
   }, [location]);
 
   const handleTagClick = (tag: string) => {
-    const newUrl = `/services?tag=${encodeURIComponent(tag)}`;
+    let newFilters;
+    if (activeFilters.includes(tag)) {
+      // Убираем тег, если он уже выбран
+      newFilters = activeFilters.filter(f => f !== tag);
+    } else {
+      // Добавляем тег к выбранным
+      newFilters = [...activeFilters, tag];
+    }
+    
+    const urlParams = new URLSearchParams();
+    newFilters.forEach(filter => urlParams.append('tag', filter));
+    
+    const newUrl = newFilters.length > 0 ? `/services?${urlParams.toString()}` : '/services';
     window.history.pushState({}, '', newUrl);
-    applyFilter(tag);
+    applyFilters(newFilters);
   };
 
-  const clearFilter = () => {
+  const clearFilters = () => {
     window.history.pushState({}, '', '/services');
-    applyFilter(null);
+    applyFilters([]);
   };
 
   return (
@@ -242,7 +259,7 @@ export default function Services() {
             </motion.p>
 
             {/* Popular Tags */}
-            {!activeFilter && (
+            {activeFilters.length === 0 && (
               <motion.div
                 className="mb-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -264,24 +281,34 @@ export default function Services() {
               </motion.div>
             )}
 
-            {/* Active Filter Display */}
-            {activeFilter && (
+            {/* Active Filters Display */}
+            {activeFilters.length > 0 && (
               <motion.div
                 className="mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="inline-flex items-center gap-3 bg-sea-green/10 border border-sea-green/30 rounded-full px-6 py-3">
-                  <span className="text-sea-green font-medium">Фильтр: {activeFilter}</span>
+                <div className="flex flex-wrap gap-3 justify-center mb-4">
+                  {activeFilters.map((filter) => (
+                    <div key={filter} className="inline-flex items-center gap-2 bg-sea-green/10 border border-sea-green/30 rounded-full px-4 py-2">
+                      <span className="text-sea-green font-medium text-sm">{filter}</span>
+                      <button
+                        onClick={() => handleTagClick(filter)}
+                        className="text-sea-green hover:text-sea-green/70 transition-colors"
+                      >
+                        <X className="w-3 h-3" />
+                      </button>
+                    </div>
+                  ))}
                   <button
-                    onClick={clearFilter}
-                    className="text-sea-green hover:text-sea-green/70 transition-colors"
+                    onClick={clearFilters}
+                    className="text-sea-green hover:text-sea-green/70 transition-colors text-sm font-medium px-3 py-2 rounded-full border border-sea-green/30"
                   >
-                    <X className="w-4 h-4" />
+                    Очистить все
                   </button>
                 </div>
-                <p className="text-dark-slate/60 mt-2">Найдено услуг: {filteredServices.length}</p>
+                <p className="text-dark-slate/60 text-center">Найдено услуг: {filteredServices.length}</p>
               </motion.div>
             )}
           </div>
@@ -294,7 +321,7 @@ export default function Services() {
           <div className="space-y-20">
             {filteredServices.map((service, index) => (
               <motion.div
-                key={`${service.slug}-${activeFilter}`}
+                key={`${service.slug}-${activeFilters.join('-')}`}
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
                   index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
                 }`}
@@ -354,7 +381,7 @@ export default function Services() {
           </div>
 
           {/* No Results Message */}
-          {filteredServices.length === 0 && (
+          {filteredServices.length === 0 && activeFilters.length > 0 && (
             <div className="text-center py-20">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -365,10 +392,10 @@ export default function Services() {
                   Услуги не найдены
                 </h3>
                 <p className="text-dark-slate/70 mb-6">
-                  По выбранному фильтру "{activeFilter}" услуги не найдены.
+                  По выбранным фильтрам услуги не найдены. Попробуйте изменить критерии поиска.
                 </p>
                 <button
-                  onClick={clearFilter}
+                  onClick={clearFilters}
                   className="btn-primary"
                 >
                   Показать все услуги

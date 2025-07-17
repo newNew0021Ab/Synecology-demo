@@ -57,7 +57,8 @@ export default function Blog() {
   // Фильтруем посты по тегам и поисковому запросу
   const filteredPosts = useMemo(() => {
     return blogPosts.filter(post => {
-      const matchesTags = selectedTags.length === 0 || selectedTags.some(tag => post.tags.includes(tag));
+      // Для тегов используем логику "И" - пост должен содержать ВСЕ выбранные теги
+      const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => post.tags.includes(tag));
       const matchesSearch = !searchTerm || 
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -135,7 +136,7 @@ export default function Blog() {
                   onClick={() => toggleTag(tag)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                     selectedTags.includes(tag)
-                      ? 'bg-sea-green/20 text-sea-green border-2 border-sea-green'
+                      ? 'bg-sea-green text-white border-2 border-sea-green shadow-lg'
                       : 'bg-white/60 text-dark-slate/70 hover:bg-sea-green/10 hover:text-sea-green border border-dark-slate/20'
                   }`}
                 >
@@ -150,9 +151,9 @@ export default function Blog() {
           {(selectedTags.length > 0 || searchTerm) && (
             <div className="flex justify-center items-center gap-4 mb-4">
               <div className="flex items-center gap-2 text-sm text-dark-slate/70">
-                <span>Активные фильтры:</span>
+                <span>Активные фильтры{selectedTags.length > 1 ? ' (все должны совпадать)' : ''}:</span>
                 {selectedTags.map(tag => (
-                  <span key={tag} className="bg-sea-green/20 text-sea-green px-3 py-1 rounded-full">
+                  <span key={tag} className="bg-sea-green text-white px-3 py-1 rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -246,9 +247,9 @@ export default function Blog() {
                         <button
                           key={tag}
                           onClick={() => toggleTag(tag)}
-                          className={`px-3 py-1 text-sm rounded-full transition-colors cursor-pointer ${
+                          className={`px-3 py-1 text-sm rounded-full transition-all duration-300 cursor-pointer ${
                             selectedTags.includes(tag)
-                              ? 'bg-sea-green text-white'
+                              ? 'bg-sea-green text-white shadow-lg'
                               : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
                           }`}
                         >
@@ -433,7 +434,7 @@ export default function Blog() {
                             onClick={() => toggleTag(tag)}
                             className={`px-3 py-1 text-sm rounded-full transition-all duration-300 ${
                               selectedTags.includes(tag)
-                                ? 'bg-sea-green text-white'
+                                ? 'bg-sea-green text-white shadow-lg'
                                 : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
                             }`}
                           >
