@@ -8,6 +8,10 @@ channel = "stable-24_05"
 run = ["sh", "-c", "npm run dev"]
 
 [[ports]]
+localPort = 4321
+externalPort = 3000
+
+[[ports]]
 localPort = 5000
 externalPort = 80
 
@@ -21,3 +25,12 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
+
+[[workflows.workflow]]
+name = "Sanity Studio"
+author = 45170381
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd studio && npx sanity dev --port 3333 --host 0.0.0.0"
