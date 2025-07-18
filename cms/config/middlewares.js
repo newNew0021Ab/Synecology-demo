@@ -32,7 +32,7 @@ module.exports = [
     config: {
       enabled: true,
       headers: '*',
-      origin: ['http://localhost:5173', 'http://localhost:5000', 'https://*.replit.dev'],
+      origin: ['http://localhost:5173', 'http://localhost:5000', 'https://*.replit.dev', 'https://ced1c427-460b-4552-9484-939a4004a9c7-00-1f51uzuqy97x3.picard.replit.dev'],
     },
   },
   'strapi::poweredBy',

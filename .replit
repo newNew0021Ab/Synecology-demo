@@ -20,6 +20,7 @@ localPort = 5173
 externalPort = 5173
 
 [workflows]
+runButton = "Full Stack Dev"
 
 [[workflows.workflow]]
 name = "Dev Server"
@@ -42,3 +43,16 @@ args = "npm run dev"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "cd cms && npm run develop"
+
+[[workflows.workflow]]
+name = "Full Stack Dev"
+author = 45209798
+mode = "parallel"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd cms && npm run develop -- --host 0.0.0.0 --port 1337"
