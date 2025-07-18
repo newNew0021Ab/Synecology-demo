@@ -11,17 +11,7 @@ run = ["sh", "-c", "npm run dev"]
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 1337
-externalPort = 3000
-
-[[ports]]
-localPort = 5173
-externalPort = 5173
-exposeLocalhost = true
-
 [workflows]
-runButton = "Full Stack Dev"
 
 [[workflows.workflow]]
 name = "Dev Server"
@@ -31,29 +21,3 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
-
-[[workflows.workflow]]
-name = "Dev with CMS"
-author = 45209798
-mode = "parallel"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd cms && npm run develop"
-
-[[workflows.workflow]]
-name = "Full Stack Dev"
-author = 45209798
-mode = "parallel"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd cms && npm run develop"

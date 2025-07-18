@@ -29,9 +29,16 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
+    host: "0.0.0.0",
+    allowedHosts: ["7911d18b-3f56-45fb-b970-a216d607665c-00-2ijj4up6gf3qq.kirk.replit.dev"],
+    port: 3000,
+    strictPort: false,
+    hmr: {
+      clientPort: 443,
+    },
     fs: {
-      strict: true,
-      deny: ["**/.*"],
+      strict: false,
+      allow: [".."],
     },
   },
 });

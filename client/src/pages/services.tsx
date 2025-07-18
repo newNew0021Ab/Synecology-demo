@@ -5,27 +5,13 @@ import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
-import { useServices } from "@/hooks/useStrapi";
-import { getStrapiImageUrl } from "@/lib/strapi";
 
 export default function Services() {
   const [location] = useLocation();
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
-  const [filteredServices, setFilteredServices] = useState<any[]>([]);
-  
-  const { data: strapiServices, isLoading, error } = useServices();
+  const [filteredServices, setFilteredServices] = useState<typeof services>([]);
 
-  // Конвертируем Strapi данные в формат компонента
-  const services = strapiServices?.map(service => ({
-    icon: Factory, // Пока используем дефолтную иконку, позже можно сделать mapping
-    title: service.attributes.title,
-    description: service.attributes.description,
-    features: service.attributes.features || [],
-    image: getStrapiImageUrl(service.attributes.image) || "https://images.unsplash.com/photo-1688763699666-88cef43ac4e4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    tags: service.attributes.tags || [],
-    slug: service.attributes.slug
-  })) || [
-    // Fallback static data in case Strapi is not available
+  const services = [
     {
       icon: Factory,
       title: "Инвентаризация выбросов",
