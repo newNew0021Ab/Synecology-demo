@@ -30,7 +30,7 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    allowedHosts: ["7911d18b-3f56-45fb-b970-a216d607665c-00-2ijj4up6gf3qq.kirk.replit.dev"],
+    allowedHosts: ["ced1c427-460b-4552-9484-939a4004a9c7-00-1f51uzuqy97x3.picard.replit.dev"],
     port: 3000,
     strictPort: false,
     hmr: {
