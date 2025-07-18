@@ -1,0 +1,72 @@
+
+{
+  "kind": "collectionType",
+  "collectionName": "team_members",
+  "info": {
+    "singularName": "team-member",
+    "pluralName": "team-members",
+    "displayName": "Team Member",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "quote": {
+      "type": "text"
+    },
+    "bio": {
+      "type": "richtext"
+    },
+    "approach": {
+      "type": "richtext"
+    },
+    "expertise": {
+      "type": "json"
+    },
+    "keyProjects": {
+      "type": "json"
+    },
+    "experience": {
+      "type": "string"
+    },
+    "education": {
+      "type": "string"
+    },
+    "certificates": {
+      "type": "json"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "contact": {
+      "type": "json"
+    },
+    "social": {
+      "type": "json"
+    },
+    "blogPosts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-post.blog-post",
+      "mappedBy": "author"
+    }
+  }
+}
