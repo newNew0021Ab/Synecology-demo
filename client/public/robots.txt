@@ -1,0 +1,22 @@
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://synecology.ru/sitemap.xml
+
+# Block development scripts
+Disallow: /src/
+Disallow: /*.js$
+Disallow: /*.ts$
+Disallow: /*.tsx$
+
+# Allow important assets
+Allow: /images/
+Allow: /favicon.ico
+Allow: /og-image.jpg
+Allow: /apple-touch-icon.png
+Allow: /site.webmanifest
+
+# Crawl delay
+Crawl-delay: 1

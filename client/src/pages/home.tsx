@@ -3,10 +3,23 @@ import { Link } from "wouter";
 import { PlayCircle, ArrowRight, Factory, Recycle, FileText, Droplets, Trash2, ClipboardList } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function Home() {
   const isMobile = useIsMobile();
+  
+  // SEO optimization
+  useSEO({
+    title: "Synecology - Экологический консалтинг в Беларуси | Экологические услуги",
+    description: "Экологический консалтинг для устойчивого будущего. Экспертные решения в области экологической оценки, планирования устойчивости и соответствия требованиям в Беларуси.",
+    keywords: "экологический консалтинг, экологические услуги, Беларусь, Минск, экологическая оценка, ПДВ, инвентаризация выбросов, экологический паспорт, обращение с отходами",
+    ogTitle: "Synecology - Экологический консалтинг в Беларуси",
+    ogDescription: "Превращаем эконормы в вашу прибыль. Экологический консалтинг для устойчивого будущего в Беларуси.",
+    ogImage: "https://synecology.ru/og-image.jpg",
+    canonical: "https://synecology.ru/"
+  });
 
   const handleCardClick = (e: React.MouseEvent) => {
     if (isMobile) {
@@ -55,6 +68,18 @@ export default function Home() {
   ];
 
   return (
+    <>
+      <StructuredData 
+        type="Organization" 
+        data={{}} 
+      />
+      <StructuredData 
+        type="WebPage" 
+        data={{
+          title: "Synecology - Экологический консалтинг в Беларуси",
+          description: "Экологический консалтинг для устойчивого будущего. Экспертные решения в области экологической оценки, планирования устойчивости и соответствия требованиям в Беларуси."
+        }} 
+      />
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="min-h-screen flex items-center relative overflow-hidden pt-20 md:pt-0">
@@ -305,5 +330,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }

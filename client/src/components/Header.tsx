@@ -36,7 +36,11 @@ export default function Header() {
             </span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav 
+            className="hidden lg:flex items-center gap-8"
+            role="navigation"
+            aria-label="Основная навигация"
+          >
             <Link 
               href="/" 
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/' ? 'text-sea-green font-semibold' : ''}`}

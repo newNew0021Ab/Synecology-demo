@@ -68,14 +68,40 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Synecology",
+          "alternateName": "Синекология",
           "url": "https://synecology.ru",
-          "logo": "https://synecology.ru/logo.png",
-          "description": "Экологическое консультирование и природоохранные решения",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+375 (29) 602-42-80",
-            "contactType": "Клиентская поддержка"
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://synecology.ru/logo.png",
+            "width": "200",
+            "height": "60"
           },
+          "image": "https://synecology.ru/og-image.jpg",
+          "description": "Экологическое консультирование и природоохранные решения в Беларуси",
+          "slogan": "Превращаем эконормы в вашу прибыль",
+          "foundingDate": "2020",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Беларусь"
+          },
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": "53.9006",
+              "longitude": "27.5590"
+            },
+            "geoRadius": "200000"
+          },
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+375 (29) 602-42-80",
+              "contactType": "Клиентская поддержка",
+              "areaServed": "BY",
+              "availableLanguage": ["Russian", "Belarusian"]
+            }
+          ],
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "пр-т. Газеты звезда д.16, пом. 53, офис 5В",
@@ -83,9 +109,43 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "postalCode": "220117",
             "addressCountry": "BY"
           },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Экологические услуги",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Разработка нормативов ПДВ"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Инвентаризация выбросов"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Экологический паспорт предприятия"
+                }
+              }
+            ]
+          },
           "sameAs": [
             "https://vk.com/synecology",
             "https://t.me/synecology"
+          ],
+          "knowsAbout": [
+            "Экологическое консультирование",
+            "Экологическая оценка",
+            "Природоохранные решения",
+            "Соответствие экологическим требованиям",
+            "Управление отходами"
           ]
         };
         break;
