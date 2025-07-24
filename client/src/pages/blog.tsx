@@ -31,8 +31,8 @@ export default function Blog() {
       image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
       featured: false,
-      author: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
+      author: "Волошко Инна Владимировна",
+      authorSlug: "inna-voloshko",
     },
     {
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",

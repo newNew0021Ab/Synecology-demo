@@ -16,24 +16,13 @@ export default function About() {
       name: "Корякин Егор Дмитриевич",
       role: "Директор",
       bio: "Стратегическое руководство компанией и контроль реализации экологических проектов. Разработка и внедрение программ природопользования и охраны окружающей среды в соответствии с требованиями законодательства. Более 100 успешно реализованных проектов.",
-      experience: "5+ лет",
+      image: "https://i.ibb.co/k2rDZbqt/5192954527513441803.jpg",
       expertise: ["Стратегическое руководство", "Программы природопользования", "Взаимодействие с органами власти", "Управление экологическими проектами"],
-      email: "koryakin@synecology.by",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400&crop=face",
-      articles: [
-        {
-          title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
-          link: "/blog/eco-certification-business-belarus"
-        },
-        {
-          title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
-          link: "/blog/waste-management-enterprise-belarus"
-        },
-        {
-          title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
-          link: "/blog/atmospheric-emissions-belarus"
-        }
-      ]
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        email: "egor@synecology.com",
+      },
     },
   ];
 
@@ -124,7 +113,7 @@ export default function About() {
             >
               <div className="glassmorphic rounded-3xl p-8 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                 <img
-                  src="https://images.unsplash.com/photo-1623303647440-967d26b95b47?q=80&w=1155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8A%3D%3D&auto=format&fit=crop&w=800&h=600"
+                  src="https://images.unsplash.com/photo-1623303647440-967d26b95b47?q=80&w=1155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600"
                   alt="Environmental consulting team"
                   className="rounded-xl shadow-lg w-full h-auto"
                 />
@@ -193,11 +182,11 @@ export default function About() {
                             </p>
                           </div>
                         </div>
-
+                        
                         <p className="text-dark-slate/70 text-sm leading-relaxed mb-4 flex-grow">
                           {member.bio}
                         </p>
-
+                        
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
@@ -205,7 +194,7 @@ export default function About() {
                               Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
                             </span>
                           </div>
-
+                          
                           <div className="space-y-2">
                             <h4 className="text-sm font-semibold text-dark-slate">Экспертиза:</h4>
                             <div className="flex flex-wrap gap-1">
@@ -220,7 +209,7 @@ export default function About() {
                             </div>
                           </div>
                         </div>
-
+                        
                         <div className="flex justify-between items-center mt-6 pt-4 border-t border-dark-slate/10">
                           <div className="text-sea-green font-medium text-sm inline-flex items-center gap-1">
                             Подробнее <ArrowRight className="w-3 h-3" />
@@ -256,11 +245,11 @@ export default function About() {
                             </p>
                           </div>
                         </div>
-
+                        
                         <p className="text-dark-slate/70 text-sm leading-relaxed mb-4 flex-grow">
                           {member.bio}
                         </p>
-
+                        
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
@@ -268,7 +257,7 @@ export default function About() {
                               Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
                             </span>
                           </div>
-
+                          
                           <div className="space-y-2">
                             <h4 className="text-sm font-semibold text-dark-slate">Экспертиза:</h4>
                             <div className="flex flex-wrap gap-1">
@@ -283,7 +272,7 @@ export default function About() {
                             </div>
                           </div>
                         </div>
-
+                        
                         <div className="flex gap-3 mt-6 pt-4 border-t border-dark-slate/10">
                           <button
                             onClick={(e) => {
@@ -307,11 +296,6 @@ export default function About() {
                       </div>
                     </GlassmorphicCard>
                   </div>
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-80 h-80 object-cover rounded-3xl shadow-2xl"
-                  />
                 </motion.div>
               );
             })}
@@ -402,4 +386,3 @@ export default function About() {
     </div>
   );
 }
-```

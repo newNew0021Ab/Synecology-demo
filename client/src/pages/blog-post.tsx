@@ -108,10 +108,10 @@ export default function BlogPost() {
       date: "18.12.2024",
       readTime: "15 мин",
       author: {
-        name: "Корякин Егор Дмитриевич",
-        role: "Директор",
-        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=200",
-        slug: "egor-koryakin"
+        name: "Волошко Инна Владимировна",
+        role: "Ведущий эколог",
+        avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b924?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&h=200",
+        slug: "inna-voloshko"
       },
       image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&w=1200&h=600",
       content: `
