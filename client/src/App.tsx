@@ -21,12 +21,11 @@ const Contact = lazy(() => import('@/pages/contact'));
 const TeamMember = lazy(() => import('@/pages/team-member'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 
+// Импортируем новый компонент загрузки
+import LoadingSpinner from '@/components/LoadingSpinner';
+
 // Оптимизированный компонент загрузки
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-  </div>
-);
+const LoadingFallback = () => <LoadingSpinner />;
 
 function App() {
   return (
