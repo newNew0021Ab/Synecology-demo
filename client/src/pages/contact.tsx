@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import emailjs, { EMAILJS_CONFIG } from '@/lib/emailjs';
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Button } from "@/components/ui/button";
@@ -42,8 +43,35 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // EmailJS configuration
+      const { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } = EMAILJS_CONFIG;
+
+      // Prepare template parameters
+      const templateParams = {
+        to_name: 'Synecology Team',
+        from_name: data.firstName,
+        from_email: data.email,
+        company: data.company || 'Не указана',
+        project_type: data.projectType,
+        message: data.message || 'Сообщение не указано',
+        reply_to: data.email,
+      };
+
+      // Send email via EmailJS
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      // Also send to our API for logging
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
 
       toast({
         title: "Сообщение успешно отправлено!",
@@ -52,9 +80,10 @@ export default function Contact() {
 
       form.reset();
     } catch (error) {
+      console.error('Form submission error:', error);
       toast({
         title: "Ошибка отправки сообщения",
-        description: "Попробуйте еще раз позже.",
+        description: "Проверьте подключение к интернету и попробуйте еще раз.",
         variant: "destructive",
       });
     } finally {
