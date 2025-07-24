@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 export const useScrollDirection = () => {
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
+  const [isVisible, setIsVisible] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
 
   useEffect(() => {
@@ -16,7 +17,18 @@ export const useScrollDirection = () => {
         return;
       }
       
-      setScrollDirection(scrollY > prevScrollY ? 'down' : 'up');
+      const direction = scrollY > prevScrollY ? 'down' : 'up';
+      setScrollDirection(direction);
+      
+      // Показывать шапку если:
+      // 1. В самом верху страницы (scrollY <= 100)
+      // 2. Скроллим вверх
+      if (scrollY <= 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(direction === 'up');
+      }
+      
       setPrevScrollY(scrollY > 0 ? scrollY : 0);
       ticking = false;
     };
@@ -35,5 +47,5 @@ export const useScrollDirection = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [prevScrollY]);
 
-  return scrollDirection;
+  return { scrollDirection, isVisible };
 };

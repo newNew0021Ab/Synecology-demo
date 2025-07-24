@@ -7,7 +7,7 @@ import { useScrollDirection } from "../hooks/useScrollDirection";
 export default function Header() {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const scrollDirection = useScrollDirection();
+  const { isVisible } = useScrollDirection();
 
   const navItems = [
     { href: "/", label: "Главная" },
@@ -30,7 +30,7 @@ export default function Header() {
       className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20"
       initial={{ y: 0 }}
       animate={{ 
-        y: scrollDirection === 'down' ? '-100%' : 0 
+        y: isVisible ? 0 : '-100%'
       }}
       transition={{ 
         duration: 0.3, 
