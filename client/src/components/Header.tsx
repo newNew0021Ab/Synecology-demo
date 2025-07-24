@@ -2,12 +2,10 @@ import { Link, useLocation } from "wouter";
 import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useScrollDirection } from "../hooks/useScrollDirection";
 
 export default function Header() {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { visible } = useScrollDirection();
 
   const navItems = [
     { href: "/", label: "Главная" },
@@ -26,17 +24,7 @@ export default function Header() {
   };
 
   return (
-    <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20"
-      initial={{ y: 0 }}
-      animate={{ 
-        y: visible ? 0 : -100
-      }}
-      transition={{ 
-        duration: 0.2,
-        ease: "easeOut"
-      }}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2" onClick={handleLogoClick}>
@@ -117,10 +105,10 @@ export default function Header() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
             className="lg:hidden glassmorphic border-t border-white/20"
           >
             <div className="px-4 py-6 space-y-4">
@@ -177,6 +165,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
