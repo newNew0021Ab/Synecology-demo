@@ -38,12 +38,12 @@ export default function TeamMember() {
       ],
       articles: [
         {
-          title: "Экологическая документация для бизнеса: системный подход",
-          link: "/blog/ecological-documentation-business"
+          title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
+          link: "/blog/eco-certification-business-belarus"
         },
         {
-          title: "Управление экологическими проектами: опыт и практика",
-          link: "/blog/ecological-project-management"
+          title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
+          link: "/blog/atmospheric-emissions-belarus"
         }
       ],
       contact: {
@@ -273,11 +273,6 @@ export default function TeamMember() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="w-24 h-24 object-cover rounded-full mx-auto mb-6"
-              />
               <h2 className="text-4xl font-heading font-bold text-dark-slate mb-6">
                 Готовы обсудить <span className="text-sea-green">ваш проект?</span>
               </h2>
