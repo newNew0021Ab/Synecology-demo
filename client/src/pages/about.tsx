@@ -170,9 +170,17 @@ export default function About() {
                     <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
-                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <Users className="w-8 h-8 text-sea-green" />
-                          </div>
+                          {member.name === "Корякин Егор Дмитриевич" ? (
+                            <img
+                              src="https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg"
+                              alt={member.name}
+                              className="w-16 h-16 object-cover rounded-2xl flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                              <Users className="w-8 h-8 text-sea-green" />
+                            </div>
+                          )}
                           <div className="flex-1">
                             <h3 className="text-xl font-heading font-bold text-dark-slate mb-1 group-hover:text-sea-green transition-colors">
                               {member.name}
@@ -182,11 +190,11 @@ export default function About() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <p className="text-dark-slate/70 text-sm leading-relaxed mb-4 flex-grow">
                           {member.bio}
                         </p>
-                        
+
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
@@ -194,7 +202,7 @@ export default function About() {
                               Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
                             </span>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <h4 className="text-sm font-semibold text-dark-slate">Экспертиза:</h4>
                             <div className="flex flex-wrap gap-1">
@@ -209,7 +217,7 @@ export default function About() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="flex justify-between items-center mt-6 pt-4 border-t border-dark-slate/10">
                           <div className="text-sea-green font-medium text-sm inline-flex items-center gap-1">
                             Подробнее <ArrowRight className="w-3 h-3" />
@@ -233,9 +241,17 @@ export default function About() {
                     <GlassmorphicCard className="h-full">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
-                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <Users className="w-8 h-8 text-sea-green" />
-                          </div>
+                          {member.name === "Корякин Егор Дмитриевич" ? (
+                            <img
+                              src="https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg"
+                              alt={member.name}
+                              className="w-16 h-16 object-cover rounded-2xl flex-shrink-0"
+                            />
+                          ) : (
+                            <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                              <Users className="w-8 h-8 text-sea-green" />
+                            </div>
+                          )}
                           <div className="flex-1">
                             <h3 className="text-xl font-heading font-bold text-dark-slate mb-1">
                               {member.name}
@@ -245,11 +261,11 @@ export default function About() {
                             </p>
                           </div>
                         </div>
-                        
+
                         <p className="text-dark-slate/70 text-sm leading-relaxed mb-4 flex-grow">
                           {member.bio}
                         </p>
-                        
+
                         <div className="space-y-3">
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
@@ -257,7 +273,7 @@ export default function About() {
                               Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
                             </span>
                           </div>
-                          
+
                           <div className="space-y-2">
                             <h4 className="text-sm font-semibold text-dark-slate">Экспертиза:</h4>
                             <div className="flex flex-wrap gap-1">
@@ -272,7 +288,7 @@ export default function About() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="flex gap-3 mt-6 pt-4 border-t border-dark-slate/10">
                           <button
                             onClick={(e) => {
