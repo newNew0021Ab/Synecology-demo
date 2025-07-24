@@ -44,6 +44,10 @@ export default function TeamMember() {
         {
           title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
           link: "/blog/atmospheric-emissions-belarus"
+        },
+        {
+          title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
+          link: "/blog/waste-management-enterprise-belarus"
         }
       ],
       contact: {
