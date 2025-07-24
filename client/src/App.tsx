@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { CustomCursor } from '@/components/CustomCursor';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import { queryClient } from '@/lib/queryClient';
 
 // Ленивая загрузка компонентов для code-splitting
@@ -21,10 +22,40 @@ const Contact = lazy(() => import('@/pages/contact'));
 const TeamMember = lazy(() => import('@/pages/team-member'));
 const NotFound = lazy(() => import('@/pages/not-found'));
 
-// Оптимизированный компонент загрузки
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen bg-sandy-beige">
+        <CustomCursor />
+        <Header />
+        
+        <main className="pt-16">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/services" component={Services} />
+              <Route path="/services/:slug" component={ServiceDetail} />
+              <Route path="/case-studies" component={CaseStudies} />
+              <Route path="/case-studies/:slug" component={CaseStudyDetail} />
+              <Route path="/blog" component={Blog} />
+              <Route path="/blog/:slug" component={BlogPost} />
+              <Route path="/faq" component={FAQ} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/team/:slug" component={TeamMember} />
+              <Route component={NotFound} />
+            </Switch>
+          </Suspense>
+        </main>
+        
+        <Footer />
+        <Toaster />
+      </div>
+    </QueryClientProvider>
+  );
+}
+
+export default App;ded-full h-8 w-8 border-b-2 border-primary"></div>
   </div>
 );
 
