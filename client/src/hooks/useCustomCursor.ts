@@ -1,34 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useCallback } from 'react';
+import { throttle } from '../lib/performance';
 
-export function useCustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+export const useCustomCursor = () => {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const followerRef = useRef<HTMLDivElement>(null);
+  const animationFrameRef = useRef<number>();
 
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+  const updateCursor = useCallback((x: number, y: number) => {
+    const cursor = cursorRef.current;
+    const follower = followerRef.current;
 
-    const handleMouseEnter = () => setIsHovering(true);
-    const handleMouseLeave = () => setIsHovering(false);
+    if (!cursor || !follower) return;
 
-    document.addEventListener("mousemove", updateMousePosition);
+    // Использование transform вместо left/top для GPU-ускорения
+    cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 
-    // Add hover effects for interactive elements
-    const interactiveElements = document.querySelectorAll("a, button, [role='button']");
-    interactiveElements.forEach((element) => {
-      element.addEventListener("mouseenter", handleMouseEnter);
-      element.addEventListener("mouseleave", handleMouseLeave);
+    // Оптимизированная анимация follower
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+
+    animationFrameRef.current = requestAnimationFrame(() => {
+      follower.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     });
-
-    return () => {
-      document.removeEventListener("mousemove", updateMousePosition);
-      interactiveElements.forEach((element) => {
-        element.removeEventListener("mouseenter", handleMouseEnter);
-        element.removeEventListener("mouseleave", handleMouseLeave);
-      });
-    };
   }, []);
 
-  return { mousePosition, isHovering };
-}
+  // Throttle для снижения частоты вызовов
+  const throttledUpdateCursor = useCallback(
+    throttle((e: MouseEvent) => {
+      updateCursor(e.clientX, e.clientY);
+    }, 16), // ~60 FPS
+    [updateCursor]
+  );
+
+  useEffect(() => {
+    document.addEventListener('mousemove', throttledUpdateCursor, { passive: true });
+
+    return () => {
+      document.removeEventListener('mousemove', throttledUpdateCursor);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [throttledUpdateCursor]);
+
+  return { cursorRef, followerRef };
+};

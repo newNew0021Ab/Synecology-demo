@@ -2,6 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Глобальные оптимизации производительности */
+* {
+  /* Принудительное использование GPU для композитинга */
+  will-change: auto;
+}
+
+/* Оптимизация скроллинга */
+html {
+  scroll-behavior: smooth;
+  /* Включение аппаратного ускорения для скроллинга */
+  -webkit-overflow-scrolling: touch;
+  /* Оптимизация рендеринга текста */
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  /* Предотвращение layout shifts */
+  contain: layout style paint;
+  /* Оптимизация repaint */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Оптимизированные классы для анимаций */
+.gpu-optimized {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Оптимизация для элементов с hover */
+.hover-optimized {
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  will-change: transform, opacity;
+}
+
+.hover-optimized:hover {
+  transform: translateY(-2px) translateZ(0);
+}
+
+/* Оптимизация для изображений */
+img {
+  content-visibility: auto;
+  contain: layout style paint;
+  image-rendering: optimizeQuality;
+}
+
+/* Оптимизация для карточек и контейнеров */
+.card-optimized {
+  contain: layout style paint;
+  content-visibility: auto;
+  transform: translateZ(0);
+}
+
+/* Быстрые переходы */
+.fast-transition {
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+/* Оптимизация для элементов вне viewport */
+.lazy-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
 :root {
   --background: hsl(45, 36%, 96%);
   --foreground: hsl(182, 35%, 25%);
