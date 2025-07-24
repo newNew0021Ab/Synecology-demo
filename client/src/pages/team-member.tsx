@@ -117,7 +117,7 @@ export default function TeamMember() {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
+                  className="w-80 h-80 object-cover rounded-3xl shadow-2xl"
                 />
 
               </div>

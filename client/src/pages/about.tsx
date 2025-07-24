@@ -307,6 +307,11 @@ export default function About() {
                       </div>
                     </GlassmorphicCard>
                   </div>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-80 h-80 object-cover rounded-3xl shadow-2xl"
+                  />
                 </motion.div>
               );
             })}
@@ -397,3 +402,4 @@ export default function About() {
     </div>
   );
 }
+```
