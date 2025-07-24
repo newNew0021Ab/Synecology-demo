@@ -30,12 +30,11 @@ export default function Header() {
       className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20"
       initial={{ y: 0 }}
       animate={{ 
-        y: visible ? 0 : -100,
-        opacity: visible ? 1 : 0
+        y: visible ? 0 : -100
       }}
       transition={{ 
-        duration: 0.3,
-        ease: "easeInOut"
+        duration: 0.2,
+        ease: "easeOut"
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,10 +117,10 @@ export default function Header() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={{ duration: 0.2 }}
             className="lg:hidden glassmorphic border-t border-white/20"
           >
             <div className="px-4 py-6 space-y-4">

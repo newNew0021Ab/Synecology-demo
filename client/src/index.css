@@ -72,8 +72,14 @@ img {
 
 /* Улучшенная производительность для скрывающегося хедера */
 .scroll-header {
-  will-change: transform, opacity;
+  will-change: transform;
   transform: translateZ(0);
+}
+
+/* Минимальные анимации для хедера */
+header {
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* Анимации для загрузки */

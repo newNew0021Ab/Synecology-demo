@@ -9,6 +9,7 @@ export const useScrollDirection = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const scrollDiff = Math.abs(currentScrollY - prevScrollY);
       
       // Показываем хедер в самом верху
       if (currentScrollY < 10) {
@@ -18,8 +19,13 @@ export const useScrollDirection = () => {
         return;
       }
 
+      // Минимальная разница для срабатывания
+      if (scrollDiff < 5) {
+        return;
+      }
+
       // Определяем направление скролла
-      if (currentScrollY > prevScrollY && currentScrollY > 100) {
+      if (currentScrollY > prevScrollY && currentScrollY > 80) {
         // Скролл вниз - скрываем хедер
         setScrollDirection('down');
         setVisible(false);
