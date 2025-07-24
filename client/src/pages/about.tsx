@@ -23,14 +23,6 @@ export default function About() {
         twitter: "#",
         email: "egor@synecology.com",
       },
-    }, Отвечает за развитие бизнеса и работу с клиентами.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c56f84f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=400",
-      expertise: ["Коммерческая деятельность", "Управление проектами", "Развитие бизнеса"],
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "inna@synecology.com",
-      },
     },
   ];
 
