@@ -64,6 +64,12 @@ img {
   transition: transform 0.1s ease-out, opacity 0.1s ease-out;
 }
 
+/* Оптимизация для анимации хедера */
+.header-animation {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
 /* Оптимизация для элементов вне viewport */
 .lazy-content {
   content-visibility: auto;
