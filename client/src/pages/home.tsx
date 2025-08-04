@@ -9,7 +9,7 @@ import { useSEO } from "@/hooks/useSEO";
 
 export default function Home() {
   const isMobile = useIsMobile();
-  
+
   // SEO optimization
   useSEO({
     title: "Synecology - Экологический консалтинг в Беларуси | Экологические услуги",
