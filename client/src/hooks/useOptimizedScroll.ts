@@ -12,19 +12,32 @@ export const useOptimizedScroll = ({
   throttleMs = 16 
 }: UseOptimizedScrollProps) => {
   const frameRef = useRef<number>();
+  const isMobile = useRef(false);
+
+  useEffect(() => {
+    // Определяем мобильное устройство
+    isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                      window.innerWidth < 768;
+  }, []);
 
   const handleScroll = useCallback(() => {
     if (frameRef.current) {
       cancelAnimationFrame(frameRef.current);
     }
 
-    frameRef.current = requestAnimationFrame(() => {
+    // На мобильных устройствах используем более простую обработку
+    if (isMobile.current) {
       onScroll?.(window.pageYOffset);
-    });
+    } else {
+      frameRef.current = requestAnimationFrame(() => {
+        onScroll?.(window.pageYOffset);
+      });
+    }
   }, [onScroll]);
 
   const throttledScroll = useCallback(
-    throttle(handleScroll, throttleMs),
+    // Увеличиваем throttle для мобильных устройств
+    throttle(handleScroll, isMobile.current ? 33 : throttleMs),
     [handleScroll, throttleMs]
   );
 

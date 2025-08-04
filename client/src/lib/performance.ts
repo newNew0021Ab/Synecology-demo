@@ -15,9 +15,14 @@ export const throttle = <T extends (...args: any[]) => any>(
   limit: number
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean;
+  let lastTime = 0;
+  
   return (...args: Parameters<T>) => {
-    if (!inThrottle) {
+    const now = Date.now();
+    
+    if (!inThrottle || now - lastTime >= limit) {
       func(...args);
+      lastTime = now;
       inThrottle = true;
       setTimeout(() => (inThrottle = false), limit);
     }

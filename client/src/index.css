@@ -2,53 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Глобальные оптимизации производительности */
-* {
-  /* Принудительное использование GPU для композитинга */
-  will-change: auto;
-}
-
 /* Оптимизация скроллинга */
 html {
   scroll-behavior: smooth;
-  /* Включение аппаратного ускорения для скроллинга */
   -webkit-overflow-scrolling: touch;
-  /* Оптимизация рендеринга текста */
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  /* Предотвращение layout shifts */
-  contain: layout style paint;
-  /* Оптимизация repaint */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 
-/* Оптимизированные классы для анимаций */
-.gpu-optimized {
-  transform: translateZ(0);
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* Оптимизированные классы для анимаций только на десктопе */
+@media (hover: hover) and (pointer: fine) {
+  .gpu-optimized {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .hover-optimized {
+    transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+    will-change: transform, opacity;
+  }
+
+  .hover-optimized:hover {
+    transform: translateY(-2px) translateZ(0);
+  }
 }
 
-/* Оптимизация для элементов с hover */
-.hover-optimized {
-  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
-  will-change: transform, opacity;
-}
+/* Мобильные оптимизации */
+@media (hover: none) and (pointer: coarse) {
+  .gpu-optimized {
+    transform: none;
+    will-change: auto;
+  }
 
-.hover-optimized:hover {
-  transform: translateY(-2px) translateZ(0);
+  .hover-optimized {
+    transition: none;
+    will-change: auto;
+  }
 }
 
 /* Оптимизация для изображений */
 img {
-  content-visibility: auto;
-  contain: layout style paint;
   image-rendering: optimizeQuality;
 }
 

@@ -4,17 +4,24 @@ import { throttle } from '../lib/performance';
 export const useParallax = (speed: number = 0.5) => {
   const elementRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number>();
+  const isMobile = useRef(false);
+
+  useEffect(() => {
+    // Определяем мобильное устройство
+    isMobile.current = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                      window.innerWidth < 768;
+  }, []);
 
   const updateParallax = useCallback((scrollY: number) => {
     const element = elementRef.current;
-    if (!element) return;
+    if (!element || isMobile.current) return; // Отключаем параллакс на мобильных
 
     // Отмена предыдущего кадра
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
     }
 
-    // GPU-ускоренная анимация
+    // GPU-ускоренная анимация только на десктопе
     animationFrameRef.current = requestAnimationFrame(() => {
       const rate = scrollY * -speed;
       element.style.transform = `translate3d(0, ${rate}px, 0)`;
@@ -31,6 +38,9 @@ export const useParallax = (speed: number = 0.5) => {
   );
 
   useEffect(() => {
+    // Отключаем параллакс на мобильных устройствах
+    if (isMobile.current) return;
+
     // Пассивный слушатель для лучшей производительности
     window.addEventListener('scroll', throttledUpdateParallax, { passive: true });
 
