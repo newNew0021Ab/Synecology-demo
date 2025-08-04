@@ -8,7 +8,7 @@ interface GlassmorphicCardProps {
   hover?: boolean;
 }
 
-export default function GlassmorphicCard({
+export function GlassmorphicCard({
   children,
   className = "",
   hover = true,
