@@ -295,13 +295,19 @@ export default function Services() {
                       <span className="text-sea-green font-medium text-sm">{filter}</span>
                       <button
                         onClick={() => handleTagClick(filter)}
-                        className="text-sea-green hover:text-sea-green/70 transition-colors"
+                        className="text-sea-green hover:text-sea-green/70 transition-colors p-1 -mr-1 touch-manipulation"
+                        aria-label={`Удалить фильтр ${filter}`}
                       >
-                        <X className="w-3 h-3" />
+                        <X className="w-4 h-4 md:w-3 md:h-3" />
                       </button>
                     </div>
                   ))}
-                  
+                  <button
+                    onClick={clearFilters}
+                    className="glassmorphic glassmorphic-hover px-4 py-2 rounded-full text-sea-green/70 font-medium hover:text-sea-green transition-all duration-300 border border-sea-green/20 text-sm"
+                  >
+                    Очистить всё
+                  </button>
                 </div>
                 <p className="text-dark-slate/60 text-center">Найдено услуг: {filteredServices.length}</p>
               </motion.div>
