@@ -189,45 +189,44 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group hover:scale-[1.02] transition-all duration-500"
               >
-                <Link href="/services" className="block cursor-pointer">
-                  <div 
-                    className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden"
-                    style={{
-                      background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
-                    }}
-                  >
-                    {/* Декоративный элемент */}
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
+                <div 
+                  className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden cursor-pointer"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
+                  }}
+                  onClick={() => window.location.href = '/services'}
+                >
+                  {/* Декоративный элемент */}
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
 
-                    <div className="relative z-10">
-                      <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
-                        {service.title}
-                      </h3>
+                  <div className="relative z-10">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 group-hover:text-sea-green transition-colors duration-300">
+                      {service.title}
+                    </h3>
 
-                      <p className="text-dark-slate/80 mb-6 md:mb-8 text-base md:text-lg leading-relaxed group-hover:text-dark-slate/90 transition-colors duration-300">
-                        {service.description}
-                      </p>
+                    <p className="text-dark-slate/80 mb-6 md:mb-8 text-base md:text-lg leading-relaxed group-hover:text-dark-slate/90 transition-colors duration-300">
+                      {service.description}
+                    </p>
 
-                      <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                        <div className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80">
-                          Подробнее 
-                          <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
-                        </div>
-                        <Link
-                          href="/contact"
-                          className="btn-primary mt-2 sm:mt-0"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                          Заказать
-                        </Link>
+                    <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                      <div className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80">
+                        Подробнее 
+                        <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
+                      <Link
+                        href="/contact"
+                        className="btn-primary mt-2 sm:mt-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                        Заказать
+                      </Link>
                     </div>
-
-                    {/* Hover эффект */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-sea-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
                   </div>
-                </Link>
+
+                  {/* Hover эффект */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-sea-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                </div>
               </motion.div>
             ))}
           </div>
