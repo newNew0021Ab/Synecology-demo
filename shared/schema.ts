@@ -31,3 +31,92 @@ export type User = z.infer<typeof UserSchema>;
 export type CreateUser = z.infer<typeof CreateUserSchema>;
 export type Login = z.infer<typeof LoginSchema>;
 export type ContactForm = z.infer<typeof ContactFormSchema>;
+
+// Strapi types
+export interface StrapiService {
+  id: number;
+  attributes: {
+    title: string;
+    slug: string;
+    excerpt: string;
+    image: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          url: string;
+          alternativeText?: string;
+        };
+      };
+    };
+    seo_title: string;
+    seo_description: string;
+    description: string;
+    icon: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
+export interface StrapiCase {
+  id: number;
+  attributes: {
+    title: string;
+    slug: string;
+    preview_text: string;
+    content: string;
+    cover_image: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          url: string;
+          alternativeText?: string;
+        };
+      };
+    };
+    gallery: {
+      data: Array<{
+        id: number;
+        attributes: {
+          name: string;
+          url: string;
+          alternativeText?: string;
+        };
+      }>;
+    };
+    client: string;
+    tags: string;
+    category: string;
+    project_date: string;
+    featured: boolean;
+    createdAt: string;
+    updatedAt: string;
+  };
+}
+
+export interface StrapiBlog {
+  id: number;
+  attributes: {
+    title: string;
+    slug: string;
+    cover_image: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          url: string;
+          alternativeText?: string;
+        };
+      };
+    };
+    tags: string;
+    time: string;
+    content: string;
+    excerpt: string;
+    author: string;
+    read_time: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}

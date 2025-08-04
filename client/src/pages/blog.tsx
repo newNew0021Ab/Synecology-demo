@@ -1,15 +1,39 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { Calendar, ArrowRight, Clock, Tag, Search, User } from "lucide-react";
-import OrganicBlob from "@/components/OrganicBlob";
-import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { useState, useMemo } from "react";
+import { useLocation, Link } from "wouter";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
+import { Breadcrumbs } from "../components/Breadcrumbs";
+import { GlassmorphicCard } from "../components/GlassmorphicCard";
+import { OrganicBlob } from "../components/OrganicBlob";
+import { useSEO } from "../hooks/useSEO";
+import { useBlogPosts } from "../hooks/useStrapi";
+import { getStrapiImageUrl } from "../lib/strapi";
+import { Skeleton } from "../components/ui/skeleton";
 
-export default function Blog() {
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
+export default function BlogPage() {
+  const [location] = useLocation();
+  const { data: blogPosts, isLoading, error } = useBlogPosts();
 
-  const blogPosts = [
+  useSEO({
+    title: "Блог - Экологические новости и статьи",
+    description: "Актуальные статьи об экологии, устойчивом развитии, экологическом праве и практических решениях для бизнеса.",
+    keywords: "экология, блог, устойчивое развитие, экологическое право, зеленые технологии"
+  });
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background text-foreground pt-24 pb-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center py-16">
+            <h2 className="text-2xl font-bold text-destructive mb-4">Ошибка загрузки</h2>
+            <p className="text-muted-foreground">Не удалось загрузить статьи блога</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const staticBlogPosts = [
     {
       title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
       excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
@@ -49,7 +73,7 @@ export default function Blog() {
   ];
 
   // Собираем все уникальные теги
-  const allTags = useMemo(() => {
+  /* const allTags = useMemo(() => {
     const tags = new Set<string>();
     blogPosts.forEach(post => {
       post.tags.forEach(tag => tags.add(tag));
@@ -82,42 +106,30 @@ export default function Blog() {
         ? prev.filter(t => t !== tag)
         : [...prev, tag]
     );
-  };
+  }; */
 
   return (
-    <div className="pt-24">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
-        <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
+    <div className="min-h-screen bg-background text-foreground pt-24 pb-16">
+      {/*   {/* Breadcrumbs */}
+      {/*  <div className="container mx-auto px-4 mb-8">
+        <Breadcrumbs segments={[
+          { label: 'Главная', href: '/' },
+          { label: 'Блог', href: '/blog' }
+        ]} />
+      </div> */}
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h1
-              className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Экология <span className="text-sea-green">простыми словами</span>
-            </motion.h1>
-            <motion.p
-              className="text-xl text-dark-slate/70 max-w-4xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              Превращаем запутанные инструкции и законы в четкие и понятные статьи. Наша цель — помочь вам быстро найти нужное решение и сэкономить ваше самое ценное время.
-            </motion.p>
-          </div>
-        </div>
-      </section>
+      <div className="container mx-auto px-4">
+        <section className="py-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-8">
+            Экология <span className="text-primary">простыми словами</span>
+          </h1>
+          <p className="text-lg text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed">
+            Превращаем запутанные инструкции и законы в четкие и понятные статьи. Наша цель — помочь вам быстро найти нужное решение и сэкономить ваше самое ценное время.
+          </p>
+        </section>
 
-      {/* Search and Filter Section */}
-      <section className="py-8 bg-gradient-to-b from-off-white to-soft-blue/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Search Bar */}
-          <div className="mb-8 max-w-2xl mx-auto">
+        <section className="py-8">
+          {/*  <div className="mb-8 max-w-2xl mx-auto">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-dark-slate/50 w-5 h-5" />
               <input
@@ -128,10 +140,9 @@ export default function Blog() {
                 className="w-full pl-12 pr-4 py-3 rounded-full border border-dark-slate/20 bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sea-green focus:border-transparent text-dark-slate"
               />
             </div>
-          </div>
+          </div> */}
 
-          {/* Tag Filter */}
-          <div className="mb-4">
+          {/*  <div className="mb-4">
             <div className="flex flex-wrap gap-2 justify-center">
               {allTags.map((tag) => (
                 <button
@@ -148,10 +159,10 @@ export default function Blog() {
                 </button>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Active Filters and Clear Button */}
-          {(selectedTags.length > 0 || searchTerm) && (
+          {/*  {(selectedTags.length > 0 || searchTerm) && (
             <div className="flex justify-center items-center gap-4 mb-4">
               <div className="flex items-center gap-2 text-sm text-dark-slate/70">
                 <span>Активные фильтры{selectedTags.length > 1 ? ' (все должны совпадать)' : ''}:</span>
@@ -173,272 +184,112 @@ export default function Blog() {
                 Очистить все
               </button>
             </div>
-          )}
+          )} */}
 
           {/* Results count */}
-          <div className="text-center text-sm text-dark-slate/70">
+          {/*  <div className="text-center text-sm text-dark-slate/70">
             {filteredPosts.length === 0 ? (
               <span>Статьи не найдены</span>
             ) : (
               <span>Найдено {filteredPosts.length} {filteredPosts.length === 1 ? 'статья' : filteredPosts.length < 5 ? 'статьи' : 'статей'}</span>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Post */}
-      {filteredPosts.length > 0 && filteredPosts.some(post => post.featured) && (
-        <section className="py-12 bg-gradient-to-b from-soft-blue/20 to-off-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">Рекомендуемая статья</h2>
-            </div>
-
-            {filteredPosts.filter(post => post.featured).map((post) => (
-              <GlassmorphicCard key={post.title} className="overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="relative">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-64 lg:h-full object-cover rounded-xl"
-                    />
-                    <div className="absolute top-4 left-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold">
-                      Рекомендуемая
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-
-                    <div className="flex items-center gap-4 text-sm flex-wrap">
-                        <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                          <Calendar className="w-4 h-4" />
-                          <span className="font-medium">{post.date}</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                          <Clock className="w-4 h-4" />
-                          <span className="font-medium">{post.readTime}</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                          <Tag className="w-4 h-4" />
-                          <span className="font-medium">{post.category}</span>
-                        </div>
-                        <Link
-                          href={`/team/${post.authorSlug}`}
-                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                        >
-                          <User className="w-4 h-4" />
-                          <span className="font-medium">{post.author}</span>
-                        </Link>
-                      </div>
-
-                    <h3 className="text-3xl font-heading font-bold text-dark-slate">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-lg text-dark-slate/70 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <button
-                          key={tag}
-                          onClick={() => toggleTag(tag)}
-                          className={`px-3 py-1 text-sm rounded-full transition-all duration-300 cursor-pointer ${
-                            selectedTags.includes(tag)
-                              ? 'bg-sea-green text-white shadow-lg'
-                              : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
-                          }`}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-
-                    <Link
-                        href="/blog/eco-certification-business-belarus"
-                        className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                        Читать полную статью
-                      </Link>
-                  </div>
-                </div>
-              </GlassmorphicCard>
-            ))}
-          </div>
+          </div> */}
         </section>
-      )}
 
-      {/* Blog Posts Grid */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredPosts.length > 0 && (
-            <div className="mb-12">
-              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
-                {filteredPosts.some(post => post.featured) ? "Другие статьи" : "Статьи"}
-              </h2>
-            </div>
-          )}
-
-          {filteredPosts.length === 0 ? (
-            <GlassmorphicCard className="text-center py-16">
-              <div className="max-w-md mx-auto">
-                <div className="w-16 h-16 bg-sea-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Search className="w-8 h-8 text-sea-green/50" />
+        <section className="py-16">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {isLoading ? (
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="space-y-4">
+                  <Skeleton className="h-48 w-full rounded-lg" />
+                  <Skeleton className="h-6 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
                 </div>
-                <h3 className="text-xl font-heading font-semibold text-dark-slate mb-2">
-                  Статьи не найдены
-                </h3>
-                <p className="text-dark-slate/70 mb-4">
-                  Попробуйте изменить критерии поиска или очистить фильтры
-                </p>
-                <button
-                  onClick={clearFilters}
-                  className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300"
-                >
-                  Очистить фильтры
-                </button>
-              </div>
-            </GlassmorphicCard>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {filteredPosts.filter(post => !post.featured).map((post, index) => (
-                <div key={post.title} className="group">
-                  <div 
-                    className="group block h-full cursor-pointer" 
-                    onClick={() => window.location.href = `/blog/${
-                      post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
-                      post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
-                      post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
-                      post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
-                      post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
-                      "production-environmental-control"
-                    }`}
+              ))
+            ) : (
+              (blogPosts || staticBlogPosts).map((post, index) => {
+                const isStrapi = 'attributes' in post;
+                const postData = isStrapi ? {
+                  slug: post.attributes.slug,
+                  title: post.attributes.title,
+                  excerpt: post.attributes.excerpt,
+                  image: getStrapiImageUrl(post.attributes.cover_image),
+                  date: new Date(post.attributes.time).toLocaleDateString('ru-RU'),
+                  readTime: post.attributes.read_time,
+                  author: post.attributes.author,
+                  tags: post.attributes.tags.split(',').map((tag: string) => tag.trim())
+                } : post;
+
+                return (
+                  <motion.div
+                    key={postData.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
-                  <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
-                      <article className="flex flex-col h-full space-y-6">
-                        <div className="relative">
-                          <img
-                            src={post.image}
-                            alt={post.title}
-                            className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                    <GlassmorphicCard className="h-full hover:scale-105 transition-all duration-300 group cursor-pointer">
+                      <Link href={`/blog/${postData.slug}`}>
+                        <div className="overflow-hidden rounded-t-lg">
+                          <img 
+                            src={postData.image} 
+                            alt={postData.title}
+                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                         </div>
-
-                        <div className="flex items-center gap-4 text-sm flex-wrap">
-                          <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                            <Calendar className="w-4 h-4" />
-                            <span className="font-medium">{post.date}</span>
+                        <div className="p-6">
+                          <div className="flex items-center justify-between mb-4">
+                            <span className="text-sm text-muted-foreground">{postData.date}</span>
+                            <span className="text-sm text-muted-foreground">{postData.readTime}</span>
                           </div>
-                          <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                            <Clock className="w-4 h-4" />
-                            <span className="font-medium">{post.readTime}</span>
+                          <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                            {postData.title}
+                          </h3>
+                          <p className="text-muted-foreground mb-4 leading-relaxed">
+                            {postData.excerpt}
+                          </p>
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {postData.tags.map((tag, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
                           </div>
-                          <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                            <Tag className="w-4 h-4" />
-                            <span className="font-medium">{post.category}</span>
-                          </div>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              window.location.href = `/team/${post.authorSlug}`;
-                            }}
-                            className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                          >
-                            <User className="w-4 h-4" />
-                            <span className="font-medium">{post.author}</span>
-                          </button>
-                        </div>
-
-                        <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
-                          {post.title}
-                        </h3>
-
-                        <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
-                          {post.excerpt}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2">
-                          {post.tags.slice(0, 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3 py-1 text-sm rounded-full bg-sea-green/10 text-sea-green pointer-events-none"
-                            >
-                              {tag}
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-muted-foreground">
+                              {postData.author}
                             </span>
-                          ))}
+                            <motion.div
+                              whileHover={{ x: 5 }}
+                              className="text-primary"
+                            >
+                              →
+                            </motion.div>
+                          </div>
                         </div>
-
-                        <div className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 mt-auto justify-center group-hover:bg-sea-green/90">
-                          <ArrowRight className="w-5 h-5" />
-                          Читать полную статью
-                        </div>
-                      </article>
+                      </Link>
                     </GlassmorphicCard>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+                  </motion.div>
+                );
+              })
+            )}
+          </div>
+        </section>
 
-          {filteredPosts.length > 0 && (
-            <div className="text-center mt-12">
+        <section className="py-12">
+          <div className="text-center">
             <GlassmorphicCard className="max-w-md mx-auto">
-                <p className="text-dark-slate/70 mb-4">
-                  Мы готовим для вас ещё больше полезных статей
-                </p>
-                <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
-                  Статьи в процессе написания
-                </button>
-              </GlassmorphicCard>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Newsletter Signup */}
-      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GlassmorphicCard className="text-center">
-            <motion.h2
-              className="text-4xl font-heading font-bold text-dark-slate mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Будьте <span className="text-sea-green">в курсе</span>
-            </motion.h2>
-            <motion.p
-              className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Подпишитесь, чтобы получать закрытые аналитические материалы, чек-листы для самопроверки и шаблоны документов, которые мы отправляем только нашим подписчикам.
-            </motion.p>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <input
-                type="email"
-                placeholder="Введите ваш email"
-                className="flex-1 px-6 py-4 rounded-full border border-dark-slate/20 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sea-green focus:border-transparent"
-              />
-              <button className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300">
-                Подписаться
-              </button>
-            </motion.div>
-          </GlassmorphicCard>
-        </div>
-      </section>
+              <p className="text-muted-foreground mb-4">
+                Мы готовим для вас ещё больше полезных статей
+              </p>
+              <Button variant="secondary" size="lg" className="opacity-50 cursor-not-allowed">
+                Статьи в процессе написания
+              </Button>
+            </GlassmorphicCard>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
