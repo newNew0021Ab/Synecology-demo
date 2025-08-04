@@ -6,6 +6,7 @@ import { CustomCursor } from '@/components/CustomCursor';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { queryClient } from '@/lib/queryClient';
+import { useScrollToTop } from './hooks/useScrollToTop';
 
 // Ленивая загрузка компонентов для code-splitting
 const Home = lazy(() => import('@/pages/home'));
@@ -29,6 +30,8 @@ const LoadingFallback = () => (
 );
 
 function App() {
+  useScrollToTop();
+
   return (
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-background">
