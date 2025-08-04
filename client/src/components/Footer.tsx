@@ -1,8 +1,12 @@
 
 import { Link } from "wouter";
 import { Leaf, Linkedin, Twitter, Instagram } from "lucide-react";
+import { useState } from "react";
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
 
 export default function Footer() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <footer className="bg-dark-slate text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,18 +20,40 @@ export default function Footer() {
             </div>
             <p className="text-white/70 mb-2">Экологический консалтинг. Помогаем разобраться в законодательстве РБ.</p>
             
-            
-            <div className="flex gap-3 mb-4">
-              <a href="https://linkedin.com/company/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="https://twitter.com/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="https://instagram.com/synecology" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-sea-green transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
+            <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+              <div className="flex gap-3 mb-4">
+                <AlertDialogTrigger asChild>
+                  <button className="text-white/70 hover:text-sea-green transition-colors cursor-pointer">
+                    <Linkedin className="w-5 h-5" />
+                  </button>
+                </AlertDialogTrigger>
+                <AlertDialogTrigger asChild>
+                  <button className="text-white/70 hover:text-sea-green transition-colors cursor-pointer">
+                    <Twitter className="w-5 h-5" />
+                  </button>
+                </AlertDialogTrigger>
+                <AlertDialogTrigger asChild>
+                  <button className="text-white/70 hover:text-sea-green transition-colors cursor-pointer">
+                    <Instagram className="w-5 h-5" />
+                  </button>
+                </AlertDialogTrigger>
+              </div>
+              
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Социальные сети</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Мы пока что не ведем социальные сети, но скоро они появятся! 
+                    Следите за обновлениями на нашем сайте.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogAction onClick={() => setIsOpen(false)}>
+                    Понятно
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
           
           
