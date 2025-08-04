@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
-import GlassmorphicCard from "@/components/GlassmorphicCard";
+import { GlassmorphicCard } from "@/components/GlassmorphicCard";
 import { useState } from "react";
 
 export default function CaseStudies() {

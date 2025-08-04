@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
-import GlassmorphicCard from "@/components/GlassmorphicCard";
+import { GlassmorphicCard } from "@/components/GlassmorphicCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
 
