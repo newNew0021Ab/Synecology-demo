@@ -194,7 +194,6 @@ export default function Home() {
                   style={{
                     background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
                   }}
-                  onClick={() => window.location.href = '/services'}
                 >
                   {/* Декоративный элемент */}
                   <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-sea-green/20 to-sea-green/5 rounded-bl-[3rem] opacity-60"></div>
@@ -209,18 +208,20 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                      <div className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80">
+                      <button 
+                        onClick={() => window.location.href = '/services'}
+                        className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
+                      >
                         Подробнее 
                         <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
-                      </div>
-                      <Link
-                        href="/contact"
+                      </button>
+                      <button
+                        onClick={() => window.location.href = '/contact'}
                         className="btn-primary mt-2 sm:mt-0"
-                        onClick={(e) => e.stopPropagation()}
                       >
                         <ArrowRight className="w-4 h-4" />
                         Заказать
-                      </Link>
+                      </button>
                     </div>
                   </div>
 
