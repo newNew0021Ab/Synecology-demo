@@ -1391,11 +1391,6 @@ export default function BlogPost() {
               <div className="flex flex-wrap items-center gap-6 text-sm text-dark-slate/70">
                 <Link href={`/team/${post.author.slug}`}>
                   <div className="flex items-center gap-2">
-                    <img
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
                     <div>
                       <div className="font-semibold text-dark-slate">{post.author.name}</div>
                       <div>{post.author.role}</div>
@@ -1452,11 +1447,6 @@ export default function BlogPost() {
             <div className="mt-12">
               <GlassmorphicCard>
                 <div className="flex items-center gap-6">
-                  <img
-                    src={post.author.avatar}
-                    alt={post.author.name}
-                    className="w-20 h-20 rounded-full object-cover"
-                  />
                   <div>
                     <h4 className="text-xl font-heading font-semibold text-dark-slate mb-2">
                       {post.author.name}
