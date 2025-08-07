@@ -64,10 +64,7 @@ const StableCard: React.FC<StableCardProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ 
-                duration: 0.2,
-                delay: delay * 0.05
-              }}
+              transition={{ duration: 0.2 }}
               className="w-full h-full glassmorphic rounded-2xl overflow-hidden"
             >
               {skeletonContent || defaultSkeleton}
@@ -75,13 +72,9 @@ const StableCard: React.FC<StableCardProps> = ({
           ) : (
             <motion.div
               key="content"
-              initial={{ opacity: 0, y: 10, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.4,
-                delay: delay * 0.05,
-                ease: [0.16, 1, 0.3, 1] // Custom easing для плавности
-              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
               className="w-full h-full"
             >
               {children}

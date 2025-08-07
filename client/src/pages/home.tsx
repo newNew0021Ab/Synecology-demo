@@ -95,33 +95,18 @@ export default function Home() {
             <div className="space-y-6 md:space-y-8">
               <motion.div
                 className="bg-white/85 backdrop-blur-md rounded-3xl p-4 md:p-8 shadow-2xl border border-white/50"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
               >
-                <motion.h1
-                  className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.8 }}
-                >
+                <h1 className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 animate-fade-in">
                   Превращаем эконормы в {" "}
                   <span className="text-sea-green">вашу прибыль</span>
-                </motion.h1>
-                <motion.p
-                  className="hero-description text-lg md:text-xl text-dark-slate/80 mb-6 md:mb-8 leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                >
+                </h1>
+                <p className="hero-description text-lg md:text-xl text-dark-slate/80 mb-6 md:mb-8 leading-relaxed animate-fade-in" style={{ animationDelay: '0.1s' }}>
                   Мы не просто готовим документы. Мы находим решения, которые защищают вас от штрафов, открывают новые рынки и делают вашу компанию лидером в заботе об окружающей среде.
-                </motion.p>
-                <motion.div
-                  className="flex flex-col sm:flex-row gap-3 md:gap-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                >
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                   <button className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base">
                     <PlayCircle className="w-4 h-4 md:w-5 md:h-5" />
                     Наши проекты
@@ -137,20 +122,18 @@ export default function Home() {
               </motion.div>
             </div>
 
-            <motion.div
-              className="relative mt-8 lg:mt-0"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div className="relative mt-8 lg:mt-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="glassmorphic rounded-3xl p-4 md:p-8 transform rotate-1 md:rotate-3"
+                   style={{ transition: 'transform 0.3s ease-out' }}
+                   onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg)'}
+                   onMouseLeave={(e) => e.currentTarget.style.transform = window.innerWidth >= 768 ? 'rotate(3deg)' : 'rotate(1deg)'}>
                 <img
                     src="https://images.unsplash.com/photo-1683402964714-a161848996d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Environmental documentation"
                     className="rounded-xl shadow-lg w-full h-auto max-h-96 md:max-h-none object-cover"
                   />
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -182,15 +165,15 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <motion.div 
-                key={service.title} 
-                initial={{ opacity: 0, y: 30 }}
+                key={`service-${index}`}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                className="group hover:scale-[1.02] transition-all duration-500"
+                transition={{ delay: index * 0.05, duration: 0.3 }}
+                viewport={{ once: true, amount: 0.3 }}
+                className="group"
               >
                 <div 
-                  className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl hover:shadow-[0_25px_50px_rgba(46,139,87,0.15)] transition-all duration-500 overflow-hidden cursor-pointer"
+                  className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden cursor-pointer transform-gpu"
                   style={{
                     background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(46, 139, 87, 0.08) 50%, rgba(255, 255, 255, 0.85) 100%)",
                   }}
