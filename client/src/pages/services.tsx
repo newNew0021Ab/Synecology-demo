@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
 import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight, CheckCircle, X } from "lucide-react";
@@ -164,7 +163,7 @@ export default function Services() {
 
   // Извлекаем все уникальные теги
   const allTags = Array.from(new Set(services.flatMap(service => service.tags)));
-  
+
   // Самые популярные теги
   const popularTags = ["Минприроды", "Документация", "Отчетность", "ПЭК", "Нормативы", "Экологическое право"];
 
@@ -174,8 +173,8 @@ export default function Services() {
       setFilteredServices(services);
       setActiveFilters([]);
     } else {
-      const filtered = services.filter(service => 
-        filters.every(filter => 
+      const filtered = services.filter(service =>
+        filters.every(filter =>
           service.tags.some(serviceTag => serviceTag.toLowerCase() === filter.toLowerCase())
         )
       );
@@ -188,7 +187,7 @@ export default function Services() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tagParams = urlParams.getAll('tag');
-    
+
     if (tagParams.length > 0) {
       applyFilters(tagParams);
     } else {
@@ -200,10 +199,10 @@ export default function Services() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const tagParams = urlParams.getAll('tag');
-    
-    const filtersChanged = tagParams.length !== activeFilters.length || 
+
+    const filtersChanged = tagParams.length !== activeFilters.length ||
       !tagParams.every(tag => activeFilters.includes(tag));
-    
+
     if (filtersChanged) {
       applyFilters(tagParams);
     }
@@ -218,10 +217,10 @@ export default function Services() {
       // Добавляем тег к выбранным
       newFilters = [...activeFilters, tag];
     }
-    
+
     const urlParams = new URLSearchParams();
     newFilters.forEach(filter => urlParams.append('tag', filter));
-    
+
     const newUrl = newFilters.length > 0 ? `/services?${urlParams.toString()}` : '/services';
     window.history.pushState({}, '', newUrl);
     applyFilters(newFilters);
@@ -322,13 +321,12 @@ export default function Services() {
           <div className="space-y-20">
             {filteredServices.map((service, index) => (
               <motion.div
-                key={`${service.slug}-${activeFilters.join('-')}`}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-                }`}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
+                key={`service-detail-${service.slug}`}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.02, duration: 0.4, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
               >
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <GlassmorphicCard>

@@ -9,6 +9,7 @@ export default function Blog() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
+  // Adding slugs for blog posts to use in URLs and keys
   const blogPosts = [
     {
       title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
@@ -21,6 +22,7 @@ export default function Blog() {
       featured: true,
       author: "Корякин Егор Дмитриевич",
       authorSlug: "egor-koryakin",
+      slug: "eco-certification-business-belarus"
     },
     {
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
@@ -33,6 +35,7 @@ export default function Blog() {
       featured: false,
       author: "Корякин Егор Дмитриевич",
       authorSlug: "egor-koryakin",
+      slug: "waste-management-enterprise-belarus"
     },
     {
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
@@ -45,7 +48,47 @@ export default function Blog() {
       featured: false,
       author: "Корякин Егор Дмитриевич",
       authorSlug: "egor-koryakin",
+      slug: "atmospheric-emissions-belarus"
     },
+    {
+      title: "Экологическое сопровождение: как защитить бизнес от штрафов и претензий",
+      excerpt: "Аутсорсинг экологического сопровождения — это решение для бизнеса, который хочет минимизировать риски и избежать штрафов. Мы берем на себя всю работу с документами и контролирующими органами, чтобы вы могли сосредоточиться на развитии своего дела.",
+      category: "Экологическое сопровождение",
+      date: "14.12.2024",
+      readTime: "7 мин",
+      image: "https://images.unsplash.com/photo-1726747849539-158043460661?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      tags: ["Экологическое сопровождение", "Штрафы", "Риски", "Аутсорсинг"],
+      featured: false,
+      author: "Иванова Анна Петровна",
+      authorSlug: "anna-ivanova",
+      slug: "ecological-support"
+    },
+    {
+      title: "Экологический паспорт предприятия: обязательный документ или формальность?",
+      excerpt: "Экологический паспорт — это не просто отчетность. Это комплексный документ, который отражает экологическую политику предприятия и его соответствие требованиям законодательства. Разбираемся, как его правильно составить и почему это важно для вашего бизнеса.",
+      category: "Документация",
+      date: "12.12.2024",
+      readTime: "6 мин",
+      image: "https://images.unsplash.com/photo-1700834334254-393f3f5c2c55?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      tags: ["Экологический паспорт", "Документация", "Законодательство", "Отчетность"],
+      featured: false,
+      author: "Иванова Анна Петровна",
+      authorSlug: "anna-ivanova",
+      slug: "ecological-passport"
+    },
+    {
+      title: "Производственный экологический контроль: как избежать штрафов и наладить систему",
+      excerpt: "Производственный экологический контроль (ПЭК) — ключевой элемент экологической безопасности на любом предприятии. Правильно организованная система ПЭК помогает не только избежать штрафов, но и оптимизировать расходы, связанные с воздействием на окружающую среду.",
+      category: "Контроль",
+      date: "10.12.2024",
+      readTime: "8 мин",
+      image: "https://images.unsplash.com/photo-1698526088101-7044e7c190a5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      tags: ["ПЭК", "Контроль", "Штрафы", "Безопасность"],
+      featured: false,
+      author: "Петров Сергей Васильевич",
+      authorSlug: "sergey-petrov",
+      slug: "production-environmental-control"
+    }
   ];
 
   // Собираем все уникальные теги
@@ -257,7 +300,7 @@ export default function Blog() {
                     </div>
 
                     <Link
-                        href="/blog/eco-certification-business-belarus"
+                        href={`/blog/${post.slug}`}
                         className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                       >
                         <ArrowRight className="w-5 h-5" />
@@ -306,26 +349,16 @@ export default function Blog() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredPosts.filter(post => !post.featured).map((post, index) => (
                 <motion.div 
-                  key={post.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: index * 0.1, 
-                    duration: 0.6,
-                    ease: [0.16, 1, 0.3, 1]
-                  }}
+                  key={`blog-post-${post.slug}`}
+                  initial={{ opacity: 0, y: 5 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.02, duration: 0.3, ease: "easeOut" }}
+                  viewport={{ once: true, amount: 0.1 }}
                   className="group"
                 >
                   <div 
                     className="group block h-full cursor-pointer" 
-                    onClick={() => window.location.href = `/blog/${
-                      post.title === "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов" ? "eco-certification-business-belarus" :
-                      post.title === "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я" ? "waste-management-enterprise-belarus" :
-                      post.title === "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего" ? "atmospheric-emissions-belarus" :
-                      post.title === "Экологическое сопровождение: как защитить бизнес от штрафов и претензий" ? "ecological-support" :
-                      post.title === "Экологический паспорт предприятия: обязательный документ или формальность?" ? "ecological-passport" :
-                      "production-environmental-control"
-                    }`}
+                    onClick={() => window.location.href = `/blog/${post.slug}`}
                   >
                   <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                       <article className="flex flex-col h-full space-y-6">

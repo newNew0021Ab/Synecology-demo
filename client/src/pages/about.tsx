@@ -157,12 +157,12 @@ export default function About() {
 
               return (
                 <motion.div
-                  key={member.name}
-                  className="group cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
+                  key={`team-${member.name}-${index}`}
+                  initial={{ opacity: 0, y: 5 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.8 }}
-                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.02, duration: 0.4, ease: "easeOut" }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  className="group"
                   onClick={() => window.location.href = `/team/${memberSlug}`}
                 >
                   {/* Desktop/Tablet - clickable card */}
@@ -345,15 +345,23 @@ export default function About() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 card-grid">
             {values.map((value, index) => (
-              <GlassmorphicCard key={value.title} delay={index * 0.1}>
-                <div className="text-center card-content">
-                  <div className="flex justify-center mb-4">{value.icon}</div>
-                  <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
-                    {value.title}
-                  </h3>
-                  <p className="text-dark-slate/70 flex-grow">{value.description}</p>
-                </div>
-              </GlassmorphicCard>
+              <motion.div
+                key={`value-${value.title}-${index}`}
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.02, duration: 0.3, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.1 }}
+              >
+                <GlassmorphicCard className="text-center group hover:scale-105 transition-transform duration-300">
+                  <div className="text-center card-content">
+                    <div className="flex justify-center mb-4">{value.icon}</div>
+                    <h3 className="text-2xl font-heading font-bold text-dark-slate mb-4">
+                      {value.title}
+                    </h3>
+                    <p className="text-dark-slate/70 flex-grow">{value.description}</p>
+                  </div>
+                </GlassmorphicCard>
+              </motion.div>
             ))}
           </div>
         </div>

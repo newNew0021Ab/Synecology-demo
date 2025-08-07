@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
@@ -90,11 +89,12 @@ export default function FAQ() {
           <div className="space-y-6">
             {faqs.map((faq, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+                key={`faq-${index}`}
+                initial={{ opacity: 0, y: 5 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
-                viewport={{ once: true }}
+                transition={{ delay: index * 0.01, duration: 0.3, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="mb-6"
               >
                 <GlassmorphicCard className="overflow-hidden">
                   <button
@@ -112,7 +112,7 @@ export default function FAQ() {
                       )}
                     </div>
                   </button>
-                  
+
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{

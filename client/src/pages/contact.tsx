@@ -256,7 +256,13 @@ export default function Contact() {
             </GlassmorphicCard>
 
             {/* Contact Information */}
-            <div className="space-y-8">
+            <motion.div
+              className="space-y-8"
+              initial={{ opacity: 0, x: 5 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.04, duration: 0.4, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.1 }}
+            >
               <GlassmorphicCard>
                 <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">Контактная информация</h3>
                 <div className="space-y-6">
@@ -313,7 +319,7 @@ export default function Contact() {
                   </div>
                 </div>
               </GlassmorphicCard>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -24,6 +24,7 @@ export default function CaseStudies() {
       timeline: "3 месяца",
       completion: "15.12.2024",
       featured: true,
+      slug: "coffee-environmental-documentation",
     },
   ];
 
@@ -87,7 +88,7 @@ export default function CaseStudies() {
               <div key={caseStudy.title} className="group">
                 {/* Desktop version - clickable */}
                 <Link
-                  href={`/case-studies/coffee-environmental-documentation`}
+                  href={`/case-studies/${caseStudy.slug}`}
                   className="hidden md:block"
                 >
                   <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
@@ -215,7 +216,7 @@ export default function CaseStudies() {
 
                         <div className="flex items-center justify-center mt-8 pt-6 border-t border-dark-slate/10">
                           <Link
-                            href="/case-studies/coffee-environmental-documentation"
+                            href={`/case-studies/${caseStudy.slug}`}
                             className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base"
                           >
                             Подробнее <ArrowRight className="w-5 h-5" />
