@@ -305,7 +305,17 @@ export default function Blog() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredPosts.filter(post => !post.featured).map((post, index) => (
-                <div key={post.title} className="group">
+                <motion.div 
+                  key={post.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    delay: index * 0.1, 
+                    duration: 0.6,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="group"
+                >
                   <div 
                     className="group block h-full cursor-pointer" 
                     onClick={() => window.location.href = `/blog/${
@@ -317,13 +327,18 @@ export default function Blog() {
                       "production-environmental-control"
                     }`}
                   >
-                  <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
+                  <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                       <article className="flex flex-col h-full space-y-6">
                         <div className="relative">
                           <img
                             src={post.image}
                             alt={post.title}
                             className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                            loading="lazy"
+                            style={{ 
+                              aspectRatio: '16/9',
+                              objectFit: 'cover'
+                            }}
                           />
                         </div>
 
@@ -378,7 +393,7 @@ export default function Blog() {
                       </article>
                     </GlassmorphicCard>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
