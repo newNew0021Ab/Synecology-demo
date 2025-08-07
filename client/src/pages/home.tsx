@@ -97,7 +97,7 @@ export default function Home() {
                 className="bg-white/85 backdrop-blur-md rounded-3xl p-4 md:p-8 shadow-2xl border border-white/50"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <h1 className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-dark-slate leading-tight mb-4 md:mb-6 animate-fade-in">
                   Превращаем эконормы в {" "}
@@ -118,7 +118,8 @@ export default function Home() {
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                     Начать с аудита
                   </Link>
-                </motion.div>
+                </div>
+              </motion.div>
               </motion.div>
             </div>
 
@@ -165,12 +166,12 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <motion.div 
-                key={`service-${index}`}
-                initial={{ opacity: 0, y: 20 }}
+                key={`service-${service.title}`}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.3 }}
-                viewport={{ once: true, amount: 0.3 }}
-                className="group"
+                transition={{ delay: index * 0.02, duration: 0.4, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="group transform-gpu"
               >
                 <div 
                   className="relative rounded-3xl p-6 md:p-8 h-full backdrop-blur-xl border border-white/30 shadow-2xl overflow-hidden cursor-pointer transform-gpu"
