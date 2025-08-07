@@ -35,6 +35,7 @@ export default function BlogPage() {
 
   const staticBlogPosts = [
     {
+      slug: "eco-certification-business-belarus",
       title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
       excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
       category: "Сертификация",
@@ -47,6 +48,7 @@ export default function BlogPage() {
       authorSlug: "egor-koryakin",
     },
     {
+      slug: "waste-management-enterprise-belarus",
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
       excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
       category: "Отходы",
@@ -59,6 +61,7 @@ export default function BlogPage() {
       authorSlug: "egor-koryakin",
     },
     {
+      slug: "atmospheric-emissions-belarus",
       title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
       excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов. Объясняем пошагово, как получить разрешение и избежать проблем с контролирующими органами.",
       category: "Выбросы",
@@ -219,8 +222,13 @@ export default function BlogPage() {
                   date: new Date(post.attributes.time).toLocaleDateString('ru-RU'),
                   readTime: post.attributes.read_time,
                   author: post.attributes.author,
-                  tags: post.attributes.tags.split(',').map((tag: string) => tag.trim())
-                } : post;
+                  tags: typeof post.attributes.tags === 'string' 
+                    ? post.attributes.tags.split(',').map((tag: string) => tag.trim())
+                    : post.attributes.tags || []
+                } : {
+                  ...post,
+                  tags: Array.isArray(post.tags) ? post.tags : []
+                };
 
                 return (
                   <motion.div
@@ -250,7 +258,7 @@ export default function BlogPage() {
                             {postData.excerpt}
                           </p>
                           <div className="flex flex-wrap gap-2 mb-4">
-                            {postData.tags.map((tag, idx) => (
+                            {postData.tags && postData.tags.length > 0 && postData.tags.map((tag, idx) => (
                               <Badge key={idx} variant="outline" className="text-xs">
                                 {tag}
                               </Badge>
