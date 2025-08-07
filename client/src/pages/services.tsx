@@ -365,13 +365,14 @@ export default function Services() {
                   </GlassmorphicCard>
                 </div>
 
-                <div className={index % 2 === 1 ? "lg:col-start-1" : ""}>
-                  <div className="glassmorphic rounded-3xl p-8 transform hover:scale-105 transition-transform duration-500 cursor-pointer"
+                <div className={index % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}>
+                  <div className="glassmorphic rounded-3xl p-6 md:p-8 transform hover:scale-102 transition-transform duration-300 cursor-pointer h-full flex items-center justify-center"
                        onClick={() => window.location.href = `/services/${service.slug}`}>
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="rounded-xl shadow-lg w-full h-auto"
+                      className="rounded-xl shadow-lg w-full h-64 md:h-80 lg:h-96 object-cover"
+                      loading="lazy"
                     />
                   </div>
                 </div>
