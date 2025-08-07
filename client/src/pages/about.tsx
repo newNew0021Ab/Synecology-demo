@@ -21,7 +21,7 @@ export default function About() {
       social: {
         linkedin: "#",
         twitter: "#",
-        email: "egor@synecology.com",
+        email: "synecology@yandex.by",
       },
     },
   ];
@@ -167,7 +167,7 @@ export default function About() {
                 >
                   {/* Desktop/Tablet - clickable card */}
                   <div className="hidden sm:block">
-                    <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
+                    <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
                           {member.name === "Корякин Егор Дмитриевич" ? (
