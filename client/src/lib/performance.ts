@@ -64,6 +64,38 @@ export const batchDOMOperations = (operations: (() => void)[]) => {
   });
 };
 
+// Разделение чтения и записи DOM для предотвращения forced reflow
+export const batchDOMReadsAndWrites = (
+  reads: (() => any)[],
+  writes: (() => void)[]
+) => {
+  requestAnimationFrame(() => {
+    // Сначала выполняем все чтения
+    const readResults = reads.map(read => read());
+    
+    // Затем все записи в следующем кадре
+    requestAnimationFrame(() => {
+      writes.forEach(write => write());
+    });
+    
+    return readResults;
+  });
+};
+
+// Утилита для отложенного показа элементов (предотвращение мигания)
+export const revealElement = (element: HTMLElement, delay = 0) => {
+  element.style.visibility = 'hidden';
+  element.style.opacity = '0';
+  
+  setTimeout(() => {
+    requestAnimationFrame(() => {
+      element.style.visibility = 'visible';
+      element.style.transition = 'opacity 0.3s ease-out';
+      element.style.opacity = '1';
+    });
+  }, delay);
+};
+
 // Предзагрузка критических ресурсов
 export const preloadResource = (href: string, as: string) => {
   const link = document.createElement('link');

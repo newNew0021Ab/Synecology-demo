@@ -16,6 +16,23 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
+/* Предотвращение forced reflow */
+* {
+  box-sizing: border-box;
+}
+
+/* Базовые оптимизации для предотвращения мигания */
+.prevent-flash {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.prevent-flash.loaded {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* Оптимизированные классы для анимаций только на десктопе */
 @media (hover: hover) and (pointer: fine) {
   .gpu-optimized {
@@ -60,9 +77,48 @@ img {
   transform: translateZ(0);
 }
 
-/* Быстрые переходы */
+/* Оптимизированные анимации без reflow */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Быстрые переходы без reflow */
 .fast-transition {
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  will-change: transform, opacity;
+} 0.1s ease-out, opacity 0.1s ease-out;
 }
 
 /* Оптимизация для элементов вне viewport */

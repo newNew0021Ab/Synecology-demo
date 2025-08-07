@@ -25,14 +25,21 @@ export const useOptimizedScroll = ({
       cancelAnimationFrame(frameRef.current);
     }
 
-    // На мобильных устройствах используем более простую обработку
-    if (isMobile.current) {
-      onScroll?.(window.pageYOffset);
-    } else {
-      frameRef.current = requestAnimationFrame(() => {
-        onScroll?.(window.pageYOffset);
-      });
-    }
+    // Батчим все чтения DOM в одном RAF
+    frameRef.current = requestAnimationFrame(() => {
+      // Читаем все layout-свойства за один раз
+      const scrollY = window.pageYOffset;
+      
+      // На мобильных устройствах используем прямой вызов
+      if (isMobile.current) {
+        onScroll?.(scrollY);
+      } else {
+        // На десктопе добавляем дополнительную оптимизацию
+        requestAnimationFrame(() => {
+          onScroll?.(scrollY);
+        });
+      }
+    });
   }, [onScroll]);
 
   const throttledScroll = useCallback(
