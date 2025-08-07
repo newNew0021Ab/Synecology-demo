@@ -157,12 +157,12 @@ export default function About() {
 
               return (
                 <motion.div
-                  key={`team-${member.name}-${index}`}
-                  initial={{ opacity: 0, y: 5 }}
+                  key={`team-${member.name}`}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.02, duration: 0.4, ease: "easeOut" }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  className="group"
+                  transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="group card-stable visible"
                   onClick={() => window.location.href = `/team/${memberSlug}`}
                 >
                   {/* Desktop/Tablet - clickable card */}
@@ -346,11 +346,12 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 card-grid">
             {values.map((value, index) => (
               <motion.div
-                key={`value-${value.title}-${index}`}
-                initial={{ opacity: 0, y: 5 }}
+                key={`value-${value.title}`}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.02, duration: 0.3, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="card-stable visible"
               >
                 <GlassmorphicCard className="text-center group hover:scale-105 transition-transform duration-300">
                   <div className="text-center card-content">

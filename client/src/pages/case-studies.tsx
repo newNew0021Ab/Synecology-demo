@@ -64,7 +64,15 @@ export default function CaseStudies() {
           {/* Stats Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             {stats.map((stat, index) => (
-              <GlassmorphicCard key={stat.label} delay={index * 0.1}>
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="card-stable visible"
+              >
+                <GlassmorphicCard>
                 <div className="text-center">
                   <div className={`w-16 h-16 ${stat.color} mx-auto mb-4`}>
                     <stat.icon className="w-full h-full" />
@@ -75,6 +83,7 @@ export default function CaseStudies() {
                   <div className="text-dark-slate/70">{stat.label}</div>
                 </div>
               </GlassmorphicCard>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -85,7 +94,14 @@ export default function CaseStudies() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             {mainCaseStudies.map((caseStudy, index) => (
-              <div key={caseStudy.title} className="group">
+              <motion.div 
+                key={caseStudy.slug}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="group card-stable visible"
+              >
                 {/* Desktop version - clickable */}
                 <Link
                   href={`/case-studies/${caseStudy.slug}`}
@@ -225,7 +241,7 @@ export default function CaseStudies() {
                     </div>
                   </GlassmorphicCard>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 

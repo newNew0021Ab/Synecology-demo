@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './styles/performance.css';
-
 /* Оптимизация скроллинга */
 html {
   scroll-behavior: smooth;
@@ -91,6 +89,25 @@ img {
   contain: layout style paint;
   content-visibility: auto;
   transform: translateZ(0);
+}
+
+/* Универсальные классы для карточек без мигания */
+.card-stable {
+  opacity: 0;
+  transform: translateY(10px) translateZ(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+}
+
+.card-stable.visible {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.card-stable.hidden {
+  opacity: 0;
+  transform: translateY(10px) translateZ(0);
 }
 
 /* Оптимизированные анимации без reflow */

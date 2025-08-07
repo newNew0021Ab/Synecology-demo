@@ -108,7 +108,7 @@ export default function Services() {
         "Консультации по всем направлениям экологии",
         "Представительство в контролирующих органах",
         "Разработка экологических программ",
-        "Мониторинг изменений в законодательстве",
+        "Мониторинг изменений в законодательства",
       ],
       image: "https://images.unsplash.com/photo-1752159400890-d906038f1b35?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
       tags: ["Аутсорсинг", "Сопровождение", "Эколог", "Консультации", "Отчетность"],
@@ -324,9 +324,9 @@ export default function Services() {
                 key={`service-detail-${service.slug}`}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.02, duration: 0.4, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center"
+                transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center card-stable visible"
               >
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <GlassmorphicCard>

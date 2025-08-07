@@ -66,3 +66,29 @@ img {
     transform: translateY(-1px);
   }
 }
+
+/* Производительность для карточек */
+.card-performance {
+  contain: layout style paint;
+  content-visibility: auto;
+  transform: translateZ(0);
+}
+
+/* Оптимизация для мобильных устройств */
+@media (hover: none) and (pointer: coarse) {
+  .card-stable {
+    transition: opacity 0.3s ease-out;
+    transform: translateZ(0);
+  }
+
+  .card-stable.visible {
+    transform: translateZ(0);
+  }
+}
+
+/* Предотвращение reflow */
+.prevent-reflow {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}

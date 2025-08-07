@@ -17,12 +17,8 @@ export default function GlassmorphicCard({
   const hoverClasses = hover ? "glassmorphic-hover gpu-optimized" : "";
 
   return (
-    <motion.div
-      className={`${baseClasses} ${hoverClasses} ${className} loaded`}
-      initial={{ opacity: 0, transform: "translate3d(0, 20px, 0)" }}
-      whileInView={{ opacity: 1, transform: "translate3d(0, 0, 0)" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      viewport={{ once: true }}
+    <div
+      className={`${baseClasses} ${hoverClasses} ${className} loaded card-stable visible`}
       style={{
         background: "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%)",
         backdropFilter: "blur(20px)",
@@ -33,6 +29,6 @@ export default function GlassmorphicCard({
       }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

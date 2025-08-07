@@ -90,11 +90,11 @@ export default function FAQ() {
             {faqs.map((faq, index) => (
               <motion.div
                 key={`faq-${index}`}
-                initial={{ opacity: 0, y: 5 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.01, duration: 0.3, ease: "easeOut" }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="mb-6"
+                transition={{ delay: index * 0.05, duration: 0.6, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+                className="mb-6 card-stable visible"
               >
                 <GlassmorphicCard className="overflow-hidden">
                   <button

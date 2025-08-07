@@ -349,15 +349,19 @@ export default function Blog() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {filteredPosts.filter(post => !post.featured).map((post, index) => (
                 <motion.div 
-                  key={`blog-post-${post.slug}`}
-                  initial={{ opacity: 0, y: 5 }}
+                  key={post.slug}
+                  initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.02, duration: 0.3, ease: "easeOut" }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  className="group"
+                  transition={{ 
+                    delay: index * 0.1, 
+                    duration: 0.6,
+                    ease: "easeOut"
+                  }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="group h-full card-stable visible"
                 >
                   <div 
-                    className="group block h-full cursor-pointer" 
+                    className="group block h-full cursor-pointer"
                     onClick={() => window.location.href = `/blog/${post.slug}`}
                   >
                   <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
@@ -427,8 +431,7 @@ export default function Blog() {
                     </GlassmorphicCard>
                   </div>
                 </motion.div>
-              ))}
-            </div>
+              ))}\n            </div>
           )}
 
           {filteredPosts.length > 0 && (
