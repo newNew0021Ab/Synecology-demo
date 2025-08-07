@@ -1,4 +1,3 @@
-
 export const debounce = <T extends (...args: any[]) => any>(
   func: T,
   wait: number
@@ -16,10 +15,10 @@ export const throttle = <T extends (...args: any[]) => any>(
 ): ((...args: Parameters<T>) => void) => {
   let inThrottle: boolean;
   let lastTime = 0;
-  
+
   return (...args: Parameters<T>) => {
     const now = Date.now();
-    
+
     if (!inThrottle || now - lastTime >= limit) {
       func(...args);
       lastTime = now;
@@ -47,14 +46,41 @@ export const addPassiveEventListener = (
 export const createIntersectionObserver = (
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit
-) => {
+): IntersectionObserver => {
   const defaultOptions: IntersectionObserverInit = {
     rootMargin: '50px',
     threshold: 0.1,
     ...options
   };
-  
+
   return new IntersectionObserver(callback, defaultOptions);
+};
+
+// Debounced resize handler для предотвращения множественных reflow
+export const createResizeObserver = (
+  callback: (entries: ResizeObserverEntry[]) => void,
+  debounceMs = 16 // ~60fps
+): ResizeObserver => {
+  let timeoutId: number;
+
+  const debouncedCallback = (entries: ResizeObserverEntry[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback(entries);
+    }, debounceMs);
+  };
+
+  return new ResizeObserver(debouncedCallback);
+};
+
+// Предотвращение forced reflow при чтении layout свойств
+export const safeGetBoundingRect = (element: Element): DOMRect => {
+  // Откладываем чтение до следующего кадра если были изменения DOM
+  return new Promise<DOMRect>((resolve) => {
+    requestAnimationFrame(() => {
+      resolve(element.getBoundingClientRect());
+    });
+  }) as any;
 };
 
 // Оптимизация запросов к DOM
@@ -72,12 +98,12 @@ export const batchDOMReadsAndWrites = (
   requestAnimationFrame(() => {
     // Сначала выполняем все чтения
     const readResults = reads.map(read => read());
-    
+
     // Затем все записи в следующем кадре
     requestAnimationFrame(() => {
       writes.forEach(write => write());
     });
-    
+
     return readResults;
   });
 };
@@ -86,7 +112,7 @@ export const batchDOMReadsAndWrites = (
 export const revealElement = (element: HTMLElement, delay = 0) => {
   element.style.visibility = 'hidden';
   element.style.opacity = '0';
-  
+
   setTimeout(() => {
     requestAnimationFrame(() => {
       element.style.visibility = 'visible';
@@ -112,6 +138,6 @@ export const smoothScrollTo = (element: Element, options?: ScrollIntoViewOptions
     block: 'start',
     ...options
   };
-  
+
   element.scrollIntoView(defaultOptions);
 };

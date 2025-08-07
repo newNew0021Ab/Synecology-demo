@@ -55,13 +55,29 @@ body {
 /* Мобильные оптимизации */
 @media (hover: none) and (pointer: coarse) {
   .gpu-optimized {
-    transform: none;
+    transform: translateZ(0);
     will-change: auto;
   }
 
   .hover-optimized {
     transition: none;
     will-change: auto;
+  }
+
+  /* Предотвращаем мигание на мобильных */
+  .prevent-mobile-flash {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+
+  .prevent-mobile-flash.loaded {
+    opacity: 1;
+  }
+
+  /* Оптимизируем прокрутку на мобильных */
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 }
 
@@ -118,7 +134,6 @@ img {
 .fast-transition {
   transition: transform 0.15s ease-out, opacity 0.15s ease-out;
   will-change: transform, opacity;
-} 0.1s ease-out, opacity 0.1s ease-out;
 }
 
 /* Оптимизация для элементов вне viewport */
