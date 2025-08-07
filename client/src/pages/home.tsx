@@ -120,7 +120,6 @@ export default function Home() {
                   </Link>
                 </div>
               </motion.div>
-              </motion.div>
             </div>
 
             <div className="relative mt-8 lg:mt-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
