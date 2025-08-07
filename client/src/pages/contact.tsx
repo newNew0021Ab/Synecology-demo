@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import emailjs, { EMAILJS_CONFIG } from '@/lib/emailjs';
 import OrganicBlob from "@/components/OrganicBlob";
-import { GlassmorphicCard } from "@/components/GlassmorphicCard";
+import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

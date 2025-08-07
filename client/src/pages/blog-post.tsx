@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, Tag, Share2, User } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
-import { GlassmorphicCard } from "@/components/GlassmorphicCard";
+import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
 
 export default function BlogPost() {

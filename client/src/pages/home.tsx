@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { PlayCircle, ArrowRight, Factory, Recycle, FileText, Droplets, Trash2, ClipboardList } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
-import { GlassmorphicCard } from "@/components/GlassmorphicCard";
+import GlassmorphicCard from "@/components/GlassmorphicCard";
 import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSEO } from "@/hooks/useSEO";

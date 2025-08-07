@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import OrganicBlob from "@/components/OrganicBlob";
-import { GlassmorphicCard } from "@/components/GlassmorphicCard";
+import GlassmorphicCard from "@/components/GlassmorphicCard";
 
 export default function FAQ() {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);

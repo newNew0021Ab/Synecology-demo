@@ -4,21 +4,18 @@ import { ChevronRight, Home } from "lucide-react";
 
 interface BreadcrumbItem {
   label: string;
-  href?: string;
+  href: string;
 }
 
 interface BreadcrumbsProps {
-  segments?: BreadcrumbItem[];
   items?: BreadcrumbItem[];
-  className?: string;
 }
 
-export function Breadcrumbs({ segments, items, className = "" }: BreadcrumbsProps) {
+export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   const [location] = useLocation();
   
   // Generate breadcrumbs from URL if items not provided
   const generateBreadcrumbs = (): BreadcrumbItem[] => {
-    if (segments) return segments;
     if (items) return items;
     
     const pathSegments = location.split('/').filter(Boolean);
@@ -68,7 +65,7 @@ export function Breadcrumbs({ segments, items, className = "" }: BreadcrumbsProp
   if (breadcrumbs.length <= 1) return null;
   
   return (
-    <nav aria-label="Навигационные ссылки" className={`mb-6 ${className}`}>
+    <nav aria-label="Навигационные ссылки" className="mb-6">
       <ol 
         className="flex items-center space-x-2 text-sm text-dark-slate/70"
         itemScope 
@@ -85,7 +82,7 @@ export function Breadcrumbs({ segments, items, className = "" }: BreadcrumbsProp
             {index > 0 && (
               <ChevronRight className="w-4 h-4 mx-2 text-dark-slate/40" />
             )}
-            {index === breadcrumbs.length - 1 || !crumb.href ? (
+            {index === breadcrumbs.length - 1 ? (
               <span 
                 className="text-dark-slate font-medium"
                 itemProp="name"
