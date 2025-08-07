@@ -21,16 +21,7 @@ export default function BlogPage() {
   });
 
   if (error) {
-    return (
-      <div className="min-h-screen bg-background text-foreground pt-24 pb-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold text-destructive mb-4">Ошибка загрузки</h2>
-            <p className="text-muted-foreground">Не удалось загрузить статьи блога</p>
-          </div>
-        </div>
-      </div>
-    );
+    console.warn('Failed to load blog posts from Strapi, using static posts:', error);
   }
 
   const staticBlogPosts = [
@@ -113,8 +104,8 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-24 pb-16">
-      {/*   {/* Breadcrumbs */}
-      {/*  <div className="container mx-auto px-4 mb-8">
+      {/* Breadcrumbs */}
+      {/* <div className="container mx-auto px-4 mb-8">
         <Breadcrumbs segments={[
           { label: 'Главная', href: '/' },
           { label: 'Блог', href: '/blog' }
@@ -212,7 +203,7 @@ export default function BlogPage() {
                 </div>
               ))
             ) : (
-              (blogPosts || staticBlogPosts).map((post, index) => {
+              (blogPosts && blogPosts.length > 0 ? blogPosts : staticBlogPosts).map((post, index) => {
                 const isStrapi = 'attributes' in post;
                 const postData = isStrapi ? {
                   slug: post.attributes.slug,
