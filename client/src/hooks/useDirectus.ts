@@ -1,7 +1,6 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { BlogPost, CaseStudy, DirectusResponse, DirectusQueryParams } from '@shared/directus-types';
 import { blogApi, caseStudiesApi } from '@/lib/directus';
-import { directus } from '@/lib/directus';
 
 // Blog hooks
 export function useBlogPosts(params?: DirectusQueryParams): UseQueryResult<DirectusResponse<BlogPost>> {
@@ -47,27 +46,14 @@ export function useCaseStudies(params?: DirectusQueryParams): UseQueryResult<Dir
   });
 }
 
-export const useCaseStudy = (slug: string) => {
+export function useCaseStudy(slug: string): UseQueryResult<CaseStudy | null> {
   return useQuery({
     queryKey: ['case-study', slug],
-    queryFn: async () => {
-      console.log('Fetching case study with slug:', slug);
-      const response = await directus.items('case_studies').readByQuery({
-        filter: { slug: { _eq: slug } },
-        limit: 1
-      });
-      console.log('Case study response:', response);
-      return response;
-    },
-    select: (data) => {
-      console.log('Case study data:', data);
-      return data.data?.[0];
-    },
+    queryFn: () => caseStudiesApi.getBySlug(slug),
     enabled: !!slug,
-    staleTime: 5 * 60 * 1000, // 5 minutes
-    retry: 3,
+    staleTime: 10 * 60 * 1000, // 10 minutes
   });
-};
+}
 
 export function useFeaturedCaseStudies(limit = 3): UseQueryResult<DirectusResponse<CaseStudy>> {
   return useQuery({

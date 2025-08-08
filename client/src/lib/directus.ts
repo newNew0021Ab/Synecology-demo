@@ -1,7 +1,11 @@
 
+import { createDirectus, rest } from '@directus/sdk';
 import { BlogPost, CaseStudy, DirectusResponse, DirectusQueryParams } from '@shared/directus-types';
 
 const DIRECTUS_URL = 'https://directus-production-6ce1.up.railway.app';
+
+// Create Directus client
+export const directus = createDirectus(DIRECTUS_URL).with(rest());
 
 // Helper function to build query string
 function buildQueryString(params: DirectusQueryParams): string {
