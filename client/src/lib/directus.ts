@@ -39,6 +39,9 @@ interface CaseStudy {
 const directusUrl = 'https://directus-production-6ce1.up.railway.app';
 const directus = createDirectus(directusUrl).with(rest());
 
+// Export directus client
+export { directus };
+
 // Helper function to get image URL
 export const getImageUrl = (image: string | { id: string; filename_download: string } | null | undefined): string | null => {
   if (!image) return null;
@@ -71,10 +74,7 @@ export const fetchBlogPosts = async (limit = 12): Promise<BlogPost[]> => {
     const posts = await directus.request(
       readItems('blog_posts', {
         limit,
-        sort: ['-published_date'],
-        filter: {
-          status: { _eq: 'published' }
-        }
+        sort: ['-published_date']
       })
     );
     return posts || [];
@@ -90,8 +90,7 @@ export const fetchBlogPost = async (slug: string): Promise<BlogPost | null> => {
     const posts = await directus.request(
       readItems('blog_posts', {
         filter: {
-          slug: { _eq: slug },
-          status: { _eq: 'published' }
+          slug: { _eq: slug }
         },
         limit: 1
       })
@@ -109,10 +108,7 @@ export const fetchCaseStudies = async (limit = 20): Promise<CaseStudy[]> => {
     const studies = await directus.request(
       readItems('case_studies', {
         limit,
-        sort: ['-completion_date'],
-        filter: {
-          status: { _eq: 'published' }
-        }
+        sort: ['-completion_date']
       })
     );
     return studies || [];
@@ -128,8 +124,7 @@ export const fetchCaseStudy = async (slug: string): Promise<CaseStudy | null> =>
     const studies = await directus.request(
       readItems('case_studies', {
         filter: {
-          slug: { _eq: slug },
-          status: { _eq: 'published' }
+          slug: { _eq: slug }
         },
         limit: 1
       })
@@ -147,10 +142,7 @@ export const fetchBlogMeta = async () => {
     const posts = await directus.request(
       readItems('blog_posts', {
         fields: ['category', 'tags'],
-        limit: -1,
-        filter: {
-          status: { _eq: 'published' }
-        }
+        limit: -1
       })
     );
 
@@ -165,5 +157,4 @@ export const fetchBlogMeta = async () => {
   }
 };
 
-export { directus };
 export type { BlogPost, CaseStudy };
