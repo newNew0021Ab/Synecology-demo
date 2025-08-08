@@ -1,122 +1,49 @@
+
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Calendar, ArrowRight, Clock, Tag, Search, User } from "lucide-react";
+import { Calendar, ArrowRight, Clock, Tag, Search, User, Loader2 } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useState, useMemo } from "react";
+import { useBlogPosts, useBlogFilters } from "@/hooks/useDirectus";
+import { getDirectusImageUrl, formatDate } from "@/lib/directus";
 
 export default function Blog() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 12;
 
-  // Adding slugs for blog posts to use in URLs and keys
-  const blogPosts = [
-    {
-      title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
-      excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
-      category: "Сертификация",
-      date: "20.12.2024",
-      readTime: "8 мин",
-      image: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
-      featured: true,
-      author: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
-      slug: "eco-certification-business-belarus"
+  // Fetch blog posts with filters
+  const blogQuery = useBlogPosts({
+    limit: postsPerPage,
+    offset: (currentPage - 1) * postsPerPage,
+    sort: ['-published_date'],
+    filter: {
+      ...(selectedCategories.length > 0 && { category: selectedCategories }),
+      ...(selectedTags.length > 0 && { 
+        tags: { _intersects: selectedTags }
+      }),
     },
-    {
-      title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
-      excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
-      category: "Отходы",
-      date: "18.12.2024",
-      readTime: "10 мин",
-      image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
-      featured: false,
-      author: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
-      slug: "waste-management-enterprise-belarus"
-    },
-    {
-      title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
-      excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов. Объясняем пошагово, как получить разрешение и избежать проблем с контролирующими органами.",
-      category: "Выбросы",
-      date: "16.12.2024",
-      readTime: "9 мин",
-      image: "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
-      featured: false,
-      author: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
-      slug: "atmospheric-emissions-belarus"
-    },
-    {
-      title: "Экологическое сопровождение: как защитить бизнес от штрафов и претензий",
-      excerpt: "Аутсорсинг экологического сопровождения — это решение для бизнеса, который хочет минимизировать риски и избежать штрафов. Мы берем на себя всю работу с документами и контролирующими органами, чтобы вы могли сосредоточиться на развитии своего дела.",
-      category: "Экологическое сопровождение",
-      date: "14.12.2024",
-      readTime: "7 мин",
-      image: "https://images.unsplash.com/photo-1726747849539-158043460661?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Экологическое сопровождение", "Штрафы", "Риски", "Аутсорсинг"],
-      featured: false,
-      author: "Иванова Анна Петровна",
-      authorSlug: "anna-ivanova",
-      slug: "ecological-support"
-    },
-    {
-      title: "Экологический паспорт предприятия: обязательный документ или формальность?",
-      excerpt: "Экологический паспорт — это не просто отчетность. Это комплексный документ, который отражает экологическую политику предприятия и его соответствие требованиям законодательства. Разбираемся, как его правильно составить и почему это важно для вашего бизнеса.",
-      category: "Документация",
-      date: "12.12.2024",
-      readTime: "6 мин",
-      image: "https://images.unsplash.com/photo-1700834334254-393f3f5c2c55?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["Экологический паспорт", "Документация", "Законодательство", "Отчетность"],
-      featured: false,
-      author: "Иванова Анна Петровна",
-      authorSlug: "anna-ivanova",
-      slug: "ecological-passport"
-    },
-    {
-      title: "Производственный экологический контроль: как избежать штрафов и наладить систему",
-      excerpt: "Производственный экологический контроль (ПЭК) — ключевой элемент экологической безопасности на любом предприятии. Правильно организованная система ПЭК помогает не только избежать штрафов, но и оптимизировать расходы, связанные с воздействием на окружающую среду.",
-      category: "Контроль",
-      date: "10.12.2024",
-      readTime: "8 мин",
-      image: "https://images.unsplash.com/photo-1698526088101-7044e7c190a5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      tags: ["ПЭК", "Контроль", "Штрафы", "Безопасность"],
-      featured: false,
-      author: "Петров Сергей Васильевич",
-      authorSlug: "sergey-petrov",
-      slug: "production-environmental-control"
-    }
-  ];
+    ...(searchTerm && { search: searchTerm }),
+  });
 
-  // Собираем все уникальные теги
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    blogPosts.forEach(post => {
-      post.tags.forEach(tag => tags.add(tag));
-    });
-    return Array.from(tags).sort();
-  }, [blogPosts]);
+  // Fetch filter options
+  const filtersQuery = useBlogFilters();
 
-  // Фильтруем посты по тегам и поисковому запросу
-  const filteredPosts = useMemo(() => {
-    return blogPosts.filter(post => {
-      // Для тегов используем логику "И" - пост должен содержать ВСЕ выбранные теги
-      const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => post.tags.includes(tag));
-      const matchesSearch = !searchTerm || 
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+  const { data: blogData, isLoading, error } = blogQuery;
+  const { data: filtersData } = filtersQuery;
 
-      return matchesTags && matchesSearch;
-    });
-  }, [blogPosts, selectedTags, searchTerm]);
+  const blogPosts = blogData?.data || [];
+  const totalCount = blogData?.meta?.total_count || 0;
+  const totalPages = Math.ceil(totalCount / postsPerPage);
 
   const clearFilters = () => {
     setSelectedTags([]);
+    setSelectedCategories([]);
     setSearchTerm("");
+    setCurrentPage(1);
   };
 
   const toggleTag = (tag: string) => {
@@ -125,7 +52,43 @@ export default function Blog() {
         ? prev.filter(t => t !== tag)
         : [...prev, tag]
     );
+    setCurrentPage(1);
   };
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories(prev => 
+      prev.includes(category) 
+        ? prev.filter(c => c !== category)
+        : [...prev, category]
+    );
+    setCurrentPage(1);
+  };
+
+  const handleSearch = (value: string) => {
+    setSearchTerm(value);
+    setCurrentPage(1);
+  };
+
+  if (error) {
+    return (
+      <div className="pt-24 min-h-screen flex items-center justify-center">
+        <GlassmorphicCard className="text-center">
+          <h2 className="text-2xl font-heading font-bold text-dark-slate mb-4">
+            Ошибка загрузки
+          </h2>
+          <p className="text-dark-slate/70 mb-4">
+            Не удалось загрузить статьи. Попробуйте обновить страницу.
+          </p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300"
+          >
+            Обновить страницу
+          </button>
+        </GlassmorphicCard>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-24">
@@ -165,39 +128,69 @@ export default function Blog() {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-dark-slate/50 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Поиск по статьям и тегам..."
+                placeholder="Поиск по статьям..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 rounded-full border border-dark-slate/20 bg-white/80 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sea-green focus:border-transparent text-dark-slate"
               />
             </div>
           </div>
 
-          {/* Tag Filter */}
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => toggleTag(tag)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    selectedTags.includes(tag)
-                      ? 'bg-sea-green text-white border-2 border-sea-green shadow-lg'
-                      : 'bg-white/60 text-dark-slate/70 hover:bg-sea-green/10 hover:text-sea-green border border-dark-slate/20'
-                  }`}
-                >
-                  <Tag className="w-3 h-3 inline mr-1" />
-                  {tag}
-                </button>
-              ))}
+          {/* Category Filter */}
+          {filtersData?.categories && filtersData.categories.length > 0 && (
+            <div className="mb-4">
+              <h3 className="text-center text-dark-slate/70 mb-3 text-sm font-medium">Категории:</h3>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {filtersData.categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => toggleCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      selectedCategories.includes(category)
+                        ? 'bg-sea-green text-white border-2 border-sea-green shadow-lg'
+                        : 'bg-white/60 text-dark-slate/70 hover:bg-sea-green/10 hover:text-sea-green border border-dark-slate/20'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Tag Filter */}
+          {filtersData?.tags && filtersData.tags.length > 0 && (
+            <div className="mb-4">
+              <h3 className="text-center text-dark-slate/70 mb-3 text-sm font-medium">Теги:</h3>
+              <div className="flex flex-wrap gap-2 justify-center">
+                {filtersData.tags.slice(0, 15).map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                      selectedTags.includes(tag)
+                        ? 'bg-sea-green text-white border-2 border-sea-green shadow-lg'
+                        : 'bg-white/60 text-dark-slate/70 hover:bg-sea-green/10 hover:text-sea-green border border-dark-slate/20'
+                    }`}
+                  >
+                    <Tag className="w-3 h-3 inline mr-1" />
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Active Filters and Clear Button */}
-          {(selectedTags.length > 0 || searchTerm) && (
+          {(selectedTags.length > 0 || selectedCategories.length > 0 || searchTerm) && (
             <div className="flex justify-center items-center gap-4 mb-4">
-              <div className="flex items-center gap-2 text-sm text-dark-slate/70">
-                <span>Активные фильтры{selectedTags.length > 1 ? ' (все должны совпадать)' : ''}:</span>
+              <div className="flex items-center gap-2 text-sm text-dark-slate/70 flex-wrap justify-center">
+                <span>Активные фильтры:</span>
+                {selectedCategories.map(category => (
+                  <span key={category} className="bg-sea-green text-white px-3 py-1 rounded-full">
+                    {category}
+                  </span>
+                ))}
                 {selectedTags.map(tag => (
                   <span key={tag} className="bg-sea-green text-white px-3 py-1 rounded-full">
                     {tag}
@@ -220,112 +213,30 @@ export default function Blog() {
 
           {/* Results count */}
           <div className="text-center text-sm text-dark-slate/70">
-            {filteredPosts.length === 0 ? (
-              <span>Статьи не найдены</span>
+            {isLoading ? (
+              <span>Загрузка...</span>
             ) : (
-              <span>Найдено {filteredPosts.length} {filteredPosts.length === 1 ? 'статья' : filteredPosts.length < 5 ? 'статьи' : 'статей'}</span>
+              <span>
+                {totalCount === 0 ? (
+                  "Статьи не найдены"
+                ) : (
+                  `Найдено ${totalCount} ${totalCount === 1 ? 'статья' : totalCount < 5 ? 'статьи' : 'статей'}`
+                )}
+              </span>
             )}
           </div>
         </div>
       </section>
 
-      {/* Featured Post */}
-      {filteredPosts.length > 0 && filteredPosts.some(post => post.featured) && (
-        <section className="py-12 bg-gradient-to-b from-soft-blue/20 to-off-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-8">
-              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">Рекомендуемая статья</h2>
-            </div>
-
-            {filteredPosts.filter(post => post.featured).map((post) => (
-              <GlassmorphicCard key={post.title} className="overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <div className="relative">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-64 lg:h-full object-cover rounded-xl"
-                    />
-                    <div className="absolute top-4 left-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold">
-                      Рекомендуемая
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-
-                    <div className="flex items-center gap-4 text-sm flex-wrap">
-                        <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                          <Calendar className="w-4 h-4" />
-                          <span className="font-medium">{post.date}</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                          <Clock className="w-4 h-4" />
-                          <span className="font-medium">{post.readTime}</span>
-                        </div>
-                        <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                          <Tag className="w-4 h-4" />
-                          <span className="font-medium">{post.category}</span>
-                        </div>
-                        <Link
-                          href={`/team/${post.authorSlug}`}
-                          className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                        >
-                          <User className="w-4 h-4" />
-                          <span className="font-medium">{post.author}</span>
-                        </Link>
-                      </div>
-
-                    <h3 className="text-3xl font-heading font-bold text-dark-slate">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-lg text-dark-slate/70 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <button
-                          key={tag}
-                          onClick={() => toggleTag(tag)}
-                          className={`px-3 py-1 text-sm rounded-full transition-all duration-300 cursor-pointer ${
-                            selectedTags.includes(tag)
-                              ? 'bg-sea-green text-white shadow-lg'
-                              : 'bg-sea-green/10 text-sea-green hover:bg-sea-green/20'
-                          }`}
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-
-                    <Link
-                        href={`/blog/${post.slug}`}
-                        className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
-                      >
-                        <ArrowRight className="w-5 h-5" />
-                        Читать полную статью
-                      </Link>
-                  </div>
-                </div>
-              </GlassmorphicCard>
-            ))}
-          </div>
-        </section>
-      )}
-
       {/* Blog Posts Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredPosts.length > 0 && (
-            <div className="mb-12">
-              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
-                {filteredPosts.some(post => post.featured) ? "Другие статьи" : "Статьи"}
-              </h2>
+          {isLoading ? (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="w-8 h-8 animate-spin text-sea-green" />
+              <span className="ml-3 text-dark-slate/70">Загружаем статьи...</span>
             </div>
-          )}
-
-          {filteredPosts.length === 0 ? (
+          ) : blogPosts.length === 0 ? (
             <GlassmorphicCard className="text-center py-16">
               <div className="max-w-md mx-auto">
                 <div className="w-16 h-16 bg-sea-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -346,105 +257,147 @@ export default function Blog() {
               </div>
             </GlassmorphicCard>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {filteredPosts.filter(post => !post.featured).map((post, index) => (
-                <motion.div 
-                  key={post.slug}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: index * 0.1, 
-                    duration: 0.6,
-                    ease: "easeOut"
-                  }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  className="group h-full card-stable visible"
-                >
-                  <div 
-                    className="group block h-full cursor-pointer"
-                    onClick={() => window.location.href = `/blog/${post.slug}`}
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {blogPosts.map((post, index) => (
+                  <motion.div 
+                    key={post.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      delay: index * 0.1, 
+                      duration: 0.6,
+                      ease: "easeOut"
+                    }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    className="group h-full card-stable visible"
                   >
-                  <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
-                      <article className="flex flex-col h-full space-y-6">
-                        <div className="relative">
-                          <img
-                            src={post.image}
-                            alt={post.title}
-                            className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
-                            loading="lazy"
-                            style={{ 
-                              aspectRatio: '16/9',
-                              objectFit: 'cover'
-                            }}
-                          />
-                        </div>
-
-                        <div className="flex items-center gap-4 text-sm flex-wrap">
-                          <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                            <Calendar className="w-4 h-4" />
-                            <span className="font-medium">{post.date}</span>
+                    <Link href={`/blog/${post.slug}`} className="block h-full">
+                      <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
+                        <article className="flex flex-col h-full space-y-6">
+                          <div className="relative">
+                            <img
+                              src={getDirectusImageUrl(post.cover_image, { width: 600, height: 300, quality: 80 })}
+                              alt={post.title}
+                              className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                              loading="lazy"
+                            />
+                            {post.featured && (
+                              <div className="absolute top-4 right-4 bg-sea-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                Рекомендуемая
+                              </div>
+                            )}
                           </div>
-                          <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                            <Clock className="w-4 h-4" />
-                            <span className="font-medium">{post.readTime}</span>
+
+                          <div className="flex items-center gap-4 text-sm flex-wrap">
+                            {post.published_date && (
+                              <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
+                                <Calendar className="w-4 h-4" />
+                                <span className="font-medium">{formatDate(post.published_date)}</span>
+                              </div>
+                            )}
+                            {post.read_time && (
+                              <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
+                                <Clock className="w-4 h-4" />
+                                <span className="font-medium">{post.read_time}</span>
+                              </div>
+                            )}
+                            {post.category && (
+                              <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
+                                <Tag className="w-4 h-4" />
+                                <span className="font-medium">{post.category}</span>
+                              </div>
+                            )}
                           </div>
-                          <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                            <Tag className="w-4 h-4" />
-                            <span className="font-medium">{post.category}</span>
+
+                          <h3 className="text-xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
+                            {post.title}
+                          </h3>
+
+                          {post.excerpt && (
+                            <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
+                              {post.excerpt}
+                            </p>
+                          )}
+
+                          {post.tags && post.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {post.tags.slice(0, 3).map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-3 py-1 text-sm rounded-full bg-sea-green/10 text-sea-green"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          <div className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 mt-auto justify-center group-hover:bg-sea-green/90">
+                            <ArrowRight className="w-5 h-5" />
+                            Читать полную статью
                           </div>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              window.location.href = `/team/${post.authorSlug}`;
-                            }}
-                            className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                          >
-                            <User className="w-4 h-4" />
-                            <span className="font-medium">{post.author}</span>
-                          </button>
-                        </div>
+                        </article>
+                      </GlassmorphicCard>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
 
-                        <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
-                          {post.title}
-                        </h3>
-
-                        <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
-                          {post.excerpt}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2">
-                          {post.tags.slice(0, 3).map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3 py-1 text-sm rounded-full bg-sea-green/10 text-sea-green pointer-events-none"
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="mt-12 flex justify-center">
+                  <GlassmorphicCard className="p-4">
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                        disabled={currentPage === 1}
+                        className="px-4 py-2 rounded-full bg-sea-green/10 text-sea-green disabled:opacity-50 disabled:cursor-not-allowed hover:bg-sea-green/20 transition-colors"
+                      >
+                        ← Предыдущая
+                      </button>
+                      
+                      <div className="flex items-center gap-1">
+                        {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                          let pageNum;
+                          if (totalPages <= 5) {
+                            pageNum = i + 1;
+                          } else if (currentPage <= 3) {
+                            pageNum = i + 1;
+                          } else if (currentPage >= totalPages - 2) {
+                            pageNum = totalPages - 4 + i;
+                          } else {
+                            pageNum = currentPage - 2 + i;
+                          }
+                          
+                          return (
+                            <button
+                              key={pageNum}
+                              onClick={() => setCurrentPage(pageNum)}
+                              className={`px-3 py-2 rounded-full text-sm font-medium transition-colors ${
+                                currentPage === pageNum
+                                  ? 'bg-sea-green text-white'
+                                  : 'hover:bg-sea-green/10 text-dark-slate'
+                              }`}
                             >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 mt-auto justify-center group-hover:bg-sea-green/90">
-                          <ArrowRight className="w-5 h-5" />
-                          Читать полную статью
-                        </div>
-                      </article>
-                    </GlassmorphicCard>
-                  </div>
-                </motion.div>
-              ))}\n            </div>
-          )}
-
-          {filteredPosts.length > 0 && (
-            <div className="text-center mt-12">
-            <GlassmorphicCard className="max-w-md mx-auto">
-                <p className="text-dark-slate/70 mb-4">
-                  Мы готовим для вас ещё больше полезных статей
-                </p>
-                <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
-                  Статьи в процессе написания
-                </button>
-              </GlassmorphicCard>
-            </div>
+                              {pageNum}
+                            </button>
+                          );
+                        })}
+                      </div>
+                      
+                      <button
+                        onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                        disabled={currentPage === totalPages}
+                        className="px-4 py-2 rounded-full bg-sea-green/10 text-sea-green disabled:opacity-50 disabled:cursor-not-allowed hover:bg-sea-green/20 transition-colors"
+                      >
+                        Следующая →
+                      </button>
+                    </div>
+                  </GlassmorphicCard>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

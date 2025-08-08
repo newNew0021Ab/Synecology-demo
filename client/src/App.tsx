@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { queryClient } from '@/lib/queryClient';
 import { useScrollToTop } from './hooks/useScrollToTop';
+import { HelmetProvider } from 'react-helmet-async';
 
 // Ленивая загрузка компонентов для code-splitting
 const Home = lazy(() => import('@/pages/home'));
@@ -29,36 +30,43 @@ const LoadingFallback = () => (
   </div>
 );
 
+// Определяем AppRoutes как компонент, который будет рендерить роуты
+const AppRoutes = () => (
+  <Switch>
+    <Route path="/" component={Home} />
+    <Route path="/about" component={About} />
+    <Route path="/services" component={Services} />
+    <Route path="/services/:slug" component={ServiceDetail} />
+    <Route path="/case-studies" component={CaseStudies} />
+    <Route path="/case-studies/:slug" component={CaseStudyDetail} />
+    <Route path="/blog" component={Blog} />
+    <Route path="/blog/:slug" component={BlogPost} />
+    <Route path="/faq" component={FAQ} />
+    <Route path="/contact" component={Contact} />
+    <Route path="/team/:slug" component={TeamMember} />
+    <Route component={NotFound} />
+  </Switch>
+);
+
 function App() {
   useScrollToTop();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-background">
-        <CustomCursor />
-        <Header />
-        <main>
-          <Suspense fallback={<LoadingFallback />}>
-            <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/services" component={Services} />
-              <Route path="/services/:slug" component={ServiceDetail} />
-              <Route path="/case-studies" component={CaseStudies} />
-              <Route path="/case-studies/:slug" component={CaseStudyDetail} />
-              <Route path="/blog" component={Blog} />
-              <Route path="/blog/:slug" component={BlogPost} />
-              <Route path="/faq" component={FAQ} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/team/:slug" component={TeamMember} />
-              <Route component={NotFound} />
-            </Switch>
-          </Suspense>
-        </main>
-        <Footer />
-        <Toaster />
-      </div>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <div className="min-h-screen bg-background">
+          <CustomCursor />
+          <Header />
+          <main>
+            <Suspense fallback={<LoadingFallback />}>
+              <AppRoutes />
+            </Suspense>
+          </main>
+          <Footer />
+          <Toaster />
+        </div>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 
