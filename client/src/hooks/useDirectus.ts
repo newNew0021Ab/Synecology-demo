@@ -1,123 +1,64 @@
-import { useQuery, UseQueryResult } from '@tanstack/react-query';
-import { BlogPost, CaseStudy, DirectusResponse, DirectusQueryParams } from '@shared/directus-types';
-import { blogApi, caseStudiesApi } from '@/lib/directus';
+import { useQuery } from '@tanstack/react-query';
+import { 
+  fetchBlogPosts, 
+  fetchBlogPost, 
+  fetchCaseStudies, 
+  fetchCaseStudy, 
+  fetchBlogMeta,
+  type BlogPost,
+  type CaseStudy
+} from '@/lib/directus';
 
-// Blog hooks
-export function useBlogPosts(params?: DirectusQueryParams): UseQueryResult<DirectusResponse<BlogPost>> {
+// Hook for fetching multiple blog posts
+export const useBlogPosts = (limit = 12) => {
   return useQuery({
-    queryKey: ['blog-posts', params],
-    queryFn: () => blogApi.getAll(params),
+    queryKey: ['blogPosts', limit],
+    queryFn: () => fetchBlogPosts(limit),
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 2,
   });
-}
+};
 
-export function useBlogPost(slug: string): UseQueryResult<BlogPost | null> {
+// Hook for fetching single blog post
+export const useBlogPost = (slug: string) => {
   return useQuery({
-    queryKey: ['blog-post', slug],
-    queryFn: () => blogApi.getBySlug(slug),
+    queryKey: ['blogPost', slug],
+    queryFn: () => fetchBlogPost(slug),
     enabled: !!slug,
     staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: 2,
   });
-}
+};
 
-export function useFeaturedBlogPosts(limit = 3): UseQueryResult<DirectusResponse<BlogPost>> {
+// Hook for fetching case studies
+export const useCaseStudies = (limit = 20) => {
   return useQuery({
-    queryKey: ['featured-blog-posts', limit],
-    queryFn: () => blogApi.getFeatured(limit),
-    staleTime: 10 * 60 * 1000, // 10 minutes
-  });
-}
-
-export function useBlogSearch(searchTerm: string, params?: DirectusQueryParams): UseQueryResult<DirectusResponse<BlogPost>> {
-  return useQuery({
-    queryKey: ['blog-search', searchTerm, params],
-    queryFn: () => blogApi.search(searchTerm, params),
-    enabled: !!searchTerm && searchTerm.length > 2,
-    staleTime: 2 * 60 * 1000, // 2 minutes
-  });
-}
-
-// Case Studies hooks
-export function useCaseStudies(params?: DirectusQueryParams): UseQueryResult<DirectusResponse<CaseStudy>> {
-  return useQuery({
-    queryKey: ['case-studies', params],
-    queryFn: () => caseStudiesApi.getAll(params),
+    queryKey: ['caseStudies', limit],
+    queryFn: () => fetchCaseStudies(limit),
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 2,
   });
-}
+};
 
-export function useCaseStudy(slug: string): UseQueryResult<CaseStudy | null> {
+// Hook for fetching single case study
+export const useCaseStudy = (slug: string) => {
   return useQuery({
-    queryKey: ['case-study', slug],
-    queryFn: () => caseStudiesApi.getBySlug(slug),
+    queryKey: ['caseStudy', slug],
+    queryFn: () => fetchCaseStudy(slug),
     enabled: !!slug,
     staleTime: 10 * 60 * 1000, // 10 minutes
+    retry: 2,
   });
-}
+};
 
-export function useFeaturedCaseStudies(limit = 3): UseQueryResult<DirectusResponse<CaseStudy>> {
+// Hook for fetching blog meta (categories, tags)
+export const useBlogMeta = () => {
   return useQuery({
-    queryKey: ['featured-case-studies', limit],
-    queryFn: () => caseStudiesApi.getFeatured(limit),
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    queryKey: ['blogMeta'],
+    queryFn: fetchBlogMeta,
+    staleTime: 15 * 60 * 1000, // 15 minutes
+    retry: 2,
   });
-}
+};
 
-// Combined hook for getting unique categories and tags
-export function useBlogFilters(): UseQueryResult<{
-  categories: string[];
-  tags: string[];
-}> {
-  return useQuery({
-    queryKey: ['blog-filters'],
-    queryFn: async () => {
-      const response = await blogApi.getAll({
-        fields: ['category', 'tags'],
-        limit: -1, // Get all records
-      });
-
-      const categories = new Set<string>();
-      const tags = new Set<string>();
-
-      response.data.forEach(post => {
-        if (post.category) post.category.forEach(cat => categories.add(cat));
-        if (post.tags) post.tags.forEach(tag => tags.add(tag));
-      });
-
-      return {
-        categories: Array.from(categories).sort(),
-        tags: Array.from(tags).sort(),
-      };
-    },
-    staleTime: 30 * 60 * 1000, // 30 minutes
-  });
-}
-
-export function useCaseStudyFilters(): UseQueryResult<{
-  categories: string[];
-  tags: string[];
-}> {
-  return useQuery({
-    queryKey: ['case-study-filters'],
-    queryFn: async () => {
-      const response = await caseStudiesApi.getAll({
-        fields: ['category', 'tags'],
-        limit: -1,
-      });
-
-      const categories = new Set<string>();
-      const tags = new Set<string>();
-
-      response.data.forEach(study => {
-        if (study.category) study.category.forEach(cat => categories.add(cat));
-        if (study.tags) study.tags.forEach(tag => tags.add(tag));
-      });
-
-      return {
-        categories: Array.from(categories).sort(),
-        tags: Array.from(tags).sort(),
-      };
-    },
-    staleTime: 30 * 60 * 1000, // 30 minutes
-  });
-}
+export type { BlogPost, CaseStudy };

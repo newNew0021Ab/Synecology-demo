@@ -1,178 +1,169 @@
 
-import { createDirectus, rest } from '@directus/sdk';
-import { BlogPost, CaseStudy, DirectusResponse, DirectusQueryParams } from '@shared/directus-types';
+import { createDirectus, rest, readItems } from '@directus/sdk';
 
-const DIRECTUS_URL = 'https://directus-production-6ce1.up.railway.app';
+// Define the Directus schema types
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  cover_image?: string | { id: string; filename_download: string };
+  published_date: string;
+  category: string;
+  tags: string[];
+  seo_title?: string;
+  seo_description?: string;
+  status: string;
+}
+
+interface CaseStudy {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  cover_image?: string | { id: string; filename_download: string };
+  completion_date: string;
+  client_name: string;
+  project_type: string;
+  gallery?: Array<{ id: string; filename_download: string }>;
+  metrics?: Array<{ name: string; value: string; unit?: string }>;
+  results?: string[];
+  seo_title?: string;
+  seo_description?: string;
+  status: string;
+}
 
 // Create Directus client
-const directusClient = createDirectus(DIRECTUS_URL).with(rest());
+const directusUrl = 'https://directus-production-6ce1.up.railway.app';
+const directus = createDirectus(directusUrl).with(rest());
 
-// Export the client as both 'directus' and 'directusClient'
-export const directus = directusClient;
-export { directusClient };
-
-// Helper function to build query string
-function buildQueryString(params: DirectusQueryParams): string {
-  const searchParams = new URLSearchParams();
+// Helper function to get image URL
+export const getImageUrl = (image: string | { id: string; filename_download: string } | null | undefined): string | null => {
+  if (!image) return null;
   
-  if (params.limit) searchParams.set('limit', params.limit.toString());
-  if (params.offset) searchParams.set('offset', params.offset.toString());
-  if (params.page) searchParams.set('page', params.page.toString());
-  if (params.sort) searchParams.set('sort', params.sort.join(','));
-  if (params.search) searchParams.set('search', params.search);
-  if (params.fields) searchParams.set('fields', params.fields.join(','));
-  
-  // Handle complex filters
-  if (params.filter) {
-    Object.entries(params.filter).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        searchParams.set(`filter[${key}][_in]`, value.join(','));
-      } else if (typeof value === 'object' && value !== null) {
-        // Handle nested filter operators like _contains, _intersects
-        Object.entries(value).forEach(([operator, operatorValue]) => {
-          searchParams.set(`filter[${key}][${operator}]`, operatorValue.toString());
-        });
-      } else {
-        searchParams.set(`filter[${key}]`, value.toString());
-      }
-    });
+  if (typeof image === 'string') {
+    return `${directusUrl}/assets/${image}`;
   }
   
-  return searchParams.toString();
-}
-
-// Generic fetch function for Directus
-async function fetchFromDirectus<T>(endpoint: string, params?: DirectusQueryParams): Promise<DirectusResponse<T>> {
-  const queryString = params ? buildQueryString(params) : '';
-  const url = `${DIRECTUS_URL}/${endpoint}${queryString ? '?' + queryString : ''}`;
+  if (typeof image === 'object' && image.id) {
+    return `${directusUrl}/assets/${image.id}`;
+  }
   
+  return null;
+};
+
+// Helper function to safely parse content
+export const parseContent = (content: string | null | undefined): string => {
+  if (!content) return '';
+  return content;
+};
+
+// Helper function to safely handle arrays
+export const safeArray = <T>(arr: T[] | null | undefined): T[] => {
+  return Array.isArray(arr) ? arr : [];
+};
+
+// Fetch blog posts
+export const fetchBlogPosts = async (limit = 12): Promise<BlogPost[]> => {
   try {
-    const response = await fetch(url, {
-      headers: {
-        'Accept': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    return await response.json();
+    const posts = await directus.request(
+      readItems('blog_posts', {
+        limit,
+        sort: ['-published_date'],
+        filter: {
+          status: { _eq: 'published' }
+        }
+      })
+    );
+    return posts || [];
   } catch (error) {
-    console.error(`Error fetching from Directus: ${url}`, error);
-    throw error;
+    console.error('Error fetching blog posts:', error);
+    return [];
   }
-}
-
-// Blog API functions
-export const blogApi = {
-  // Get all blog posts
-  getAll: (params?: DirectusQueryParams): Promise<DirectusResponse<BlogPost>> => 
-    fetchFromDirectus<BlogPost>('items/blog_posts', params),
-
-  // Get single blog post by slug
-  getBySlug: (slug: string): Promise<BlogPost | null> => 
-    fetchFromDirectus<BlogPost>('items/blog_posts', {
-      filter: { slug: { _eq: slug } },
-      limit: 1,
-    }).then(response => response.data[0] || null),
-
-  // Get featured blog posts
-  getFeatured: (limit = 3): Promise<DirectusResponse<BlogPost>> =>
-    fetchFromDirectus<BlogPost>('items/blog_posts', {
-      filter: { featured: { _eq: true } },
-      limit,
-      sort: ['-published_date'],
-    }),
-
-  // Get blog posts by category
-  getByCategory: (category: string, params?: DirectusQueryParams): Promise<DirectusResponse<BlogPost>> =>
-    fetchFromDirectus<BlogPost>('items/blog_posts', {
-      ...params,
-      filter: {
-        category: { _contains: category },
-        ...params?.filter,
-      },
-    }),
-
-  // Search blog posts
-  search: (searchTerm: string, params?: DirectusQueryParams): Promise<DirectusResponse<BlogPost>> =>
-    fetchFromDirectus<BlogPost>('items/blog_posts', {
-      ...params,
-      search: searchTerm,
-    }),
 };
 
-// Case Studies API functions
-export const caseStudiesApi = {
-  // Get all case studies
-  getAll: (params?: DirectusQueryParams): Promise<DirectusResponse<CaseStudy>> => 
-    fetchFromDirectus<CaseStudy>('items/case_studies', params),
-
-  // Get single case study by slug
-  getBySlug: (slug: string): Promise<CaseStudy | null> => 
-    fetchFromDirectus<CaseStudy>('items/case_studies', {
-      filter: { slug: { _eq: slug } },
-      limit: 1,
-    }).then(response => response.data[0] || null),
-
-  // Get featured case studies
-  getFeatured: (limit = 3): Promise<DirectusResponse<CaseStudy>> =>
-    fetchFromDirectus<CaseStudy>('items/case_studies', {
-      filter: { featured: { _eq: true } },
-      limit,
-      sort: ['-completion_date'],
-    }),
-
-  // Get case studies by category
-  getByCategory: (category: string, params?: DirectusQueryParams): Promise<DirectusResponse<CaseStudy>> =>
-    fetchFromDirectus<CaseStudy>('items/case_studies', {
-      ...params,
-      filter: {
-        category: { _contains: category },
-        ...params?.filter,
-      },
-    }),
+// Fetch single blog post by slug
+export const fetchBlogPost = async (slug: string): Promise<BlogPost | null> => {
+  try {
+    const posts = await directus.request(
+      readItems('blog_posts', {
+        filter: {
+          slug: { _eq: slug },
+          status: { _eq: 'published' }
+        },
+        limit: 1
+      })
+    );
+    return posts?.[0] || null;
+  } catch (error) {
+    console.error('Error fetching blog post:', error);
+    return null;
+  }
 };
 
-// Helper function to get image URL from Directus
-export function getDirectusImageUrl(fileId: string, params?: {
-  width?: number;
-  height?: number;
-  quality?: number;
-  format?: 'webp' | 'jpg' | 'png';
-}): string {
-  if (!fileId) return '';
-  
-  const baseUrl = `${DIRECTUS_URL}/assets/${fileId}`;
-  
-  if (!params) return baseUrl;
-  
-  const searchParams = new URLSearchParams();
-  if (params.width) searchParams.set('width', params.width.toString());
-  if (params.height) searchParams.set('height', params.height.toString());
-  if (params.quality) searchParams.set('quality', params.quality.toString());
-  if (params.format) searchParams.set('format', params.format);
-  
-  return `${baseUrl}?${searchParams.toString()}`;
-}
+// Fetch case studies
+export const fetchCaseStudies = async (limit = 20): Promise<CaseStudy[]> => {
+  try {
+    const studies = await directus.request(
+      readItems('case_studies', {
+        limit,
+        sort: ['-completion_date'],
+        filter: {
+          status: { _eq: 'published' }
+        }
+      })
+    );
+    return studies || [];
+  } catch (error) {
+    console.error('Error fetching case studies:', error);
+    return [];
+  }
+};
 
-// Helper function to format date
-export function formatDate(dateString?: string): string {
-  if (!dateString) return '';
-  
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
-}
+// Fetch single case study by slug
+export const fetchCaseStudy = async (slug: string): Promise<CaseStudy | null> => {
+  try {
+    const studies = await directus.request(
+      readItems('case_studies', {
+        filter: {
+          slug: { _eq: slug },
+          status: { _eq: 'published' }
+        },
+        limit: 1
+      })
+    );
+    return studies?.[0] || null;
+  } catch (error) {
+    console.error('Error fetching case study:', error);
+    return null;
+  }
+};
 
-// Helper function to calculate read time
-export function calculateReadTime(content: string): string {
-  const wordsPerMinute = 200;
-  const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
-  const minutes = Math.ceil(words / wordsPerMinute);
-  return `${minutes} мин`;
-}
+// Fetch blog categories and tags
+export const fetchBlogMeta = async () => {
+  try {
+    const posts = await directus.request(
+      readItems('blog_posts', {
+        fields: ['category', 'tags'],
+        limit: -1,
+        filter: {
+          status: { _eq: 'published' }
+        }
+      })
+    );
+
+    const categories = [...new Set(posts?.map(post => post.category).filter(Boolean))];
+    const allTags = posts?.flatMap(post => safeArray(post.tags)) || [];
+    const tags = [...new Set(allTags.filter(Boolean))];
+
+    return { categories, tags };
+  } catch (error) {
+    console.error('Error fetching blog meta:', error);
+    return { categories: [], tags: [] };
+  }
+};
+
+export { directus };
+export type { BlogPost, CaseStudy };
