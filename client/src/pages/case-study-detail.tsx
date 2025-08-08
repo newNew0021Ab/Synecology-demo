@@ -208,17 +208,16 @@ export default function CaseStudyDetail() {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {caseStudy.metrics.map((metric, index) => (
                   <GlassmorphicCard key={index} delay={index * 0.1}>
                     <div className="text-center">
                       <div className="w-16 h-16 text-sea-green mx-auto mb-4">
                         <TrendingUp className="w-full h-full" />
                       </div>
-                      <div className="text-4xl font-heading font-bold text-dark-slate mb-2">
-                        {metric.value}
+                      <div className="text-lg font-heading font-bold text-dark-slate">
+                        {typeof metric === 'string' ? metric : metric.value || metric}
                       </div>
-                      <div className="text-dark-slate/70">{metric.label}</div>
                     </div>
                   </GlassmorphicCard>
                 ))}
@@ -237,10 +236,13 @@ export default function CaseStudyDetail() {
                     <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">
                       Вызов
                     </h3>
-                    <div 
-                      className="text-dark-slate/70 leading-relaxed prose max-w-none"
-                      dangerouslySetInnerHTML={{ __html: caseStudy.challenge }}
-                    />
+                    <div className="text-dark-slate/70 leading-relaxed prose max-w-none">
+                      {caseStudy.challenge.includes('<') ? (
+                        <div dangerouslySetInnerHTML={{ __html: caseStudy.challenge }} />
+                      ) : (
+                        <p>{caseStudy.challenge}</p>
+                      )}
+                    </div>
                   </GlassmorphicCard>
                 )}
 
@@ -249,10 +251,13 @@ export default function CaseStudyDetail() {
                     <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">
                       Решение
                     </h3>
-                    <div 
-                      className="text-dark-slate/70 leading-relaxed prose max-w-none"
-                      dangerouslySetInnerHTML={{ __html: caseStudy.solution }}
-                    />
+                    <div className="text-dark-slate/70 leading-relaxed prose max-w-none">
+                      {caseStudy.solution.includes('<') ? (
+                        <div dangerouslySetInnerHTML={{ __html: caseStudy.solution }} />
+                      ) : (
+                        <p>{caseStudy.solution}</p>
+                      )}
+                    </div>
                   </GlassmorphicCard>
                 )}
               </div>
@@ -264,21 +269,30 @@ export default function CaseStudyDetail() {
         <section className="py-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <GlassmorphicCard>
-              <div 
-                className="prose prose-lg max-w-none
-                  prose-headings:font-heading prose-headings:text-dark-slate
-                  prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
-                  prose-p:text-dark-slate/80 prose-p:leading-relaxed prose-p:mb-6
-                  prose-strong:text-dark-slate prose-strong:font-semibold
-                  prose-a:text-sea-green prose-a:no-underline hover:prose-a:underline
-                  prose-ul:text-dark-slate/80 prose-li:mb-2
-                  prose-ol:text-dark-slate/80
-                  prose-blockquote:border-l-sea-green prose-blockquote:bg-sea-green/5
-                  prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg
-                  prose-img:rounded-xl prose-img:shadow-lg
-                "
-                dangerouslySetInnerHTML={{ __html: caseStudy.content }}
-              />
+              <div className="prose prose-lg max-w-none
+                prose-headings:font-heading prose-headings:text-dark-slate
+                prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+                prose-p:text-dark-slate/80 prose-p:leading-relaxed prose-p:mb-6
+                prose-strong:text-dark-slate prose-strong:font-semibold
+                prose-a:text-sea-green prose-a:no-underline hover:prose-a:underline
+                prose-ul:text-dark-slate/80 prose-li:mb-2
+                prose-ol:text-dark-slate/80
+                prose-blockquote:border-l-sea-green prose-blockquote:bg-sea-green/5
+                prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded-r-lg
+                prose-img:rounded-xl prose-img:shadow-lg
+              ">
+                {caseStudy.content ? (
+                  caseStudy.content.includes('<') ? (
+                    <div dangerouslySetInnerHTML={{ __html: caseStudy.content }} />
+                  ) : (
+                    <p className="text-lg leading-relaxed">{caseStudy.content}</p>
+                  )
+                ) : (
+                  <p className="text-lg leading-relaxed text-dark-slate/70">
+                    Содержимое кейса загружается...
+                  </p>
+                )}
+              </div>
             </GlassmorphicCard>
           </div>
         </section>
