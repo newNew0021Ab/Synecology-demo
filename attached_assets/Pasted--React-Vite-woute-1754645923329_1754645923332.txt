@@ -1,0 +1,99 @@
+🧱 Техническая архитектура
+Фреймворк: Да, используется React + Vite
+
+Роутинг: Да, используется wouter
+
+Рендеринг: Используем SPA (client-side rendering). SSR/SSG не требуется
+
+Страницы:
+
+/blog.tsx — страница списка блогов + страницы отдельных постов /blog/:slug
+
+/case-studies.tsx — список кейсов + страницы кейсов /case-studies/:slug
+
+📡 Directus API
+URL API: https://directus-production-6ce1.up.railway.app/
+
+Доступ: API открыт, токен не обязателен (но можно добавить при необходимости)
+
+Endpoint blog: /items/blog
+
+Endpoint case_studies: /items/case_studies
+
+🗂️ Поля коллекций
+blog:
+json
+Copy
+Edit
+{
+  "title": "Text (required)",
+  "slug": "UID (required, based on title)",
+  "excerpt": "Long Text",
+  "content": "Rich Text (required)",
+  "cover_image": "Media (single, required)",
+  "category": "Text",
+  "tags": "JSON",
+  "read_time": "Text",
+  "author_name": "Text",
+  "author_role": "Text", 
+  "author_slug": "Text",
+  "author_avatar": "Media (single)",
+  "published_date": "Date",
+  "featured": "Boolean",
+  "seo_title": "Text",
+  "seo_description": "Text",
+  "seo_keywords": "Text"
+}
+case_studies:
+json
+Copy
+Edit
+{
+  "title": "Text (required)",
+  "slug": "UID (required, based on title)",
+  "preview_text": "Text",
+  "content": "Rich Text (required)",
+  "cover_image": "Media (single, required)",
+  "gallery": "Media (multiple)",
+  "category": "Text",
+  "tags": "JSON",
+  "client": "Text",
+  "project_date": "Text",
+  "featured": "Boolean",
+  "full_description": "Rich Text",
+  "challenge": "Rich Text",
+  "solution": "Rich Text",
+  "timeline": "Text",
+  "completion_date": "Text",
+  "location": "Text",
+  "team_size": "Text",
+  "results": "JSON",
+  "metrics": "JSON",
+  "seo_title": "Text",
+  "seo_description": "Text", 
+  "seo_keywords": "Text"
+}
+🔍 Функциональность
+Blog:
+
+Список статей на /blog.tsx
+
+Детальная статья по slug на /blog/:slug
+
+Нужна пагинация
+
+Фильтрация по категориям и тегам — желательно
+
+Case Studies:
+
+Список кейсов на /case-studies.tsx
+
+Страница кейса по slug на /case-studies/:slug
+
+Можно без пагинации
+
+Фильтрация по тегам и категориям — желательно
+
+🎯 Теперь можешь делать тестовый fetch к API и на основе данных генерировать типы, React-компоненты, хуки и т.д.
+
+Если нужны тестовые данные — могу сгенерировать 2-3 записи.
