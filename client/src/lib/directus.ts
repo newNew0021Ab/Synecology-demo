@@ -69,14 +69,14 @@ export const blogApi = {
   // Get single blog post by slug
   getBySlug: (slug: string): Promise<BlogPost | null> => 
     fetchFromDirectus<BlogPost>('items/blog_posts', {
-      filter: { slug },
+      filter: { slug: { _eq: slug } },
       limit: 1,
     }).then(response => response.data[0] || null),
 
   // Get featured blog posts
   getFeatured: (limit = 3): Promise<DirectusResponse<BlogPost>> =>
     fetchFromDirectus<BlogPost>('items/blog_posts', {
-      filter: { featured: true },
+      filter: { featured: { _eq: true } },
       limit,
       sort: ['-published_date'],
     }),
@@ -103,25 +103,19 @@ export const blogApi = {
 export const caseStudiesApi = {
   // Get all case studies
   getAll: (params?: DirectusQueryParams): Promise<DirectusResponse<CaseStudy>> => 
-    fetchFromDirectus<CaseStudy>('items/case_studies', {
-      ...params,
-      filter: {
-        status: 'published',
-        ...params?.filter,
-      },
-    }),
+    fetchFromDirectus<CaseStudy>('items/case_studies', params),
 
   // Get single case study by slug
   getBySlug: (slug: string): Promise<CaseStudy | null> => 
     fetchFromDirectus<CaseStudy>('items/case_studies', {
-      filter: { slug, status: 'published' },
+      filter: { slug: { _eq: slug } },
       limit: 1,
     }).then(response => response.data[0] || null),
 
   // Get featured case studies
   getFeatured: (limit = 3): Promise<DirectusResponse<CaseStudy>> =>
     fetchFromDirectus<CaseStudy>('items/case_studies', {
-      filter: { featured: true, status: 'published' },
+      filter: { featured: { _eq: true } },
       limit,
       sort: ['-completion_date'],
     }),
@@ -131,8 +125,7 @@ export const caseStudiesApi = {
     fetchFromDirectus<CaseStudy>('items/case_studies', {
       ...params,
       filter: {
-        category,
-        status: 'published',
+        category: { _contains: category },
         ...params?.filter,
       },
     }),
