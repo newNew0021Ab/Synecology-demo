@@ -5,7 +5,11 @@ import { BlogPost, CaseStudy, DirectusResponse, DirectusQueryParams } from '@sha
 const DIRECTUS_URL = 'https://directus-production-6ce1.up.railway.app';
 
 // Create Directus client
-export const directus = createDirectus(DIRECTUS_URL).with(rest());
+const directusClient = createDirectus(DIRECTUS_URL).with(rest());
+
+// Export the client as both 'directus' and 'directusClient'
+export const directus = directusClient;
+export { directusClient };
 
 // Helper function to build query string
 function buildQueryString(params: DirectusQueryParams): string {
