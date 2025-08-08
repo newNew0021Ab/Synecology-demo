@@ -16,7 +16,7 @@ export interface BlogPost {
   excerpt?: string;
   content: string;
   cover_image: string;
-  category?: string;
+  category?: string[];
   tags?: string[];
   read_time?: string;
   author_name?: string;
@@ -27,7 +27,7 @@ export interface BlogPost {
   featured?: boolean;
   seo_title?: string;
   seo_description?: string;
-  seo_keywords?: string;
+  seo_keywords?: string[];
   status?: string;
   date_created?: string;
   date_updated?: string;
@@ -42,7 +42,7 @@ export interface CaseStudy {
   content: string;
   cover_image: string;
   gallery?: string[];
-  category?: string;
+  category?: string[];
   tags?: string[];
   client?: string;
   project_date?: string;
@@ -54,18 +54,11 @@ export interface CaseStudy {
   completion_date?: string;
   location?: string;
   team_size?: string;
-  results?: Array<{
-    title: string;
-    description: string;
-  }>;
-  metrics?: Array<{
-    label: string;
-    value: string;
-    color?: string;
-  }>;
+  results?: string[];
+  metrics?: string[];
   seo_title?: string;
   seo_description?: string;
-  seo_keywords?: string;
+  seo_keywords?: string[];
   status?: string;
   date_created?: string;
   date_updated?: string;

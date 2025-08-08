@@ -324,7 +324,6 @@ export default function CaseStudies() {
                 ))}
               </div>
             )}
-</new_str>
 
       {/* More Cases Button */}
           <div className="text-center">

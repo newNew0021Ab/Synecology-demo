@@ -19,6 +19,11 @@ function buildQueryString(params: DirectusQueryParams): string {
     Object.entries(params.filter).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         searchParams.set(`filter[${key}][_in]`, value.join(','));
+      } else if (typeof value === 'object' && value !== null) {
+        // Handle nested filter operators like _contains, _intersects
+        Object.entries(value).forEach(([operator, operatorValue]) => {
+          searchParams.set(`filter[${key}][${operator}]`, operatorValue.toString());
+        });
       } else {
         searchParams.set(`filter[${key}]`, value.toString());
       }
@@ -55,49 +60,38 @@ async function fetchFromDirectus<T>(endpoint: string, params?: DirectusQueryPara
 export const blogApi = {
   // Get all blog posts
   getAll: (params?: DirectusQueryParams): Promise<DirectusResponse<BlogPost>> => 
-    fetchFromDirectus<BlogPost>('items/blog', {
-      ...params,
-      filter: {
-        status: 'published',
-        ...params?.filter,
-      },
-    }),
+    fetchFromDirectus<BlogPost>('items/blog_posts', params),
 
   // Get single blog post by slug
   getBySlug: (slug: string): Promise<BlogPost | null> => 
-    fetchFromDirectus<BlogPost>('items/blog', {
-      filter: { slug, status: 'published' },
+    fetchFromDirectus<BlogPost>('items/blog_posts', {
+      filter: { slug },
       limit: 1,
     }).then(response => response.data[0] || null),
 
   // Get featured blog posts
   getFeatured: (limit = 3): Promise<DirectusResponse<BlogPost>> =>
-    fetchFromDirectus<BlogPost>('items/blog', {
-      filter: { featured: true, status: 'published' },
+    fetchFromDirectus<BlogPost>('items/blog_posts', {
+      filter: { featured: true },
       limit,
       sort: ['-published_date'],
     }),
 
   // Get blog posts by category
   getByCategory: (category: string, params?: DirectusQueryParams): Promise<DirectusResponse<BlogPost>> =>
-    fetchFromDirectus<BlogPost>('items/blog', {
+    fetchFromDirectus<BlogPost>('items/blog_posts', {
       ...params,
       filter: {
-        category,
-        status: 'published',
+        category: { _contains: category },
         ...params?.filter,
       },
     }),
 
   // Search blog posts
   search: (searchTerm: string, params?: DirectusQueryParams): Promise<DirectusResponse<BlogPost>> =>
-    fetchFromDirectus<BlogPost>('items/blog', {
+    fetchFromDirectus<BlogPost>('items/blog_posts', {
       ...params,
       search: searchTerm,
-      filter: {
-        status: 'published',
-        ...params?.filter,
-      },
     }),
 };
 

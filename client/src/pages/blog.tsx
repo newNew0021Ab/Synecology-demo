@@ -21,7 +21,9 @@ export default function Blog() {
     offset: (currentPage - 1) * postsPerPage,
     sort: ['-published_date'],
     filter: {
-      ...(selectedCategories.length > 0 && { category: selectedCategories }),
+      ...(selectedCategories.length > 0 && { 
+        category: { _intersects: selectedCategories }
+      }),
       ...(selectedTags.length > 0 && { 
         tags: { _intersects: selectedTags }
       }),
@@ -302,10 +304,10 @@ export default function Blog() {
                                 <span className="font-medium">{post.read_time}</span>
                               </div>
                             )}
-                            {post.category && (
+                            {post.category && post.category.length > 0 && (
                               <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
                                 <Tag className="w-4 h-4" />
-                                <span className="font-medium">{post.category}</span>
+                                <span className="font-medium">{post.category[0]}</span>
                               </div>
                             )}
                           </div>

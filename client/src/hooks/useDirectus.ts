@@ -81,7 +81,7 @@ export function useBlogFilters(): UseQueryResult<{
       const tags = new Set<string>();
 
       response.data.forEach(post => {
-        if (post.category) categories.add(post.category);
+        if (post.category) post.category.forEach(cat => categories.add(cat));
         if (post.tags) post.tags.forEach(tag => tags.add(tag));
       });
 
@@ -110,7 +110,7 @@ export function useCaseStudyFilters(): UseQueryResult<{
       const tags = new Set<string>();
 
       response.data.forEach(study => {
-        if (study.category) categories.add(study.category);
+        if (study.category) study.category.forEach(cat => categories.add(cat));
         if (study.tags) study.tags.forEach(tag => tags.add(tag));
       });
 
