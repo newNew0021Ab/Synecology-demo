@@ -113,9 +113,9 @@ export default function BlogPost() {
             >
               {/* Category and Tags */}
               <div className="flex flex-wrap items-center gap-3 mb-6">
-                {post.category && (
+                {post.category && post.category.length > 0 && (
                   <span className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                    {post.category}
+                    {post.category[0]}
                   </span>
                 )}
                 {post.featured && (

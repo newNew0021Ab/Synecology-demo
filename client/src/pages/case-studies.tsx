@@ -1,80 +1,21 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus, Loader2 } from "lucide-react";
+import { ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus, Loader2 } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { useState, useEffect } from "react";
-
-// Assuming you have these hooks and types defined elsewhere
-// import { useDirectusCaseStudies } from '@/hooks/useDirectusCaseStudies'; 
-
-// Placeholder for directus data fetching logic
-const fetchDirectusCaseStudies = async () => {
-  // Replace with your actual Directus API call
-  // For demonstration purposes, returning dummy data
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          id: 1,
-          title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
-          category: "Пищевая промышленность",
-          description: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
-          results: "[\"Полный пакет документов «под ключ» за 90 дней.\", \"Полностью исключены риски штрафов и приостановки деятельности\", \"Гарантированное прохождение всех проверок с первого раза\", \"100% соответствие природоохранному законодательству\"]",
-          image: "https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
-          tags: "[\"Экологическая документация\", \"Пищевая промышленность\", \"Соответствие законодательству\"]",
-          timeline: "3 месяца",
-          completion_date: "2024-12-15",
-          featured: true,
-          slug: "coffee-environmental-documentation",
-        },
-        {
-          id: 2,
-          title: "Оптимизация производственных процессов для завода ЖБИ.",
-          category: "Строительная индустрия",
-          description: "Разработали и внедрили систему управления отходами, снизив затраты на утилизацию и повысив экологическую ответственность предприятия.",
-          results: "[\"Снижение затрат на утилизацию на 30%\", \"Увеличение доли вторичного использования отходов до 50%\", \"Улучшение экологического имиджа компании\"]",
-          image: "https://images.unsplash.com/photo-1590651236939-17226674c755?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
-          tags: "[\"Управление отходами\", \"Строительство\", \"Эффективность\"]",
-          timeline: "6 месяцев",
-          completion_date: "2024-09-01",
-          featured: false,
-          slug: "construction-waste-management",
-        },
-      ]);
-    }, 1000);
-  });
-};
-
-// Mock hook for fetching data
-const useDirectusCaseStudies = () => {
-  const [caseStudies, setCaseStudies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await fetchDirectusCaseStudies();
-        // Assuming Directus returns data in a structure where items are in a 'data' array
-        // Adjust this based on your actual Directus API response structure
-        setCaseStudies(data || []); 
-      } catch (err) {
-        setError(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    loadData();
-  }, []);
-
-  return { caseStudies, isLoading, error };
-};
+import { useState } from "react";
+import { useCaseStudies } from "@/hooks/useDirectus";
+import { getDirectusImageUrl, formatDate } from "@/lib/directus";
 
 
 export default function CaseStudies() {
   const [showAdditionalCases, setShowAdditionalCases] = useState(false);
-  const { caseStudies, isLoading, error } = useDirectusCaseStudies();
+  const { data: caseStudiesData, isLoading, error } = useCaseStudies({
+    limit: 20,
+    sort: ['-completion_date'],
+  });
+
+  const caseStudies = caseStudiesData?.data || [];
 
 
   const stats = [
@@ -174,7 +115,7 @@ export default function CaseStudies() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 {caseStudies.map((caseStudy, index) => (
                 <motion.div 
-                  key={caseStudy.slug}
+                  key={caseStudy.id}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
@@ -190,9 +131,10 @@ export default function CaseStudies() {
                       <div className="flex flex-col h-full min-h-[700px]">
                           <div className="relative mb-6">
                             <img
-                              src={caseStudy.image}
+                              src={caseStudy.cover_image ? getDirectusImageUrl(caseStudy.cover_image, { width: 600, height: 300, quality: 80 }) : 'https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?w=600&h=300&fit=crop'}
                               alt={caseStudy.title}
                               className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                              loading="lazy"
                             />
                             {caseStudy.featured && (
                               <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -209,37 +151,45 @@ export default function CaseStudies() {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2 text-sea-green">
                                 <Calendar className="w-4 h-4" />
-                                <span className="text-sm font-medium">{caseStudy.completion_date}</span>
+                                <span className="text-sm font-medium">{caseStudy.completion_date ? formatDate(caseStudy.completion_date) : 'Дата не указана'}</span>
                               </div>
-                              <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                                {caseStudy.timeline}
-                              </div>
+                              {caseStudy.timeline && (
+                                <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
+                                  {caseStudy.timeline}
+                                </div>
+                              )}
                             </div>
 
-                            <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description}</p>
+                            <p className="text-dark-slate/70 text-base leading-relaxed">
+                              {caseStudy.preview_text || 'Описание проекта'}
+                            </p>
 
-                            <div className="space-y-3">
-                              <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
-                              <ul className="space-y-2">
-                                {JSON.parse(caseStudy.results).slice(0, 3).map((result, resultIndex) => (
-                                  <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
-                                    <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
-                                    <span className="font-medium">{result}</span>
-                                  </li>
+                            {caseStudy.results && caseStudy.results.length > 0 && (
+                              <div className="space-y-3">
+                                <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
+                                <ul className="space-y-2">
+                                  {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
+                                    <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
+                                      <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
+                                      <span className="font-medium">{result}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {caseStudy.category && caseStudy.category.length > 0 && (
+                              <div className="flex flex-wrap gap-2">
+                                {caseStudy.category.slice(0, 2).map((cat) => (
+                                  <span
+                                    key={cat}
+                                    className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
+                                  >
+                                    {cat}
+                                  </span>
                                 ))}
-                              </ul>
-                            </div>
-
-                            <div className="flex flex-wrap gap-2">
-                              {JSON.parse(caseStudy.tags).slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
+                              </div>
+                            )}
                           </div>
 
                           <div className="flex items-center justify-center mt-8 pt-6 border-t border-dark-slate/10">
@@ -257,9 +207,10 @@ export default function CaseStudies() {
                       <div className="flex flex-col h-full min-h-[700px]">
                           <div className="relative mb-6">
                             <img
-                              src={caseStudy.image}
+                              src={caseStudy.cover_image ? getDirectusImageUrl(caseStudy.cover_image, { width: 600, height: 300, quality: 80 }) : 'https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?w=600&h=300&fit=crop'}
                               alt={caseStudy.title}
                               className="w-full h-64 object-cover rounded-xl"
+                              loading="lazy"
                             />
                             {caseStudy.featured && (
                               <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -276,37 +227,45 @@ export default function CaseStudies() {
                             <div className="flex items-center justify-between">
                               <div className="flex items-center gap-2 text-sea-green">
                                 <Calendar className="w-4 h-4" />
-                                <span className="text-sm font-medium">{caseStudy.completion_date}</span>
+                                <span className="text-sm font-medium">{caseStudy.completion_date ? formatDate(caseStudy.completion_date) : 'Дата не указана'}</span>
                               </div>
-                              <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                                {caseStudy.timeline}
-                              </div>
+                              {caseStudy.timeline && (
+                                <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
+                                  {caseStudy.timeline}
+                                </div>
+                              )}
                             </div>
 
-                            <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description}</p>
+                            <p className="text-dark-slate/70 text-base leading-relaxed">
+                              {caseStudy.preview_text || 'Описание проекта'}
+                            </p>
 
-                            <div className="space-y-3">
-                              <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
-                              <ul className="space-y-2">
-                                {JSON.parse(caseStudy.results).slice(0, 3).map((result, resultIndex) => (
-                                  <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
-                                    <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
-                                    <span className="font-medium">{result}</span>
-                                  </li>
+                            {caseStudy.results && caseStudy.results.length > 0 && (
+                              <div className="space-y-3">
+                                <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
+                                <ul className="space-y-2">
+                                  {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
+                                    <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
+                                      <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
+                                      <span className="font-medium">{result}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {caseStudy.category && caseStudy.category.length > 0 && (
+                              <div className="flex flex-wrap gap-2">
+                                {caseStudy.category.slice(0, 2).map((cat) => (
+                                  <span
+                                    key={cat}
+                                    className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
+                                  >
+                                    {cat}
+                                  </span>
                                 ))}
-                              </ul>
-                            </div>
-
-                            <div className="flex flex-wrap gap-2">
-                              {JSON.parse(caseStudy.tags).slice(0, 2).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
+                              </div>
+                            )}
                           </div>
 
                           <div className="flex items-center justify-center mt-8 pt-6 border-t border-dark-slate/10">
