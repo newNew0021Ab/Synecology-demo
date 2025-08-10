@@ -168,28 +168,60 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     console.log('Response status:', response.status);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorText = await response.text();
+      console.log('Blog proxy error response:', errorText);
+      throw new Error(`Failed to fetch blog posts: ${response.status} ${response.statusText}`);
     }
 
-    // Check if response is JSON
     const contentType = response.headers.get('content-type');
+    const responseText = await response.text();
+    
+    // Check if response is HTML (error page)
+    if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
+      console.error('Received HTML error page instead of JSON:', responseText.substring(0, 200));
+      throw new Error('Server returned HTML error page instead of JSON data');
+    }
+    
     if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      console.log('Received HTML error page instead of JSON:', text.substring(0, 200));
-      throw new Error('Server returned HTML instead of JSON');
+      console.error('Non-JSON response received:', responseText.substring(0, 300));
+      throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
     }
 
-    const data = await response.json();
+    let json;
+    try {
+      json = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError, 'Response text:', responseText.substring(0, 300));
+      throw new Error(`Failed to parse JSON response: ${parseError.message}`);
+    }
+    
+    console.log('Blog Proxy API Response:', json);
 
-    if (data && data.data) {
-      return data.data.filter((item: BlogPost) => item.status === 'published');
+    // Check if this is an error response from our proxy
+    if (json.status === 500) {
+      throw new Error(json.message || 'Proxy server error');
     }
 
-    return [];
+    if (!json.data) {
+      console.warn('No data field in blog response:', json);
+      return [];
+    }
+
+    if (!Array.isArray(json.data)) {
+      console.warn('Blog data is not an array:', json.data);
+      return [];
+    }
+
+    const blogPosts = json.data.filter((item: BlogPost) => item.status === 'published');
+    console.log('Successfully loaded blog posts from Directus:', blogPosts.length, 'posts');
+    return blogPosts;
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     throw error;
   }
 };
+
+// Alias for backwards compatibility
+export const fetchCaseStudies = fetchDirectusCases;
 
 export { getImageUrl };

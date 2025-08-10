@@ -3,6 +3,56 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Directus proxy endpoint for blog posts
+  app.get("/api/directus-blog", async (req, res) => {
+    try {
+      const directusUrl = "https://directus-production-6ce1.up.railway.app/items/blog_posts?fields=*";
+
+      console.log('Proxying request to Directus blog:', directusUrl);
+
+      const response = await fetch(directusUrl, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Directus blog response status:', response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Directus blog error response:', errorText);
+        return res.status(500).json({
+          status: 500,
+          message: `Directus API error: ${response.status} - ${errorText.substring(0, 200)}`
+        });
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const responseText = await response.text();
+        console.error('Non-JSON response from Directus blog:', responseText.substring(0, 300));
+        return res.status(500).json({
+          status: 500,
+          message: `Expected JSON from Directus but received ${contentType}: ${responseText.substring(0, 100)}`
+        });
+      }
+
+      const data = await response.json();
+      console.log('Successfully fetched blog from Directus, data length:', data?.data?.length || 0);
+
+      // Return the data as-is from Directus
+      res.status(200).json(data);
+    } catch (error) {
+      console.error("Directus blog proxy error:", error);
+      res.status(500).json({
+        status: 500,
+        message: `Proxy error: ${error instanceof Error ? error.message : 'Unknown error'}`
+      });
+    }
+  });
+
   // Directus proxy endpoint for case studies
   app.get("/api/directus-cases", async (req, res) => {
     try {
