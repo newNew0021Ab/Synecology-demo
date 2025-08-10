@@ -59,6 +59,26 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
     const blogPosts = data.data.map((item: any): BlogPost => {
       console.log('Processing blog item:', item);
 
+      // Handle category field - it might be a string or array
+      let category = [];
+      if (Array.isArray(item.category)) {
+        category = item.category;
+      } else if (typeof item.category === 'string') {
+        category = [item.category];
+      }
+
+      // Handle tags field - it might be a string or array
+      let tags = [];
+      if (typeof item.tags === 'string') {
+        try {
+          tags = JSON.parse(item.tags);
+        } catch {
+          tags = item.tags.split(',').map(t => t.trim()).filter(t => t);
+        }
+      } else if (Array.isArray(item.tags)) {
+        tags = item.tags;
+      }
+
       return {
         id: item.id,
         title: item.title || 'Untitled',
@@ -66,14 +86,14 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
         excerpt: item.excerpt || item.preview_text || '',
         content: item.content || item.full_content || '',
         coverImage: getImageUrl(item.cover_image),
-        category: Array.isArray(item.category) ? item.category : (typeof item.category === 'string' ? [item.category] : []),
-        tags: Array.isArray(item.tags) ? item.tags : (typeof item.tags === 'string' ? item.tags.split(',').map(t => t.trim()) : []),
+        category: category,
+        tags: tags,
         readTime: item.read_time || '',
         authorName: item.author_name || '',
         authorRole: item.author_role || '',
         authorSlug: item.author_slug || '',
         authorAvatar: getImageUrl(item.author_avatar),
-        publishedDate: item.published_date || new Date().toISOString(),
+        publishedDate: item.published_date || item.date_created || new Date().toISOString(),
         featured: Boolean(item.featured)
       };
     });

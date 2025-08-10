@@ -56,13 +56,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Directus proxy endpoint for blog posts
   app.get("/api/directus-blog", async (req, res) => {
     try {
-      const directusUrl = "https://directus-production-6ce1.up.railway.app/items/blog-posts?fields=*";
+      const directusUrl = "https://directus-production-6ce1.up.railway.app/items/blog_posts?fields=*";
 
       console.log('Proxying request to Directus:', directusUrl);
 
       const response = await fetch(directusUrl, {
         method: 'GET',
-        mode: 'cors',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -70,47 +69,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       console.log('Directus response status:', response.status);
-      console.log('Directus response headers:', Object.fromEntries(response.headers.entries()));
 
       if (!response.ok) {
         const errorText = await response.text();
         console.error('Directus error response:', errorText);
-        
-        let errorData;
-        try {
-          errorData = JSON.parse(errorText);
-        } catch {
-          errorData = { message: errorText };
-        }
-        
-        return res.status(response.status).json({
-          status: response.status,
-          message: `Directus API error: ${response.status} - ${JSON.stringify(errorData)}`
+        return res.status(500).json({
+          status: 500,
+          message: `Directus API error: ${response.status} - ${errorText.substring(0, 200)}`
         });
       }
 
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
         const responseText = await response.text();
-        console.error('Expected JSON but received:', contentType, responseText.substring(0, 300));
+        console.error('Non-JSON response from Directus:', responseText.substring(0, 300));
         return res.status(500).json({
           status: 500,
-          message: `Expected JSON but received ${contentType}. Response: ${responseText.substring(0, 100)}...`
+          message: `Expected JSON from Directus but received ${contentType}: ${responseText.substring(0, 100)}`
         });
       }
 
-      let data;
-      try {
-        const responseText = await response.text();
-        data = JSON.parse(responseText);
-        console.log('Successfully fetched from Directus, blog posts length:', data?.data?.length || 0);
-      } catch (parseError) {
-        console.log('JSON parse error:', parseError);
-        return res.status(500).json({
-          status: 500,
-          message: `JSON parse error: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`
-        });
-      }
+      const data = await response.json();
+      console.log('Successfully fetched from Directus, data length:', data?.data?.length || 0);
 
       // Return the data as-is from Directus
       res.status(200).json(data);
