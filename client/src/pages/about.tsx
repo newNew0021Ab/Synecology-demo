@@ -4,9 +4,6 @@ import { Users, Award, TrendingUp, ArrowRight, Linkedin, Twitter, Mail } from "l
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import NavigationLink from "@/components/NavigationLink";
-import { Link } from "wouter";
-  </Link>
-);
 
 export default function About() {
   const stats = [
