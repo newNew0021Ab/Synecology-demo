@@ -201,6 +201,27 @@ export default function BlogPost() {
     }
   };
 
+  // Функция для нормализации категории в массив
+  const normalizeCategory = (category: string | string[] | undefined): string[] => {
+    if (!category) return [];
+    if (Array.isArray(category)) return category.filter(Boolean);
+    if (typeof category === 'string') return [category];
+    return [];
+  };
+
+  // Функция для нормализации тегов в массив
+  const normalizeTags = (tags: string | string[] | undefined): string[] => {
+    if (!tags) return [];
+    if (Array.isArray(tags)) return tags.filter(Boolean);
+    if (typeof tags === 'string') return [tags];
+    return [];
+  };
+
+  // Функция для проверки наличия данных автора
+  const hasAuthorData = (post: BlogPost): boolean => {
+    return !!(post.authorName || post.authorAvatar);
+  };
+
   if (isLoading) {
     return (
       <div className="pt-24 min-h-screen">
@@ -242,6 +263,9 @@ export default function BlogPost() {
     );
   }
 
+  const categoryArray = normalizeCategory(post.category);
+  const tagsArray = normalizeTags(post.tags);
+
   return (
     <div className="pt-24">
       {/* Hero Section */}
@@ -268,9 +292,11 @@ export default function BlogPost() {
             {/* Article Header */}
             <header className="mb-12">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold">
-                  {Array.isArray(post.category) ? post.category[0] : post.category}
-                </div>
+                {categoryArray.length > 0 && (
+                  <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold">
+                    {categoryArray[0]}
+                  </div>
+                )}
                 <button
                   onClick={handleShare}
                   className="flex items-center gap-2 text-dark-slate/70 hover:text-sea-green transition-colors"
@@ -284,37 +310,47 @@ export default function BlogPost() {
                 {post.title}
               </h1>
 
-              <p className="text-xl text-dark-slate/70 mb-8 leading-relaxed">
-                {post.excerpt}
-              </p>
+              {post.excerpt && (
+                <p className="text-xl text-dark-slate/70 mb-8 leading-relaxed">
+                  {post.excerpt}
+                </p>
+              )}
 
               {/* Article Meta */}
               <div className="flex flex-wrap items-center gap-6 text-sm text-dark-slate/70">
-                {post.authorName && post.authorSlug && (
+                {hasAuthorData(post) && post.authorSlug && (
                   <Link href={`/team/${post.authorSlug}`}>
                     <div className="flex items-center gap-3">
                       {post.authorAvatar && (
                         <img
                           src={post.authorAvatar}
-                          alt={post.authorName}
+                          alt={post.authorName || 'Автор'}
                           className="w-10 h-10 rounded-full object-cover"
                         />
                       )}
                       <div>
-                        <div className="font-semibold text-dark-slate">{post.authorName}</div>
+                        {post.authorName && (
+                          <div className="font-semibold text-dark-slate">{post.authorName}</div>
+                        )}
                         {post.authorRole && <div>{post.authorRole}</div>}
                       </div>
                     </div>
                   </Link>
                 )}
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{new Date(post.publishedDate || '').toLocaleDateString('ru-RU')}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{post.readTime || '5 мин'} чтения</span>
-                </div>
+
+                {post.publishedDate && (
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{new Date(post.publishedDate).toLocaleDateString('ru-RU')}</span>
+                  </div>
+                )}
+
+                {post.readTime && (
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{post.readTime} чтения</span>
+                  </div>
+                )}
               </div>
             </header>
 
@@ -330,21 +366,23 @@ export default function BlogPost() {
             )}
 
             {/* Article Content */}
-            <GlassmorphicCard>
-              <div
-                className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-dark-slate prose-p:text-dark-slate/80 prose-li:text-dark-slate/80 prose-strong:text-dark-slate prose-a:text-sea-green hover:prose-a:text-sea-green/80"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-            </GlassmorphicCard>
+            {post.content && (
+              <GlassmorphicCard>
+                <div
+                  className="prose prose-lg max-w-none prose-headings:font-heading prose-headings:text-dark-slate prose-p:text-dark-slate/80 prose-li:text-dark-slate/80 prose-strong:text-dark-slate prose-a:text-sea-green hover:prose-a:text-sea-green/80"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+              </GlassmorphicCard>
+            )}
 
             {/* Tags */}
-            {post.tags && post.tags.length > 0 && (
+            {tagsArray.length > 0 && (
               <div className="mt-12">
                 <h3 className="text-lg font-heading font-semibold text-dark-slate mb-4">
                   Теги статьи
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {post.tags.map((tag: string) => (
+                  {tagsArray.map((tag: string) => (
                     <span
                       key={tag}
                       className="flex items-center gap-2 px-4 py-2 bg-sea-green/10 text-sea-green rounded-full font-semibold text-sm"
@@ -358,21 +396,23 @@ export default function BlogPost() {
             )}
 
             {/* Author Bio */}
-            {post.authorName && (
+            {hasAuthorData(post) && (
               <div className="mt-12">
                 <GlassmorphicCard>
                   <div className="flex items-center gap-6">
                     {post.authorAvatar && (
                       <img
                         src={post.authorAvatar}
-                        alt={post.authorName}
+                        alt={post.authorName || 'Автор'}
                         className="w-16 h-16 rounded-full object-cover"
                       />
                     )}
                     <div>
-                      <h4 className="text-xl font-heading font-semibold text-dark-slate mb-2">
-                        {post.authorName}
-                      </h4>
+                      {post.authorName && (
+                        <h4 className="text-xl font-heading font-semibold text-dark-slate mb-2">
+                          {post.authorName}
+                        </h4>
+                      )}
                       {post.authorRole && (
                         <p className="text-dark-slate/70 mb-2">{post.authorRole}</p>
                       )}
@@ -399,36 +439,47 @@ export default function BlogPost() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relatedPosts.map((relatedPost) => (
-                <GlassmorphicCard key={relatedPost.slug}>
-                  <Link href={`/blog/${relatedPost.slug}`}>
-                    <article className="space-y-4 cursor-pointer">
-                      {relatedPost.coverImage && (
-                        <img
-                          src={relatedPost.coverImage}
-                          alt={relatedPost.title}
-                          className="w-full h-48 object-cover rounded-xl"
-                        />
-                      )}
-                      <div className="space-y-2">
-                        <div className="text-sm text-sea-green font-semibold">
-                          {Array.isArray(relatedPost.category) ? relatedPost.category[0] : relatedPost.category}
+              {relatedPosts.map((relatedPost) => {
+                const relatedCategoryArray = normalizeCategory(relatedPost.category);
+                return (
+                  <GlassmorphicCard key={relatedPost.slug}>
+                    <Link href={`/blog/${relatedPost.slug}`}>
+                      <article className="space-y-4 cursor-pointer">
+                        {relatedPost.coverImage && (
+                          <img
+                            src={relatedPost.coverImage}
+                            alt={relatedPost.title}
+                            className="w-full h-48 object-cover rounded-xl"
+                          />
+                        )}
+                        <div className="space-y-2">
+                          {relatedCategoryArray.length > 0 && (
+                            <div className="text-sm text-sea-green font-semibold">
+                              {relatedCategoryArray[0]}
+                            </div>
+                          )}
+                          <h3 className="text-lg font-heading font-semibold text-dark-slate line-clamp-2">
+                            {relatedPost.title}
+                          </h3>
+                          {relatedPost.excerpt && (
+                            <p className="text-dark-slate/70 text-sm line-clamp-2">
+                              {relatedPost.excerpt}
+                            </p>
+                          )}
+                          <div className="flex items-center gap-4 text-xs text-dark-slate/60">
+                            {relatedPost.publishedDate && (
+                              <span>{new Date(relatedPost.publishedDate).toLocaleDateString('ru-RU')}</span>
+                            )}
+                            {relatedPost.readTime && (
+                              <span>{relatedPost.readTime}</span>
+                            )}
+                          </div>
                         </div>
-                        <h3 className="text-lg font-heading font-semibold text-dark-slate line-clamp-2">
-                          {relatedPost.title}
-                        </h3>
-                        <p className="text-dark-slate/70 text-sm line-clamp-2">
-                          {relatedPost.excerpt}
-                        </p>
-                        <div className="flex items-center gap-4 text-xs text-dark-slate/60">
-                          <span>{new Date(relatedPost.publishedDate || '').toLocaleDateString('ru-RU')}</span>
-                          <span>{relatedPost.readTime || '5 мин'}</span>
-                        </div>
-                      </div>
-                    </article>
-                  </Link>
-                </GlassmorphicCard>
-              ))}
+                      </article>
+                    </Link>
+                  </GlassmorphicCard>
+                );
+              })}
             </div>
           </div>
         </section>
