@@ -262,23 +262,32 @@ export default function Blog() {
                         <div className="flex items-center gap-4 text-sm flex-wrap">
                           <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                             <Calendar className="w-4 h-4" />
-                            <span className="font-medium">{post.date}</span>
+                            <span className="font-medium">
+                              {post.publishDate ? new Date(post.publishDate).toLocaleDateString('ru-RU') : (post.date || 'Неизвестная дата')}
+                            </span>
                           </div>
                           <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
                             <Clock className="w-4 h-4" />
-                            <span className="font-medium">{post.readTime}</span>
+                            <span className="font-medium">
+                              {post.readTime}
+                            </span>
                           </div>
                           <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
                             <Tag className="w-4 h-4" />
-                            <span className="font-medium">{post.category}</span>
+                            <span className="font-medium">
+                              {post.category}
+                            </span>
                           </div>
-                          <Link
-                            href={`/team/${post.authorSlug}`}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.location.href = `/team/${post.author?.slug || 'egor-koryakin'}`;
+                            }}
                             className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                           >
                             <User className="w-4 h-4" />
-                            <span className="font-medium">{post.author}</span>
-                          </Link>
+                            <span className="font-medium">{post.author?.name || post.author || 'Корякин Егор Дмитриевич'}</span>
+                          </button>
                         </div>
 
                         <h3 className="text-3xl font-heading font-bold text-dark-slate">
@@ -398,7 +407,9 @@ export default function Blog() {
                           <div className="flex items-center gap-4 text-sm flex-wrap">
                             <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                               <Calendar className="w-4 h-4" />
-                              <span className="font-medium">{post.date}</span>
+                              <span className="font-medium">
+                                {post.publishDate ? new Date(post.publishDate).toLocaleDateString('ru-RU') : (post.date || 'Неизвестная дата')}
+                              </span>
                             </div>
                             <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
                               <Clock className="w-4 h-4" />
@@ -415,12 +426,12 @@ export default function Blog() {
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                window.location.href = `/team/${post.authorSlug}`;
+                                window.location.href = `/team/${post.author?.slug || 'egor-koryakin'}`;
                               }}
                               className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                             >
                               <User className="w-4 h-4" />
-                              <span className="font-medium">{post.author}</span>
+                              <span className="font-medium">{post.author?.name || post.author || 'Корякин Егор Дмитриевич'}</span>
                             </button>
                           </div>
 
