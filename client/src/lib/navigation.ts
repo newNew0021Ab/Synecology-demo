@@ -1,3 +1,5 @@
+import { useRouter } from "wouter";
+
 /**
  * Генерирует URL с параметром from для корректного возврата
  */
@@ -22,15 +24,20 @@ export function navigateBack(): void {
   const backUrl = getBackUrl();
 
   if (backUrl) {
+    // Если есть параметр from, идем по нему
     window.location.href = backUrl;
   } else {
+    // Если нет параметра from, используем стандартный возврат браузера
     if (window.history.length > 1) {
       window.history.back();
     } else {
+      // Если это первая страница в сессии, идем на главную
       window.location.href = '/';
     }
   }
 }
+
+
 
 export const addFromParam = (href: string, currentLocation: string): string => {
   return getUrlWithFrom(href, currentLocation);
