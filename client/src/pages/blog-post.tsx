@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, Tag, Share2, User } from "lucide-react";
@@ -6,6 +5,7 @@ import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
 import { fetchBlogPosts, type BlogPost, getImageUrl } from "@/lib/blog";
+import { BackButton } from "@/components/BackButton";
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -275,13 +275,7 @@ export default function BlogPost() {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-sea-green font-semibold hover:gap-3 transition-all"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Вернуться к блогу
-            </Link>
+            <BackButton className="inline-flex items-center gap-2 text-sea-green font-semibold hover:text-sea-green/90 transition-all" />
           </div>
 
           <motion.article

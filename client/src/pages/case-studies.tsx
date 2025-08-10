@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus, Clock, MapPin, UserCheck } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
@@ -44,7 +44,7 @@ export default function CaseStudies() {
         setLoading(true);
         setError(null);
         const directusData = await fetchDirectusCases();
-        
+
         if (directusData.length > 0) {
           // Combine Directus data with static cases
           const allCases = [...directusData, ...staticCases];
@@ -178,11 +178,10 @@ export default function CaseStudies() {
               {displayCases.map((caseStudy, index) => (
                 <motion.div
                   key={caseStudy.id}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  className="group card-stable visible"
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
                 >
                   {/* Desktop version - clickable */}
                   <Link

@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, Users, Share2, MapPin, UserCheck } from "lucide-react";
@@ -6,6 +5,7 @@ import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
 import { fetchCaseStudies, type CaseStudy } from "@/lib/directus";
+import { BackButton } from "@/components/BackButton";
 
 export default function CaseStudyDetail() {
   const { slug } = useParams();
@@ -174,7 +174,7 @@ export default function CaseStudyDetail() {
         if (caseStudies[slug as keyof typeof caseStudies]) {
           const staticCase = caseStudies[slug as keyof typeof caseStudies];
           setCaseStudy(staticCase);
-          
+
           // SEO оптимизация для статичных кейсов
           if (staticCase.seoTitle) {
             document.title = staticCase.seoTitle;
@@ -190,7 +190,7 @@ export default function CaseStudyDetail() {
         // If not found in static, try to load from Directus
         const directusCases = await fetchCaseStudies();
         const directusCase = directusCases.find(c => c.slug === slug);
-        
+
         if (directusCase) {
           // Convert Directus case to detail format
           const formattedCase = {
@@ -251,10 +251,10 @@ export default function CaseStudyDetail() {
   // Helper function to generate metrics from results
   const generateMetricsFromResults = (results: string[]): any[] => {
     const metrics = [];
-    
+
     results.forEach((result, index) => {
       if (index >= 4) return; // Limit to 4 metrics
-      
+
       let icon = CheckCircle;
       let color = 'text-sea-green';
       let value = '✓';
@@ -341,13 +341,7 @@ export default function CaseStudyDetail() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center gap-2 text-sea-green font-semibold hover:gap-3 transition-all"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Вернуться к кейсам
-            </Link>
+            <BackButton className="inline-flex items-center gap-2 text-sea-green font-semibold hover:gap-3 transition-all" />
           </div>
 
           <div className={`grid grid-cols-1 ${caseStudy.image ? 'lg:grid-cols-2' : ''} gap-12 items-center`}>

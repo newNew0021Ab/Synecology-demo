@@ -31,7 +31,7 @@ export default function Blog() {
       content: ""
     },
     {
-      id: "static-2", 
+      id: "static-2",
       title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
       excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
       coverImage: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -68,23 +68,23 @@ export default function Blog() {
         setIsLoading(true);
         setError(null);
         console.log('Loading blog posts from Directus...');
-        
+
         const directusPosts = await fetchBlogPosts();
         console.log('Loaded Directus posts:', directusPosts.length);
-        
+
         // Объединяем посты из Directus с статичными
         const allPosts = [...directusPosts, ...staticPosts];
-        
+
         // Убираем дубликаты по slug
-        const uniquePosts = allPosts.filter((post, index, self) => 
+        const uniquePosts = allPosts.filter((post, index, self) =>
           index === self.findIndex(p => p.slug === post.slug)
         );
-        
+
         // Сортируем по дате (новые первые)
-        const sortedPosts = uniquePosts.sort((a, b) => 
+        const sortedPosts = uniquePosts.sort((a, b) =>
           new Date(b.publishedDate || '').getTime() - new Date(a.publishedDate || '').getTime()
         );
-        
+
         setBlogPosts(sortedPosts);
         console.log('Final blog posts:', sortedPosts.length);
       } catch (error) {
@@ -432,11 +432,10 @@ export default function Blog() {
                     viewport={{ once: true, amount: 0.2 }}
                     className="group h-full card-stable visible"
                   >
-                    <div
-                      className="group block h-full cursor-pointer"
-                      onClick={() =>
-                        (window.location.href = `/blog/${post.slug}`)
-                      }
+                    {/* Replaced Link with NavigationLink and added the 'from' parameter */}
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="block group"
                     >
                       <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
                         <article className="flex flex-col h-full space-y-6">
@@ -471,16 +470,13 @@ export default function Blog() {
                               </span>
                             </div>
                             {post.authorSlug && (
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  window.location.href = `/team/${post.authorSlug}`;
-                                }}
+                              <Link
+                                href={`/team/${post.authorSlug}`}
                                 className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
                               >
                                 <User className="w-4 h-4" />
                                 <span className="font-medium">{post.authorName || 'Автор'}</span>
-                              </button>
+                              </Link>
                             )}
                           </div>
 
@@ -509,7 +505,7 @@ export default function Blog() {
                           </div>
                         </article>
                       </GlassmorphicCard>
-                    </div>
+                    </Link>
                   </motion.div>
                 ))}
             </div>
