@@ -8,7 +8,7 @@ interface StableCardProps {
   delay?: number;
 }
 
-export const StableCard: React.FC<StableCardProps> = ({
+const StableCard: React.FC<StableCardProps> = ({
   children,
   className = "",
   delay = 0
@@ -31,3 +31,6 @@ export const StableCard: React.FC<StableCardProps> = ({
     </motion.div>
   );
 };
+
+export { StableCard };
+export default StableCard;

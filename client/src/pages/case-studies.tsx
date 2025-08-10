@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus, Clock, MapPin, UserCheck } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import StableCard from '@/components/StableCard'; // Fixed import for StableCard
 import { useState, useEffect } from "react";
 import { fetchDirectusCases, type CaseStudy } from "@/lib/directus";
 import OptimizedImage from "@/components/OptimizedImage";
@@ -151,8 +152,8 @@ export default function CaseStudies() {
                   <p className="text-dark-slate/50 text-xs mb-4">
                     Отображаются доступные кейсы. Если проблема повторяется, свяжитесь с администратором.
                   </p>
-                  <button 
-                    onClick={() => window.location.reload()} 
+                  <button
+                    onClick={() => window.location.reload()}
                     className="text-sea-green hover:text-sea-green/80 font-medium text-sm"
                   >
                     Обновить страницу

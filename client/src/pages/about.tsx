@@ -4,9 +4,7 @@ import { Users, Award, TrendingUp, ArrowRight, Linkedin, Twitter, Mail } from "l
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import NavigationLink from "@/components/NavigationLink";
-const NavigationLink = ({ href, className, children }) => (
-  <Link href={href} className={className}>
-    {children}
+import { Link } from "wouter";
   </Link>
 );
 

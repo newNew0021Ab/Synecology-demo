@@ -1,4 +1,3 @@
-
 import { useRouter } from "wouter";
 
 /**
@@ -23,7 +22,7 @@ export function getBackUrl(): string | null {
  */
 export function navigateBack(): void {
   const backUrl = getBackUrl();
-  
+
   if (backUrl) {
     // Если есть параметр from, идем по нему
     window.location.href = backUrl;
@@ -37,3 +36,17 @@ export function navigateBack(): void {
     }
   }
 }
+
+export const getUrlWithFrom = (href: string, currentLocation: string): string => {
+  if (!currentLocation || currentLocation === '/') {
+    return href;
+  }
+
+  const url = new URL(href, window.location.origin);
+  url.searchParams.set('from', currentLocation);
+  return url.pathname + url.search;
+};
+
+export const addFromParam = (href: string, currentLocation: string): string => {
+  return getUrlWithFrom(href, currentLocation);
+};

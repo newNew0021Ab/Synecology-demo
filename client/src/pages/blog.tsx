@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Calendar, ArrowRight, Clock, Tag, Search, User } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import StableCard from '@/components/StableCard';
 import { useState, useMemo, useEffect } from "react";
 import { fetchBlogPosts, type BlogPost } from "@/lib/blog";
 
