@@ -24,20 +24,42 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
   const url = `${API_BASE}/items/case_studies?fields=*`;
 
   try {
+    console.log('Fetching from:', url);
+    
     const res = await fetch(url, {
+      method: 'GET',
       headers: { 
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors'
     });
 
+    console.log('Response status:', res.status);
+    console.log('Response headers:', Object.fromEntries(res.headers.entries()));
+
     if (!res.ok) {
-      throw new Error(`Failed to fetch case studies: ${res.status} ${res.statusText}`);
+      const errorText = await res.text();
+      console.error('Error response:', errorText);
+      throw new Error(`HTTP ${res.status}: ${errorText.substring(0, 200)}`);
+    }
+
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const responseText = await res.text();
+      console.error('Non-JSON response received:', responseText.substring(0, 300));
+      throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
     }
 
     const json = await res.json();
+    console.log('API Response:', json);
 
-    return (json.data || []).map((item: any) => ({
+    if (!json.data) {
+      console.warn('No data field in response:', json);
+      return [];
+    }
+
+    return json.data.map((item: any) => ({
       id: item.id,
       title: item.title || 'Untitled',
       slug: item.slug || `case-${item.id}`,

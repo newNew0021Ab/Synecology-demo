@@ -19,11 +19,17 @@ export default function CaseStudies() {
         setLoading(true);
         setError(null);
         const data = await fetchCaseStudies();
-        setCases(data);
-      } catch (err) {
+        if (data.length === 0) {
+          setError("Кейсы не найдены в Directus. Отображаем пример.");
+        } else {
+          setCases(data);
+        }
+      } catch (err: any) {
         console.error("Failed to fetch case studies:", err);
-        setError("Не удалось загрузить кейсы из Directus. Отображаем примеры.");
-        // Fallback to example case
+        const errorMessage = err?.message || 'Неизвестная ошибка';
+        setError(`Ошибка загрузки из Directus: ${errorMessage}. Отображаем пример.`);
+      } finally {
+        // Always show fallback data for now
         setCases([
           {
             id: "example-1",
@@ -45,7 +51,6 @@ export default function CaseStudies() {
             featured: true,
           },
         ]);
-      } finally {
         setLoading(false);
       }
     };
@@ -332,7 +337,6 @@ export default function CaseStudies() {
               ))}
             </div>
           )}
-          </div>
 
           {/* More Cases Button */}
           <div className="text-center">
