@@ -3,12 +3,57 @@ import { Link } from "wouter";
 import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CaseStudies() {
   const [showAdditionalCases, setShowAdditionalCases] = useState(false);
+  const [cases, setCases] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const mainCaseStudies = [
+  // Fetch case studies from Directus API
+  useEffect(() => {
+    const fetchDirectusCases = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/directus-cases'); // Assuming you have an API endpoint for Directus
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setCases(data.data); // Assuming Directus returns data in a 'data' field
+      } catch (err) {
+        console.error("Failed to fetch case studies:", err);
+        setError("Could not load case studies. Displaying examples.");
+        // Fallback to the original hardcoded cases if API fails
+        setCases([
+          {
+            title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
+            category: "Пищевая промышленность",
+            description: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
+            results: [
+              "Полный пакет документов «под ключ» за 90 дней.",
+              "Полностью исключены риски штрафов и приостановки деятельности",
+              "Гарантированное прохождение всех проверок с первого раза",
+              "100% соответствие природоохранному законодательству",
+            ],
+            image: "https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
+            tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству"],
+            timeline: "3 месяца",
+            completion: "15.12.2024",
+            featured: true,
+            slug: "coffee-environmental-documentation",
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDirectusCases();
+  }, []);
+
+  const displayCases = cases.length > 0 ? cases : [
     {
       title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
       category: "Пищевая промышленность",
@@ -92,10 +137,24 @@ export default function CaseStudies() {
       {/* Case Studies Grid */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {loading && !error && (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-sea-green"></div>
+              <p className="mt-4 text-dark-slate/70">Загружаем кейсы...</p>
+            </div>
+          )}
+
+          {error && (
+            <div className="text-center py-12">
+              <p className="text-red-500 mb-4">{error}</p>
+              <p className="text-dark-slate/70">Показываем примеры кейсов</p>
+            </div>
+          )}
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {mainCaseStudies.map((caseStudy, index) => (
-              <motion.div 
-                key={caseStudy.slug}
+            {displayCases.map((caseStudy, index) => (
+              <motion.div
+                key={caseStudy.slug || index}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
@@ -104,16 +163,20 @@ export default function CaseStudies() {
               >
                 {/* Desktop version - clickable */}
                 <Link
-                  href={`/case-studies/${caseStudy.slug}`}
+                  href={`/case-studies/${caseStudy.slug || `example-${index}`}`}
                   className="hidden md:block"
                 >
                   <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
                     <div className="flex flex-col h-full min-h-[700px]">
                         <div className="relative mb-6">
                           <img
-                            src={caseStudy.image}
+                            src={caseStudy.coverImage || caseStudy.image || "/api/placeholder/600/400"}
                             alt={caseStudy.title}
                             className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "/api/placeholder/600/400";
+                            }}
                           />
                           {caseStudy.featured && (
                             <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -130,19 +193,19 @@ export default function CaseStudies() {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2 text-sea-green">
                               <Calendar className="w-4 h-4" />
-                              <span className="text-sm font-medium">{caseStudy.completion}</span>
+                              <span className="text-sm font-medium">{caseStudy.completion || new Date(caseStudy.completionDate || Date.now()).toLocaleDateString('ru-RU')}</span>
                             </div>
                             <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                              {caseStudy.timeline}
+                              {caseStudy.timeline || 'N/A'}
                             </div>
                           </div>
 
-                          <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description}</p>
+                          <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description || caseStudy.previewText || 'No description available.'}</p>
 
                           <div className="space-y-3">
                             <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
                             <ul className="space-y-2">
-                              {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
+                              {(caseStudy.results || []).slice(0, 3).map((result, resultIndex) => (
                                 <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
                                   <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
                                   <span className="font-medium">{result}</span>
@@ -152,7 +215,7 @@ export default function CaseStudies() {
                           </div>
 
                           <div className="flex flex-wrap gap-2">
-                            {caseStudy.tags.slice(0, 2).map((tag) => (
+                            {(caseStudy.tags || []).slice(0, 2).map((tag) => (
                               <span
                                 key={tag}
                                 className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
@@ -178,9 +241,13 @@ export default function CaseStudies() {
                     <div className="flex flex-col h-full min-h-[700px]">
                         <div className="relative mb-6">
                           <img
-                            src={caseStudy.image}
+                            src={caseStudy.coverImage || caseStudy.image || "/api/placeholder/600/400"}
                             alt={caseStudy.title}
                             className="w-full h-64 object-cover rounded-xl"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "/api/placeholder/600/400";
+                            }}
                           />
                           {caseStudy.featured && (
                             <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -197,19 +264,19 @@ export default function CaseStudies() {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2 text-sea-green">
                               <Calendar className="w-4 h-4" />
-                              <span className="text-sm font-medium">{caseStudy.completion}</span>
+                              <span className="text-sm font-medium">{caseStudy.completion || new Date(caseStudy.completionDate || Date.now()).toLocaleDateString('ru-RU')}</span>
                             </div>
                             <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                              {caseStudy.timeline}
+                              {caseStudy.timeline || 'N/A'}
                             </div>
                           </div>
 
-                          <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description}</p>
+                          <p className="text-dark-slate/70 text-base leading-relaxed">{caseStudy.description || caseStudy.previewText || 'No description available.'}</p>
 
                           <div className="space-y-3">
                             <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
                             <ul className="space-y-2">
-                              {caseStudy.results.slice(0, 3).map((result, resultIndex) => (
+                              {(caseStudy.results || []).slice(0, 3).map((result, resultIndex) => (
                                 <li key={resultIndex} className="flex items-start gap-3 text-sm text-dark-slate">
                                   <CheckCircle className="w-4 h-4 text-sea-green flex-shrink-0 mt-0.5" />
                                   <span className="font-medium">{result}</span>
@@ -219,7 +286,7 @@ export default function CaseStudies() {
                           </div>
 
                           <div className="flex flex-wrap gap-2">
-                            {caseStudy.tags.slice(0, 2).map((tag) => (
+                            {(caseStudy.tags || []).slice(0, 2).map((tag) => (
                               <span
                                 key={tag}
                                 className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
@@ -232,7 +299,7 @@ export default function CaseStudies() {
 
                         <div className="flex items-center justify-center mt-8 pt-6 border-t border-dark-slate/10">
                           <Link
-                            href={`/case-studies/${caseStudy.slug}`}
+                            href={`/case-studies/${caseStudy.slug || `example-${index}`}`}
                             className="text-sea-green font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all text-base"
                           >
                             Подробнее <ArrowRight className="w-5 h-5" />
