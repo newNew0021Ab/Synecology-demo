@@ -45,7 +45,7 @@ export type BlogPost = {
 
 export async function fetchDirectusCases(): Promise<CaseStudy[]> {
   try {
-    logger.debug('Loading cases from Directus...');
+    logger.debug('Loading cases...');
 
     const res = await fetch('/api/directus-cases');
     logger.debug('Response status:', res.status);
@@ -153,7 +153,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
       };
     });
 
-    logger.debug('Successfully loaded cases from Directus:', caseStudies.length, 'cases');
+    logger.debug('Successfully loaded cases:', caseStudies.length, 'cases');
     return caseStudies;
   } catch (error) {
     logger.error('Error fetching case studies:', error);
@@ -163,7 +163,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
 
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   try {
-    logger.debug('Loading blog posts from Directus...');
+    logger.debug('Loading blog posts...');
     logger.debug('Fetching from proxy:', '/api/directus-blog');
 
     const response = await fetch('/api/directus-blog');
@@ -215,7 +215,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     }
 
     const blogPosts = json.data.filter((item: BlogPost) => item.status === 'published');
-    logger.debug('Successfully loaded blog posts from Directus:', blogPosts.length, 'posts');
+    logger.debug('Successfully loaded blog posts:', blogPosts.length, 'posts');
     return blogPosts;
   } catch (error) {
     logger.error('Error fetching blog posts:', error);

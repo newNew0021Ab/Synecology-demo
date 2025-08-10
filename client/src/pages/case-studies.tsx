@@ -139,7 +139,7 @@ export default function CaseStudies() {
           {loading && (
             <div className="text-center py-12">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-sea-green"></div>
-              <p className="mt-4 text-dark-slate/70">Загружаем кейсы из Directus...</p>
+              <p className="mt-4 text-dark-slate/70">Загружаем кейсы...</p>
             </div>
           )}
 
