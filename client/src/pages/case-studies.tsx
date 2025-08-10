@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus } from "lucide-react";
+import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus, Clock, MapPin, UserCheck } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useState, useEffect } from "react";
 import { fetchCaseStudies, type CaseStudy } from "@/lib/directus";
+import OptimizedImage from "@/components/OptimizedImage";
+import { getImageUrl } from "@/lib/blog";
 
 export default function CaseStudies() {
   const [showAdditionalCases, setShowAdditionalCases] = useState(false);

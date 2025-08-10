@@ -9,43 +9,35 @@ export type CaseStudy = {
   id: string;
   title: string;
   slug: string;
-  previewText: string;
+  excerpt: string;
+  content: string;
   coverImage: string | null;
-  timeline: string;
-  completionDate: string;
-  results: string[];
-  category?: string;
-  description?: string;
+  category?: string[];
   tags?: string[];
+  client?: string;
+  projectDate?: string;
   featured?: boolean;
-  // Additional fields for detail page
+  fullDescription?: string;
   challenge?: string;
   solution?: string;
-  client?: string;
+  timeline?: string;
+  completionDate?: string;
   location?: string;
-  team_size?: string;
+  teamSize?: string;
+  results?: string[];
 };
 
-export async function fetchCaseStudies(): Promise<CaseStudy[]> {
-  const url = '/api/directus-cases';
-
+export async function fetchDirectusCases(): Promise<CaseStudy[]> {
   try {
-    console.log('Fetching from proxy:', url);
-    
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: { 
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
+    console.log('Loading cases from Directus...');
 
+    const res = await fetch('/api/directus-cases');
     console.log('Response status:', res.status);
 
     if (!res.ok) {
       const errorText = await res.text();
-      console.error('Proxy error response:', errorText);
-      throw new Error(`HTTP ${res.status}: ${errorText.substring(0, 200)}`);
+      console.log('Proxy error response:', errorText);
+      throw new Error(`Failed to fetch case studies: ${res.status} ${res.statusText}`);
     }
 
     const contentType = res.headers.get('content-type');
@@ -82,58 +74,71 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
       return [];
     }
 
-    return json.data.map((item: any) => {
-      // Handle results field - it might be a string or array
-      let results = [];
-      if (typeof item.results === 'string') {
-        try {
-          results = JSON.parse(item.results);
-        } catch {
-          results = item.results.split('\n').filter(r => r.trim());
-        }
-      } else if (Array.isArray(item.results)) {
-        results = item.results;
+    if (!Array.isArray(json.data)) {
+      console.warn('Data is not an array:', json.data);
+      return [];
+    }
+
+    const caseStudies = json.data.map((item: any): CaseStudy => {
+      console.log('Processing case study item:', item);
+
+      // Handle category field - it might be a string or array
+      let category = [];
+      if (Array.isArray(item.category)) {
+        category = item.category.filter(cat => cat && cat.trim());
+      } else if (typeof item.category === 'string' && item.category.trim()) {
+        category = [item.category.trim()];
       }
 
       // Handle tags field - it might be a string or array
       let tags = [];
-      if (typeof item.tags === 'string') {
+      if (typeof item.tags === 'string' && item.tags.trim()) {
         try {
           tags = JSON.parse(item.tags);
         } catch {
           tags = item.tags.split(',').map(t => t.trim()).filter(t => t);
         }
       } else if (Array.isArray(item.tags)) {
-        tags = item.tags;
+        tags = item.tags.filter(tag => tag && tag.trim());
       }
 
-      // Handle category field
-      let category = item.category;
-      if (Array.isArray(item.category)) {
-        category = item.category[0] || 'Без категории';
+      // Handle results field - it might be a string or array
+      let results = [];
+      if (typeof item.results === 'string' && item.results.trim()) {
+        try {
+          results = JSON.parse(item.results);
+        } catch {
+          results = item.results.split(',').map(r => r.trim()).filter(r => r);
+        }
+      } else if (Array.isArray(item.results)) {
+        results = item.results.filter(result => result && result.trim());
       }
 
       return {
         id: item.id,
-        title: item.title || 'Untitled',
+        title: item.title || '',
         slug: item.slug || `case-${item.id}`,
-        previewText: item.preview_text || item.description || '',
+        excerpt: item.preview_text || item.excerpt || '',
+        content: item.content || item.full_content || '',
         coverImage: getImageUrl(item.cover_image),
-        timeline: item.timeline || 'N/A',
-        completionDate: item.completion_date || item.project_date || new Date().toISOString(),
-        results: results,
-        category: category || 'Без категории',
-        description: item.description || item.full_description || '',
-        tags: tags,
+        category: category.length > 0 ? category : undefined,
+        tags: tags.length > 0 ? tags : undefined,
+        client: item.client || undefined,
+        projectDate: item.project_date || undefined,
         featured: Boolean(item.featured),
-        // Additional fields for detail page
-        challenge: item.challenge || '',
-        solution: item.solution || '',
-        client: item.client || '',
-        location: item.location || '',
-        team_size: item.team_size || ''
+        fullDescription: item.full_description || undefined,
+        challenge: item.challenge || undefined,
+        solution: item.solution || undefined,
+        timeline: item.timeline || undefined,
+        completionDate: item.completion_date || undefined,
+        location: item.location || undefined,
+        teamSize: item.team_size || undefined,
+        results: results.length > 0 ? results : undefined,
       };
     });
+
+    console.log('Successfully loaded cases from Directus:', caseStudies.length, 'cases');
+    return caseStudies;
   } catch (error) {
     console.error('Error fetching case studies:', error);
     throw error;
