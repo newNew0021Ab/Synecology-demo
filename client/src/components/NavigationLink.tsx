@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'wouter';
 import { addFromParam } from '@/lib/navigation';
@@ -17,9 +16,9 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   ...props 
 }) => {
   const [location] = useLocation();
-  
+
   const linkHref = addFromParam(href, location);
-  
+
   return (
     <Link 
       href={linkHref} 
@@ -31,4 +30,5 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   );
 };
 
+export { NavigationLink };
 export default NavigationLink;

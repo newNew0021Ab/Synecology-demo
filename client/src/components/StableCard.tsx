@@ -33,4 +33,5 @@ const StableCard: React.FC<StableCardProps> = ({
 };
 
 export { StableCard };
+export { StableCard };
 export default StableCard;
