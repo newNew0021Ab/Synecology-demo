@@ -1,8 +1,7 @@
-
-const API_BASE = "https://directus-production-6ce1.up.railway.app";
+export const DIRECTUS_URL = "https://directus-production-6ce1.up.railway.app";
 
 function getImageUrl(id?: string) {
-  return id ? `${API_BASE}/assets/${id}` : null;
+  return id ? `${DIRECTUS_URL}/assets/${id}` : null;
 }
 
 export type CaseStudy = {
@@ -25,6 +24,21 @@ export type CaseStudy = {
   location?: string;
   teamSize?: string;
   results?: string[];
+};
+
+export type BlogPost = {
+  id: number;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string;
+  image?: string;
+  author?: string;
+  status: 'published' | 'draft';
+  date_created: string;
+  date_updated: string;
+  tags?: string[];
+  featured?: boolean;
 };
 
 export async function fetchDirectusCases(): Promise<CaseStudy[]> {
@@ -144,5 +158,38 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
     throw error;
   }
 }
+
+export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
+  try {
+    console.log('Loading blog posts from Directus...');
+    console.log('Fetching from proxy:', '/api/directus-blog');
+
+    const response = await fetch('/api/directus-blog');
+    console.log('Response status:', response.status);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if response is JSON
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      console.log('Received HTML error page instead of JSON:', text.substring(0, 200));
+      throw new Error('Server returned HTML instead of JSON');
+    }
+
+    const data = await response.json();
+
+    if (data && data.data) {
+      return data.data.filter((item: BlogPost) => item.status === 'published');
+    }
+
+    return [];
+  } catch (error) {
+    console.error('Error fetching blog posts:', error);
+    throw error;
+  }
+};
 
 export { getImageUrl };
