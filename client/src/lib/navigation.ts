@@ -37,6 +37,16 @@ export function navigateBack(): void {
   }
 }
 
+export const getUrlWithFrom = (href: string, currentLocation: string): string => {
+  if (!currentLocation || currentLocation === '/') {
+    return href;
+  }
+
+  const url = new URL(href, window.location.origin);
+  url.searchParams.set('from', currentLocation);
+  return url.pathname + url.search;
+};
+
 export const addFromParam = (href: string, currentLocation: string): string => {
   return getUrlWithFrom(href, currentLocation);
 };

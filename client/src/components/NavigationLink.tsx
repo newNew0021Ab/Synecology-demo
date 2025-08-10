@@ -30,5 +30,4 @@ const NavigationLink: React.FC<NavigationLinkProps> = ({
   );
 };
 
-export { NavigationLink };
 export default NavigationLink;
