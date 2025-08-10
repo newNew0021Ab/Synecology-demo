@@ -1,4 +1,3 @@
-
 const API_BASE = "https://directus-production-6ce1.up.railway.app";
 
 function getImageUrl(id?: string) {
@@ -16,15 +15,19 @@ export type CaseStudy = {
 };
 
 export async function fetchCaseStudies(): Promise<CaseStudy[]> {
-  const res = await fetch(`${API_BASE}/items/case_studies`);
-  
+  const url = `${API_BASE}/items/case_studies?fields=title,slug,preview_text,cover_image,timeline,completion_date,results`;
+
+  const res = await fetch(url, {
+    headers: { Accept: "application/json" }
+  });
+
   if (!res.ok) {
-    throw new Error(`Failed to fetch case studies: ${res.status}`);
+    throw new Error(`Failed to fetch case studies: ${res.status} ${res.statusText}`);
   }
-  
-  const { data } = await res.json();
-  
-  return data.map((item: any) => ({
+
+  const json = await res.json();
+
+  return json.data.map((item: any) => ({
     title: item.title,
     slug: item.slug,
     previewText: item.preview_text,

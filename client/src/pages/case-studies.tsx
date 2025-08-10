@@ -10,6 +10,7 @@ export default function CaseStudies() {
   const [cases, setCases] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
 
   // Fetch case studies from Directus API
   useEffect(() => {
