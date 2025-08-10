@@ -7,9 +7,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/directus-cases", async (req, res) => {
     try {
       const directusUrl = "https://directus-production-6ce1.up.railway.app/items/case_studies?fields=*";
-      
+
       console.log('Proxying request to Directus:', directusUrl);
-      
+
       const response = await fetch(directusUrl, {
         method: 'GET',
         headers: {
@@ -41,7 +41,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const data = await response.json();
       console.log('Successfully fetched from Directus, data length:', data?.data?.length || 0);
-      
+
       // Return the data as-is from Directus
       res.status(200).json(data);
     } catch (error) {
@@ -57,9 +57,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/directus-blog", async (req, res) => {
     try {
       const directusUrl = "https://directus-production-6ce1.up.railway.app/items/blog?fields=*";
-      
+
       console.log('Proxying request to Directus:', directusUrl);
-      
+
       const response = await fetch(directusUrl, {
         method: 'GET',
         headers: {
@@ -91,7 +91,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const data = await response.json();
       console.log('Successfully fetched from Directus, blog posts length:', data?.data?.length || 0);
-      
+
       // Return the data as-is from Directus
       res.status(200).json(data);
     } catch (error) {
@@ -107,31 +107,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
     try {
       const { firstName, email, company, projectType, message } = req.body;
-      
+
       // Basic validation
       if (!firstName || !email || !projectType) {
-        return res.status(400).json({ 
-          message: "Обязательные поля: имя, email и тип проекта" 
+        return res.status(400).json({
+          message: "Обязательные поля: имя, email и тип проекта"
         });
       }
 
       // Email validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        return res.status(400).json({ 
-          message: "Некорректный email адрес" 
+        return res.status(400).json({
+          message: "Некорректный email адрес"
         });
       }
 
       // Here you could save to database if needed
       // For now, just return success
-      res.status(200).json({ 
-        message: "Сообщение успешно отправлено!" 
+      res.status(200).json({
+        message: "Сообщение успешно отправлено!"
       });
     } catch (error) {
       console.error("Contact form error:", error);
-      res.status(500).json({ 
-        message: "Ошибка сервера. Попробуйте позже." 
+      res.status(500).json({
+        message: "Ошибка сервера. Попробуйте позже."
       });
     }
   });

@@ -1,4 +1,3 @@
-
 const API_BASE = "https://directus-production-6ce1.up.railway.app";
 
 function getImageUrl(id?: string) {
@@ -24,85 +23,41 @@ export type BlogPost = {
 };
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
-  const url = '/api/directus-blog';
-
   try {
-    console.log('Fetching from proxy:', url);
-    
-    const res = await fetch(url, {
-      method: 'GET',
-      headers: { 
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
+    console.log('Fetching from proxy:', '/api/directus-blog');
 
-    console.log('Response status:', res.status);
+    const response = await fetch('/api/directus-blog');
+    console.log('Response status:', response.status);
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error('Proxy error response:', errorText);
-      throw new Error(`HTTP ${res.status}: ${errorText.substring(0, 200)}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log('Proxy error response:', errorText);
+      throw new Error(`Failed to fetch blog posts: ${response.status} ${response.statusText}`);
     }
 
-    const contentType = res.headers.get('content-type');
-    const responseText = await res.text();
-    
-    // Check if response is HTML (error page)
-    if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
-      console.error('Received HTML error page instead of JSON:', responseText.substring(0, 200));
-      throw new Error('Server returned HTML error page instead of JSON data');
-    }
-    
+    const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
-      console.error('Non-JSON response received:', responseText.substring(0, 300));
-      throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
+      const htmlContent = await response.text();
+      console.log('Received HTML error page instead of JSON:', htmlContent.substring(0, 200));
+      throw new Error(`Expected JSON but got ${contentType}`);
     }
 
-    let json;
+    let data;
     try {
-      json = JSON.parse(responseText);
+      data = await response.json();
+      console.log('Proxy API Response:', data);
     } catch (parseError) {
-      console.error('JSON parse error:', parseError, 'Response text:', responseText.substring(0, 300));
-      throw new Error(`Failed to parse JSON response: ${parseError.message}`);
-    }
-    
-    console.log('Proxy API Response:', json);
-
-    // Check if this is an error response from our proxy
-    if (json.status === 500) {
-      throw new Error(json.message || 'Proxy server error');
+      console.log('JSON parse error:', parseError);
+      throw new Error('Invalid JSON response from server');
     }
 
-    if (!json.data) {
-      console.warn('No data field in response:', json);
-      return [];
+    if (!data.data || !Array.isArray(data.data)) {
+      console.log('Invalid data structure:', data);
+      throw new Error('Invalid data structure from Directus API');
     }
 
-    return json.data.map((item: any) => {
-      // Handle category field
-      let category = item.category;
-      if (Array.isArray(item.category)) {
-        category = item.category;
-      } else if (typeof item.category === 'string') {
-        try {
-          category = JSON.parse(item.category);
-        } catch {
-          category = [item.category];
-        }
-      }
-
-      // Handle tags field - it might be a string or array
-      let tags = [];
-      if (typeof item.tags === 'string') {
-        try {
-          tags = JSON.parse(item.tags);
-        } catch {
-          tags = item.tags.split(',').map(t => t.trim()).filter(t => t);
-        }
-      } else if (Array.isArray(item.tags)) {
-        tags = item.tags;
-      }
+    const blogPosts = data.data.map((item: any): BlogPost => {
+      console.log('Processing blog item:', item);
 
       return {
         id: item.id,
@@ -111,17 +66,20 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
         excerpt: item.excerpt || item.preview_text || '',
         content: item.content || item.full_content || '',
         coverImage: getImageUrl(item.cover_image),
-        category: category || [],
-        tags: tags,
-        readTime: item.read_time || item.reading_time || '',
-        authorName: item.author_name || item.author || '',
+        category: Array.isArray(item.category) ? item.category : (typeof item.category === 'string' ? [item.category] : []),
+        tags: Array.isArray(item.tags) ? item.tags : (typeof item.tags === 'string' ? item.tags.split(',').map(t => t.trim()) : []),
+        readTime: item.read_time || '',
+        authorName: item.author_name || '',
         authorRole: item.author_role || '',
         authorSlug: item.author_slug || '',
         authorAvatar: getImageUrl(item.author_avatar),
-        publishedDate: item.published_date || item.publication_date || item.date || new Date().toISOString(),
+        publishedDate: item.published_date || new Date().toISOString(),
         featured: Boolean(item.featured)
       };
     });
+
+    console.log('Successfully loaded blog posts from Directus:', blogPosts.length, 'posts');
+    return blogPosts;
   } catch (error) {
     console.error('Error fetching blog posts:', error);
     throw error;
