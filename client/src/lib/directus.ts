@@ -21,26 +21,24 @@ export type CaseStudy = {
 };
 
 export async function fetchCaseStudies(): Promise<CaseStudy[]> {
-  const url = `${API_BASE}/items/case_studies?fields=*`;
+  const url = '/api/directus-cases';
 
   try {
-    console.log('Fetching from:', url);
+    console.log('Fetching from proxy:', url);
     
     const res = await fetch(url, {
       method: 'GET',
       headers: { 
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      mode: 'cors'
+      }
     });
 
     console.log('Response status:', res.status);
-    console.log('Response headers:', Object.fromEntries(res.headers.entries()));
 
     if (!res.ok) {
       const errorText = await res.text();
-      console.error('Error response:', errorText);
+      console.error('Proxy error response:', errorText);
       throw new Error(`HTTP ${res.status}: ${errorText.substring(0, 200)}`);
     }
 
@@ -52,7 +50,12 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
     }
 
     const json = await res.json();
-    console.log('API Response:', json);
+    console.log('Proxy API Response:', json);
+
+    // Check if this is an error response from our proxy
+    if (json.status === 500) {
+      throw new Error(json.message || 'Proxy server error');
+    }
 
     if (!json.data) {
       console.warn('No data field in response:', json);
