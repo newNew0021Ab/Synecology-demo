@@ -4,7 +4,7 @@ import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCirc
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useState, useEffect } from "react";
-import { fetchCaseStudies, type CaseStudy } from "@/lib/directus";
+import { fetchDirectusCases, type CaseStudy } from "@/lib/directus";
 import OptimizedImage from "@/components/OptimizedImage";
 import { getImageUrl } from "@/lib/blog";
 
@@ -20,7 +20,8 @@ export default function CaseStudies() {
       id: "example-1",
       title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
       slug: "coffee-environmental-documentation",
-      previewText: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
+      excerpt: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
+      content: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
       coverImage: "https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
       timeline: "3 месяца",
       completionDate: "2024-12-15",
@@ -30,8 +31,7 @@ export default function CaseStudies() {
         "Гарантированное прохождение всех проверок с первого раза",
         "100% соответствие природоохранному законодательству",
       ],
-      category: "Пищевая промышленность",
-      description: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
+      category: ["Пищевая промышленность"],
       tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству"],
       featured: true,
     },
@@ -43,7 +43,7 @@ export default function CaseStudies() {
       try {
         setLoading(true);
         setError(null);
-        const directusData = await fetchCaseStudies();
+        const directusData = await fetchDirectusCases();
         
         if (directusData.length > 0) {
           // Combine Directus data with static cases
@@ -190,46 +190,64 @@ export default function CaseStudies() {
                     className="hidden md:block"
                   >
                     <GlassmorphicCard delay={index * 0.1} className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
-                      <div className="flex flex-col h-full min-h-[700px]">
-                          <div className="relative mb-6">
-                            <img
-                              src={caseStudy.coverImage || "/api/placeholder/600/400"}
-                              alt={caseStudy.title}
-                              className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "/api/placeholder/600/400";
-                              }}
-                            />
-                            {caseStudy.featured && (
-                              <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                      <div className="flex flex-col h-full min-h-[500px]">
+                          {caseStudy.coverImage && (
+                            <div className="relative mb-6">
+                              <img
+                                src={caseStudy.coverImage}
+                                alt={caseStudy.title || 'Case study image'}
+                                className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                }}
+                              />
+                              {caseStudy.featured && (
+                                <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                  Рекомендуемый
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {!caseStudy.coverImage && caseStudy.featured && (
+                            <div className="mb-4">
+                              <div className="bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg inline-block">
                                 Рекомендуемый
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
 
                           <div className="space-y-5 flex-grow">
                             <h3 className="text-2xl font-heading font-bold text-dark-slate leading-tight group-hover:text-sea-green transition-colors duration-300">
-                              {caseStudy.title}
+                              {caseStudy.title || 'Untitled Case Study'}
                             </h3>
 
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2 text-sea-green">
-                                <Calendar className="w-4 h-4" />
-                                <span className="text-sm font-medium">
-                                  {new Date(caseStudy.completionDate).toLocaleDateString('ru-RU')}
-                                </span>
+                            {(caseStudy.completionDate || caseStudy.timeline) && (
+                              <div className="flex items-center justify-between">
+                                {caseStudy.completionDate && (
+                                  <div className="flex items-center gap-2 text-sea-green">
+                                    <Calendar className="w-4 h-4" />
+                                    <span className="text-sm font-medium">
+                                      {new Date(caseStudy.completionDate).toLocaleDateString('ru-RU')}
+                                    </span>
+                                  </div>
+                                )}
+                                {caseStudy.timeline && (
+                                  <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
+                                    {caseStudy.timeline}
+                                  </div>
+                                )}
                               </div>
-                              <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                                {caseStudy.timeline}
-                              </div>
-                            </div>
+                            )}
 
-                            <p className="text-dark-slate/70 text-base leading-relaxed">
-                              {caseStudy.previewText || caseStudy.description || 'Описание недоступно.'}
-                            </p>
+                            {(caseStudy.excerpt || caseStudy.content) && (
+                              <p className="text-dark-slate/70 text-base leading-relaxed">
+                                {caseStudy.excerpt || caseStudy.content || 'Описание недоступно.'}
+                              </p>
+                            )}
 
-                            {caseStudy.results.length > 0 && (
+                            {caseStudy.results && caseStudy.results.length > 0 && (
                               <div className="space-y-3">
                                 <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
                                 <ul className="space-y-2">
@@ -269,46 +287,64 @@ export default function CaseStudies() {
                   {/* Mobile version - not clickable */}
                   <div className="md:hidden">
                     <GlassmorphicCard delay={index * 0.1}>
-                      <div className="flex flex-col h-full min-h-[700px]">
-                          <div className="relative mb-6">
-                            <img
-                              src={caseStudy.coverImage || "/api/placeholder/600/400"}
-                              alt={caseStudy.title}
-                              className="w-full h-64 object-cover rounded-xl"
-                              onError={(e) => {
-                                const target = e.target as HTMLImageElement;
-                                target.src = "/api/placeholder/600/400";
-                              }}
-                            />
-                            {caseStudy.featured && (
-                              <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                      <div className="flex flex-col h-full min-h-[500px]">
+                          {caseStudy.coverImage && (
+                            <div className="relative mb-6">
+                              <img
+                                src={caseStudy.coverImage}
+                                alt={caseStudy.title || 'Case study image'}
+                                className="w-full h-64 object-cover rounded-xl"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.style.display = 'none';
+                                }}
+                              />
+                              {caseStudy.featured && (
+                                <div className="absolute top-4 right-4 bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                  Рекомендуемый
+                                </div>
+                              )}
+                            </div>
+                          )}
+
+                          {!caseStudy.coverImage && caseStudy.featured && (
+                            <div className="mb-4">
+                              <div className="bg-sea-green text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg inline-block">
                                 Рекомендуемый
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
 
                           <div className="space-y-5 flex-grow">
                             <h3 className="text-2xl font-heading font-bold text-dark-slate leading-tight">
-                              {caseStudy.title}
+                              {caseStudy.title || 'Untitled Case Study'}
                             </h3>
 
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2 text-sea-green">
-                                <Calendar className="w-4 h-4" />
-                                <span className="text-sm font-medium">
-                                  {new Date(caseStudy.completionDate).toLocaleDateString('ru-RU')}
-                                </span>
+                            {(caseStudy.completionDate || caseStudy.timeline) && (
+                              <div className="flex items-center justify-between">
+                                {caseStudy.completionDate && (
+                                  <div className="flex items-center gap-2 text-sea-green">
+                                    <Calendar className="w-4 h-4" />
+                                    <span className="text-sm font-medium">
+                                      {new Date(caseStudy.completionDate).toLocaleDateString('ru-RU')}
+                                    </span>
+                                  </div>
+                                )}
+                                {caseStudy.timeline && (
+                                  <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
+                                    {caseStudy.timeline}
+                                  </div>
+                                )}
                               </div>
-                              <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold text-sm">
-                                {caseStudy.timeline}
-                              </div>
-                            </div>
+                            )}
 
-                            <p className="text-dark-slate/70 text-base leading-relaxed">
-                              {caseStudy.previewText || caseStudy.description || 'Описание недоступно.'}
-                            </p>
+                            {(caseStudy.excerpt || caseStudy.content) && (
+                              <p className="text-dark-slate/70 text-base leading-relaxed">
+                                {caseStudy.excerpt || caseStudy.content || 'Описание недоступно.'}
+                              </p>
+                            )}
 
-                            {caseStudy.results.length > 0 && (
+                            {caseStudy.results && caseStudy.results.length > 0 && (
                               <div className="space-y-3">
                                 <h4 className="font-semibold text-dark-slate text-base">Ключевые результаты:</h4>
                                 <ul className="space-y-2">
