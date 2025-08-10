@@ -43,13 +43,27 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
     }
 
     const contentType = res.headers.get('content-type');
+    const responseText = await res.text();
+    
+    // Check if response is HTML (error page)
+    if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
+      console.error('Received HTML error page instead of JSON:', responseText.substring(0, 200));
+      throw new Error('Server returned HTML error page instead of JSON data');
+    }
+    
     if (!contentType || !contentType.includes('application/json')) {
-      const responseText = await res.text();
       console.error('Non-JSON response received:', responseText.substring(0, 300));
       throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
     }
 
-    const json = await res.json();
+    let json;
+    try {
+      json = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError, 'Response text:', responseText.substring(0, 300));
+      throw new Error(`Failed to parse JSON response: ${parseError.message}`);
+    }
+    
     console.log('Proxy API Response:', json);
 
     // Check if this is an error response from our proxy
@@ -62,20 +76,52 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
       return [];
     }
 
-    return json.data.map((item: any) => ({
-      id: item.id,
-      title: item.title || 'Untitled',
-      slug: item.slug || `case-${item.id}`,
-      previewText: item.preview_text || item.description || '',
-      coverImage: getImageUrl(item.cover_image),
-      timeline: item.timeline || 'N/A',
-      completionDate: item.completion_date || new Date().toISOString(),
-      results: Array.isArray(item.results) ? item.results : [],
-      category: item.category,
-      description: item.description,
-      tags: Array.isArray(item.tags) ? item.tags : [],
-      featured: Boolean(item.featured)
-    }));
+    return json.data.map((item: any) => {
+      // Handle results field - it might be a string or array
+      let results = [];
+      if (typeof item.results === 'string') {
+        try {
+          results = JSON.parse(item.results);
+        } catch {
+          results = item.results.split('\n').filter(r => r.trim());
+        }
+      } else if (Array.isArray(item.results)) {
+        results = item.results;
+      }
+
+      // Handle tags field - it might be a string or array
+      let tags = [];
+      if (typeof item.tags === 'string') {
+        try {
+          tags = JSON.parse(item.tags);
+        } catch {
+          tags = item.tags.split(',').map(t => t.trim()).filter(t => t);
+        }
+      } else if (Array.isArray(item.tags)) {
+        tags = item.tags;
+      }
+
+      // Handle category field
+      let category = item.category;
+      if (Array.isArray(item.category)) {
+        category = item.category[0] || 'Без категории';
+      }
+
+      return {
+        id: item.id,
+        title: item.title || 'Untitled',
+        slug: item.slug || `case-${item.id}`,
+        previewText: item.preview_text || item.description || '',
+        coverImage: getImageUrl(item.cover_image),
+        timeline: item.timeline || 'N/A',
+        completionDate: item.completion_date || item.project_date || new Date().toISOString(),
+        results: results,
+        category: category || 'Без категории',
+        description: item.description || item.full_description || '',
+        tags: tags,
+        featured: Boolean(item.featured)
+      };
+    });
   } catch (error) {
     console.error('Error fetching case studies:', error);
     throw error;
