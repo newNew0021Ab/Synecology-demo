@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'wouter';
-import { getUrlWithFrom } from '@/lib/navigation';
+import { addFromParam } from '@/lib/navigation';
 
 interface NavigationLinkProps {
   href: string;
@@ -10,14 +10,25 @@ interface NavigationLinkProps {
   [key: string]: any;
 }
 
-export function NavigationLink({ href, children, className, ...props }: NavigationLinkProps) {
+const NavigationLink: React.FC<NavigationLinkProps> = ({ 
+  href, 
+  children, 
+  className = "", 
+  ...props 
+}) => {
   const [location] = useLocation();
   
-  const urlWithFrom = getUrlWithFrom(href, location);
-
+  const linkHref = addFromParam(href, location);
+  
   return (
-    <Link href={urlWithFrom} className={className} {...props}>
+    <Link 
+      href={linkHref} 
+      className={className} 
+      {...props}
+    >
       {children}
     </Link>
   );
-}
+};
+
+export default NavigationLink;

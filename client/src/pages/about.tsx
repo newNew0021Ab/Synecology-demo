@@ -3,12 +3,7 @@ import { Link } from "wouter";
 import { Users, Award, TrendingUp, ArrowRight, Linkedin, Twitter, Mail } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-// Assume NavigationLink is imported from a shared component or utility file.
-// If NavigationLink is not a standard import, you would need to define or import it.
-// For the purpose of this example, let's assume it's available.
-// import NavigationLink from "@/components/NavigationLink"; // Placeholder import
-
-// Mock NavigationLink if it's not provided, to make the code runnable for demonstration.
+import NavigationLink from "@/components/NavigationLink";
 const NavigationLink = ({ href, className, children }) => (
   <Link href={href} className={className}>
     {children}
