@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { NavigationLink } from './NavigationLink'; // Добавлен импорт NavigationLink
+import NavigationLink from './NavigationLink'; // Добавлен импорт NavigationLink
 
 export default function Header() {
   const [location] = useLocation();

@@ -9,7 +9,7 @@ interface NavigationLinkProps {
   [key: string]: any;
 }
 
-const NavigationLink: React.FC<NavigationLinkProps> = ({ 
+export const NavigationLink: React.FC<NavigationLinkProps> = ({ 
   href, 
   children, 
   className = "", 

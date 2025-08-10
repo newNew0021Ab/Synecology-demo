@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useParams } from "wouter";
 import { CheckCircle, Clock, DollarSign, FileText, Share2, ArrowRight } from "lucide-react";
-import { NavigationLink } from "@/components/NavigationLink";
+import NavigationLink from "@/components/NavigationLink";
 import { BackButton } from "@/components/BackButton";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";

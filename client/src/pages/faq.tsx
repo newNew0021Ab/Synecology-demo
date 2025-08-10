@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { NavigationLink } from "@/components/NavigationLink";
+import NavigationLink from "@/components/NavigationLink";
 import { BackButton } from "@/components/BackButton";
 
 export default function FAQ() {

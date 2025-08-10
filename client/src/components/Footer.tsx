@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Leaf, Linkedin, Twitter, Instagram } from "lucide-react";
 import { useState } from "react";
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
-import { NavigationLink } from './NavigationLink';
+import NavigationLink from './NavigationLink';
 
 export default function Footer() {
   const [isOpen, setIsOpen] = useState(false);
