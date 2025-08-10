@@ -118,11 +118,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       });
 
-      console.log('Directus response status:', response.status);
-
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Directus error response:', errorText);
         return res.status(500).json({
           status: 500,
           message: `Directus API error: ${response.status} - ${errorText.substring(0, 200)}`
@@ -132,20 +129,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
         const responseText = await response.text();
-        console.error('Non-JSON response from Directus:', responseText.substring(0, 300));
         return res.status(500).json({
           status: 500,
-          message: `Expected JSON from Directus but received ${contentType}: ${responseText.substring(0, 100)}`
+          message: `Expected JSON from Directus but received ${contentType}`
         });
       }
 
       const data = await response.json();
-      console.log('Successfully fetched from Directus, data length:', data?.data?.length || 0);
-
-      // Return the data as-is from Directus
       res.status(200).json(data);
     } catch (error) {
-      console.error("Directus blog proxy error:", error);
       res.status(500).json({
         status: 500,
         message: `Proxy error: ${error instanceof Error ? error.message : 'Unknown error'}`
