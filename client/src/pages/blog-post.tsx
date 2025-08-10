@@ -4,17 +4,13 @@ import { ArrowLeft, Calendar, Clock, Tag, Share2, User } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
-import { fetchBlogPosts, type BlogPost } from "@/lib/directus";
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [post, setPost] = useState<any>(null);
 
-  // Static fallback blog posts data
-  const staticBlogPosts = {
+  // Данные статей блога (в будущем будут из Sanity)
+  const blogPosts = {
     "eco-certification-business-belarus": {
       title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
       excerpt: "В современном мире экологичность перестала быть просто модной тенденцией. Сегодня это прагматичный и мощный бизнес-инструмент для увеличения целевой аудитории и получения решающего преимущества в конкурентной борьбе.",
@@ -297,79 +293,15 @@ export default function BlogPost() {
   };
 
   useEffect(() => {
-    const loadBlogPost = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        // Try to load from Directus first
-        const directusData = await fetchBlogPosts();
-        const combinedPosts = [...directusData];
-        
-        // Add static posts as fallback
-        Object.entries(staticBlogPosts).forEach(([key, staticPost]) => {
-          const existsInDirectus = directusData.some(p => p.slug === key);
-          if (!existsInDirectus) {
-            combinedPosts.push({
-              ...staticPost,
-              id: key,
-              slug: key,
-              publishDate: staticPost.date,
-              coverImage: staticPost.image,
-              author: {
-                name: staticPost.author.name,
-                role: staticPost.author.role,
-                avatar: staticPost.author.avatar,
-                slug: staticPost.author.slug
-              }
-            } as BlogPost);
-          }
-        });
-        
-        setAllPosts(combinedPosts);
-        
-        // Find the specific post by slug
-        const foundPost = combinedPosts.find(p => p.slug === slug);
-        if (foundPost) {
-          setPost(foundPost);
-          // SEO optimization
-          document.title = foundPost.seoTitle || foundPost.title;
-          const metaDescription = document.querySelector('meta[name="description"]');
-          if (metaDescription) {
-            metaDescription.setAttribute('content', foundPost.seoDescription || foundPost.excerpt);
-          }
-        } else {
-          setError("Статья не найдена");
-        }
-      } catch (err: any) {
-        console.error("Failed to fetch blog post:", err);
-        setError("Ошибка загрузки статьи");
-        
-        // Fallback to static posts only
-        const staticPost = staticBlogPosts[slug as keyof typeof staticBlogPosts];
-        if (staticPost) {
-          setPost({
-            ...staticPost,
-            id: slug!,
-            slug: slug!,
-            publishDate: staticPost.date,
-            coverImage: staticPost.image,
-            author: {
-              name: staticPost.author.name,
-              role: staticPost.author.role,
-              avatar: staticPost.author.avatar,
-              slug: staticPost.author.slug
-            }
-          } as BlogPost);
-          setAllPosts([]);
-        }
-      } finally {
-        setLoading(false);
+    if (slug && blogPosts[slug as keyof typeof blogPosts]) {
+      setPost(blogPosts[slug as keyof typeof blogPosts]);
+      // SEO оптимизация
+      const article = blogPosts[slug as keyof typeof blogPosts];
+      document.title = article.seoTitle;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', article.seoDescription);
       }
-    };
-
-    if (slug) {
-      loadBlogPost();
     }
   }, [slug]);
 
@@ -385,27 +317,10 @@ export default function BlogPost() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="pt-24 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-sea-green mb-4"></div>
-          <p className="text-xl text-dark-slate">Загружаем статью...</p>
-        </div>
-      </div>
-    );
-  }
-
   if (!post) {
     return (
       <div className="pt-24 min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-xl text-dark-slate mb-4">Статья не найдена</p>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          <Link href="/blog" className="text-sea-green hover:underline">
-            Вернуться к блогу
-          </Link>
-        </div>
+        <p className="text-xl text-dark-slate">Статья не найдена</p>
       </div>
     );
   }
@@ -468,7 +383,7 @@ export default function BlogPost() {
                 </Link>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(post.publishDate).toLocaleDateString('ru-RU')}</span>
+                  <span>{post.date}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
@@ -480,13 +395,9 @@ export default function BlogPost() {
             {/* Featured Image */}
             <div className="mb-12">
               <img
-                src={post.coverImage || "/api/placeholder/1200/600"}
+                src={post.image}
                 alt={post.title}
                 className="w-full h-96 object-cover rounded-2xl shadow-xl"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = "/api/placeholder/1200/600";
-                }}
               />
             </div>
 
@@ -546,21 +457,17 @@ export default function BlogPost() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allPosts
-              .filter((relatedPost) => relatedPost.slug !== slug)
+            {Object.entries(blogPosts)
+              .filter(([key]) => key !== slug)
               .slice(0, 3)
-              .map((relatedPost) => (
-                <GlassmorphicCard key={relatedPost.slug}>
-                  <Link href={`/blog/${relatedPost.slug}`}>
+              .map(([key, relatedPost]) => (
+                <GlassmorphicCard key={key}>
+                  <Link href={`/blog/${key}`}>
                     <article className="space-y-4 cursor-pointer">
                       <img
-                        src={relatedPost.coverImage || "/api/placeholder/600/400"}
+                        src={relatedPost.image}
                         alt={relatedPost.title}
                         className="w-full h-48 object-cover rounded-xl"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "/api/placeholder/600/400";
-                        }}
                       />
                       <div className="space-y-2">
                         <div className="text-sm text-sea-green font-semibold">
@@ -573,7 +480,7 @@ export default function BlogPost() {
                           {relatedPost.excerpt}
                         </p>
                         <div className="flex items-center gap-4 text-xs text-dark-slate/60">
-                          <span>{new Date(relatedPost.publishDate).toLocaleDateString('ru-RU')}</span>
+                          <span>{relatedPost.date}</span>
                           <span>{relatedPost.readTime}</span>
                         </div>
                       </div>
