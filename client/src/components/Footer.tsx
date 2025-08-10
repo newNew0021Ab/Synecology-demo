@@ -1,8 +1,8 @@
-
 import { Link } from "wouter";
 import { Leaf, Linkedin, Twitter, Instagram } from "lucide-react";
 import { useState } from "react";
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { NavigationLink } from './NavigationLink';
 
 export default function Footer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ export default function Footer() {
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
             <p className="text-white/70 mb-2">Экологический консалтинг. Помогаем разобраться в законодательстве РБ.</p>
-            
+
             <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
               <div className="flex gap-3 mb-4">
                 <AlertDialogTrigger asChild>
@@ -38,12 +38,12 @@ export default function Footer() {
                   </button>
                 </AlertDialogTrigger>
               </div>
-              
+
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Социальные сети</AlertDialogTitle>
                   <AlertDialogDescription>
-                    Мы пока что не ведем социальные сети, но скоро они появятся! 
+                    Мы пока что не ведем социальные сети, но скоро они появятся!
                     Следите за обновлениями на нашем сайте.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
@@ -55,60 +55,60 @@ export default function Footer() {
               </AlertDialogContent>
             </AlertDialog>
           </div>
-          
-          
+
+
           <div>
             <h4 className="font-semibold mb-4">Услуги</h4>
             <ul className="space-y-2 text-white/70">
               <li>
-                <Link href="/services/emissions-inventory" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/services/emissions-inventory" className="hover:text-sea-green transition-colors">
                   Инвентаризация выбросов
-                </Link>
+                </NavigationLink>
               </li>
               <li>
-                <Link href="/services/pdv-standards" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/services/pdv-standards" className="hover:text-sea-green transition-colors">
                   Нормативы ПДВ
-                </Link>
+                </NavigationLink>
               </li>
               <li>
-                <Link href="/services/ecological-passport" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/services/ecological-passport" className="hover:text-sea-green transition-colors">
                   Экологический паспорт
-                </Link>
+                </NavigationLink>
               </li>
               <li>
-                <Link href="/services/gas-treatment-passport" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/services/gas-treatment-passport" className="hover:text-sea-green transition-colors">
                   Паспорт газоочистной установки
-                </Link>
+                </NavigationLink>
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">Компания</h4>
             <ul className="space-y-2 text-white/70">
               <li>
-                <Link href="/about" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/about" className="hover:text-sea-green transition-colors">
                   О нас
-                </Link>
+                </NavigationLink>
               </li>
               <li>
-                <Link href="/case-studies" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/case-studies" className="hover:text-sea-green transition-colors">
                   Кейсы
-                </Link>
+                </NavigationLink>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/blog" className="hover:text-sea-green transition-colors">
                   Блог
-                </Link>
+                </NavigationLink>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-sea-green transition-colors">
+                <NavigationLink href="/contact" className="hover:text-sea-green transition-colors">
                   Контакты
-                </Link>
+                </NavigationLink>
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h4 className="font-semibold mb-4">Контакты</h4>
             <div className="text-white/70 space-y-2">
@@ -124,7 +124,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        
+
         <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/70 text-sm">
           <p>&copy; 2025 Synecology. Все права защищены.</p>
         </div>

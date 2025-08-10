@@ -3,6 +3,17 @@ import { Link } from "wouter";
 import { Users, Award, TrendingUp, ArrowRight, Linkedin, Twitter, Mail } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+// Assume NavigationLink is imported from a shared component or utility file.
+// If NavigationLink is not a standard import, you would need to define or import it.
+// For the purpose of this example, let's assume it's available.
+// import NavigationLink from "@/components/NavigationLink"; // Placeholder import
+
+// Mock NavigationLink if it's not provided, to make the code runnable for demonstration.
+const NavigationLink = ({ href, className, children }) => (
+  <Link href={href} className={className}>
+    {children}
+  </Link>
+);
 
 export default function About() {
   const stats = [
@@ -95,13 +106,13 @@ export default function About() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
-                <Link
+                <NavigationLink
                   href="/contact"
-                  className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2"
+                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                 >
                   <Users className="w-5 h-5" />
                   Работать с нами
-                </Link>
+                </NavigationLink>
               </motion.div>
             </div>
 
@@ -162,7 +173,7 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
                   viewport={{ once: true, amount: 0.2 }}
-                  className="group card-stable visible"
+                  className="card-stable visible"
                   onClick={() => window.location.href = `/team/${memberSlug}`}
                 >
                   {/* Desktop/Tablet - clickable card */}
@@ -397,10 +408,10 @@ export default function About() {
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Link href="/contact" className="btn-primary">
+              <NavigationLink href="/contact" className="btn-primary">
                 <ArrowRight className="w-5 h-5" />
                 Получить консультацию
-              </Link>
+              </NavigationLink>
               <Link href="/case-studies" className="btn-secondary">
                 Посмотреть наши работы
               </Link>

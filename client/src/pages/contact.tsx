@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
+import { NavigationLink } from "@/components/NavigationLink";
 
 const contactFormSchema = z.object({
   firstName: z.string().min(2, "Поле должно содержать минимум 2 символа"),

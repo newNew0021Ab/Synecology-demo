@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Leaf, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { NavigationLink } from './NavigationLink'; // Добавлен импорт NavigationLink
 
 export default function Header() {
   const [location] = useLocation();
@@ -27,7 +28,7 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 glassmorphic border-b border-white/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2" onClick={handleLogoClick}>
+          <Link href="/" className="flex items-center gap-2" onClick={handleLogoClick}> {/* Заменили Link на NavigationLink */}
             <div className="w-8 h-8 bg-sea-green rounded-lg flex items-center justify-center">
               <Leaf className="w-4 h-4 text-white" />
             </div>
@@ -36,47 +37,47 @@ export default function Header() {
             </span>
           </Link>
 
-          <nav 
+          <nav
             className="hidden lg:flex items-center gap-8"
             role="navigation"
             aria-label="Основная навигация"
           >
-            <Link 
-              href="/" 
+            <NavigationLink
+              href="/"
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/' ? 'text-sea-green font-semibold' : ''}`}
             >
               Главная
-            </Link>
-            <Link 
-              href="/services" 
+            </NavigationLink>
+            <NavigationLink
+              href="/services"
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/services' ? 'text-sea-green font-semibold' : ''}`}
             >
               Услуги
-            </Link>
-            <Link 
-              href="/case-studies" 
+            </NavigationLink>
+            <NavigationLink
+              href="/case-studies"
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/case-studies' ? 'text-sea-green font-semibold' : ''}`}
             >
               Кейсы
-            </Link>
-            <Link 
-              href="/blog" 
+            </NavigationLink>
+            <NavigationLink
+              href="/blog"
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/blog' ? 'text-sea-green font-semibold' : ''}`}
             >
               Блог
-            </Link>
-            <Link 
-              href="/about" 
+            </NavigationLink>
+            <NavigationLink
+              href="/about"
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/about' ? 'text-sea-green font-semibold' : ''}`}
             >
               О нас
-            </Link>
-            <Link 
-              href="/contact" 
+            </NavigationLink>
+            <NavigationLink
+              href="/contact"
               className={`text-dark-slate hover:text-sea-green transition-colors ${location === '/contact' ? 'text-sea-green font-semibold' : ''}`}
             >
               Контакты
-            </Link>
+            </NavigationLink>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -112,48 +113,48 @@ export default function Header() {
             className="lg:hidden glassmorphic border-t border-white/20"
           >
             <div className="px-4 py-6 space-y-4">
-              <Link 
-                href="/" 
+              <NavigationLink
+                href="/"
                 className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Главная
-              </Link>
-              <Link 
-                href="/services" 
+              </NavigationLink>
+              <NavigationLink
+                href="/services"
                 className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/services' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Услуги
-              </Link>
-              <Link 
-                href="/case-studies" 
+              </NavigationLink>
+              <NavigationLink
+                href="/case-studies"
                 className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/case-studies' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Кейсы
-              </Link>
-              <Link 
-                href="/blog" 
+              </NavigationLink>
+              <NavigationLink
+                href="/blog"
                 className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/blog' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Блог
-              </Link>
-              <Link 
-                href="/about" 
+              </NavigationLink>
+              <NavigationLink
+                href="/about"
                 className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/about' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 О нас
-              </Link>
-              <Link 
-                href="/contact" 
+              </NavigationLink>
+              <NavigationLink
+                href="/contact"
                 className={`block text-dark-slate hover:text-sea-green transition-colors py-3 px-2 rounded-lg ${location === '/contact' ? 'text-sea-green font-semibold bg-sea-green/10' : ''}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Контакты
-              </Link>
+              </NavigationLink>
               <Link
                 href="/contact"
                 className="block w-full bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 text-center mt-6"

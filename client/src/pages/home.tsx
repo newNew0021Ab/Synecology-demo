@@ -8,6 +8,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useSEO } from "@/hooks/useSEO";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { StableCard } from "@/components/StableCard";
+import NavigationLink from "@/components/NavigationLink"; // Assuming NavigationLink is imported from a similar path
 
 export default function Home() {
   const isMobile = useIsMobile();
@@ -177,13 +178,13 @@ export default function Home() {
                     <PlayCircle className="w-4 h-4 md:w-5 md:h-5" />
                     Наши проекты
                   </button>
-                  <Link
+                  <NavigationLink
                     href="/contact"
-                    className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base"
+                    className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base shadow-lg hover:shadow-xl"
                   >
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                     Начать с аудита
-                  </Link>
+                  </NavigationLink>
                 </div>
               </motion.div>
             </div>
@@ -257,20 +258,28 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                      <button
-                        onClick={() => window.location.href = '/services'}
-                        className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
+                      <NavigationLink
+                        href="/services"
+                        className="w-full h-full group"
                       >
-                        Подробнее
-                        <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
-                      </button>
-                      <button
-                        onClick={() => window.location.href = '/contact'}
-                        className="btn-primary mt-2 sm:mt-0"
+                        <button
+                          className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
+                        >
+                          Подробнее
+                          <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                        </button>
+                      </NavigationLink>
+                      <NavigationLink
+                        href="/contact"
+                        className="w-full h-full group"
                       >
-                        <ArrowRight className="w-4 h-4" />
-                        Заказать
-                      </button>
+                        <button
+                          className="btn-primary mt-2 sm:mt-0"
+                        >
+                          <ArrowRight className="w-4 h-4" />
+                          Заказать
+                        </button>
+                      </NavigationLink>
                     </div>
                   </div>
 
@@ -288,13 +297,13 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Link
+            <NavigationLink
               href="/services"
               className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
             >
               Все наши услуги
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-            </Link>
+            </NavigationLink>
           </motion.div>
         </div>
       </section>
@@ -332,8 +341,10 @@ export default function Home() {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="group relative">
-                  <Link href={`/case-studies/${caseStudy.slug}`}>
+                <NavigationLink
+                    href={`/case-studies/${caseStudy.slug}`}
+                    className="block h-full group relative"
+                  >
                     <StableCard className="overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer border-0 bg-white/80 backdrop-blur-sm">
                       <div className="relative overflow-hidden h-56">
                         <OptimizedImage
@@ -356,11 +367,7 @@ export default function Home() {
                         </div>
                       </div>
                     </StableCard>
-                  </Link>
-
-                  {/* Hover эффект */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-sea-green/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-                </div>
+                  </NavigationLink>
               </motion.div>
             ))}
           </div>
@@ -372,13 +379,13 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Link
+            <NavigationLink
               href="/case-studies"
               className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
             >
               Все кейсы
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-            </Link>
+            </NavigationLink>
           </motion.div>
         </div>
       </section>
@@ -416,7 +423,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <Link href={`/blog/${post.slug}`}>
+                <NavigationLink href={`/blog/${post.slug}`}>
                   <StableCard className="group overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer border-0 bg-white/80 backdrop-blur-sm">
                     <div className="relative overflow-hidden h-48">
                       <OptimizedImage
@@ -439,7 +446,7 @@ export default function Home() {
                       </div>
                     </div>
                   </StableCard>
-                </Link>
+                </NavigationLink>
               </motion.div>
             ))}
           </div>
@@ -451,13 +458,13 @@ export default function Home() {
             transition={{ delay: 0.6, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Link
+            <NavigationLink
               href="/blog"
               className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
             >
               Все статьи
               <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-            </Link>
+            </NavigationLink>
           </motion.div>
         </div>
       </section>
@@ -493,19 +500,19 @@ export default function Home() {
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Link
+              <NavigationLink
                 href="/contact"
-                className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base"
+                className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base shadow-lg hover:shadow-xl"
               >
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                 Получить консультацию
-              </Link>
-              <Link
+              </NavigationLink>
+              <NavigationLink
                 href="/case-studies"
                 className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base"
               >
                 Посмотреть кейсы
-              </Link>
+              </NavigationLink>
             </motion.div>
           </GlassmorphicCard>
         </div>

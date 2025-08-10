@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
-import { Link, useParams } from "wouter";
-import { ArrowLeft, CheckCircle, Clock, DollarSign, FileText, Share2, ArrowRight } from "lucide-react";
+import { useParams } from "wouter";
+import { CheckCircle, Clock, DollarSign, FileText, Share2, ArrowRight } from "lucide-react";
+import { NavigationLink } from "@/components/NavigationLink";
+import { BackButton } from "@/components/BackButton";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
@@ -616,13 +618,7 @@ export default function ServiceDetail() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-sea-green font-semibold hover:gap-3 transition-all"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Вернуться к услугам
-            </Link>
+            <BackButton />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -797,13 +793,13 @@ export default function ServiceDetail() {
             </h2>
             <div className="flex flex-wrap gap-3 justify-center">
               {service.tags.map((tag: string) => (
-                <Link
+                <NavigationLink
                   key={tag}
                   href={`/services?tag=${encodeURIComponent(tag)}`}
                   className="glassmorphic glassmorphic-hover px-6 py-3 rounded-full text-sea-green font-medium hover:scale-105 transition-all duration-300 border border-sea-green/20"
                 >
                   {tag}
-                </Link>
+                </NavigationLink>
               ))}
             </div>
           </GlassmorphicCard>
@@ -821,19 +817,19 @@ export default function ServiceDetail() {
               Получите профессиональную консультацию и расчет стоимости услуги для вашего предприятия.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
+              <NavigationLink
                 href="/contact"
                 className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
               >
                 <ArrowRight className="w-5 h-5" />
                 Получить консультацию
-              </Link>
-              <Link
+              </NavigationLink>
+              <NavigationLink
                 href="/case-studies"
                 className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2"
               >
                 Посмотреть примеры работ
-              </Link>
+              </NavigationLink>
             </div>
           </GlassmorphicCard>
         </div>

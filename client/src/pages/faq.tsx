@@ -3,6 +3,8 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
+import { NavigationLink } from "@/components/NavigationLink";
+import { BackButton } from "@/components/BackButton";
 
 export default function FAQ() {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
@@ -62,6 +64,9 @@ export default function FAQ() {
         <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <BackButton />
+          </div>
           <div className="text-center mb-16">
             <motion.h1
               className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
@@ -164,9 +169,12 @@ export default function FAQ() {
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <button className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300">
+              <NavigationLink
+                href="/contact"
+                className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+              >
                 Связаться с нами
-              </button>
+              </NavigationLink>
               <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold">
                 Запросить консультацию
               </button>

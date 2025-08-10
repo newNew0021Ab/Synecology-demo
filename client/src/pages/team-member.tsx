@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
-import { ArrowLeft, Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
+import BackButton from "@/components/BackButton";
+import NavigationLink from "@/components/NavigationLink";
+
 
 export default function TeamMember() {
   const { slug } = useParams();
@@ -20,7 +23,7 @@ export default function TeamMember() {
       image: "https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg",
       expertise: [
         "Стратегическое руководство компанией",
-        "Разработка программ природопользования и охраны окружающей среды", 
+        "Разработка программ природопользования и охраны окружающей среды",
         "Координация взаимодействия с органами власти",
         "Управление бюджетом и ресурсами",
         "Анализ рынка экологических услуг",
@@ -89,13 +92,7 @@ export default function TeamMember() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 text-dark-slate/70 hover:text-sea-green transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Вернуться к команде
-            </Link>
+            <BackButton />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -188,7 +185,7 @@ export default function TeamMember() {
         </div>
       </section>
 
-      
+
 
       {/* Key Projects Section - только если есть проекты */}
       {member.keyProjects && member.keyProjects.length > 0 && (
@@ -291,20 +288,20 @@ export default function TeamMember() {
                   <Mail className="w-5 h-5" />
                   Связаться со мной
                 </a>
-                <Link
+                <NavigationLink
                   href="/contact"
-                  className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2"
+                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
                 >
                   <ArrowRight className="w-5 h-5" />
                   Оставить заявку
-                </Link>
+                </NavigationLink>
               </div>
             </motion.div>
           </GlassmorphicCard>
         </div>
       </section>
 
-      
+
     </div>
   );
 }

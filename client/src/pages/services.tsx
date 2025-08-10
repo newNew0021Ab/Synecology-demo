@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { Factory, Recycle, FileText, Droplets, Trash2, ClipboardList, ArrowRight, CheckCircle, X } from "lucide-react";
+import { NavigationLink } from "@/components/NavigationLink";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
@@ -347,19 +348,19 @@ export default function Services() {
                         ))}
                       </div>
                       <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                        <Link
+                        <NavigationLink
                           href={`/services/${service.slug}`}
                           className="btn-secondary"
                         >
                           Подробнее
-                        </Link>
-                        <Link
+                        </NavigationLink>
+                        <NavigationLink
                           href="/contact"
                           className="btn-primary"
                         >
                           <ArrowRight className="w-4 h-4" />
                           Заказать
-                        </Link>
+                        </NavigationLink>
                       </div>
                     </div>
                   </GlassmorphicCard>
@@ -437,19 +438,19 @@ export default function Services() {
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <Link
+              <NavigationLink
                 href="/contact"
                 className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
               >
                 <ArrowRight className="w-5 h-5" />
                 Получить консультацию
-              </Link>
-              <Link
+              </NavigationLink>
+              <NavigationLink
                 href="/case-studies"
                 className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold inline-flex items-center gap-2"
               >
                 Истории успеха
-              </Link>
+              </NavigationLink>
             </motion.div>
           </GlassmorphicCard>
         </div>
