@@ -54,12 +54,9 @@ export default function CaseStudies() {
         } else {
           // Only static cases if no Directus data
           setCases(staticCases);
-          setError("Кейсы из Directus не найдены. Отображаем статичные примеры.");
         }
       } catch (err: any) {
         console.error("Failed to fetch case studies:", err);
-        const errorMessage = err?.message || 'Неизвестная ошибка';
-        setError(`Ошибка загрузки из Directus: ${errorMessage}. Отображаем статичные примеры.`);
         // Show static cases on error
         setCases(staticCases);
       } finally {
@@ -143,36 +140,7 @@ export default function CaseStudies() {
             </div>
           )}
 
-          {error && (
-            <div className="text-center py-8 mb-8">
-              <GlassmorphicCard>
-                <div className="p-6">
-                  <p className="text-amber-600 mb-2 font-semibold">ℹ️ Информация</p>
-                  <p className="text-dark-slate/70 text-sm mb-4">{error}</p>
-                  <p className="text-dark-slate/50 text-xs mb-4">
-                    Отображаются доступные кейсы. Если проблема повторяется, свяжитесь с администратором.
-                  </p>
-                  <button
-                    onClick={() => window.location.reload()}
-                    className="text-sea-green hover:text-sea-green/80 font-medium text-sm"
-                  >
-                    Обновить страницу
-                  </button>
-                </div>
-              </GlassmorphicCard>
-            </div>
-          )}
-
-          {!loading && displayCases.length === 0 && !error && (
-            <div className="text-center py-12">
-              <GlassmorphicCard>
-                <div className="p-8">
-                  <p className="text-dark-slate/70 mb-4">Кейсы не найдены в Directus</p>
-                  <p className="text-sm text-dark-slate/50">Проверьте настройки API или добавьте кейсы в коллекцию case_studies</p>
-                </div>
-              </GlassmorphicCard>
-            </div>
-          )}
+          
 
           {displayCases.length > 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
