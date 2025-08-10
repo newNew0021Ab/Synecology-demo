@@ -3,69 +3,110 @@ import { Link } from "wouter";
 import { Calendar, ArrowRight, Clock, Tag, Search, User } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { fetchBlogPosts, type BlogPost } from "@/lib/blog";
 
 export default function Blog() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Adding slugs for blog posts to use in URLs and keys
-  const blogPosts = [
+  // Статичные посты как fallback
+  const staticPosts: BlogPost[] = [
     {
-      title:
-        "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
-      excerpt:
-        "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
-      category: "Сертификация",
-      date: "20.12.2024",
-      readTime: "8 мин",
-      image:
-        "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      id: "static-1",
+      title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
+      excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
+      coverImage: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      category: ["Сертификация"],
       tags: ["Экосертификат", "Органик", "ISO 14001", "Беларусь"],
+      publishedDate: "2024-12-20",
+      readTime: "8 мин",
       featured: true,
-      author: "Корякин Егор Дмитриевич",
+      authorName: "Корякин Егор Дмитриевич",
       authorSlug: "egor-koryakin",
       slug: "eco-certification-business-belarus",
+      content: ""
     },
     {
-      title:
-        "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
-      excerpt:
-        "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
-      category: "Отходы",
-      date: "18.12.2024",
-      readTime: "10 мин",
-      image:
-        "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      id: "static-2", 
+      title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
+      excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
+      coverImage: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      category: ["Отходы"],
       tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
+      publishedDate: "2024-12-18",
+      readTime: "10 мин",
       featured: false,
-      author: "Корякин Егор Дмитриевич",
+      authorName: "Корякин Егор Дмитриевич",
       authorSlug: "egor-koryakin",
       slug: "waste-management-enterprise-belarus",
+      content: ""
     },
     {
-      title:
-        "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
-      excerpt:
-        "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов. Объясняем пошагово, как получить разрешение и избежать проблем с контролирующими органами.",
-      category: "Выбросы",
-      date: "16.12.2024",
-      readTime: "9 мин",
-      image:
-        "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      id: "static-3",
+      title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
+      excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов. Объясняем пошагово, как получить разрешение и избежать проблем с контролирующими органами.",
+      coverImage: "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      category: ["Выбросы"],
       tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
+      publishedDate: "2024-12-16",
+      readTime: "9 мин",
       featured: false,
-      author: "Корякин Егор Дмитриевич",
+      authorName: "Корякин Егор Дмитриевич",
       authorSlug: "egor-koryakin",
       slug: "atmospheric-emissions-belarus",
+      content: ""
     },
   ];
+
+  useEffect(() => {
+    const loadBlogPosts = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        console.log('Loading blog posts from Directus...');
+        
+        const directusPosts = await fetchBlogPosts();
+        console.log('Loaded Directus posts:', directusPosts.length);
+        
+        // Объединяем посты из Directus с статичными
+        const allPosts = [...directusPosts, ...staticPosts];
+        
+        // Убираем дубликаты по slug
+        const uniquePosts = allPosts.filter((post, index, self) => 
+          index === self.findIndex(p => p.slug === post.slug)
+        );
+        
+        // Сортируем по дате (новые первые)
+        const sortedPosts = uniquePosts.sort((a, b) => 
+          new Date(b.publishedDate || '').getTime() - new Date(a.publishedDate || '').getTime()
+        );
+        
+        setBlogPosts(sortedPosts);
+        console.log('Final blog posts:', sortedPosts.length);
+      } catch (error) {
+        console.error('Error loading blog posts:', error);
+        setError('Ошибка загрузки статей');
+        // При ошибке показываем только статичные посты
+        setBlogPosts(staticPosts);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadBlogPosts();
+  }, []);
 
   // Собираем все уникальные теги
   const allTags = useMemo(() => {
     const tags = new Set<string>();
     blogPosts.forEach((post) => {
-      post.tags.forEach((tag) => tags.add(tag));
+      if (post.tags && Array.isArray(post.tags)) {
+        post.tags.forEach((tag) => tags.add(tag));
+      }
     });
     return Array.from(tags).sort();
   }, [blogPosts]);
@@ -74,14 +115,15 @@ export default function Blog() {
   const filteredPosts = useMemo(() => {
     return blogPosts.filter((post) => {
       // Для тегов используем логику "И" - пост должен содержать ВСЕ выбранные теги
+      const postTags = post.tags || [];
       const matchesTags =
         selectedTags.length === 0 ||
-        selectedTags.every((tag) => post.tags.includes(tag));
+        selectedTags.every((tag) => postTags.includes(tag));
       const matchesSearch =
         !searchTerm ||
         post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.tags.some((tag) =>
+        postTags.some((tag) =>
           tag.toLowerCase().includes(searchTerm.toLowerCase()),
         );
 
@@ -245,7 +287,7 @@ export default function Blog() {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                       <div className="relative">
                         <img
-                          src={post.image}
+                          src={post.coverImage || "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"}
                           alt={post.title}
                           className="w-full h-64 lg:h-full object-cover rounded-xl"
                         />
@@ -258,23 +300,25 @@ export default function Blog() {
                         <div className="flex items-center gap-4 text-sm flex-wrap">
                           <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                             <Calendar className="w-4 h-4" />
-                            <span className="font-medium">{post.date}</span>
+                            <span className="font-medium">{new Date(post.publishedDate || '').toLocaleDateString('ru-RU')}</span>
                           </div>
                           <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
                             <Clock className="w-4 h-4" />
-                            <span className="font-medium">{post.readTime}</span>
+                            <span className="font-medium">{post.readTime || '5 мин'}</span>
                           </div>
                           <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
                             <Tag className="w-4 h-4" />
-                            <span className="font-medium">{post.category}</span>
+                            <span className="font-medium">{Array.isArray(post.category) ? post.category[0] : post.category || 'Статья'}</span>
                           </div>
-                          <Link
-                            href={`/team/${post.authorSlug}`}
-                            className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                          >
-                            <User className="w-4 h-4" />
-                            <span className="font-medium">{post.author}</span>
-                          </Link>
+                          {post.authorSlug && (
+                            <Link
+                              href={`/team/${post.authorSlug}`}
+                              className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
+                            >
+                              <User className="w-4 h-4" />
+                              <span className="font-medium">{post.authorName || 'Автор'}</span>
+                            </Link>
+                          )}
                         </div>
 
                         <h3 className="text-3xl font-heading font-bold text-dark-slate">
@@ -286,7 +330,7 @@ export default function Blog() {
                         </p>
 
                         <div className="flex flex-wrap gap-2">
-                          {post.tags.map((tag) => (
+                          {(post.tags || []).map((tag) => (
                             <button
                               key={tag}
                               onClick={() => toggleTag(tag)}
@@ -319,17 +363,39 @@ export default function Blog() {
       {/* Blog Posts Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredPosts.length > 0 && (
-            <div className="mb-12">
-              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
-                {filteredPosts.some((post) => post.featured)
-                  ? "Другие статьи"
-                  : "Статьи"}
-              </h2>
+          {isLoading ? (
+            <div className="text-center py-16">
+              <div className="animate-spin w-12 h-12 border-4 border-sea-green border-t-transparent rounded-full mx-auto mb-4"></div>
+              <p className="text-dark-slate/70">Загружаем статьи...</p>
             </div>
-          )}
+          ) : error ? (
+            <GlassmorphicCard className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <h3 className="text-xl font-heading font-semibold text-dark-slate mb-2">
+                  Ошибка загрузки
+                </h3>
+                <p className="text-dark-slate/70 mb-4">{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300"
+                >
+                  Попробовать снова
+                </button>
+              </div>
+            </GlassmorphicCard>
+          ) : (
+            <>
+              {filteredPosts.length > 0 && (
+                <div className="mb-12">
+                  <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
+                    {filteredPosts.some((post) => post.featured)
+                      ? "Другие статьи"
+                      : "Статьи"}
+                  </h2>
+                </div>
+              )}
 
-          {filteredPosts.length === 0 ? (
+              {filteredPosts.length === 0 ? (
             <GlassmorphicCard className="text-center py-16">
               <div className="max-w-md mx-auto">
                 <div className="w-16 h-16 bg-sea-green/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -376,7 +442,7 @@ export default function Blog() {
                         <article className="flex flex-col h-full space-y-6">
                           <div className="relative">
                             <img
-                              src={post.image}
+                              src={post.coverImage || "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"}
                               alt={post.title}
                               className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
                               loading="lazy"
@@ -390,30 +456,32 @@ export default function Blog() {
                           <div className="flex items-center gap-4 text-sm flex-wrap">
                             <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
                               <Calendar className="w-4 h-4" />
-                              <span className="font-medium">{post.date}</span>
+                              <span className="font-medium">{new Date(post.publishedDate || '').toLocaleDateString('ru-RU')}</span>
                             </div>
                             <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
                               <Clock className="w-4 h-4" />
                               <span className="font-medium">
-                                {post.readTime}
+                                {post.readTime || '5 мин'}
                               </span>
                             </div>
                             <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
                               <Tag className="w-4 h-4" />
                               <span className="font-medium">
-                                {post.category}
+                                {Array.isArray(post.category) ? post.category[0] : post.category || 'Статья'}
                               </span>
                             </div>
-                            <button
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                window.location.href = `/team/${post.authorSlug}`;
-                              }}
-                              className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                            >
-                              <User className="w-4 h-4" />
-                              <span className="font-medium">{post.author}</span>
-                            </button>
+                            {post.authorSlug && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  window.location.href = `/team/${post.authorSlug}`;
+                                }}
+                                className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
+                              >
+                                <User className="w-4 h-4" />
+                                <span className="font-medium">{post.authorName || 'Автор'}</span>
+                              </button>
+                            )}
                           </div>
 
                           <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
@@ -425,7 +493,7 @@ export default function Blog() {
                           </p>
 
                           <div className="flex flex-wrap gap-2">
-                            {post.tags.slice(0, 3).map((tag) => (
+                            {(post.tags || []).slice(0, 3).map((tag) => (
                               <span
                                 key={tag}
                                 className="px-3 py-1 text-sm rounded-full bg-sea-green/10 text-sea-green pointer-events-none"
@@ -458,6 +526,8 @@ export default function Blog() {
                 </button>
               </GlassmorphicCard>
             </div>
+              )}
+            </>
           )}
         </div>
       </section>
