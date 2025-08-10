@@ -1,0 +1,39 @@
+We have a working integration with the Directus collection `case_studies`, fetching data via `/api/directus-cases`.  
+Now we need to improve the frontend rendering logic and design of the case study cards to better match the real data returned by Directus.
+
+Requirements:
+
+1. **Conditional Rendering**
+   - If a field is missing or empty (title, description, results, category, tags, image, etc.), the corresponding section should NOT be displayed at all (no placeholder text, no empty divs).
+   - For example:
+     - No image → card should render cleanly without any broken image icon or blank space.
+     - No `results` → remove the "Results" section entirely.
+     - No `category` → hide the category label.
+     - No `tags` → hide tags section.
+
+2. **Card Layout Adjustments**
+   - If there is **no image**, adjust the layout so the card doesn't look like it's "missing" something:
+     - No empty image container.
+     - Text content should expand to full width.
+     - Maintain balanced padding and alignment.
+   - If there is **no title** (rare case), display `"Untitled Case Study"` as a fallback.
+
+3. **Responsive Design**
+   - Cards should remain visually appealing on both desktop and mobile, even when multiple sections are hidden.
+   - Test cases:
+     - Full data (everything present).
+     - Only title and description.
+     - Missing image but having all text fields.
+     - Only title and results.
+
+4. **Code Cleanup**
+   - In the React component for case studies:
+     - Add checks like `{field && <Element>...</Element>}` for each section.
+     - Remove all assumptions that fields are always present.
+   - Ensure `getImageUrl` is only called if an image ID exists.
+
+5. **Testing**
+   - Use the live Directus data from `/api/directus-cases` to confirm all conditional rendering works with the actual dataset.
+   - Take screenshots of cards in multiple data states to confirm visual balance.
+
+The goal: the case study cards should adapt perfectly to whatever fields Directus sends — never showing empty placeholders or broken layouts — and look intentional, even if half the fields are missing.

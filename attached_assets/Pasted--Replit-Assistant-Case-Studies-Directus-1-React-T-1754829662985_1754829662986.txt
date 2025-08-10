@@ -1,0 +1,141 @@
+ТЗ для Replit Assistant — интеграция коллекции Case Studies из Directus
+1. Цель
+Подключить к React/TypeScript-сайту данные из Directus API (развёрнут на Railway), чтобы на странице /case-studies рендерились карточки кейсов.
+
+2. Исходные данные
+API URL:
+
+arduino
+Copy
+Edit
+https://directus-production-6ce1.up.railway.app
+Эндпоинт кейсов:
+
+bash
+Copy
+Edit
+/items/case_studies
+Как выглядят данные в ответе (сокращённо):
+
+json
+Copy
+Edit
+{
+  "data": [
+    {
+      "title": "Редизайн сайта для FinTech-стартапа",
+      "slug": "redizajn-fintech-startupa",
+      "preview_text": "Новый UX/UI увеличил удержание пользователей на 30%",
+      "cover_image": "dc1d9005-0da2-40ea-b9a6-c6df82221972",
+      "timeline": "6 недель",
+      "completion_date": "2025-08-30T12:00:00",
+      "results": [
+        "20 новых лидов",
+        "супер сильный сайт",
+        "куча хороших отзывов"
+      ]
+    }
+  ]
+}
+3. Особенности
+cover_image возвращается как ID файла, а не как URL.
+Чтобы получить картинку:
+
+bash
+Copy
+Edit
+https://directus-production-6ce1.up.railway.app/assets/{cover_image}
+Даты (completion_date) приходят в ISO-формате и могут потребовать форматирования на фронтенде.
+
+Поля results — массив строк, нужно будет отобразить как список.
+
+4. Этап 1. API-хелпер
+Создать файл src/lib/directus.ts с функцией:
+
+ts
+Copy
+Edit
+const API_BASE = "https://directus-production-6ce1.up.railway.app";
+
+function getImageUrl(id?: string) {
+  return id ? `${API_BASE}/assets/${id}` : null;
+}
+
+export type CaseStudy = {
+  title: string;
+  slug: string;
+  previewText: string;
+  coverImage: string | null;
+  timeline: string;
+  completionDate: string;
+  results: string[];
+};
+
+export async function fetchCaseStudies(): Promise<CaseStudy[]> {
+  const res = await fetch(`${API_BASE}/items/case_studies`);
+  const { data } = await res.json();
+  return data.map((item: any) => ({
+    title: item.title,
+    slug: item.slug,
+    previewText: item.preview_text,
+    coverImage: getImageUrl(item.cover_image),
+    timeline: item.timeline,
+    completionDate: item.completion_date,
+    results: item.results || []
+  }));
+}
+5. Этап 2. Отображение на странице
+В src/pages/case-studies.tsx или CaseStudies.tsx:
+
+tsx
+Copy
+Edit
+import { useEffect, useState } from "react";
+import { fetchCaseStudies, CaseStudy } from "../lib/directus";
+
+export default function CaseStudiesPage() {
+  const [cases, setCases] = useState<CaseStudy[]>([]);
+
+  useEffect(() => {
+    fetchCaseStudies().then(setCases);
+  }, []);
+
+  return (
+    <div>
+      <h1>Наши кейсы</h1>
+      <div style={{ display: "grid", gap: "20px" }}>
+        {cases.map(c => (
+          <div key={c.slug} style={{ border: "1px solid #ccc", padding: "10px" }}>
+            {c.coverImage && (
+              <img src={c.coverImage} alt={c.title} style={{ width: "100%", height: "auto" }} />
+            )}
+            <h2>{c.title}</h2>
+            <p>{c.previewText}</p>
+            <p><b>Сроки:</b> {c.timeline}</p>
+            <p><b>Дата завершения:</b> {new Date(c.completionDate).toLocaleDateString()}</p>
+            <ul>
+              {c.results.map((r, i) => <li key={i}>{r}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+6. Этап 3. Проверка
+При запуске проекта убедиться, что карточки кейсов загружаются с правильными картинками.
+
+Если изображения не отображаются — проверить URL coverImage.
+
+7. Этап 4. Следующий шаг
+Если кейсы работают:
+
+Добавляем аналогичный хелпер для blog_posts.
+
+Создаём страницы /blog и /blog/:slug.
+
+📌 Инструкция Replit Assistant:
+Сначала реализуй только этапы 1–3 (API-хелпер и страницу с кейсами).
+Проверь загрузку данных и отображение на фронтенде.
+Если что-то не будет работать, задай уточняющие вопросы (например, структуру проекта, роутинг, сборщик).
+
