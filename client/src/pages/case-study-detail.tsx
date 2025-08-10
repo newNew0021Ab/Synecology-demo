@@ -4,10 +4,13 @@ import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, 
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
+import { fetchCaseStudies, type CaseStudy } from "@/lib/directus";
 
 export default function CaseStudyDetail() {
   const { slug } = useParams();
   const [caseStudy, setCaseStudy] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // Данные кейсов (в будущем будут из Sanity)
   const caseStudies = {
@@ -159,17 +162,130 @@ export default function CaseStudyDetail() {
   };
 
   useEffect(() => {
-    if (slug && caseStudies[slug as keyof typeof caseStudies]) {
-      setCaseStudy(caseStudies[slug as keyof typeof caseStudies]);
-      // SEO оптимизация
-      const study = caseStudies[slug as keyof typeof caseStudies];
-      document.title = study.seoTitle;
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', study.seoDescription);
+    const loadCaseStudy = async () => {
+      if (!slug) return;
+
+      setLoading(true);
+      setError(null);
+
+      try {
+        // First, try to find in static cases
+        if (caseStudies[slug as keyof typeof caseStudies]) {
+          const staticCase = caseStudies[slug as keyof typeof caseStudies];
+          setCaseStudy(staticCase);
+          
+          // SEO оптимизация для статичных кейсов
+          document.title = staticCase.seoTitle;
+          const metaDescription = document.querySelector('meta[name="description"]');
+          if (metaDescription) {
+            metaDescription.setAttribute('content', staticCase.seoDescription);
+          }
+          setLoading(false);
+          return;
+        }
+
+        // If not found in static, try to load from Directus
+        const directusCases = await fetchCaseStudies();
+        const directusCase = directusCases.find(c => c.slug === slug);
+        
+        if (directusCase) {
+          // Convert Directus case to detail format
+          const formattedCase = {
+            title: directusCase.title,
+            category: directusCase.category || 'Без категории',
+            description: directusCase.previewText || directusCase.description || '',
+            fullDescription: directusCase.description || directusCase.previewText || '',
+            challenge: extractTextFromHTML(directusCase.challenge) || 'Информация о вызове недоступна.',
+            solution: extractTextFromHTML(directusCase.solution) || 'Информация о решении недоступна.',
+            results: directusCase.results || [],
+            metrics: generateMetricsFromResults(directusCase.results),
+            image: directusCase.coverImage || "/api/placeholder/1200/800",
+            images: [directusCase.coverImage || "/api/placeholder/800/600"],
+            tags: directusCase.tags || [],
+            timeline: directusCase.timeline || 'N/A',
+            completion: new Date(directusCase.completionDate).toLocaleDateString('ru-RU'),
+            client: directusCase.client || 'Клиент не указан',
+            location: directusCase.location || 'Локация не указана',
+            teamSize: directusCase.team_size || 'Команда не указана',
+            seoTitle: `${directusCase.title} - кейс Synecology`,
+            seoDescription: directusCase.previewText || directusCase.description || '',
+            seoKeywords: directusCase.tags || []
+          };
+
+          setCaseStudy(formattedCase);
+
+          // SEO оптимизация для Directus кейсов
+          document.title = formattedCase.seoTitle;
+          const metaDescription = document.querySelector('meta[name="description"]');
+          if (metaDescription) {
+            metaDescription.setAttribute('content', formattedCase.seoDescription);
+          }
+        } else {
+          setError('Кейс не найден');
+        }
+      } catch (err: any) {
+        console.error('Error loading case study:', err);
+        setError('Ошибка загрузки кейса');
+      } finally {
+        setLoading(false);
       }
-    }
+    };
+
+    loadCaseStudy();
   }, [slug]);
+
+  // Helper function to extract text from HTML
+  const extractTextFromHTML = (htmlString?: string): string => {
+    if (!htmlString) return '';
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlString;
+    return tempDiv.textContent || tempDiv.innerText || '';
+  };
+
+  // Helper function to generate metrics from results
+  const generateMetricsFromResults = (results: string[]): any[] => {
+    const metrics = [];
+    
+    results.forEach((result, index) => {
+      if (index >= 4) return; // Limit to 4 metrics
+      
+      let icon = CheckCircle;
+      let color = 'text-sea-green';
+      let value = '✓';
+      let label = result;
+
+      // Try to extract numbers for better metrics
+      const numberMatch = result.match(/(\d+(?:[.,]\d+)?)\s*([%$₽BYN]|\w+)/);
+      if (numberMatch) {
+        value = numberMatch[1] + (numberMatch[2] || '');
+        label = result.replace(numberMatch[0], '').trim();
+      }
+
+      // Assign different icons and colors
+      switch (index % 4) {
+        case 0:
+          icon = TrendingUp;
+          color = 'text-sea-green';
+          break;
+        case 1:
+          icon = DollarSign;
+          color = 'text-soft-blue';
+          break;
+        case 2:
+          icon = Leaf;
+          color = 'text-sandy-beige';
+          break;
+        case 3:
+          icon = Users;
+          color = 'text-sea-green';
+          break;
+      }
+
+      metrics.push({ icon, value, label, color });
+    });
+
+    return metrics;
+  };
 
   const handleShare = () => {
     if (navigator.share) {
@@ -183,10 +299,29 @@ export default function CaseStudyDetail() {
     }
   };
 
-  if (!caseStudy) {
+  if (loading) {
     return (
       <div className="pt-24 min-h-screen flex items-center justify-center">
-        <p className="text-xl text-dark-slate">Кейс не найден</p>
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-sea-green mb-4"></div>
+          <p className="text-xl text-dark-slate">Загружаем кейс...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !caseStudy) {
+    return (
+      <div className="pt-24 min-h-screen flex items-center justify-center">
+        <div className="text-center max-w-md mx-auto px-4">
+          <p className="text-xl text-dark-slate mb-4">{error || 'Кейс не найден'}</p>
+          <Link
+            href="/case-studies"
+            className="text-sea-green font-semibold hover:text-sea-green/80 transition-colors"
+          >
+            ← Вернуться к кейсам
+          </Link>
+        </div>
       </div>
     );
   }
@@ -238,14 +373,13 @@ export default function CaseStudyDetail() {
                 {caseStudy.title}
               </motion.h1>
 
-              <motion.p
-                className="text-xl text-dark-slate/70 mb-8 leading-relaxed"
+              <motion.div
+                className="text-xl text-dark-slate/70 mb-8 leading-relaxed prose prose-lg max-w-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                {caseStudy.fullDescription}
-              </motion.p>
+                dangerouslySetInnerHTML={{ __html: caseStudy.fullDescription }}
+              />
 
               <motion.div
                 className="grid grid-cols-2 gap-6"
@@ -300,7 +434,7 @@ export default function CaseStudyDetail() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {caseStudy.metrics.map((metric: any, index: number) => (
+            {(caseStudy.metrics || []).map((metric: any, index: number) => (
               <GlassmorphicCard key={metric.label} delay={index * 0.1}>
                 <div className="text-center">
                   <div className={`w-16 h-16 ${metric.color} mx-auto mb-4`}>

@@ -18,6 +18,12 @@ export type CaseStudy = {
   description?: string;
   tags?: string[];
   featured?: boolean;
+  // Additional fields for detail page
+  challenge?: string;
+  solution?: string;
+  client?: string;
+  location?: string;
+  team_size?: string;
 };
 
 export async function fetchCaseStudies(): Promise<CaseStudy[]> {
@@ -119,7 +125,13 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
         category: category || 'Без категории',
         description: item.description || item.full_description || '',
         tags: tags,
-        featured: Boolean(item.featured)
+        featured: Boolean(item.featured),
+        // Additional fields for detail page
+        challenge: item.challenge || '',
+        solution: item.solution || '',
+        client: item.client || '',
+        location: item.location || '',
+        team_size: item.team_size || ''
       };
     });
   } catch (error) {
