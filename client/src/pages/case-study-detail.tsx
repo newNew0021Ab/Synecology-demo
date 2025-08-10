@@ -1,6 +1,7 @@
+
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
-import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, Users, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, CheckCircle, TrendingUp, DollarSign, Leaf, Users, Share2, MapPin, UserCheck } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { useEffect, useState } from "react";
@@ -175,9 +176,11 @@ export default function CaseStudyDetail() {
           setCaseStudy(staticCase);
           
           // SEO оптимизация для статичных кейсов
-          document.title = staticCase.seoTitle;
+          if (staticCase.seoTitle) {
+            document.title = staticCase.seoTitle;
+          }
           const metaDescription = document.querySelector('meta[name="description"]');
-          if (metaDescription) {
+          if (metaDescription && staticCase.seoDescription) {
             metaDescription.setAttribute('content', staticCase.seoDescription);
           }
           setLoading(false);
@@ -192,32 +195,34 @@ export default function CaseStudyDetail() {
           // Convert Directus case to detail format
           const formattedCase = {
             title: directusCase.title,
-            category: directusCase.category || 'Без категории',
-            description: directusCase.previewText || directusCase.description || '',
-            fullDescription: directusCase.description || directusCase.previewText || '',
-            challenge: extractTextFromHTML(directusCase.challenge) || 'Информация о вызове недоступна.',
-            solution: extractTextFromHTML(directusCase.solution) || 'Информация о решении недоступна.',
-            results: directusCase.results || [],
-            metrics: generateMetricsFromResults(directusCase.results),
-            image: directusCase.coverImage || "/api/placeholder/1200/800",
-            images: [directusCase.coverImage || "/api/placeholder/800/600"],
-            tags: directusCase.tags || [],
-            timeline: directusCase.timeline || 'N/A',
-            completion: new Date(directusCase.completionDate).toLocaleDateString('ru-RU'),
-            client: directusCase.client || 'Клиент не указан',
-            location: directusCase.location || 'Локация не указана',
-            teamSize: directusCase.team_size || 'Команда не указана',
-            seoTitle: `${directusCase.title} - кейс Synecology`,
-            seoDescription: directusCase.previewText || directusCase.description || '',
-            seoKeywords: directusCase.tags || []
+            category: directusCase.category?.[0] || null,
+            description: directusCase.previewText || directusCase.description || directusCase.content || null,
+            fullDescription: directusCase.description || directusCase.previewText || directusCase.content || null,
+            challenge: extractTextFromHTML(directusCase.challenge) || null,
+            solution: extractTextFromHTML(directusCase.solution) || null,
+            results: directusCase.results && directusCase.results.length > 0 ? directusCase.results : null,
+            metrics: directusCase.results && directusCase.results.length > 0 ? generateMetricsFromResults(directusCase.results) : null,
+            image: directusCase.coverImage || null,
+            images: directusCase.coverImage ? [directusCase.coverImage] : null,
+            tags: directusCase.tags && directusCase.tags.length > 0 ? directusCase.tags : null,
+            timeline: directusCase.timeline || null,
+            completion: directusCase.completionDate ? new Date(directusCase.completionDate).toLocaleDateString('ru-RU') : null,
+            client: directusCase.client || null,
+            location: directusCase.location || null,
+            teamSize: directusCase.team_size || null,
+            seoTitle: directusCase.title ? `${directusCase.title} - кейс Synecology` : null,
+            seoDescription: directusCase.previewText || directusCase.description || null,
+            seoKeywords: directusCase.tags || null
           };
 
           setCaseStudy(formattedCase);
 
           // SEO оптимизация для Directus кейсов
-          document.title = formattedCase.seoTitle;
+          if (formattedCase.seoTitle) {
+            document.title = formattedCase.seoTitle;
+          }
           const metaDescription = document.querySelector('meta[name="description"]');
-          if (metaDescription) {
+          if (metaDescription && formattedCase.seoDescription) {
             metaDescription.setAttribute('content', formattedCase.seoDescription);
           }
         } else {
@@ -235,11 +240,12 @@ export default function CaseStudyDetail() {
   }, [slug]);
 
   // Helper function to extract text from HTML
-  const extractTextFromHTML = (htmlString?: string): string => {
-    if (!htmlString) return '';
+  const extractTextFromHTML = (htmlString?: string): string | null => {
+    if (!htmlString) return null;
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlString;
-    return tempDiv.textContent || tempDiv.innerText || '';
+    const text = tempDiv.textContent || tempDiv.innerText || '';
+    return text.trim() || null;
   };
 
   // Helper function to generate metrics from results
@@ -344,17 +350,19 @@ export default function CaseStudyDetail() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className={`grid grid-cols-1 ${caseStudy.image ? 'lg:grid-cols-2' : ''} gap-12 items-center`}>
+            <div className={caseStudy.image ? '' : 'lg:col-span-2'}>
               <motion.div
-                className="flex items-center gap-4 mb-6"
+                className="flex items-center gap-4 mb-6 flex-wrap"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold">
-                  {caseStudy.category}
-                </div>
+                {caseStudy.category && (
+                  <div className="bg-sea-green/10 text-sea-green px-4 py-2 rounded-full font-semibold">
+                    {caseStudy.category}
+                  </div>
+                )}
                 <button
                   onClick={handleShare}
                   className="flex items-center gap-2 text-dark-slate/70 hover:text-sea-green transition-colors"
@@ -373,130 +381,170 @@ export default function CaseStudyDetail() {
                 {caseStudy.title}
               </motion.h1>
 
-              <motion.div
-                className="text-xl text-dark-slate/70 mb-8 leading-relaxed prose prose-lg max-w-none"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-                dangerouslySetInnerHTML={{ __html: caseStudy.fullDescription }}
-              />
+              {(caseStudy.description || caseStudy.fullDescription) && (
+                <motion.div
+                  className="text-xl text-dark-slate/70 mb-8 leading-relaxed prose prose-lg max-w-none"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                >
+                  {typeof (caseStudy.fullDescription || caseStudy.description) === 'string' && 
+                   (caseStudy.fullDescription || caseStudy.description).includes('<') ? (
+                    <div dangerouslySetInnerHTML={{ __html: caseStudy.fullDescription || caseStudy.description }} />
+                  ) : (
+                    <p>{caseStudy.fullDescription || caseStudy.description}</p>
+                  )}
+                </motion.div>
+              )}
 
-              <motion.div
-                className="grid grid-cols-2 gap-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-dark-slate/70">
-                    <Calendar className="w-4 h-4" />
-                    <span>Завершен: {caseStudy.completion}</span>
+              {(caseStudy.completion || caseStudy.timeline || caseStudy.client || caseStudy.teamSize || caseStudy.location) && (
+                <motion.div
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                >
+                  <div className="space-y-2">
+                    {caseStudy.completion && (
+                      <div className="flex items-center gap-2 text-sm text-dark-slate/70">
+                        <Calendar className="w-4 h-4" />
+                        <span>Завершен: {caseStudy.completion}</span>
+                      </div>
+                    )}
+                    {caseStudy.timeline && (
+                      <div className="flex items-center gap-2 text-sm text-dark-slate/70">
+                        <Clock className="w-4 h-4" />
+                        <span>Длительность: {caseStudy.timeline}</span>
+                      </div>
+                    )}
+                    {caseStudy.location && (
+                      <div className="flex items-center gap-2 text-sm text-dark-slate/70">
+                        <MapPin className="w-4 h-4" />
+                        <span>{caseStudy.location}</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-dark-slate/70">
-                    <Clock className="w-4 h-4" />
-                    <span>Длительность: {caseStudy.timeline}</span>
+                  <div className="space-y-2">
+                    {caseStudy.client && (
+                      <p className="text-sm text-dark-slate/70">
+                        <span className="font-semibold">Клиент:</span> {caseStudy.client}
+                      </p>
+                    )}
+                    {caseStudy.teamSize && (
+                      <p className="text-sm text-dark-slate/70">
+                        <span className="font-semibold">Команда:</span> {caseStudy.teamSize}
+                      </p>
+                    )}
                   </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-sm text-dark-slate/70">
-                    <span className="font-semibold">Клиент:</span> {caseStudy.client}
-                  </p>
-                  <p className="text-sm text-dark-slate/70">
-                    <span className="font-semibold">Команда:</span> {caseStudy.teamSize}
-                  </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              )}
             </div>
 
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              <img
-                src={caseStudy.image}
-                alt={caseStudy.title}
-                className="rounded-2xl shadow-2xl w-full h-auto"
-              />
-            </motion.div>
+            {caseStudy.image && (
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                <img
+                  src={caseStudy.image}
+                  alt={caseStudy.title}
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
+                />
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Metrics Section */}
-      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
-              Ключевые показатели
-            </h2>
-          </div>
+      {caseStudy.metrics && caseStudy.metrics.length > 0 && (
+        <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
+                Ключевые показатели
+              </h2>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {(caseStudy.metrics || []).map((metric: any, index: number) => (
-              <GlassmorphicCard key={metric.label} delay={index * 0.1}>
-                <div className="text-center">
-                  <div className={`w-16 h-16 ${metric.color} mx-auto mb-4`}>
-                    <metric.icon className="w-full h-full" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {caseStudy.metrics.map((metric: any, index: number) => (
+                <GlassmorphicCard key={metric.label} delay={index * 0.1}>
+                  <div className="text-center">
+                    <div className={`w-16 h-16 ${metric.color} mx-auto mb-4`}>
+                      <metric.icon className="w-full h-full" />
+                    </div>
+                    <div className="text-4xl font-heading font-bold text-dark-slate mb-2">
+                      {metric.value}
+                    </div>
+                    <div className="text-dark-slate/70">{metric.label}</div>
                   </div>
-                  <div className="text-4xl font-heading font-bold text-dark-slate mb-2">
-                    {metric.value}
-                  </div>
-                  <div className="text-dark-slate/70">{metric.label}</div>
-                </div>
-              </GlassmorphicCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Challenge & Solution */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <GlassmorphicCard>
-              <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">
-                Вызов
-              </h3>
-              <p className="text-dark-slate/70 leading-relaxed">
-                {caseStudy.challenge}
-              </p>
-            </GlassmorphicCard>
-
-            <GlassmorphicCard>
-              <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">
-                Решение
-              </h3>
-              <p className="text-dark-slate/70 leading-relaxed">
-                {caseStudy.solution}
-              </p>
-            </GlassmorphicCard>
-          </div>
-        </div>
-      </section>
-
-      {/* Results */}
-      <section className="py-20 bg-gradient-to-b from-soft-blue/20 to-off-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
-              Достигнутые результаты
-            </h2>
-          </div>
-
-          <GlassmorphicCard>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {caseStudy.results.map((result: string, index: number) => (
-                <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-sea-green flex-shrink-0" />
-                  <span className="text-dark-slate">{result}</span>
-                </div>
+                </GlassmorphicCard>
               ))}
             </div>
-          </GlassmorphicCard>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
+
+      {/* Challenge & Solution */}
+      {(caseStudy.challenge || caseStudy.solution) && (
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className={`grid grid-cols-1 ${caseStudy.challenge && caseStudy.solution ? 'lg:grid-cols-2' : ''} gap-12`}>
+              {caseStudy.challenge && (
+                <GlassmorphicCard>
+                  <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">
+                    Вызов
+                  </h3>
+                  <p className="text-dark-slate/70 leading-relaxed">
+                    {caseStudy.challenge}
+                  </p>
+                </GlassmorphicCard>
+              )}
+
+              {caseStudy.solution && (
+                <GlassmorphicCard>
+                  <h3 className="text-2xl font-heading font-bold text-dark-slate mb-6">
+                    Решение
+                  </h3>
+                  <p className="text-dark-slate/70 leading-relaxed">
+                    {caseStudy.solution}
+                  </p>
+                </GlassmorphicCard>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Results */}
+      {caseStudy.results && caseStudy.results.length > 0 && (
+        <section className="py-20 bg-gradient-to-b from-soft-blue/20 to-off-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-heading font-bold text-dark-slate mb-4">
+                Достигнутые результаты
+              </h2>
+            </div>
+
+            <GlassmorphicCard>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {caseStudy.results.map((result: string, index: number) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <CheckCircle className="w-6 h-6 text-sea-green flex-shrink-0" />
+                    <span className="text-dark-slate">{result}</span>
+                  </div>
+                ))}
+              </div>
+            </GlassmorphicCard>
+          </div>
+        </section>
+      )}
 
       {/* Process Timeline */}
       <section className="py-20">
@@ -552,32 +600,32 @@ export default function CaseStudyDetail() {
                 </div>
               </GlassmorphicCard>
             </div>
-
-            
           </div>
         </div>
       </section>
 
       {/* Tags */}
-      <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h3 className="text-xl font-heading font-bold text-dark-slate mb-6">
-              Ключевые теги
-            </h3>
-            <div className="flex flex-wrap gap-3 justify-center">
-              {caseStudy.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-4 py-2 bg-sea-green/10 text-sea-green rounded-full font-semibold"
-                >
-                  {tag}
-                </span>
-              ))}
+      {caseStudy.tags && caseStudy.tags.length > 0 && (
+        <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h3 className="text-xl font-heading font-bold text-dark-slate mb-6">
+                Ключевые теги
+              </h3>
+              <div className="flex flex-wrap gap-3 justify-center">
+                {caseStudy.tags.map((tag: string) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 bg-sea-green/10 text-sea-green rounded-full font-semibold"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="py-20">
