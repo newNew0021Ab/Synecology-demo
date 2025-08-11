@@ -260,9 +260,10 @@ export default function Blog() {
                             <Link
                               href={`/team/${post.authorSlug}`}
                               className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
+                              onClick={(e) => e.stopPropagation()}
                             >
                               <User className="w-4 h-4" />
-                              <span className="font-medium">{post.authorName || 'Автор'}</span>
+                              <span className="font-medium">{post.authorName}</span>
                             </Link>
                           )}
                         </div>
