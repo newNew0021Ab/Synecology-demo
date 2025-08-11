@@ -201,7 +201,8 @@ export default function CaseStudyDetail() {
             challenge: extractTextFromHTML(directusCase.challenge) || null,
             solution: extractTextFromHTML(directusCase.solution) || null,
             results: directusCase.results && directusCase.results.length > 0 ? directusCase.results : null,
-            metrics: directusCase.results && directusCase.results.length > 0 ? generateMetricsFromResults(directusCase.results) : null,
+            metrics: directusCase.metrics ? parseMetricsFromDirectus(directusCase.metrics) : 
+                     (directusCase.results && directusCase.results.length > 0 ? generateMetricsFromResults(directusCase.results) : null),
             image: directusCase.coverImage || null,
             images: directusCase.coverImage ? [directusCase.coverImage] : null,
             tags: directusCase.tags && directusCase.tags.length > 0 ? directusCase.tags : null,
@@ -248,7 +249,60 @@ export default function CaseStudyDetail() {
     return text.trim() || null;
   };
 
-  // Helper function to generate metrics from results
+  // Helper function to parse metrics from Directus
+  const parseMetricsFromDirectus = (metricsData?: any): any[] => {
+    if (!metricsData) return [];
+
+    let metrics = [];
+    
+    // Handle if metrics is a string (JSON)
+    if (typeof metricsData === 'string') {
+      try {
+        metrics = JSON.parse(metricsData);
+      } catch {
+        return [];
+      }
+    } else if (Array.isArray(metricsData)) {
+      metrics = metricsData;
+    } else {
+      return [];
+    }
+
+    // Transform metrics to include proper icons and colors
+    return metrics.map((metric: any, index: number) => {
+      let icon = TrendingUp;
+      let color = 'text-sea-green';
+
+      // Assign different icons and colors based on index or metric type
+      switch (index % 4) {
+        case 0:
+          icon = TrendingUp;
+          color = 'text-sea-green';
+          break;
+        case 1:
+          icon = DollarSign;
+          color = 'text-soft-blue';
+          break;
+        case 2:
+          icon = Leaf;
+          color = 'text-sandy-beige';
+          break;
+        case 3:
+          icon = Users;
+          color = 'text-sea-green';
+          break;
+      }
+
+      return {
+        icon,
+        value: metric.value || '✓',
+        label: metric.label || '',
+        color
+      };
+    });
+  };
+
+  // Helper function to generate metrics from results (fallback)
   const generateMetricsFromResults = (results: string[]): any[] => {
     const metrics = [];
 

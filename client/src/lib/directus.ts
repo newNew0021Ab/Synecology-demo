@@ -26,6 +26,7 @@ export type CaseStudy = {
   location?: string;
   teamSize?: string;
   results?: string[];
+  metrics?: any[];
 };
 
 export type BlogPost = {
@@ -130,6 +131,19 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
         results = item.results.filter(result => result && result.trim());
       }
 
+      // Handle metrics field - it might be a string or array
+      let metrics = [];
+      if (typeof item.metrics === 'string' && item.metrics.trim()) {
+        try {
+          metrics = JSON.parse(item.metrics);
+        } catch {
+          // If parsing fails, leave metrics empty
+          metrics = [];
+        }
+      } else if (Array.isArray(item.metrics)) {
+        metrics = item.metrics.filter(metric => metric);
+      }
+
       return {
         id: item.id,
         title: item.title || '',
@@ -150,6 +164,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
         location: item.location || undefined,
         teamSize: item.team_size || undefined,
         results: results.length > 0 ? results : undefined,
+        metrics: metrics.length > 0 ? metrics : undefined,
       };
     });
 
