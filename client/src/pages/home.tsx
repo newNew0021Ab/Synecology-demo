@@ -31,36 +31,42 @@ export default function Home() {
       title: "Разработка акта инвентаризации выбросов загрязняющих веществ в атмосферный воздух",
       description: "Комплексная инвентаризация источников выбросов для соблюдения экологических нормативов.",
       image: "https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      slug: "emissions-inventory"
     },
     {
       icon: Recycle,
       title: "Разработка проекта нормативов допустимых выбросов загрязняющих веществ в атмосферный воздух",
       description: "Определение предельно допустимых концентраций выбросов для предприятий.",
       image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      slug: "pdv-standards"
     },
     {
       icon: FileText,
       title: "Разработка экологического паспорта предприятия",
       description: "Составление документа, отражающего экологическое состояние и воздействие предприятия.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      slug: "ecological-passport"
     },
     {
       icon: Droplets,
       title: "Разработка паспорта газоочистной установки (ГОУ)",
       description: "Техническая документация для систем очистки промышленных газов.",
       image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      slug: "gas-treatment-passport"
     },
     {
       icon: Trash2,
       title: "Разработка инструкции по обращению с отходами",
       description: "Правила и процедуры безопасного обращения с промышленными отходами.",
       image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      slug: "waste-management-instructions"
     },
     {
       icon: ClipboardList,
       title: "Ведение книг и журналов учета в области экологии",
       description: "Ведение обязательной экологической отчетности и документооборота.",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
+      slug: "environmental-journals"
     },
   ];
 
@@ -191,20 +197,20 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                      <button 
-                        onClick={() => window.location.href = '/services'}
+                      <NavigationLink
+                        href={`/services#${service.slug || service.title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-')}`}
                         className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
                       >
                         Подробнее 
                         <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
-                      </button>
-                      <button
-                        onClick={() => window.location.href = '/contact'}
+                      </NavigationLink>
+                      <NavigationLink
+                        href="/contact"
                         className="btn-primary mt-2 sm:mt-0"
                       >
                         <ArrowRight className="w-4 h-4" />
                         Заказать
-                      </button>
+                      </NavigationLink>
                     </div>
                   </div>
 

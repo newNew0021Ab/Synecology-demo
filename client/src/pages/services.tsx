@@ -194,6 +194,21 @@ export default function Services() {
     } else {
       applyFilters([]);
     }
+
+    // Проверяем якорь в URL и скроллим к нужной услуге
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      // Небольшая задержка для рендеринга компонентов
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 500);
+    }
   }, []);
 
   // Следим за изменениями в URL
@@ -206,6 +221,20 @@ export default function Services() {
 
     if (filtersChanged) {
       applyFilters(tagParams);
+    }
+
+    // Обрабатываем якорь при изменении location
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }, 300);
     }
   }, [location]);
 
@@ -323,11 +352,12 @@ export default function Services() {
             {filteredServices.map((service, index) => (
               <motion.div
                 key={`service-detail-${service.slug}`}
+                id={service.slug}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center card-stable visible"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center card-stable visible scroll-mt-32"
               >
                 <div className={index % 2 === 1 ? "lg:col-start-2" : ""}>
                   <GlassmorphicCard>
