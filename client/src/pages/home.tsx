@@ -198,7 +198,7 @@ export default function Home() {
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-auto">
                       <NavigationLink
-                        href={`/services#${service.slug || service.title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-')}`}
+                        href={`/services#${service.slug}`}
                         className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
                       >
                         Подробнее 

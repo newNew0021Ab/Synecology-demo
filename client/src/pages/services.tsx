@@ -198,16 +198,18 @@ export default function Services() {
     // Проверяем якорь в URL и скроллим к нужной услуге
     const hash = window.location.hash.replace('#', '');
     if (hash) {
-      // Небольшая задержка для рендеринга компонентов
+      // Увеличенная задержка для рендеринга компонентов
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          const headerHeight = 80; // Высота хедера
+          const elementPosition = element.offsetTop - headerHeight;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
           });
         }
-      }, 500);
+      }, 1000);
     }
   }, []);
 
@@ -229,12 +231,14 @@ export default function Services() {
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+          const headerHeight = 80; // Высота хедера
+          const elementPosition = element.offsetTop - headerHeight;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
           });
         }
-      }, 300);
+      }, 800);
     }
   }, [location]);
 
