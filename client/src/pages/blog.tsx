@@ -14,54 +14,7 @@ export default function Blog() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Статичные посты как fallback
-  const staticPosts: BlogPost[] = [
-    {
-      id: "static-1",
-      title: "Экосертификат для бизнеса в Беларуси: как подтвердить «зеленый» статус и обойти конкурентов",
-      excerpt: "Получение экологического сертификата — это не альтруизм, а стратегический шаг, который позволяет увеличить целевую аудиторию, повысить доверие покупателей и получить решающее преимущество в конкурентной борьбе. Рассказываем, как получить органик-сертификат и ISO 14001 в Беларуси.",
-      coverImage: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      category: ["Сертификация"],
-      tags: ["Экосертификат", "Органик", "ISO 14001"],
-      publishedDate: "2024-12-20",
-      readTime: "8 мин",
-      featured: true,
-      authorName: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
-      slug: "eco-certification-business-belarus",
-      content: ""
-    },
-    {
-      id: "static-2",
-      title: "Отходы на предприятии в Беларуси: полное руководство по обращению от А до Я",
-      excerpt: "Правильная организация системы обращения с отходами — это не просто забота о природе. В первую очередь, это вопрос финансовой безопасности и юридической защиты вашего бизнеса. Штрафы за нарушения могут достигать 40 000 рублей, а грамотная система экономит деньги на налогах.",
-      coverImage: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      category: ["Отходы"],
-      tags: ["Отходы", "Штрафы", "Инструкция", "ПОД-9", "ПОД-10"],
-      publishedDate: "2024-12-18",
-      readTime: "10 мин",
-      featured: false,
-      authorName: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
-      slug: "waste-management-enterprise-belarus",
-      content: ""
-    },
-    {
-      id: "static-3",
-      title: "Выбросы в атмосферу в Беларуси: как легально работать и не платить лишнего",
-      excerpt: "Разработка проекта нормативов допустимых выбросов — это не только исполнение закона, но и инструмент для существенной экономии на экологическом налоге и защита от многотысячных штрафов. Объясняем пошагово, как получить разрешение и избежать проблем с контролирующими органами.",
-      coverImage: "https://images.unsplash.com/photo-1692934869616-3c4b9a0c0a4f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      category: ["Выбросы"],
-      tags: ["Выбросы", "ПДВ", "Экологический налог", "Разрешение"],
-      publishedDate: "2024-12-16",
-      readTime: "9 мин",
-      featured: false,
-      authorName: "Корякин Егор Дмитриевич",
-      authorSlug: "egor-koryakin",
-      slug: "atmospheric-emissions-belarus",
-      content: ""
-    },
-  ];
+  
 
   useEffect(() => {
     const loadBlogPosts = async () => {
@@ -73,16 +26,8 @@ export default function Blog() {
         const directusPosts = await fetchBlogPosts();
         console.log('Loaded Directus posts:', directusPosts.length);
 
-        // Объединяем посты из Directus с статичными
-        const allPosts = [...directusPosts, ...staticPosts];
-
-        // Убираем дубликаты по slug
-        const uniquePosts = allPosts.filter((post, index, self) =>
-          index === self.findIndex(p => p.slug === post.slug)
-        );
-
         // Сортируем по дате (новые первые)
-        const sortedPosts = uniquePosts.sort((a, b) =>
+        const sortedPosts = directusPosts.sort((a, b) =>
           new Date(b.publishedDate || '').getTime() - new Date(a.publishedDate || '').getTime()
         );
 
@@ -91,8 +36,7 @@ export default function Blog() {
       } catch (error) {
         console.error('Error loading blog posts:', error);
         setError('Ошибка загрузки статей');
-        // При ошибке показываем только статичные посты
-        setBlogPosts(staticPosts);
+        setBlogPosts([]);
       } finally {
         setIsLoading(false);
       }
