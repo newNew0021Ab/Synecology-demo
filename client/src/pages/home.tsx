@@ -1,14 +1,11 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
 import { PlayCircle, ArrowRight, Factory, Recycle, FileText, Droplets, Trash2, ClipboardList } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSEO } from "@/hooks/useSEO";
-import { OptimizedImage } from "@/components/OptimizedImage";
-import { StableCard } from "@/components/StableCard";
-import NavigationLink from "@/components/NavigationLink"; // Assuming NavigationLink is imported from a similar path
+import NavigationLink from "@/components/NavigationLink";
 
 export default function Home() {
   const isMobile = useIsMobile();
@@ -23,70 +20,6 @@ export default function Home() {
     ogImage: "https://synecology.ru/og-image.jpg",
     canonical: "https://synecology.ru/"
   });
-
-  // Mock data for case studies (replace with actual data fetching)
-  const filteredCases = [
-    {
-      id: 1,
-      slug: "project-a",
-      title: "Экологический аудит ООО 'Завод Металлоконструкций'",
-      cover_image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      description: "Провели комплексный экологический аудит, выявили нарушения и разработали план мероприятий по их устранению.",
-      category: "Промышленность",
-    },
-    {
-      id: 2,
-      slug: "project-b",
-      title: "Разработка ПДВ для ОАО 'ХимПром'",
-      cover_image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      description: "Осуществили расчет и согласование нормативов допустимых выбросов загрязняющих веществ в атмосферный воздух.",
-      category: "Химическая промышленность",
-    },
-    {
-      id: 3,
-      slug: "project-c",
-      title: "Экологический паспорт РУП 'СтройМатериалы'",
-      cover_image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      description: "Подготовили полный пакет документов для экологического паспорта предприятия.",
-      category: "Строительство",
-    },
-    {
-      id: 4,
-      slug: "project-d",
-      title: "Инвентаризация отходов для УП 'АгроСервис'",
-      cover_image: "https://images.unsplash.com/photo-1469474968028-56623f02e429?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      description: "Провели инвентаризацию всех видов отходов и разработали инструкцию по их обращению.",
-      category: "Сельское хозяйство",
-    },
-  ];
-
-  // Mock data for blog posts (replace with actual data fetching)
-  const blogPosts = [
-    {
-      slug: "eco-trends-2024",
-      title: "Тренды в экологии: что ждать в 2024 году?",
-      coverImage: "https://images.unsplash.com/photo-1683402964714-a161848996d0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      excerpt: "Обзор ключевых направлений развития экологического законодательства и технологий.",
-      date: "2024-01-15",
-      author: "Иван Петров",
-    },
-    {
-      slug: "green-business-strategy",
-      title: "Как построить 'зеленый' бизнес: стратегия устойчивого развития",
-      coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      excerpt: "Практические советы по интеграции экологической ответственности в бизнес-процессы.",
-      date: "2023-12-01",
-      author: "Анна Сидорова",
-    },
-    {
-      slug: "waste-management-innovations",
-      title: "Инновации в управлении отходами: будущее переработки",
-      coverImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600",
-      excerpt: "Новые технологии и подходы к сокращению, переработке и утилизации отходов.",
-      date: "2023-11-10",
-      author: "Сергей Иванов",
-    },
-  ];
 
   const handleCardClick = (e: React.MouseEvent) => {
     // Removed mobile click blocking to allow navigation
@@ -153,7 +86,7 @@ export default function Home() {
         <div
           className="absolute inset-0 parallax-bg opacity-60"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c62277687169?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
+            backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')`,
           }}
         />
 
@@ -258,28 +191,20 @@ export default function Home() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-                      <NavigationLink
-                        href="/services"
-                        className="w-full h-full group"
+                      <button 
+                        onClick={() => window.location.href = '/services'}
+                        className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
                       >
-                        <button
-                          className="inline-flex items-center gap-3 text-sea-green font-bold text-base md:text-lg group-hover:gap-4 transition-all duration-300 group-hover:text-sea-green/80 bg-transparent border-none cursor-pointer"
-                        >
-                          Подробнее
-                          <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
-                        </button>
-                      </NavigationLink>
-                      <NavigationLink
-                        href="/contact"
-                        className="w-full h-full group"
+                        Подробнее 
+                        <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                      </button>
+                      <button
+                        onClick={() => window.location.href = '/contact'}
+                        className="btn-primary mt-2 sm:mt-0"
                       >
-                        <button
-                          className="btn-primary mt-2 sm:mt-0"
-                        >
-                          <ArrowRight className="w-4 h-4" />
-                          Заказать
-                        </button>
-                      </NavigationLink>
+                        <ArrowRight className="w-4 h-4" />
+                        Заказать
+                      </button>
                     </div>
                   </div>
 
@@ -308,166 +233,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Case Studies Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              className="text-4xl lg:text-5xl font-heading font-bold text-dark-slate mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Наши <span className="text-sea-green">кейсы</span>
-            </motion.h2>
-            <motion.p
-              className="text-xl text-dark-slate/70 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Успешные примеры реализации экологических проектов для наших клиентов.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {filteredCases.slice(0, 3).map((caseStudy, index) => (
-              <motion.div
-                key={caseStudy.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <NavigationLink
-                    href={`/case-studies/${caseStudy.slug}`}
-                    className="block h-full group relative"
-                  >
-                    <StableCard className="overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer border-0 bg-white/80 backdrop-blur-sm">
-                      <div className="relative overflow-hidden h-56">
-                        <OptimizedImage
-                          src={`https://directus-production-6ce1.up.railway.app/assets/${caseStudy.cover_image}`}
-                          alt={caseStudy.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-dark-slate/30 to-transparent"></div>
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-heading font-bold text-dark-slate mb-3 group-hover:text-sea-green transition-colors duration-300">
-                          {caseStudy.title}
-                        </h3>
-                        <p className="text-dark-slate/70 mb-4 text-base leading-relaxed">
-                          {caseStudy.description.substring(0, 80)}...
-                        </p>
-                        <div className="flex items-center gap-2 text-sea-green font-semibold text-sm">
-                          Подробнее
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                        </div>
-                      </div>
-                    </StableCard>
-                  </NavigationLink>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            className="text-center mt-12 md:mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <NavigationLink
-              href="/case-studies"
-              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
-            >
-              Все кейсы
-              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-            </NavigationLink>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Blog Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2
-              className="text-4xl lg:text-5xl font-heading font-bold text-dark-slate mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Полезное из <span className="text-sea-green">блога</span>
-            </motion.h2>
-            <motion.p
-              className="text-xl text-dark-slate/70 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Актуальная информация, аналитика и практические советы от экспертов Synecology.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {blogPosts.slice(0, 3).map((post, index) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <NavigationLink href={`/blog/${post.slug}`}>
-                  <StableCard className="group overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer border-0 bg-white/80 backdrop-blur-sm">
-                    <div className="relative overflow-hidden h-48">
-                      <OptimizedImage
-                        src={post.coverImage}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-slate/20 to-transparent"></div>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-heading font-bold text-dark-slate mb-3 group-hover:text-sea-green transition-colors duration-300">
-                        {post.title}
-                      </h3>
-                      <p className="text-dark-slate/70 mb-4 text-base leading-relaxed">
-                        {post.excerpt.substring(0, 80)}...
-                      </p>
-                      <div className="flex items-center gap-2 text-sea-green font-semibold text-sm">
-                        Читать далее
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                      </div>
-                    </div>
-                  </StableCard>
-                </NavigationLink>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            className="text-center mt-12 md:mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <NavigationLink
-              href="/blog"
-              className="bg-white text-sea-green px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold border-2 border-sea-green hover:bg-sea-green hover:text-white transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base shadow-md hover:shadow-lg"
-            >
-              Все статьи
-              <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-            </NavigationLink>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* Quick CTA Section */}
       <section className="py-20 relative">
