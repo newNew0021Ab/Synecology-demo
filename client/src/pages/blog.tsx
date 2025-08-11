@@ -382,10 +382,10 @@ export default function Blog() {
                     <GlassmorphicCard delay={index * 0.1}>
                     <Link href={`/blog/${post.slug}`}>
                       <article className="group cursor-pointer h-full flex flex-col">
-                        {post.image && (
+                        {(post.image || post.coverImage) && (
                           <div className="mb-6 overflow-hidden rounded-xl">
                             <OptimizedImage
-                              src={post.image}
+                              src={post.image || post.coverImage || "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"}
                               alt={post.title}
                               className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
                               width={400}
@@ -406,8 +406,8 @@ export default function Blog() {
                           )}
 
                           <div className="flex items-center justify-between text-sm text-dark-slate/60 mb-4">
-                            <span>{new Date(post.date_created).toLocaleDateString('ru-RU')}</span>
-                            {post.author && <span>Автор: {post.author}</span>}
+                            <span>{new Date(post.date_created || post.publishedDate || '').toLocaleDateString('ru-RU')}</span>
+                            {(post.author || post.authorName) && <span>Автор: {post.author || post.authorName}</span>}
                           </div>
 
                           {post.tags && post.tags.length > 0 && (

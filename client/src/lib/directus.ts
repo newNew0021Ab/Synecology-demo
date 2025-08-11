@@ -36,12 +36,18 @@ export type BlogPost = {
   content: string;
   excerpt?: string;
   image?: string;
+  coverImage?: string;
   author?: string;
+  authorName?: string;
+  authorSlug?: string;
   status: 'published' | 'draft';
   date_created: string;
   date_updated: string;
+  publishedDate?: string;
   tags?: string[];
   featured?: boolean;
+  category?: string | string[];
+  readTime?: string;
 };
 
 export async function fetchDirectusCases(): Promise<CaseStudy[]> {
@@ -235,7 +241,16 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       return [];
     }
 
-    const blogPosts = json.data.filter((item: any) => item.status === 'published');
+    const blogPosts = json.data
+      .filter((item: any) => item.status === 'published')
+      .map((item: any) => ({
+        ...item,
+        coverImage: getImageUrl(item.cover_image),
+        image: getImageUrl(item.cover_image),
+        publishedDate: item.date_updated || item.date_created,
+        authorName: item.author_name || item.author,
+        readTime: item.read_time || '5 мин'
+      }));
     logger.debug('Successfully loaded blog posts:', blogPosts.length, 'posts');
     return blogPosts;
   } catch (error) {
