@@ -95,10 +95,11 @@ export default function About() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
+                className="relative z-10"
               >
                 <NavigationLink
                   href="/contact"
-                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 relative z-10"
                 >
                   <Users className="w-5 h-5" />
                   Работать с нами
