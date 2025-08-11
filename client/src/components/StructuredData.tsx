@@ -2,171 +2,170 @@
 import { useEffect } from 'react';
 
 interface StructuredDataProps {
-  type: 'Article' | 'Service' | 'Organization' | 'WebPage';
-  data: any;
+  type: 'organization' | 'website' | 'service' | 'article' | 'breadcrumb';
+  data?: any;
 }
 
-export default function StructuredData({ type, data }: StructuredDataProps) {
+export function StructuredData({ type, data }: StructuredDataProps) {
   useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-
     let structuredData;
 
     switch (type) {
-      case 'Article':
-        structuredData = {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": data.title,
-          "description": data.description,
-          "image": data.image,
-          "author": {
-            "@type": "Person",
-            "name": data.author?.name || "Synecology Team"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Synecology",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://synecology.ru/logo.png"
-            }
-          },
-          "datePublished": data.datePublished,
-          "dateModified": data.dateModified || data.datePublished,
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": window.location.href
-          }
-        };
-        break;
-
-      case 'Service':
-        structuredData = {
-          "@context": "https://schema.org",
-          "@type": "Service",
-          "name": data.title,
-          "description": data.description,
-          "provider": {
-            "@type": "Organization",
-            "name": "Synecology",
-            "url": "https://synecology.ru"
-          },
-          "serviceType": "Экологическое консультирование",
-          "category": "Экологические услуги",
-          "offers": {
-            "@type": "Offer",
-            "price": data.price,
-            "priceCurrency": "RUB"
-          }
-        };
-        break;
-
-      case 'Organization':
+      case 'organization':
         structuredData = {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Synecology",
-          "alternateName": "Синекология",
           "url": "https://synecology.ru",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://synecology.ru/logo.png",
-            "width": "200",
-            "height": "60"
-          },
-          "image": "https://synecology.ru/og-image.jpg",
-          "description": "Экологическое консультирование и природоохранные решения в Беларуси",
-          "slogan": "Превращаем эконормы в вашу прибыль",
-          "foundingDate": "2020",
-          "areaServed": {
-            "@type": "Country",
-            "name": "Беларусь"
-          },
-          "serviceArea": {
-            "@type": "GeoCircle",
-            "geoMidpoint": {
-              "@type": "GeoCoordinates",
-              "latitude": "53.9006",
-              "longitude": "27.5590"
-            },
-            "geoRadius": "200000"
-          },
-          "contactPoint": [
-            {
-              "@type": "ContactPoint",
-              "telephone": "+375 (29) 602-42-80",
-              "contactType": "Клиентская поддержка",
-              "areaServed": "BY",
-              "availableLanguage": ["Russian", "Belarusian"]
-            }
-          ],
+          "logo": "https://synecology.ru/og-image.jpg",
+          "description": "Экологический консалтинг для устойчивого будущего. Экспертные решения в области экологической оценки, планирования устойчивости и соответствия требованиям.",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "пр-т. Газеты звезда д.16, пом. 53, офис 5В",
-            "addressLocality": "Минск",
-            "postalCode": "220117",
-            "addressCountry": "BY"
+            "addressCountry": "BY",
+            "addressLocality": "Минск"
           },
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Экологические услуги",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Разработка нормативов ПДВ"
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Инвентаризация выбросов"
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Экологический паспорт предприятия"
-                }
-              }
-            ]
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "url": "https://synecology.ru/contact"
           },
           "sameAs": [
-            "https://vk.com/synecology",
-            "https://t.me/synecology"
+            "https://synecology.ru"
           ],
-          "knowsAbout": [
-            "Экологическое консультирование",
-            "Экологическая оценка",
-            "Природоохранные решения",
-            "Соответствие экологическим требованиям",
-            "Управление отходами"
-          ]
+          "foundingDate": "2020",
+          "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "minValue": 5,
+            "maxValue": 20
+          }
         };
         break;
 
-      default:
+      case 'website':
         structuredData = {
           "@context": "https://schema.org",
-          "@type": "WebPage",
-          "name": data.title,
-          "description": data.description,
-          "url": window.location.href
+          "@type": "WebSite",
+          "name": "Synecology",
+          "url": "https://synecology.ru",
+          "description": "Экологический консалтинг в Беларуси",
+          "inLanguage": "ru-BY",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Synecology"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://synecology.ru/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
         };
+        break;
+
+      case 'service':
+        if (data) {
+          structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": data.title,
+            "description": data.description,
+            "provider": {
+              "@type": "Organization",
+              "name": "Synecology",
+              "url": "https://synecology.ru"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "Беларусь"
+            },
+            "serviceType": "Экологический консалтинг",
+            "url": `https://synecology.ru/services/${data.slug}`
+          };
+        }
+        break;
+
+      case 'article':
+        if (data) {
+          structuredData = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": data.title,
+            "description": data.excerpt,
+            "author": {
+              "@type": "Organization",
+              "name": "Synecology"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Synecology",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://synecology.ru/og-image.jpg"
+              }
+            },
+            "datePublished": data.publishedAt,
+            "dateModified": data.updatedAt,
+            "url": `https://synecology.ru/blog/${data.slug}`,
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": `https://synecology.ru/blog/${data.slug}`
+            }
+          };
+
+          if (data.coverImage) {
+            structuredData.image = {
+              "@type": "ImageObject",
+              "url": data.coverImage,
+              "width": 1200,
+              "height": 630
+            };
+          }
+        }
+        break;
+
+      case 'breadcrumb':
+        if (data && Array.isArray(data)) {
+          structuredData = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": data.map((item, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "name": item.name,
+              "item": item.url
+            }))
+          };
+        }
+        break;
     }
 
-    script.innerHTML = JSON.stringify(structuredData);
-    document.head.appendChild(script);
+    if (structuredData) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.text = JSON.stringify(structuredData, null, 2);
+      script.id = `structured-data-${type}`;
+      
+      // Удаляем предыдущий script если есть
+      const existingScript = document.getElementById(`structured-data-${type}`);
+      if (existingScript) {
+        document.head.removeChild(existingScript);
+      }
+      
+      document.head.appendChild(script);
 
-    return () => {
-      document.head.removeChild(script);
-    };
+      // Cleanup при unmount
+      return () => {
+        const scriptToRemove = document.getElementById(`structured-data-${type}`);
+        if (scriptToRemove) {
+          document.head.removeChild(scriptToRemove);
+        }
+      };
+    }
   }, [type, data]);
 
   return null;
 }
+
+export default StructuredData;
