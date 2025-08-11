@@ -462,7 +462,7 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
+      {/* CTA Section */}
       <section className="py-20 bg-gradient-to-b from-off-white to-soft-blue/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassmorphicCard className="text-center">
@@ -473,7 +473,7 @@ export default function Blog() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Будьте <span className="text-sea-green">в курсе</span>
+              Нужна <span className="text-sea-green">консультация</span>?
             </motion.h2>
             <motion.p
               className="text-xl text-dark-slate/70 mb-8 max-w-3xl mx-auto"
@@ -482,25 +482,22 @@ export default function Blog() {
               transition={{ delay: 0.2, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Подпишитесь, чтобы получать закрытые аналитические материалы,
-              чек-листы для самопроверки и шаблоны документов, которые мы
-              отправляем только нашим подписчикам.
+              Свяжитесь с нами для получения персональной консультации по вашим экологическим задачам. Мы поможем найти оптимальное решение для вашего бизнеса.
             </motion.p>
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto"
+              className="flex justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <input
-                type="email"
-                placeholder="Введите ваш email"
-                className="flex-1 px-6 py-4 rounded-full border border-dark-slate/20 bg-white/50 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-sea-green focus:border-transparent"
-              />
-              <button className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300">
-                Подписаться
-              </button>
+              <Link
+                href="/contact"
+                className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2"
+              >
+                <ArrowRight className="w-5 h-5" />
+                Связаться с нами
+              </Link>
             </motion.div>
           </GlassmorphicCard>
         </div>
