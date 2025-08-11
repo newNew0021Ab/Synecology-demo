@@ -196,8 +196,8 @@ export default function CaseStudyDetail() {
           const formattedCase = {
             title: directusCase.title,
             category: directusCase.category?.[0] || null,
-            description: directusCase.previewText || directusCase.description || directusCase.content || null,
-            fullDescription: directusCase.description || directusCase.previewText || directusCase.content || null,
+            description: directusCase.excerpt || directusCase.previewText || null,
+            fullDescription: directusCase.fullDescription || directusCase.full_description || null,
             challenge: extractTextFromHTML(directusCase.challenge) || null,
             solution: extractTextFromHTML(directusCase.solution) || null,
             results: directusCase.results && directusCase.results.length > 0 ? directusCase.results : null,
