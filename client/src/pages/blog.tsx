@@ -1,9 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Calendar, ArrowRight, Clock, Tag, Search, User } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import StableCard from '@/components/StableCard';
