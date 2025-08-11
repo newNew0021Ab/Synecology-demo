@@ -2,21 +2,55 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Main sitemap
 Sitemap: https://synecology.ru/sitemap.xml
 
-# Block development scripts
-Disallow: /src/
-Disallow: /*.js$
-Disallow: /*.ts$
-Disallow: /*.tsx$
-
-# Allow important assets
+# Allow important pages and assets
+Allow: /services/
+Allow: /about
+Allow: /contact
+Allow: /case-studies/
+Allow: /blog/
+Allow: /faq
 Allow: /images/
 Allow: /favicon.ico
 Allow: /og-image.jpg
 Allow: /apple-touch-icon.png
 Allow: /site.webmanifest
 
-# Crawl delay
+# Block development and system files
+Disallow: /src/
+Disallow: /server/
+Disallow: /node_modules/
+Disallow: /*.js$
+Disallow: /*.ts$
+Disallow: /*.tsx$
+Disallow: /*.json$
+Disallow: /.git/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /vite.config.*
+Disallow: /tsconfig.json
+Disallow: /tailwind.config.*
+
+# Block admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_*
+
+# Crawl optimization
 Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2

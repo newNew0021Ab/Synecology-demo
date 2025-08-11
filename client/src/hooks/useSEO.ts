@@ -8,9 +8,15 @@ interface SEOProps {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogType?: string;
   canonical?: string;
   noindex?: boolean;
-}
+  structuredData?: Record<string, any>;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  alternateLanguages?: Array<{ href: string; hreflang: string; }>;
+}</interface>
 
 export function useSEO({
   title,
@@ -19,8 +25,14 @@ export function useSEO({
   ogTitle,
   ogDescription,
   ogImage,
+  ogType = 'website',
   canonical,
-  noindex = false
+  noindex = false,
+  structuredData,
+  author,
+  publishedTime,
+  modifiedTime,
+  alternateLanguages = []
 }: SEOProps) {
   useEffect(() => {
     // Update title
@@ -94,14 +106,111 @@ export function useSEO({
       canonicalLink.setAttribute('href', canonical);
     }
     
-    // Update robots meta tag
+    // Update Open Graph type
+    let ogTypeMeta = document.querySelector('meta[property="og:type"]');
+    if (!ogTypeMeta) {
+      ogTypeMeta = document.createElement('meta');
+      ogTypeMeta.setAttribute('property', 'og:type');
+      document.head.appendChild(ogTypeMeta);
+    }
+    ogTypeMeta.setAttribute('content', ogType);
+
+    // Update Open Graph site name
+    let ogSiteNameMeta = document.querySelector('meta[property="og:site_name"]');
+    if (!ogSiteNameMeta) {
+      ogSiteNameMeta = document.createElement('meta');
+      ogSiteNameMeta.setAttribute('property', 'og:site_name');
+      document.head.appendChild(ogSiteNameMeta);
+    }
+    ogSiteNameMeta.setAttribute('content', 'Synecology');
+
+    // Update Open Graph locale
+    let ogLocaleMeta = document.querySelector('meta[property="og:locale"]');
+    if (!ogLocaleMeta) {
+      ogLocaleMeta = document.createElement('meta');
+      ogLocaleMeta.setAttribute('property', 'og:locale');
+      document.head.appendChild(ogLocaleMeta);
+    }
+    ogLocaleMeta.setAttribute('content', 'ru_BY');
+
+    // Update author meta tag
+    if (author) {
+      let authorMeta = document.querySelector('meta[name="author"]');
+      if (!authorMeta) {
+        authorMeta = document.createElement('meta');
+        authorMeta.setAttribute('name', 'author');
+        document.head.appendChild(authorMeta);
+      }
+      authorMeta.setAttribute('content', author);
+    }
+
+    // Update article published time
+    if (publishedTime) {
+      let publishedTimeMeta = document.querySelector('meta[property="article:published_time"]');
+      if (!publishedTimeMeta) {
+        publishedTimeMeta = document.createElement('meta');
+        publishedTimeMeta.setAttribute('property', 'article:published_time');
+        document.head.appendChild(publishedTimeMeta);
+      }
+      publishedTimeMeta.setAttribute('content', publishedTime);
+    }
+
+    // Update article modified time
+    if (modifiedTime) {
+      let modifiedTimeMeta = document.querySelector('meta[property="article:modified_time"]');
+      if (!modifiedTimeMeta) {
+        modifiedTimeMeta = document.createElement('meta');
+        modifiedTimeMeta.setAttribute('property', 'article:modified_time');
+        document.head.appendChild(modifiedTimeMeta);
+      }
+      modifiedTimeMeta.setAttribute('content', modifiedTime);
+    }
+
+    // Update alternate language links
+    // Remove existing alternate links first
+    const existingAlternates = document.querySelectorAll('link[rel="alternate"][hreflang]');
+    existingAlternates.forEach(link => link.remove());
+    
+    alternateLanguages.forEach(({ href, hreflang }) => {
+      const alternateLink = document.createElement('link');
+      alternateLink.setAttribute('rel', 'alternate');
+      alternateLink.setAttribute('href', href);
+      alternateLink.setAttribute('hreflang', hreflang);
+      document.head.appendChild(alternateLink);
+    });
+
+    // Add structured data
+    if (structuredData) {
+      let structuredDataScript = document.querySelector('script[type="application/ld+json"]');
+      if (!structuredDataScript) {
+        structuredDataScript = document.createElement('script');
+        structuredDataScript.setAttribute('type', 'application/ld+json');
+        document.head.appendChild(structuredDataScript);
+      }
+      structuredDataScript.textContent = JSON.stringify(structuredData);
+    }
+
+    // Update robots meta tag with enhanced options
     let robotsMeta = document.querySelector('meta[name="robots"]');
     if (!robotsMeta) {
       robotsMeta = document.createElement('meta');
       robotsMeta.setAttribute('name', 'robots');
       document.head.appendChild(robotsMeta);
     }
-    robotsMeta.setAttribute('content', noindex ? 'noindex, nofollow' : 'index, follow');
     
-  }, [title, description, keywords, ogTitle, ogDescription, ogImage, canonical, noindex]);
+    const robotsContent = noindex 
+      ? 'noindex, nofollow, noarchive, nosnippet' 
+      : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+    robotsMeta.setAttribute('content', robotsContent);
+
+    // Add viewport meta tag if missing
+    let viewportMeta = document.querySelector('meta[name="viewport"]');
+    if (!viewportMeta) {
+      viewportMeta = document.createElement('meta');
+      viewportMeta.setAttribute('name', 'viewport');
+      viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=5.0');
+      document.head.appendChild(viewportMeta);
+    }
+    
+  }, [title, description, keywords, ogTitle, ogDescription, ogImage, ogType, canonical, noindex, structuredData, author, publishedTime, modifiedTime, alternateLanguages]);
 }
