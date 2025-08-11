@@ -14,7 +14,7 @@ export default function Blog() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-
+  
 
   useEffect(() => {
     const loadBlogPosts = async () => {
@@ -256,10 +256,13 @@ export default function Blog() {
                             <span className="font-medium">{Array.isArray(post.category) ? post.category[0] : post.category || 'Статья'}</span>
                           </div>
                           {post.authorSlug && (
-                            <div className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full">
+                            <Link
+                              href={`/team/${post.authorSlug}`}
+                              className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
+                            >
                               <User className="w-4 h-4" />
                               <span className="font-medium">{post.authorName || 'Автор'}</span>
-                            </div>
+                            </Link>
                           )}
                         </div>
 
@@ -412,10 +415,13 @@ export default function Blog() {
                               </span>
                             </div>
                             {post.authorSlug && (
-                              <div className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full">
+                              <Link
+                                href={`/team/${post.authorSlug}`}
+                                className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
+                              >
                                 <User className="w-4 h-4" />
                                 <span className="font-medium">{post.authorName || 'Автор'}</span>
-                              </div>
+                              </Link>
                             )}
                           </div>
 
@@ -452,23 +458,14 @@ export default function Blog() {
 
           {filteredPosts.length > 0 && (
             <div className="text-center mt-12">
-              {filteredPosts.length > 3 ? (
-                <GlassmorphicCard className="max-w-md mx-auto">
-                  <Link
-                    href="/blog" // Assuming a route to load more articles or a dedicated page
-                    className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold transition-all duration-300 inline-flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                    Ещё статьи
-                  </Link>
-                </GlassmorphicCard>
-              ) : (
-                <GlassmorphicCard className="max-w-md mx-auto">
-                  <p className="text-dark-slate/70">
-                    Мы готовим для вас ещё больше полезных статей
-                  </p>
-                </GlassmorphicCard>
-              )}
+              <GlassmorphicCard className="max-w-md mx-auto">
+                <p className="text-dark-slate/70 mb-4">
+                  Мы готовим для вас ещё больше полезных статей
+                </p>
+                <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
+                  Статьи в процессе написания
+                </button>
+              </GlassmorphicCard>
             </div>
               )}
             </>
