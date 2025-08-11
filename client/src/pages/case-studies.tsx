@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useLocation } from "wouter";
-import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Plus, Clock, MapPin, UserCheck } from "lucide-react";
+import { ExternalLink, ArrowRight, TrendingUp, Users, Award, Calendar, CheckCircle, Clock, MapPin, UserCheck } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import StableCard from '@/components/StableCard'; // Fixed import for StableCard
@@ -10,7 +10,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import { getImageUrl } from "@/lib/blog";
 
 export default function CaseStudies() {
-  const [showAdditionalCases, setShowAdditionalCases] = useState(false);
+  
   const [cases, setCases] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -349,44 +349,7 @@ export default function CaseStudies() {
             </div>
           )}
 
-          {/* More Cases Button */}
-          <div className="text-center">
-            <GlassmorphicCard delay={0.3}>
-              <div className="text-center py-8">
-                <button
-                  onClick={() => setShowAdditionalCases(!showAdditionalCases)}
-                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 mb-4"
-                >
-                  <Plus className="w-5 h-5" />
-                  Ещё кейсы
-                </button>
-
-                {showAdditionalCases && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    transition={{ duration: 0.5 }}
-                    className="text-dark-slate/70 max-w-md mx-auto"
-                  >
-                    <div className="bg-soft-blue/20 rounded-xl p-6">
-                      <h4 className="font-semibold text-dark-slate mb-2">Готовится к публикации</h4>
-                      <p className="text-sm">
-                        Мы работаем над оформлением дополнительных кейсов. Скоро здесь появятся новые истории успеха наших клиентов.
-                      </p>
-                      <div className="mt-4">
-                        <Link
-                          href="/contact"
-                          className="text-sea-green font-semibold hover:text-sea-green/80 transition-colors text-sm"
-                        >
-                          Узнать о своем кейсе →
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </div>
-            </GlassmorphicCard>
-          </div>
+          
         </div>
       </section>
 
