@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 
 interface StructuredDataProps {
-  type: 'organization' | 'website' | 'service' | 'article' | 'breadcrumb';
+  type: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList' | 'WebPage';
   data?: any;
 }
 
@@ -11,7 +11,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
     let structuredData;
 
     switch (type) {
-      case 'organization':
+      case 'Organization':
         structuredData = {
           "@context": "https://schema.org",
           "@type": "Organization",
@@ -41,7 +41,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         };
         break;
 
-      case 'website':
+      case 'WebSite':
         structuredData = {
           "@context": "https://schema.org",
           "@type": "WebSite",
@@ -64,7 +64,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         };
         break;
 
-      case 'service':
+      case 'Service':
         if (data) {
           structuredData = {
             "@context": "https://schema.org",
@@ -86,7 +86,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         }
         break;
 
-      case 'article':
+      case 'Article':
         if (data) {
           structuredData = {
             "@context": "https://schema.org",
@@ -125,7 +125,7 @@ export function StructuredData({ type, data }: StructuredDataProps) {
         }
         break;
 
-      case 'breadcrumb':
+      case 'BreadcrumbList':
         if (data && Array.isArray(data)) {
           structuredData = {
             "@context": "https://schema.org",
@@ -136,6 +136,23 @@ export function StructuredData({ type, data }: StructuredDataProps) {
               "name": item.name,
               "item": item.url
             }))
+          };
+        }
+        break;
+
+      case 'WebPage':
+        if (data) {
+          structuredData = {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": data.title,
+            "description": data.description,
+            "url": data.url || window.location.href,
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Synecology"
+            },
+            "breadcrumb": data.breadcrumb
           };
         }
         break;

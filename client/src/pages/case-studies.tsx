@@ -404,3 +404,325 @@ export default function CaseStudies() {
     </div>
   );
 }
+import { useState, useEffect, useMemo } from 'react';
+import { motion } from "framer-motion";
+import { Search, Filter, ArrowRight, Calendar, MapPin, Users, CheckCircle2 } from "lucide-react";
+import OrganicBlob from "@/components/OrganicBlob";
+import GlassmorphicCard from "@/components/GlassmorphicCard";
+import StructuredData from "@/components/StructuredData";
+import NavigationLink from "@/components/NavigationLink";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useSEO } from "@/hooks/useSEO";
+import { fetchDirectusCases, type CaseStudy } from "@/lib/directus";
+
+export default function CaseStudies() {
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const isMobile = useIsMobile();
+
+  // SEO optimization
+  useSEO({
+    title: "Кейсы - Synecology | Примеры экологических проектов в Беларуси",
+    description: "Изучите наши успешные экологические проекты и кейсы. Примеры разработки ПДВ, экологических паспортов и других услуг в области экологического консалтинга.",
+    keywords: "кейсы, экологические проекты, примеры работ, ПДВ проекты, экологический паспорт, Беларусь, Минск",
+    ogTitle: "Кейсы Synecology - Примеры экологических проектов",
+    ogDescription: "Изучите наши успешные экологические проекты и решения для предприятий Беларуси.",
+    canonical: "https://synecology.ru/case-studies"
+  });
+
+  useEffect(() => {
+    const loadCaseStudies = async () => {
+      try {
+        setIsLoading(true);
+        const cases = await fetchDirectusCases();
+        setCaseStudies(cases);
+      } catch (error) {
+        console.error('Error loading case studies:', error);
+        setError('Ошибка загрузки кейсов');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadCaseStudies();
+  }, []);
+
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = new Set<string>();
+    caseStudies.forEach(study => {
+      if (study.category && Array.isArray(study.category)) {
+        study.category.forEach(cat => cats.add(cat));
+      }
+    });
+    return Array.from(cats).sort();
+  }, [caseStudies]);
+
+  // Filter case studies
+  const filteredCaseStudies = useMemo(() => {
+    return caseStudies.filter(study => {
+      const matchesSearch = !searchTerm || 
+        study.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        study.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        study.client?.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesCategory = !selectedCategory || 
+        (study.category && Array.isArray(study.category) && study.category.includes(selectedCategory));
+      
+      return matchesSearch && matchesCategory;
+    });
+  }, [caseStudies, searchTerm, selectedCategory]);
+
+  const breadcrumbItems = [
+    { label: 'Главная', href: '/' },
+    { label: 'Кейсы', href: '/case-studies' }
+  ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-24">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sea-green mx-auto mb-4"></div>
+          <p className="text-dark-slate/70">Загрузка кейсов...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <StructuredData
+        type="WebPage"
+        data={{
+          title: "Кейсы - Synecology | Примеры экологических проектов",
+          description: "Изучите наши успешные экологические проекты и кейсы",
+          url: "https://synecology.ru/case-studies"
+        }}
+      />
+      
+      <div className="pt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+
+        {/* Hero Section */}
+        <section className="py-20 relative overflow-hidden">
+          <OrganicBlob className="absolute top-10 right-10 opacity-15" size="lg" />
+          <OrganicBlob className="absolute bottom-10 left-10 opacity-10" size="md" delay={2} />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <motion.h1
+                className="text-5xl lg:text-6xl font-heading font-bold text-dark-slate mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                Наши <span className="text-sea-green">кейсы</span>
+              </motion.h1>
+              <motion.p
+                className="text-xl text-dark-slate/70 max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+              >
+                Примеры успешно реализованных проектов в области экологического консалтинга
+              </motion.p>
+            </div>
+
+            {/* Filters */}
+            <motion.div
+              className="mb-12 space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              {/* Search */}
+              <div className="relative max-w-md mx-auto">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-dark-slate/50" />
+                <input
+                  type="text"
+                  placeholder="Поиск кейсов..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-sea-green focus:border-transparent"
+                />
+              </div>
+
+              {/* Category Filter */}
+              {categories.length > 0 && (
+                <div className="flex flex-wrap justify-center gap-3">
+                  <button
+                    onClick={() => setSelectedCategory('')}
+                    className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                      !selectedCategory
+                        ? 'bg-sea-green text-white'
+                        : 'bg-white text-dark-slate border border-gray-200 hover:bg-gray-50'
+                    }`}
+                  >
+                    Все категории
+                  </button>
+                  {categories.map(category => (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`px-4 py-2 rounded-full transition-all duration-300 ${
+                        selectedCategory === category
+                          ? 'bg-sea-green text-white'
+                          : 'bg-white text-dark-slate border border-gray-200 hover:bg-gray-50'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+
+            {/* Case Studies Grid */}
+            {error ? (
+              <div className="text-center py-12">
+                <p className="text-red-600 mb-4">{error}</p>
+                <button 
+                  onClick={() => window.location.reload()} 
+                  className="btn-primary"
+                >
+                  Попробовать снова
+                </button>
+              </div>
+            ) : filteredCaseStudies.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-dark-slate/70 text-lg">
+                  {searchTerm || selectedCategory ? 'Кейсы не найдены' : 'Кейсы пока не загружены'}
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredCaseStudies.map((caseStudy, index) => (
+                  <motion.div
+                    key={caseStudy.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.8 }}
+                  >
+                    <GlassmorphicCard className="h-full group hover:shadow-xl transition-all duration-300">
+                      {caseStudy.coverImage && (
+                        <div className="relative overflow-hidden rounded-lg mb-6">
+                          <img
+                            src={caseStudy.coverImage}
+                            alt={caseStudy.title}
+                            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                      )}
+                      
+                      <div className="space-y-4">
+                        <h3 className="text-xl font-heading font-bold text-dark-slate line-clamp-2">
+                          {caseStudy.title}
+                        </h3>
+                        
+                        <p className="text-dark-slate/70 line-clamp-3">
+                          {caseStudy.excerpt}
+                        </p>
+
+                        {/* Meta info */}
+                        <div className="space-y-2 text-sm text-dark-slate/60">
+                          {caseStudy.client && (
+                            <div className="flex items-center gap-2">
+                              <Users className="w-4 h-4" />
+                              <span>{caseStudy.client}</span>
+                            </div>
+                          )}
+                          {caseStudy.projectDate && (
+                            <div className="flex items-center gap-2">
+                              <Calendar className="w-4 h-4" />
+                              <span>{caseStudy.projectDate}</span>
+                            </div>
+                          )}
+                          {caseStudy.location && (
+                            <div className="flex items-center gap-2">
+                              <MapPin className="w-4 h-4" />
+                              <span>{caseStudy.location}</span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Tags */}
+                        {caseStudy.tags && caseStudy.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {caseStudy.tags.slice(0, 3).map(tag => (
+                              <span
+                                key={tag}
+                                className="px-2 py-1 text-xs bg-sea-green/10 text-sea-green rounded-full"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        <NavigationLink
+                          href={`/case-studies/${caseStudy.slug}`}
+                          className="inline-flex items-center gap-2 text-sea-green font-semibold hover:gap-3 transition-all duration-300 mt-4"
+                        >
+                          Подробнее
+                          <ArrowRight className="w-4 h-4" />
+                        </NavigationLink>
+                      </div>
+                    </GlassmorphicCard>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 relative">
+          <OrganicBlob className="absolute top-10 right-10 opacity-10" size="md" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <GlassmorphicCard className="text-center">
+              <motion.h2
+                className="text-3xl lg:text-4xl font-heading font-bold text-dark-slate mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Хотите стать следующим <span className="text-sea-green">успешным кейсом?</span>
+              </motion.h2>
+              <motion.p
+                className="text-xl text-dark-slate/70 mb-8 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Обратитесь к нам за консультацией и начните свой путь к экологической эффективности
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <NavigationLink
+                  href="/contact"
+                  className="bg-sea-green text-white px-8 py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center gap-2 shadow-lg hover:shadow-xl"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                  Начать проект
+                </NavigationLink>
+              </motion.div>
+            </GlassmorphicCard>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+}
