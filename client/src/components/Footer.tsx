@@ -1,11 +1,8 @@
 import { Link } from "wouter";
-import { Leaf, Linkedin, Twitter, Instagram } from "lucide-react";
-import { useState } from "react";
-import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
+import { Leaf } from "lucide-react";
 import NavigationLink from './NavigationLink';
 
 export default function Footer() {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <footer className="bg-dark-slate text-white py-12">
@@ -18,42 +15,7 @@ export default function Footer() {
               </div>
               <span className="text-xl font-heading font-bold">Synecology</span>
             </div>
-            <p className="text-white/70 mb-2">Экологический консалтинг. Помогаем разобраться в законодательстве РБ.</p>
-
-            <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-              <div className="flex gap-3 mb-4">
-                <AlertDialogTrigger asChild>
-                  <button className="text-white/70 hover:text-sea-green transition-colors cursor-pointer">
-                    <Linkedin className="w-5 h-5" />
-                  </button>
-                </AlertDialogTrigger>
-                <AlertDialogTrigger asChild>
-                  <button className="text-white/70 hover:text-sea-green transition-colors cursor-pointer">
-                    <Twitter className="w-5 h-5" />
-                  </button>
-                </AlertDialogTrigger>
-                <AlertDialogTrigger asChild>
-                  <button className="text-white/70 hover:text-sea-green transition-colors cursor-pointer">
-                    <Instagram className="w-5 h-5" />
-                  </button>
-                </AlertDialogTrigger>
-              </div>
-
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Социальные сети</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Мы пока что не ведем социальные сети, но скоро они появятся!
-                    Следите за обновлениями на нашем сайте.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogAction onClick={() => setIsOpen(false)}>
-                    Понятно
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
+            <p className="text-white/70 mb-4">Экологический консалтинг. Помогаем разобраться в законодательстве РБ.</p>
           </div>
 
 
