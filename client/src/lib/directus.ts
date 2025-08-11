@@ -76,7 +76,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
       json = JSON.parse(responseText);
     } catch (parseError) {
       logger.error('JSON parse error:', parseError, 'Response text:', responseText.substring(0, 300));
-      throw new Error(`Failed to parse JSON response: ${parseError.message}`);
+      throw new Error(`Failed to parse JSON response: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`);
     }
 
     logger.debug('Proxy API Response:', json);
@@ -209,7 +209,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       json = JSON.parse(responseText);
     } catch (parseError) {
       logger.error('JSON parse error:', parseError, 'Response text:', responseText.substring(0, 300));
-      throw new Error(`Failed to parse JSON response: ${parseError.message}`);
+      throw new Error(`Failed to parse JSON response: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`);
     }
 
     logger.debug('Blog Proxy API Response:', json);

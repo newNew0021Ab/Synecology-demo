@@ -103,48 +103,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Directus proxy endpoint for blog posts
-  app.get("/api/directus-blog", async (req, res) => {
-    try {
-      const directusUrl = "https://directus-production-6ce1.up.railway.app/items/blog_posts?fields=*";
-
-      console.log('Proxying request to Directus:', directusUrl);
-
-      const response = await fetch(directusUrl, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        return res.status(500).json({
-          status: 500,
-          message: `Directus API error: ${response.status} - ${errorText.substring(0, 200)}`
-        });
-      }
-
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        const responseText = await response.text();
-        return res.status(500).json({
-          status: 500,
-          message: `Expected JSON from Directus but received ${contentType}`
-        });
-      }
-
-      const data = await response.json();
-      res.status(200).json(data);
-    } catch (error) {
-      res.status(500).json({
-        status: 500,
-        message: `Proxy error: ${error instanceof Error ? error.message : 'Unknown error'}`
-      });
-    }
-  });
-
   // Contact form submission endpoint
   app.post("/api/contact", async (req, res) => {
     try {
