@@ -107,10 +107,13 @@ export default function Home() {
                   Мы не просто готовим документы. Мы находим решения, которые защищают вас от штрафов, открывают новые рынки и делают вашу компанию лидером в заботе об окружающей среде.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                  <button className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base">
+                  <NavigationLink
+                    href="/case-studies"
+                    className="glassmorphic glassmorphic-hover px-6 md:px-8 py-3 md:py-4 rounded-full text-sea-green font-semibold inline-flex items-center justify-center gap-2 text-sm md:text-base"
+                  >
                     <PlayCircle className="w-4 h-4 md:w-5 md:h-5" />
                     Наши проекты
-                  </button>
+                  </NavigationLink>
                   <NavigationLink
                     href="/contact"
                     className="bg-sea-green text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold hover:bg-sea-green/90 transition-all duration-300 inline-flex items-center justify-center gap-2 text-sm md:text-base shadow-lg hover:shadow-xl"
