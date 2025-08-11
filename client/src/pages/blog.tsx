@@ -456,18 +456,7 @@ export default function Blog() {
             </div>
           )}
 
-          {filteredPosts.length > 0 && (
-            <div className="text-center mt-12">
-              <GlassmorphicCard className="max-w-md mx-auto">
-                <p className="text-dark-slate/70 mb-4">
-                  Мы готовим для вас ещё больше полезных статей
-                </p>
-                <button className="glassmorphic glassmorphic-hover px-8 py-4 rounded-full text-sea-green font-semibold opacity-50 cursor-not-allowed">
-                  Статьи в процессе написания
-                </button>
-              </GlassmorphicCard>
-            </div>
-              )}
+          
             </>
           )}
         </div>
