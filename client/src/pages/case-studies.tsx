@@ -15,28 +15,7 @@ export default function CaseStudies() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Static fallback cases
-  const staticCases: CaseStudy[] = [
-    {
-      id: "example-1",
-      title: "Экология как инвестиция: кейс ведущего обжарщика кофе в РБ.",
-      slug: "coffee-environmental-documentation",
-      excerpt: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
-      content: "Превратили обязательные экологические требования в источник дохода для ведущего обжарщика кофе, выстроив систему, которая не только защищает от штрафов, но и приносит прибыль.",
-      coverImage: "https://images.unsplash.com/photo-1587734195342-39d4b9b2ff05?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600",
-      timeline: "3 месяца",
-      completionDate: "2024-12-15",
-      results: [
-        "Полный пакет документов «под ключ» за 90 дней.",
-        "Полностью исключены риски штрафов и приостановки деятельности",
-        "Гарантированное прохождение всех проверок с первого раза",
-        "100% соответствие природоохранному законодательству",
-      ],
-      category: ["Пищевая промышленность"],
-      tags: ["Экологическая документация", "Пищевая промышленность", "Соответствие законодательству"],
-      featured: true,
-    },
-  ];
+  
 
   // Fetch case studies from Directus API
   useEffect(() => {
@@ -45,20 +24,12 @@ export default function CaseStudies() {
         setLoading(true);
         setError(null);
         const directusData = await fetchDirectusCases();
-
-        if (directusData.length > 0) {
-          // Combine Directus data with static cases
-          const allCases = [...directusData, ...staticCases];
-          setCases(allCases);
-          console.log('Successfully loaded cases from Directus:', directusData.length, 'cases');
-        } else {
-          // Only static cases if no Directus data
-          setCases(staticCases);
-        }
+        setCases(directusData);
+        console.log('Successfully loaded cases from Directus:', directusData.length, 'cases');
       } catch (err: any) {
         console.error("Failed to fetch case studies:", err);
-        // Show static cases on error
-        setCases(staticCases);
+        setError('Ошибка загрузки кейсов');
+        setCases([]);
       } finally {
         setLoading(false);
       }
@@ -140,7 +111,29 @@ export default function CaseStudies() {
             </div>
           )}
 
-          
+          {error && (
+            <div className="text-center py-12">
+              <p className="text-red-500 mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="text-sea-green font-semibold hover:text-sea-green/80 transition-colors"
+              >
+                Попробовать снова
+              </button>
+            </div>
+          )}
+
+          {!loading && !error && displayCases.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-dark-slate/70 mb-4">Кейсы пока не добавлены</p>
+              <Link
+                href="/contact"
+                className="text-sea-green font-semibold hover:text-sea-green/80 transition-colors"
+              >
+                Свяжитесь с нами
+              </Link>
+            </div>
+          )}
 
           {displayCases.length > 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
