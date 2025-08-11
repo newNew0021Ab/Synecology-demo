@@ -312,13 +312,10 @@ export default function Blog() {
                             <span className="font-medium">{Array.isArray(post.category) ? post.category[0] : post.category || 'Статья'}</span>
                           </div>
                           {post.authorSlug && (
-                            <Link
-                              href={`/team/${post.authorSlug}`}
-                              className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                            >
+                            <div className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate px-3 py-1 rounded-full">
                               <User className="w-4 h-4" />
                               <span className="font-medium">{post.authorName || 'Автор'}</span>
-                            </Link>
+                            </div>
                           )}
                         </div>
 
@@ -471,13 +468,10 @@ export default function Blog() {
                               </span>
                             </div>
                             {post.authorSlug && (
-                              <Link
-                                href={`/team/${post.authorSlug}`}
-                                className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                              >
+                              <div className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate px-3 py-1 rounded-full">
                                 <User className="w-4 h-4" />
                                 <span className="font-medium">{post.authorName || 'Автор'}</span>
-                              </Link>
+                              </div>
                             )}
                           </div>
 
