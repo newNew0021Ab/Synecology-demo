@@ -496,11 +496,11 @@ export default function BlogPost() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => {
                 const relatedCategoryArray = normalizeCategory(relatedPost.category);
                 return (
-                  <GlassmorphicCard key={relatedPost.slug} className="mb-8">
+                  <GlassmorphicCard key={relatedPost.slug}>
                     <Link href={`/blog/${relatedPost.slug}`}>
                       <article className="space-y-4 cursor-pointer">
                         {relatedPost.coverImage && (
