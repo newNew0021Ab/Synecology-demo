@@ -500,8 +500,8 @@ export default function BlogPost() {
               {relatedPosts.map((relatedPost) => {
                 const relatedCategoryArray = normalizeCategory(relatedPost.category);
                 return (
-                  <Link key={relatedPost.slug} href={`/blog/${relatedPost.slug}`}>
-                    <GlassmorphicCard>
+                  <GlassmorphicCard key={relatedPost.slug}>
+                    <Link href={`/blog/${relatedPost.slug}`}>
                       <article className="space-y-4 cursor-pointer">
                         {relatedPost.coverImage && (
                           <img
@@ -534,8 +534,8 @@ export default function BlogPost() {
                           </div>
                         </div>
                       </article>
-                    </GlassmorphicCard>
-                  </Link>
+                    </Link>
+                  </GlassmorphicCard>
                 );
               })}
             </div>
