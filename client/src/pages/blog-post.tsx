@@ -180,11 +180,56 @@ export default function BlogPost() {
 
   useEffect(() => {
     if (post) {
-      // SEO оптимизация
-      document.title = `${post.title} | ЭкоПартнер`;
+      // SEO оптимизация с использованием специальных SEO полей из Directus
+      const seoTitle = (post as any).seoTitle || post.title;
+      const seoDescription = (post as any).seoDescription || post.excerpt;
+      const seoKeywords = (post as any).seoKeywords;
+
+      document.title = `${seoTitle} | ЭкоПартнер`;
+      
       const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', post.excerpt);
+      if (metaDescription && seoDescription) {
+        metaDescription.setAttribute('content', seoDescription);
+      }
+
+      // Добавляем или обновляем meta keywords если они есть
+      let metaKeywords = document.querySelector('meta[name="keywords"]');
+      if (seoKeywords && Array.isArray(seoKeywords) && seoKeywords.length > 0) {
+        if (!metaKeywords) {
+          metaKeywords = document.createElement('meta');
+          metaKeywords.setAttribute('name', 'keywords');
+          document.head.appendChild(metaKeywords);
+        }
+        metaKeywords.setAttribute('content', seoKeywords.join(', '));
+      }
+
+      // Open Graph теги для социальных сетей
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (!ogTitle) {
+        ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        document.head.appendChild(ogTitle);
+      }
+      ogTitle.setAttribute('content', seoTitle);
+
+      let ogDescription = document.querySelector('meta[property="og:description"]');
+      if (!ogDescription) {
+        ogDescription = document.createElement('meta');
+        ogDescription.setAttribute('property', 'og:description');
+        document.head.appendChild(ogDescription);
+      }
+      if (seoDescription) {
+        ogDescription.setAttribute('content', seoDescription);
+      }
+
+      if (post.coverImage) {
+        let ogImage = document.querySelector('meta[property="og:image"]');
+        if (!ogImage) {
+          ogImage = document.createElement('meta');
+          ogImage.setAttribute('property', 'og:image');
+          document.head.appendChild(ogImage);
+        }
+        ogImage.setAttribute('content', post.coverImage);
       }
     }
   }, [post]);
@@ -394,7 +439,16 @@ export default function BlogPost() {
               <div className="mt-12">
                 <GlassmorphicCard>
                   <div className="flex items-center gap-6">
-                    {post.authorAvatar && (
+                    {post.authorSlug && post.authorAvatar && (
+                      <Link href={`/team/${post.authorSlug}`}>
+                        <img
+                          src={post.authorAvatar}
+                          alt={post.authorName || 'Автор'}
+                          className="w-16 h-16 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity"
+                        />
+                      </Link>
+                    )}
+                    {!post.authorSlug && post.authorAvatar && (
                       <img
                         src={post.authorAvatar}
                         alt={post.authorName || 'Автор'}
@@ -403,9 +457,19 @@ export default function BlogPost() {
                     )}
                     <div>
                       {post.authorName && (
-                        <h4 className="text-xl font-heading font-semibold text-dark-slate mb-2">
-                          {post.authorName}
-                        </h4>
+                        <>
+                          {post.authorSlug ? (
+                            <Link href={`/team/${post.authorSlug}`}>
+                              <h4 className="text-xl font-heading font-semibold text-dark-slate mb-2 cursor-pointer hover:text-sea-green transition-colors">
+                                {post.authorName}
+                              </h4>
+                            </Link>
+                          ) : (
+                            <h4 className="text-xl font-heading font-semibold text-dark-slate mb-2">
+                              {post.authorName}
+                            </h4>
+                          )}
+                        </>
                       )}
                       {post.authorRole && (
                         <p className="text-dark-slate/70 mb-2">{post.authorRole}</p>

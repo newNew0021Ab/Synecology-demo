@@ -20,6 +20,9 @@ export type BlogPost = {
   authorAvatar?: string | null;
   publishedDate?: string;
   featured?: boolean;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
 };
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
@@ -94,7 +97,10 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
         authorSlug: item.author_slug || '',
         authorAvatar: getImageUrl(item.author_avatar),
         publishedDate: item.published_date || item.date_created || new Date().toISOString(),
-        featured: Boolean(item.featured)
+        featured: Boolean(item.featured),
+        seoTitle: item.seo_title || '',
+        seoDescription: item.seo_description || '',
+        seoKeywords: item.seo_keywords || []
       };
     });
 
