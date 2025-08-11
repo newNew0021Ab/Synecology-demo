@@ -18,7 +18,7 @@ export async function getDirectusBlog(req: Request, res: Response) {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.log('Directus error response:', errorText);
+      console.error('Directus error response:', errorText);
       
       let errorData;
       try {
@@ -36,7 +36,7 @@ export async function getDirectusBlog(req: Request, res: Response) {
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
       const htmlContent = await response.text();
-      console.log('Expected JSON but got HTML:', htmlContent.substring(0, 200));
+      console.error('Expected JSON but got HTML:', htmlContent.substring(0, 200));
       return res.status(500).json({
         status: 500,
         message: `Expected JSON but got ${contentType}. Response: ${htmlContent.substring(0, 100)}...`
@@ -45,17 +45,18 @@ export async function getDirectusBlog(req: Request, res: Response) {
 
     let data;
     try {
-      const responseText = await response.text();
-      data = JSON.parse(responseText);
+      data = await response.json();
       console.log('Successfully fetched from Directus, data length:', data.data?.length || 0);
     } catch (parseError) {
-      console.log('JSON parse error:', parseError);
+      console.error('JSON parse error:', parseError);
       return res.status(500).json({
         status: 500,
         message: `JSON parse error: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`
       });
     }
 
+    // Ensure we're sending JSON response
+    res.setHeader('Content-Type', 'application/json');
     res.json(data);
   } catch (error) {
     console.error('Error fetching blog posts from Directus:', error);

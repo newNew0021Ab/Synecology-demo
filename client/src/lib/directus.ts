@@ -181,7 +181,11 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     logger.debug('Loading blog posts...');
     logger.debug('Fetching from proxy:', '/api/directus-blog');
 
-    const response = await fetch('/api/directus-blog');
+    const response = await fetch('/api/directus-blog', {
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
     logger.debug('Response status:', response.status);
 
     if (!response.ok) {
@@ -191,24 +195,26 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     }
 
     const contentType = response.headers.get('content-type');
-    const responseText = await response.text();
-
-    // Check if response is HTML (error page)
-    if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
-      logger.error('Received HTML error page instead of JSON:', responseText.substring(0, 200));
-      throw new Error('Server returned HTML error page instead of JSON data');
-    }
-
+    
     if (!contentType || !contentType.includes('application/json')) {
-      logger.error('Non-JSON response received:', responseText.substring(0, 300));
+      const responseText = await response.text();
+      logger.error('Non-JSON response received. Content-Type:', contentType);
+      logger.error('Response text:', responseText.substring(0, 300));
+      
+      // Check if response is HTML (error page from Vite or development server)
+      if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
+        logger.error('Received HTML error page instead of JSON');
+        throw new Error('Server returned HTML error page. Check if the API endpoint is working correctly.');
+      }
+      
       throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
     }
 
     let json;
     try {
-      json = JSON.parse(responseText);
+      json = await response.json();
     } catch (parseError) {
-      logger.error('JSON parse error:', parseError, 'Response text:', responseText.substring(0, 300));
+      logger.error('JSON parse error:', parseError);
       throw new Error(`Failed to parse JSON response: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`);
     }
 
@@ -229,7 +235,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       return [];
     }
 
-    const blogPosts = json.data.filter((item: BlogPost) => item.status === 'published');
+    const blogPosts = json.data.filter((item: any) => item.status === 'published');
     logger.debug('Successfully loaded blog posts:', blogPosts.length, 'posts');
     return blogPosts;
   } catch (error) {
