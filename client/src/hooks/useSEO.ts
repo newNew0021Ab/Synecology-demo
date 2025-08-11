@@ -16,7 +16,7 @@ interface SEOProps {
   publishedTime?: string;
   modifiedTime?: string;
   alternateLanguages?: Array<{ href: string; hreflang: string; }>;
-}</interface>
+}
 
 export function useSEO({
   title,
