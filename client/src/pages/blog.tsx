@@ -6,6 +6,7 @@ import GlassmorphicCard from "@/components/GlassmorphicCard";
 import StableCard from '@/components/StableCard';
 import { useState, useMemo, useEffect } from "react";
 import { fetchBlogPosts, type BlogPost } from "@/lib/blog";
+import OptimizedImage from "@/components/OptimizedImage";
 
 export default function Blog() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -14,7 +15,7 @@ export default function Blog() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  
+
 
   useEffect(() => {
     const loadBlogPosts = async () => {
@@ -378,85 +379,63 @@ export default function Blog() {
                     className="group h-full card-stable visible"
                   >
                     {/* Replaced Link with NavigationLink and added the 'from' parameter */}
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="block group"
-                    >
-                      <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
-                        <article className="flex flex-col h-full space-y-6">
-                          <div className="relative">
-                            <img
-                              src={post.coverImage || "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0"}
+                    <GlassmorphicCard delay={index * 0.1}>
+                    <Link href={`/blog/${post.slug}`}>
+                      <article className="group cursor-pointer h-full flex flex-col">
+                        {post.image && (
+                          <div className="mb-6 overflow-hidden rounded-xl">
+                            <OptimizedImage
+                              src={post.image}
                               alt={post.title}
-                              className="w-full h-64 object-cover rounded-xl transition-transform duration-300 group-hover:scale-102"
-                              loading="lazy"
-                              style={{
-                                aspectRatio: "16/9",
-                                objectFit: "cover",
-                              }}
+                              className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
+                              width={400}
+                              height={250}
                             />
                           </div>
+                        )}
 
-                          <div className="flex items-center gap-4 text-sm flex-wrap">
-                            <div className="flex items-center gap-2 bg-sea-green/10 text-sea-green px-3 py-1 rounded-full">
-                              <Calendar className="w-4 h-4" />
-                              <span className="font-medium">{new Date(post.publishedDate || '').toLocaleDateString('ru-RU')}</span>
-                            </div>
-                            <div className="flex items-center gap-2 bg-soft-blue/20 text-dark-slate px-3 py-1 rounded-full">
-                              <Clock className="w-4 h-4" />
-                              <span className="font-medium">
-                                {post.readTime || '5 мин'}
-                              </span>
-                            </div>
-                            <div className="flex items-center gap-2 bg-sandy-beige/50 text-dark-slate px-3 py-1 rounded-full">
-                              <Tag className="w-4 h-4" />
-                              <span className="font-medium">
-                                {Array.isArray(post.category) ? post.category[0] : post.category || 'Статья'}
-                              </span>
-                            </div>
-                            {post.authorSlug && (
-                              <Link
-                                href={`/team/${post.authorSlug}`}
-                                className="flex items-center gap-2 bg-dark-slate/10 text-dark-slate hover:bg-dark-slate/20 transition-colors px-3 py-1 rounded-full"
-                              >
-                                <User className="w-4 h-4" />
-                                <span className="font-medium">{post.authorName || 'Автор'}</span>
-                              </Link>
-                            )}
-                          </div>
-
-                          <h3 className="text-2xl font-heading font-bold text-dark-slate line-clamp-3 group-hover:text-sea-green transition-colors duration-300">
+                        <div className="flex-grow flex flex-col">
+                          <h2 className="text-2xl font-heading font-bold text-dark-slate mb-4 leading-tight group-hover:text-sea-green transition-colors duration-300">
                             {post.title}
-                          </h3>
+                          </h2>
 
-                          <p className="text-dark-slate/70 line-clamp-4 flex-grow text-base leading-relaxed">
-                            {post.excerpt}
-                          </p>
+                          {post.excerpt && (
+                            <p className="text-dark-slate/70 mb-6 leading-relaxed flex-grow">
+                              {post.excerpt}
+                            </p>
+                          )}
 
-                          <div className="flex flex-wrap gap-2">
-                            {(post.tags || []).slice(0, 3).map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-3 py-1 text-sm rounded-full bg-sea-green/10 text-sea-green pointer-events-none"
-                              >
-                                {tag}
-                              </span>
-                            ))}
+                          <div className="flex items-center justify-between text-sm text-dark-slate/60 mb-4">
+                            <span>{new Date(post.date_created).toLocaleDateString('ru-RU')}</span>
+                            {post.author && <span>Автор: {post.author}</span>}
                           </div>
 
-                          <div className="bg-sea-green text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 mt-auto justify-center group-hover:bg-sea-green/90">
-                            <ArrowRight className="w-5 h-5" />
-                            Читать полную статью
+                          {post.tags && post.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-6">
+                              {post.tags.slice(0, 3).map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-3 py-1 bg-sea-green/10 text-sea-green text-sm rounded-full font-medium"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+
+                          <div className="text-sea-green font-semibold inline-flex items-center gap-2 text-base mt-auto">
+                            Читать далее <ArrowRight className="w-5 h-5" />
                           </div>
-                        </article>
-                      </GlassmorphicCard>
+                        </div>
+                      </article>
                     </Link>
+                  </GlassmorphicCard>
                   </motion.div>
                 ))}
             </div>
           )}
 
-          
+
             </>
           )}
         </div>
