@@ -2,62 +2,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
-        http://www.google.com/schemas/sitemap-image/1.1
-        http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
   <!-- Main pages -->
   <url>
     <loc>https://synecology.ru/</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://synecology.ru/og-image.jpg</image:loc>
-      <image:title>Synecology - Экологический консалтинг в Беларуси</image:title>
-    </image:image>
   </url>
   
   <url>
     <loc>https://synecology.ru/services</loc>
-    <lastmod>2024-12-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/about</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/contact</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/case-studies</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/blog</loc>
-    <lastmod>2024-12-21</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2024-12-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/faq</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -65,51 +58,51 @@
   <!-- Service detail pages -->
   <url>
     <loc>https://synecology.ru/services/emissions-inventory</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/services/emission-standards</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/services/ecological-passport</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/services/gas-cleaning-passport</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/services/waste-management-instructions</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/services/ecological-record-keeping</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/services/ecological-support</loc>
-    <lastmod>2024-12-21</lastmod>
+    <lastmod>2024-12-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   
   <!-- Blog posts -->
@@ -117,28 +110,28 @@
     <loc>https://synecology.ru/blog/eco-certification-business-belarus</loc>
     <lastmod>2024-12-20</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/blog/pdv-norms-development-belarus</loc>
     <lastmod>2024-12-18</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/blog/waste-management-compliance-belarus</loc>
     <lastmod>2024-12-18</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://synecology.ru/blog/ecological-support-business-guide</loc>
     <lastmod>2024-12-17</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   
 </urlset>

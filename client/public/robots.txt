@@ -5,44 +5,18 @@ Allow: /
 # Sitemap
 Sitemap: https://synecology.ru/sitemap.xml
 
-# Block development and system files
+# Block development scripts
 Disallow: /src/
 Disallow: /*.js$
 Disallow: /*.ts$
 Disallow: /*.tsx$
-Disallow: /.git/
-Disallow: /node_modules/
-Disallow: /migrations/
-Disallow: /server/
-Disallow: /shared/
-Disallow: /*.json$
-Disallow: /*.config.*
-Disallow: /package-lock.json
-Disallow: /.replit
-Disallow: /replit.md
 
-# Allow important assets and directories
+# Allow important assets
 Allow: /images/
-Allow: /assets/
 Allow: /favicon.ico
-Allow: /favicon.svg
 Allow: /og-image.jpg
 Allow: /apple-touch-icon.png
 Allow: /site.webmanifest
-Allow: /web-app-manifest-*.png
-Allow: /*.css$
-Allow: /*.woff2$
-Allow: /*.woff$
 
-# Crawl delay for polite crawling
+# Crawl delay
 Crawl-delay: 1
-
-# Specific rules for Yandex (important for .ru domain)
-User-agent: Yandex
-Crawl-delay: 2
-Allow: /
-
-# Allow search console verification files
-Allow: /google*.html
-Allow: /yandex*.html
-Allow: /verification.html

@@ -1,7 +1,45 @@
 
-# SEO и производительность оптимизации
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Включить сжатие
+# Force WWW or non-WWW (choose one)
+# RewriteCond %{HTTP_HOST} !^www\.
+# RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove trailing slash
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{THE_REQUEST} /+[^\s]*\s HTTP/
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Cache static files
+<IfModule mod_expires.c>
+    ExpiresActive on
+    
+    # Images
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # CSS and JS
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # Fonts
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    
+    # HTML
+    ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Gzip compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -12,75 +50,22 @@
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
-    AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
-# Настройка кэширования
-<IfModule mod_expires.c>
-    ExpiresActive On
-    
-    # Изображения
-    ExpiresByType image/jpg "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/webp "access plus 1 month"
-    ExpiresByType image/svg+xml "access plus 1 month"
-    
-    # Шрифты
-    ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType font/woff "access plus 1 year"
-    ExpiresByType font/ttf "access plus 1 year"
-    
-    # CSS и JS
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType application/x-javascript "access plus 1 month"
-    
-    # HTML
-    ExpiresByType text/html "access plus 1 day"
-    
-    # Манифесты и иконки
-    ExpiresByType application/x-web-app-manifest+json "access plus 1 week"
-    ExpiresByType image/x-icon "access plus 1 month"
-</IfModule>
-
-# Безопасность заголовки для SEO
+# Security headers
 <IfModule mod_headers.c>
-    # Безопасность
     Header always set X-Content-Type-Options nosniff
-    Header always set X-Frame-Options SAMEORIGIN
+    Header always set X-Frame-Options DENY
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
-    
-    # SEO заголовки
-    Header set Cache-Control "public, max-age=31536000" "expr=%{REQUEST_URI} =~ m#\.(js|css|woff2|woff|jpg|jpeg|png|gif|ico|svg)$#"
 </IfModule>
 
-# Редиректы для SEO
-RewriteEngine On
-
-# Принудительный HTTPS
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Удаление trailing slash для SEO
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{THE_REQUEST} /+[^?\s]*?/[\s?] [NC]
-RewriteRule ^(.*)/ /$1 [R=301,L]
-
-# Обработка SPA роутинга
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.html [L]
-
-# Блокировка доступа к системным файлам
-<Files ~ "^\.">
-    Order allow,deny
-    Deny from all
-</Files>
-
-<Files ~ "(package\.json|\.config\.|\.ts$|\.tsx$)">
-    Order allow,deny
-    Deny from all
-</Files>
+# SPA fallback for React Router
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>
