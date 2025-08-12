@@ -1,5 +1,9 @@
 import { logger } from './logger';
 
+const API_BASE = import.meta.env.DEV
+  ? "http://localhost:5000/api"
+  : "/api";
+
 export const DIRECTUS_URL = "https://directus-production-6ce1.up.railway.app";
 
 function getImageUrl(id?: string) {
@@ -54,7 +58,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
   try {
     logger.debug('Loading cases...');
 
-    const res = await fetch('/api/directus-cases');
+    const res = await fetch(`${API_BASE}/directus-cases`);
     logger.debug('Response status:', res.status);
 
     if (!res.ok) {
@@ -187,7 +191,7 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     logger.debug('Loading blog posts...');
     logger.debug('Fetching from proxy:', '/api/directus-blog');
 
-    const response = await fetch('/api/directus-blog', {
+    const response = await fetch(`${API_BASE}/directus-blog`, {
       headers: {
         'Accept': 'application/json',
       },

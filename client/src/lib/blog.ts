@@ -1,7 +1,11 @@
-const API_BASE = "https://directus-production-6ce1.up.railway.app";
+const API_BASE_URL = import.meta.env.DEV
+  ? "http://localhost:5000/api"
+  : "/api";
+
+const DIRECTUS_URL = "https://directus-production-6ce1.up.railway.app";
 
 function getImageUrl(id?: string) {
-  return id ? `${API_BASE}/assets/${id}` : null;
+  return id ? `${DIRECTUS_URL}/assets/${id}` : null;
 }
 
 export type BlogPost = {
@@ -29,7 +33,7 @@ export async function fetchBlogPosts(): Promise<BlogPost[]> {
   try {
     console.log('Fetching from proxy:', '/api/directus-blog');
 
-    const response = await fetch('/api/directus-blog', {
+    const response = await fetch(`${API_BASE_URL}/directus-blog`, {
     });
     console.log('Response status:', response.status);
 
