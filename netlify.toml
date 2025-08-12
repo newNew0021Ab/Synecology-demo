@@ -1,37 +1,11 @@
 # Конфигурация сборки
 [build]
   # Команда, которую Netlify выполнит для сборки вашего сайта.
-  command = "cd client && npm run build"
+  command = "npm run build"
 
   # Папка, которую Netlify опубликует.
-  publish = "client/dist"
-  
-  # Папка с функциями
-  functions = "netlify/functions"
-
-[dev]
-  framework = "#custom"
-  command = "npm run dev"
-  targetPort = 5173
-  port = 8888
-  publish = "client/dist"
-  autoLaunch = true
-
-[functions]
-  directory = "netlify/functions"
-
-# Редиректы API на функции
-[[redirects]]
-  from = "/api/blog"
-  to = "/.netlify/functions/blog"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/cases"
-  to = "/.netlify/functions/cases"
-  status = 200
-  force = true
+  # Vite соберет ваше приложение из папки 'client' в папку 'client/dist'.
+  publish = "dist/public"
 
 # Правило для корректной работы роутинга в React
 [[redirects]]

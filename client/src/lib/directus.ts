@@ -2,8 +2,6 @@ import { logger } from './logger';
 
 export const DIRECTUS_URL = "https://directus-production-6ce1.up.railway.app";
 
-const API_BASE_URL = '/api';
-
 function getImageUrl(id?: string) {
   return id ? `${DIRECTUS_URL}/assets/${id}` : null;
 }
@@ -56,7 +54,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
   try {
     logger.debug('Loading cases...');
 
-    const res = await fetch('/api/cases');
+    const res = await fetch('/api/directus-cases');
     logger.debug('Response status:', res.status);
 
     if (!res.ok) {
@@ -187,9 +185,9 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     logger.debug('Loading blog posts...');
-    logger.debug('Fetching from proxy:', '/api/blog');
+    logger.debug('Fetching from proxy:', '/api/directus-blog');
 
-    const response = await fetch('/api/blog', {
+    const response = await fetch('/api/directus-blog', {
       headers: {
         'Accept': 'application/json',
       },
@@ -203,18 +201,18 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     }
 
     const contentType = response.headers.get('content-type');
-
+    
     if (!contentType || !contentType.includes('application/json')) {
       const responseText = await response.text();
       logger.error('Non-JSON response received. Content-Type:', contentType);
       logger.error('Response text:', responseText.substring(0, 300));
-
+      
       // Check if response is HTML (error page from Vite or development server)
       if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
         logger.error('Received HTML error page instead of JSON');
         throw new Error('Server returned HTML error page. Check if the API endpoint is working correctly.');
       }
-
+      
       throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
     }
 

@@ -12,7 +12,7 @@ localPort = 5000
 externalPort = 80
 
 [workflows]
-runButton = "Netlify Dev"
+runButton = "Run"
 
 [[workflows.workflow]]
 name = "Dev Server"
@@ -40,12 +40,3 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
-
-[[workflows.workflow]]
-name = "Netlify Dev"
-author = 46301118
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd client && npm run dev"
