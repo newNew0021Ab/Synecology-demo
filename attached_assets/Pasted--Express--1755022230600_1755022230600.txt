@@ -1,0 +1,88 @@
+Нужно полностью отказаться от Express-сервера и переписать проект так, чтобы он корректно собирался и деплоился на Netlify с использованием Netlify Functions для проксирования запросов к Directus.
+
+**Что сделать:**
+
+1. **Удалить Express и всё серверное окружение**
+   - Убрать папку /server и все файлы index.ts, связанные с запуском сервера.
+   - Удалить из package.json любые команды, которые запускают сервер (`tsx server/index.ts` и т.д.).
+   - В package.json оставить только сборку фронтенда через Vite/React/TypeScript.
+
+2. **Создать Netlify Functions**
+   - Папка функций: `/netlify/functions/`
+   - Каждая функция в отдельной подпапке с файлом `index.js`:
+     - `/netlify/functions/blog/index.js`
+     - `/netlify/functions/cases/index.js`
+
+   Пример `index.js` для blog:
+   ```javascript
+   import fetch from "node-fetch";
+
+   export const handler = async (event) => {
+     try {
+       const apiUrl = `https://directus-production-6ce1.up.railway.app/items/blog_posts?fields=*`;
+       const res = await fetch(apiUrl);
+       if (!res.ok) {
+         return { statusCode: res.status, body: JSON.stringify({ error: "Failed to fetch data" }) };
+       }
+       const data = await res.json();
+       return {
+         statusCode: 200,
+         headers: {
+           "Access-Control-Allow-Origin": "*",
+           "Content-Type": "application/json"
+         },
+         body: JSON.stringify(data)
+       };
+     } catch (err) {
+       return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+     }
+   };
+Пример index.js для cases — такой же, только URL меняем на:
+
+bash
+Copy
+Edit
+https://directus-production-6ce1.up.railway.app/items/case_studies?fields=*
+Редиректы в netlify.toml
+
+ini
+Copy
+Edit
+[build]
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/blog"
+  to = "/.netlify/functions/blog"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/cases"
+  to = "/.netlify/functions/cases"
+  status = 200
+  force = true
+Фронтенд
+
+В коде заменить все fetch-запросы:
+
+Блог → /api/blog
+
+Кейсы → /api/cases
+
+Эти пути должны работать и в dev (через netlify dev) и в продакшене на Netlify.
+
+Netlify CLI (для теста)
+
+Локально можно проверить перед деплоем:
+
+nginx
+Copy
+Edit
+npm install -g netlify-cli
+netlify dev
+На Netlify.com ничего дополнительно в консоли вводить не нужно, главное — правильная структура.
+
+Цель
+
+После этих изменений Netlify должен просто билдить фронтенд и деплоить Functions, без поднятия сервера и зависания сборки.
