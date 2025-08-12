@@ -5,7 +5,7 @@
 
   # Папка, которую Netlify опубликует.
   # Vite соберет ваше приложение из папки 'client' в папку 'client/dist'.
-  publish = "dist/public""
+  publish = "dist/public"
 
 
 [[redirects]]
