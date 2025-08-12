@@ -201,18 +201,18 @@ export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
     }
 
     const contentType = response.headers.get('content-type');
-    
+
     if (!contentType || !contentType.includes('application/json')) {
       const responseText = await response.text();
       logger.error('Non-JSON response received. Content-Type:', contentType);
       logger.error('Response text:', responseText.substring(0, 300));
-      
+
       // Check if response is HTML (error page from Vite or development server)
       if (responseText.trim().startsWith('<!DOCTYPE') || responseText.trim().startsWith('<html')) {
         logger.error('Received HTML error page instead of JSON');
         throw new Error('Server returned HTML error page. Check if the API endpoint is working correctly.');
       }
-      
+
       throw new Error(`Expected JSON but received ${contentType}: ${responseText.substring(0, 100)}`);
     }
 

@@ -27,11 +27,13 @@
   from = "/api/blog"
   to = "/.netlify/functions/blog"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/api/cases"
   to = "/.netlify/functions/cases"
   status = 200
+  force = true
 
 # Правило для корректной работы роутинга в React
 [[redirects]]
