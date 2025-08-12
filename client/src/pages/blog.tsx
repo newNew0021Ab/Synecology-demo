@@ -407,7 +407,12 @@ export default function Blog() {
 
                           <div className="flex items-center justify-between text-sm text-dark-slate/60 mb-4">
                             <span>{new Date(post.date_created || post.publishedDate || '').toLocaleDateString('ru-RU')}</span>
-                            {(post.author || post.authorName) && <span>Автор: {post.author || post.authorName}</span>}
+                            {(post.author || post.authorName) && (
+                              <div className="flex items-center gap-2">
+                                <User className="w-4 h-4" />
+                                <span>{post.author || post.authorName}</span>
+                              </div>
+                            )}
                           </div>
 
                           {post.tags && post.tags.length > 0 && (
