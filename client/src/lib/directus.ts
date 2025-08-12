@@ -54,7 +54,7 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
   try {
     logger.debug('Loading cases...');
 
-    const res = await fetch('/api/directus-cases');
+    const res = await fetch('/api/cases');
     logger.debug('Response status:', res.status);
 
     if (!res.ok) {
@@ -185,9 +185,9 @@ export async function fetchDirectusCases(): Promise<CaseStudy[]> {
 export const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   try {
     logger.debug('Loading blog posts...');
-    logger.debug('Fetching from proxy:', '/api/directus-blog');
+    logger.debug('Fetching from proxy:', '/api/blog');
 
-    const response = await fetch('/api/directus-blog', {
+    const response = await fetch('/api/blog', {
       headers: {
         'Accept': 'application/json',
       },

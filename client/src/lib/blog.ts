@@ -27,9 +27,9 @@ export type BlogPost = {
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
   try {
-    console.log('Fetching from proxy:', '/api/directus-blog');
+    console.log('Fetching from proxy:', '/api/blog');
 
-    const response = await fetch('/api/directus-blog');
+    const response = await fetch('/api/blog');
     console.log('Response status:', response.status);
 
     if (!response.ok) {

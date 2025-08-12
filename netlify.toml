@@ -12,3 +12,31 @@
   from = "/*"
   to = "/index.html"
   status = 200
+[build]
+  functions = "netlify/functions"
+
+[dev]
+  framework = "#custom"
+  command = "npm run dev"
+  targetPort = 5173
+  port = 8888
+  publish = "client/dist"
+  autoLaunch = true
+
+[[redirects]]
+  from = "/api/blog"
+  to = "/.netlify/functions/blog"
+  status = 200
+
+[[redirects]]
+  from = "/api/cases"
+  to = "/.netlify/functions/cases"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  directory = "netlify/functions"
