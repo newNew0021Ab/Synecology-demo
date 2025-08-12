@@ -8,7 +8,18 @@
   publish = "dist/public"
 
 # Правило для корректной работы роутинга в React
+[[redirects]]
+  from = "/api/directus-cases"
+  to = "https://directus-production-6ce1.up.railway.app/items/case_studies"
+  status = 200
+  force = true
 
+[[redirects]]
+  from = "/api/directus-blog"
+  to = "https://directus-production-6ce1.up.railway.app/items/blog_posts"
+  status = 200
+  force = true
+  
 [[redirects]]
   from = "/api/*"
   to = "https://directus-production-6ce1.up.railway.app/:splat"
