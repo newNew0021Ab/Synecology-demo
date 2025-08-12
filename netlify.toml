@@ -1,12 +1,10 @@
-
 # Конфигурация сборки
 [build]
   # Команда, которую Netlify выполнит для сборки вашего сайта.
-  command = "npm run build"
+  command = "cd client && npm run build"
 
   # Папка, которую Netlify опубликует.
-  # Vite соберет ваше приложение из папки 'client' в папку 'client/dist'.
-  publish = "dist/public"
+  publish = "client/dist"
   
   # Папка с функциями
   functions = "netlify/functions"

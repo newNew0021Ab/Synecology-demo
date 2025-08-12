@@ -2,6 +2,8 @@ import { logger } from './logger';
 
 export const DIRECTUS_URL = "https://directus-production-6ce1.up.railway.app";
 
+const API_BASE_URL = '/api';
+
 function getImageUrl(id?: string) {
   return id ? `${DIRECTUS_URL}/assets/${id}` : null;
 }
