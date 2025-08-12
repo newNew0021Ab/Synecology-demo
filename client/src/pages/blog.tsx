@@ -23,6 +23,7 @@ export default function Blog() {
         setIsLoading(true);
         setError(null);
         console.log('Loading blog posts from Directus...');
+        console.log('Fetching from proxy:', '/api/directus-blog');
 
         const directusPosts = await fetchBlogPosts();
         console.log('Loaded Directus posts:', directusPosts.length);

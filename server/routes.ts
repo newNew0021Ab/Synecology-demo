@@ -1,12 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { getDirectusBlog } from "./routes/directus-blog";
+import { getDirectusBlog } from "./routes/directus-blog.js";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Register Directus blog route
   app.get("/api/directus-blog", getDirectusBlog);
-  
+
 
   // Directus proxy endpoint for case studies
   app.get("/api/directus-cases", async (req, res) => {
@@ -52,7 +52,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Directus proxy error:", error);
       res.status(500).json({
-        status: 500,
         message: `Proxy error: ${error.message || 'Unknown error'}`
       });
     }
