@@ -25,18 +25,14 @@ export const handler: Handler = async (event, context) => {
     console.log('Proxying request to Directus:', directusUrl);
 
     const response = await fetch(directusUrl, {
-      method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      },
     });
 
     console.log('Directus response status:', response.status);
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Directus error response:', errorText);
       return {
         statusCode: response.status,
         headers: {
@@ -46,15 +42,17 @@ export const handler: Handler = async (event, context) => {
         },
         body: JSON.stringify({
           status: response.status,
-          message: `Directus API error: ${response.status} - ${errorText.substring(0, 200)}`
+          message: `Directus API error: ${response.statusText}`
         }),
       };
     }
 
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const responseText = await response.text();
-      console.error('Non-JSON response from Directus:', responseText.substring(0, 300));
+    let data;
+    try {
+      data = await response.json();
+      console.log('Successfully fetched from Directus, data length:', data.data?.length || 0);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
       return {
         statusCode: 500,
         headers: {
@@ -64,13 +62,10 @@ export const handler: Handler = async (event, context) => {
         },
         body: JSON.stringify({
           status: 500,
-          message: `Expected JSON from Directus but received ${contentType}: ${responseText.substring(0, 100)}`
+          message: `JSON parse error: ${parseError instanceof Error ? parseError.message : 'Unknown parse error'}`
         }),
       };
     }
-
-    const data = await response.json();
-    console.log('Successfully fetched from Directus, data length:', data?.data?.length || 0);
 
     return {
       statusCode: 200,
@@ -82,7 +77,7 @@ export const handler: Handler = async (event, context) => {
       body: JSON.stringify(data),
     };
   } catch (error) {
-    console.error("Directus proxy error:", error);
+    console.error('Error fetching case studies from Directus:', error);
     return {
       statusCode: 500,
       headers: {
@@ -92,7 +87,7 @@ export const handler: Handler = async (event, context) => {
       },
       body: JSON.stringify({
         status: 500,
-        message: `Proxy error: ${error instanceof Error ? error.message : 'Unknown error'}`
+        message: error instanceof Error ? error.message : 'Unknown server error'
       }),
     };
   }
