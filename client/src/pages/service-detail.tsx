@@ -11,6 +11,27 @@ export default function ServiceDetail() {
   const { slug } = useParams();
   const [service, setService] = useState<any>(null);
 
+  useEffect(() => {
+    // Google Analytics tracking code
+    const gtagScript = document.createElement("script");
+    gtagScript.async = true;
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-24XG1CXEZY";
+    const gtagInlineScript = document.createElement("script");
+    gtagInlineScript.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-24XG1CXEZY');
+    `;
+    document.head.appendChild(gtagScript);
+    document.head.appendChild(gtagInlineScript);
+    return () => {
+      // Remove scripts on unmount
+      document.head.removeChild(gtagScript);
+      document.head.removeChild(gtagInlineScript);
+    };
+  }, []);
+
   // Данные услуг с актуальной информацией
   const services = {
     "emissions-inventory": {
