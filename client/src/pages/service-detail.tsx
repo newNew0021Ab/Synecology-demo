@@ -15,13 +15,13 @@ export default function ServiceDetail() {
     // Google Analytics tracking code
     const gtagScript = document.createElement("script");
     gtagScript.async = true;
-    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-24XG1CXEZY";
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-7X7PWQCWQ1";
     const gtagInlineScript = document.createElement("script");
     gtagInlineScript.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-24XG1CXEZY');
+      gtag('config', 'G-7X7PWQCWQ1');
     `;
     document.head.appendChild(gtagScript);
     document.head.appendChild(gtagInlineScript);
