@@ -6,8 +6,14 @@ const API_BASE = import.meta.env.DEV
 
 export const DIRECTUS_URL = "https://directus-latest-r74c.onrender.com/";
 
-function getImageUrl(id?: string) {
-  return id ? `${DIRECTUS_URL}/assets/${id}` : null;
+function getImageUrl(urlOrId?: string) {
+  if (!urlOrId) return null;
+  // If it's already a full URL, return as is
+  if (urlOrId.startsWith('http://') || urlOrId.startsWith('https://')) {
+    return urlOrId;
+  }
+  // Otherwise, treat as asset ID and build URL
+  return `${DIRECTUS_URL}/assets/${urlOrId}`;
 }
 
 export type CaseStudy = {
