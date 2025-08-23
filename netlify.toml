@@ -10,19 +10,19 @@
 
 [[redirects]]
   from = "/api/directus-cases"
-  to = "https://directus-production-6ce1.up.railway.app/items/case_studies"
+  to = "https://directus-latest-r74c.onrender.com/items/case_studies"
   status = 200
   force = true
 
 [[redirects]]
   from = "/api/directus-blog"
-  to = "https://directus-production-6ce1.up.railway.app/items/blog_posts"
+  to = "https://directus-latest-r74c.onrender.com/items/blog_posts"
   status = 200
   force = true
   
 [[redirects]]
   from = "/api/*"
-  to = "https://directus-production-6ce1.up.railway.app/:splat"
+  to = "https://directus-latest-r74c.onrender.com/:splat"
   status = 200
   force = true
 
