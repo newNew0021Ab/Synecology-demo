@@ -2,7 +2,7 @@ const API_BASE_URL = import.meta.env.DEV
   ? "http://localhost:5000/api"
   : "/api";
 
-const DIRECTUS_URL = "https://directus-production-6ce1.up.railway.app";
+const DIRECTUS_URL = "https://directus-latest-r74c.onrender.com/";
 
 function getImageUrl(id?: string) {
   return id ? `${DIRECTUS_URL}/assets/${id}` : null;
