@@ -415,9 +415,12 @@ export default function Contact() {
               <Button
                 variant="outline"
                 className="glassmorphic glassmorphic-hover border-sea-green text-sea-green font-semibold py-4 px-8 rounded-full"
+                asChild
               >
-                <Phone className="w-5 h-5 mr-2" />
-                Позвонить сейчас
+                <a href="tel:+375297384433">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Позвонить сейчас
+                </a>
               </Button>
             </motion.div>
           </GlassmorphicCard>
