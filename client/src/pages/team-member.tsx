@@ -65,7 +65,7 @@ export default function TeamMember() {
       role: "Директор",
       quote: "Экологическая ответственность и инновационные решения — основа устойчивого развития. Реальные изменения возможны только через грамотное управление ресурсами, профессиональный подход и системную работу.",
       bio: "Стратегическое руководство компанией и контроль реализации экологических проектов. Разработка и внедрение программ природопользования и охраны окружающей среды в соответствии с требованиями законодательства. Координация взаимодействия с органами власти, включая Минприроды.",
-      image: "https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg",
+      image: null,
       expertise: [
         "Стратегическое руководство компанией",
         "Разработка программ природопользования и охраны окружающей среды",
@@ -147,12 +147,28 @@ export default function TeamMember() {
               transition={{ duration: 0.8 }}
             >
               <div className="relative">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
-                />
-
+                {member.image ? (
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
+                  />
+                ) : (
+                  <div className="w-80 h-80 bg-gray-200 rounded-3xl shadow-2xl mx-auto lg:mx-0 flex items-center justify-center">
+                    <svg
+                      className="w-1/2 h-1/2 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                )}
               </div>
             </motion.div>
 
