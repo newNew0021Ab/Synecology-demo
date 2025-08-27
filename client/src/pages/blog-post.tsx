@@ -14,7 +14,7 @@ export default function BlogPost() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  
+
 
   useEffect(() => {
     const loadPost = async () => {
@@ -55,7 +55,7 @@ export default function BlogPost() {
       const seoKeywords = (post as any).seoKeywords;
 
       document.title = `${seoTitle} | ЭкоПартнер`;
-      
+
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription && seoDescription) {
         metaDescription.setAttribute('content', seoDescription);
@@ -229,12 +229,16 @@ export default function BlogPost() {
                 {hasAuthorData(post) && post.authorSlug && (
                   <Link href={`/team/${post.authorSlug}`}>
                     <div className="flex items-center gap-3">
-                      {post.authorAvatar && (
+                      {post.authorAvatar ? (
                         <img
                           src={post.authorAvatar}
                           alt={post.authorName || 'Автор'}
                           className="w-10 h-10 rounded-full object-cover"
                         />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-sea-green/10 flex items-center justify-center">
+                          <User className="w-5 h-5 text-sea-green" />
+                        </div>
                       )}
                       <div>
                         {post.authorName && (
@@ -323,6 +327,17 @@ export default function BlogPost() {
                         alt={post.authorName || 'Автор'}
                         className="w-16 h-16 rounded-full object-cover"
                       />
+                    )}
+                    {post.authorAvatar ? (
+                      <img
+                        src={post.authorAvatar}
+                        alt={post.authorName || 'Автор'}
+                        className="w-16 h-16 rounded-full object-cover cursor-pointer hover:opacity-80 transition-opacity"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 rounded-full bg-sea-green/10 flex items-center justify-center">
+                        <User className="w-6 h-6 text-sea-green" />
+                      </div>
                     )}
                     <div>
                       {post.authorName && (
