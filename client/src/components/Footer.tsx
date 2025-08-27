@@ -78,7 +78,7 @@ export default function Footer() {
               <p>УНП 193885234</p>
               <p>г. Минск, пр-т. Газеты звезда д.16, пом. 53, офис 5В, 220117 </p>
               <a href="tel:+375296024280" className="block hover:text-sea-green transition-colors">
-                +375 (29) 602-42-80
+                +375 29 738 4433
               </a>
               <a href="mailto:synecology@yandex.by" className="block hover:text-sea-green transition-colors">
                 synecology@yandex.by

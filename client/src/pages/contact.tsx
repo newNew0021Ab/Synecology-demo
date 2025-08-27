@@ -101,7 +101,7 @@ export default function Contact() {
     {
       icon: Phone,
       title: "Телефон",
-      details: "+375 (29) 602-42-80",
+      details: "+375 (29) 738-44-33",
     },
     {
       icon: Mail,
