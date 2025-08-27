@@ -165,9 +165,8 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {teamMembers.map((member, index) => {
-              const memberSlug = member.name === "Корякин Егор Дмитриевич" ? "egor-koryakin" :
-                                "team-member-inna-voloshko";
+            {teamMembers.filter(member => member.name === "Волошко Инна Владимировна").map((member, index) => {
+              const memberSlug = "team-member-inna-voloshko";
 
               return (
                 <motion.div
@@ -184,17 +183,9 @@ export default function About() {
                     <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
-                          {member.name === "Корякин Егор Дмитриевич" || member.name === "Волошко Инна Владимировна" ? (
-                            <img
-                              src="https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg"
-                              alt={member.name}
-                              className="w-16 h-16 object-cover rounded-2xl flex-shrink-0"
-                            />
-                          ) : (
-                            <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                              <Users className="w-8 h-8 text-sea-green" />
-                            </div>
-                          )}
+                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-8 h-8 text-sea-green" />
+                          </div>
                           <div className="flex-1">
                             <h3 className="text-xl font-heading font-bold text-dark-slate mb-1 group-hover:text-sea-green transition-colors">
                               {member.name}
@@ -213,7 +204,7 @@ export default function About() {
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
                             <span className="text-sm font-medium text-dark-slate">
-                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : member.name === "Волошко Инна Владимировна" ? "5+ лет" : "10+ лет"}
+                              Опыт работы: 5+ лет
                             </span>
                           </div>
 
@@ -255,17 +246,9 @@ export default function About() {
                     <GlassmorphicCard className="h-full">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
-                          {member.name === "Корякин Егор Дмитриевич" || member.name === "Волошко Инна Владимировна" ? (
-                            <img
-                              src="https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg"
-                              alt={member.name}
-                              className="w-16 h-16 object-cover rounded-2xl flex-shrink-0"
-                            />
-                          ) : (
-                            <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-                              <Users className="w-8 h-8 text-sea-green" />
-                            </div>
-                          )}
+                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-8 h-8 text-sea-green" />
+                          </div>
                           <div className="flex-1">
                             <h3 className="text-xl font-heading font-bold text-dark-slate mb-1">
                               {member.name}
@@ -284,7 +267,7 @@ export default function About() {
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
                             <span className="text-sm font-medium text-dark-slate">
-                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : member.name === "Волошко Инна Владимировна" ? "5+ лет" : "10+ лет"}
+                              Опыт работы: 5+ лет
                             </span>
                           </div>
 
