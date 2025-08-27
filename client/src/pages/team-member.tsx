@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
-import { Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Award, FileText, ArrowRight, Quote, X, Users } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -147,12 +147,9 @@ export default function TeamMember() {
               transition={{ duration: 0.8 }}
             >
               <div className="relative">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-80 h-80 object-cover rounded-3xl shadow-2xl mx-auto lg:mx-0"
-                />
-
+                <div className="w-80 h-80 bg-sea-green/20 rounded-3xl shadow-2xl mx-auto lg:mx-0 flex items-center justify-center">
+                  <Users className="w-32 h-32 text-sea-green" />
+                </div>
               </div>
             </motion.div>
 
