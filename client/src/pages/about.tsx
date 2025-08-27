@@ -25,6 +25,18 @@ export default function About() {
         email: "synecology@yandex.by",
       },
     },
+    {
+      name: "Волошко Инна Владимировна",
+      role: "Директор",
+      bio: "Стратегическое руководство компанией и контроль реализации экологических проектов. Разработка и внедрение программ природопользования и охраны окружающей среды в соответствии с требованиями законодательства. Более 100 успешно реализованных проектов.",
+      image: "https://i.ibb.co/k2rDZbqt/5192954527513441803.jpg",
+      expertise: ["Стратегическое руководство", "Программы природопользования", "Взаимодействие с органами власти", "Управление экологическими проектами"],
+      social: {
+        linkedin: "#",
+        twitter: "#",
+        email: "synecology@yandex.by",
+      },
+    },
   ];
 
   const values = [
@@ -155,7 +167,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => {
               const memberSlug = member.name === "Корякин Егор Дмитриевич" ? "egor-koryakin" :
-                                "team-member";
+                                "team-member-inna-voloshko";
 
               return (
                 <motion.div
@@ -172,7 +184,7 @@ export default function About() {
                     <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
-                          {member.name === "Корякин Егор Дмитриевич" ? (
+                          {member.name === "Корякин Егор Дмитриевич" || member.name === "Волошко Инна Владимировна" ? (
                             <img
                               src="https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg"
                               alt={member.name}
@@ -201,7 +213,7 @@ export default function About() {
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
                             <span className="text-sm font-medium text-dark-slate">
-                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
+                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : member.name === "Волошко Инна Владимировна" ? "5+ лет" : "10+ лет"}
                             </span>
                           </div>
 
@@ -243,7 +255,7 @@ export default function About() {
                     <GlassmorphicCard className="h-full">
                       <div className="flex flex-col h-full p-6">
                         <div className="flex items-start gap-4 mb-4">
-                          {member.name === "Корякин Егор Дмитриевич" ? (
+                          {member.name === "Корякин Егор Дмитриевич" || member.name === "Волошко Инна Владимировна" ? (
                             <img
                               src="https://i.ibb.co/0RCtbCgY/5192954527513441803-1-1.jpg"
                               alt={member.name}
@@ -272,7 +284,7 @@ export default function About() {
                           <div className="flex items-center gap-2">
                             <Award className="w-4 h-4 text-sea-green flex-shrink-0" />
                             <span className="text-sm font-medium text-dark-slate">
-                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : "10+ лет"}
+                              Опыт работы: {member.name === "Корякин Егор Дмитриевич" ? "5+ лет" : member.name === "Волошко Инна Владимировна" ? "5+ лет" : "10+ лет"}
                             </span>
                           </div>
 
