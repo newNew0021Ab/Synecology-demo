@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag, User, ArrowRight } from 'lucide-react';
@@ -25,7 +26,7 @@ interface BlogPost {
 const fetchBlogPosts = async (): Promise<BlogPost[]> => {
   // Симулируем задержку сети
   await new Promise(resolve => setTimeout(resolve, 800));
-
+  
   return [
     {
       id: '1',
@@ -36,8 +37,8 @@ const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       readTime: "8 мин",
       image: "https://images.unsplash.com/photo-1727812100171-8af0e7211041?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0",
       tags: ["Экосертификат", "Органик", "ISO 14001"],
-      author: "Волошко Инна Владимировна",
-      authorSlug: "inna-voloshko",
+      author: "Корякин Егор Дмитриевич",
+      authorSlug: "egor-koryakin",
       slug: "eco-certification-business-belarus"
     },
     {
@@ -49,8 +50,8 @@ const fetchBlogPosts = async (): Promise<BlogPost[]> => {
       readTime: "10 мин",
       image: "https://images.unsplash.com/photo-1684324278460-25fbb2e3f175?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0",
       tags: ["Отходы", "Штрафы", "Инструкция"],
-      author: "Волошко Инна Владимировна",
-      authorSlug: "inna-voloshko",
+      author: "Корякин Егор Дмитриевич",
+      authorSlug: "egor-koryakin",
       slug: "waste-management-enterprise-belarus"
     }
   ];
@@ -60,7 +61,7 @@ const BlogCardSkeleton: React.FC = () => (
   <div className="space-y-6 p-6">
     {/* Image skeleton */}
     <Skeleton className="w-full h-64 rounded-xl" />
-
+    
     {/* Meta info skeleton */}
     <div className="flex items-center gap-4 flex-wrap">
       <Skeleton className="h-6 w-20 rounded-full" />
@@ -99,10 +100,12 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
                    onClick={() => window.location.href = `/blog/${post.slug}`}>
     <article className="flex flex-col h-full space-y-6 p-6">
       <div className="relative overflow-hidden rounded-xl">
-        {/* Replaced image with a placeholder for avatar/logo */}
-        <div className="w-full h-64 bg-gray-200 rounded-xl flex items-center justify-center">
-          <User className="w-24 h-24 text-gray-400" />
-        </div>
+        <img
+          src={post.image}
+          alt={post.title}
+          className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-102"
+          loading="lazy"
+        />
       </div>
 
       <div className="flex items-center gap-4 text-sm flex-wrap">

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { Users, Award, TrendingUp, ArrowRight, Linkedin, Twitter, Mail, User } from "lucide-react";
+import { Users, Award, TrendingUp, ArrowRight, Linkedin, Twitter, Mail } from "lucide-react";
 import OrganicBlob from "@/components/OrganicBlob";
 import GlassmorphicCard from "@/components/GlassmorphicCard";
 import NavigationLink from "@/components/NavigationLink";
@@ -165,8 +165,8 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {teamMembers.map((member, index) => {
-              const memberSlug = member.name.toLowerCase().replace(/\s+/g, '-');
+            {teamMembers.filter(member => member.name === "Волошко Инна Владимировна").map((member, index) => {
+              const memberSlug = "team-member-inna-voloshko";
 
               return (
                 <motion.div
@@ -182,18 +182,10 @@ export default function About() {
                   <div className="hidden sm:block">
                     <GlassmorphicCard className="h-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg cursor-pointer">
                       <div className="flex flex-col h-full p-6">
-                        <div className="flex items-center gap-4 mb-4">
-                          {member.image ? (
-                            <img
-                              src={member.image}
-                              alt={member.name}
-                              className="w-16 h-16 object-cover rounded-full shadow-lg"
-                            />
-                          ) : (
-                            <div className="w-16 h-16 rounded-full bg-sea-green/10 flex items-center justify-center shadow-lg">
-                              <User className="w-8 h-8 text-sea-green" />
-                            </div>
-                          )}
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-8 h-8 text-sea-green" />
+                          </div>
                           <div className="flex-1">
                             <h3 className="text-xl font-heading font-bold text-dark-slate mb-1 group-hover:text-sea-green transition-colors">
                               {member.name}
@@ -253,18 +245,10 @@ export default function About() {
                   <div className="sm:hidden">
                     <GlassmorphicCard className="h-full">
                       <div className="flex flex-col h-full p-6">
-                        <div className="flex items-center gap-4 mb-4">
-                          {member.image ? (
-                            <img
-                              src={member.image}
-                              alt={member.name}
-                              className="w-16 h-16 object-cover rounded-full shadow-lg"
-                            />
-                          ) : (
-                            <div className="w-16 h-16 rounded-full bg-sea-green/10 flex items-center justify-center shadow-lg">
-                              <User className="w-8 h-8 text-sea-green" />
-                            </div>
-                          )}
+                        <div className="flex items-start gap-4 mb-4">
+                          <div className="w-16 h-16 bg-sea-green/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <Users className="w-8 h-8 text-sea-green" />
+                          </div>
                           <div className="flex-1">
                             <h3 className="text-xl font-heading font-bold text-dark-slate mb-1">
                               {member.name}
